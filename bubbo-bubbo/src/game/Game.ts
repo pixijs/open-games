@@ -41,11 +41,10 @@ export class Game
     {
         this.stage.addChild(this.gameContainer);
 
-        // Create the hit area
+        // Prepare the container for interaction
         this._hitArea = new Rectangle();
 
         this.hitContainer.interactive = true;
-        this.hitContainer.cursor = 'pointer';
         this.hitContainer.hitArea = this._hitArea;
         this.gameContainer.addChild(this.hitContainer);
 
@@ -187,6 +186,7 @@ export class Game
 
         // Offsets the hit area position back to top left of the screen,
         // it then sets the dimensions of the hit area to match the screen dimensions
+        // Leave a little room to prevent interaction bellow the cannon
         this._hitArea.x = -w / 2;
         this._hitArea.y = -h;
         this._hitArea.width = w;
