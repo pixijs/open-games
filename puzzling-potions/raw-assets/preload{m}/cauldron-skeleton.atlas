@@ -1,0 +1,9 @@
+cauldron-skeleton.png
+size:135,95
+filter:Linear,Linear
+Ellipse 3
+bounds:110,2,23,22
+Group 26
+bounds:2,2,106,91
+Rectangle 142
+bounds:110,26,8,67

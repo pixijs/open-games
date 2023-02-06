@@ -1,0 +1,31 @@
+{
+    "name": "pixijs-match3",
+    "version": "0.0.1",
+    "type": "module",
+    "scripts": {
+        "start": "npm run assets && vite --open",
+        "assets": "assetpack",
+        "build": "npm run assets && tsc && vite build",
+        "preview": "npm run build && vite preview --open",
+        "clean": "node cmds.js clean"
+    },
+    "dependencies": {
+        "@pixi/sound": "^5.0.0",
+        "@pixi/ui": "^0.5.0",
+        "gsap": "^3.11.4",
+        "pixi-spine": "^4.0.3",
+        "pixi.js": "^7.1.1"
+    },
+    "devDependencies": {
+        "@assetpack/cli": "~0.3.4",
+        "@assetpack/plugin-manifest": "~0.3.4",
+        "@assetpack/plugin-compress": "~0.3.4",
+        "@assetpack/plugin-ffmpeg": "~0.3.4",
+        "@assetpack/plugin-json": "~0.3.4",
+        "@assetpack/plugin-mipmap": "~0.3.4",
+        "@assetpack/plugin-texture-packer": "~0.3.4",
+        "@assetpack/plugin-webfont": "~0.3.4",
+        "typescript": "^4.9.3",
+        "vite": "^4.0.4"
+    }
+}

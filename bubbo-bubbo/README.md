@@ -13,6 +13,7 @@ This project utilises multiple pixi based libraries including;
 - Clear and concise code explanations,
 - Includes essential game development concepts such as stat management, systems, game loops, and user input etc.
 - Designed to be easily understandable and expandable for further learning and development
+
 # Prerequisites
 To run this project, you need to have `Node.js` and `npm` installed on your system.
 

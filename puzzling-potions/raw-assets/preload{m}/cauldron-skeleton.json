@@ -1,0 +1,276 @@
+{
+"skeleton": {
+	"hash": "WSR1KmE9Snw",
+	"spine": "4.1.18",
+	"x": -51,
+	"y": 4,
+	"width": 106,
+	"height": 151.57,
+	"images": "../Assets/",
+	"audio": ""
+},
+"bones": [
+	{ "name": "root" },
+	{ "name": "bone2", "parent": "root", "x": -0.37, "y": 47.59 },
+	{ "name": "bone", "parent": "bone2", "length": 62.36, "rotation": 89.76, "x": -28.58, "y": 43.44 },
+	{ "name": "bubble-1", "parent": "root", "x": -16.23, "y": 65.27 },
+	{ "name": "bubble-3", "parent": "root", "x": 20.21, "y": 64.73 },
+	{ "name": "bubble-2", "parent": "root", "x": 1.17, "y": 66.36 }
+],
+"slots": [
+	{ "name": "Ellipse 3", "bone": "root", "attachment": "Ellipse 3" },
+	{ "name": "Ellipse 4", "bone": "root", "attachment": "Ellipse 3" },
+	{ "name": "Ellipse 5", "bone": "root", "attachment": "Ellipse 3" },
+	{ "name": "Rectangle 142", "bone": "root", "attachment": "Rectangle 142" },
+	{ "name": "Group 26", "bone": "root", "attachment": "Group 26" },
+	{ "name": "path-1", "bone": "root", "attachment": "path-1" },
+	{ "name": "path-2", "bone": "root", "attachment": "path-1" },
+	{ "name": "path-3", "bone": "root", "attachment": "path-1" }
+],
+"path": [
+	{
+		"name": "path-1",
+		"bones": [ "bubble-2" ],
+		"target": "path-1"
+	},
+	{
+		"name": "path-2",
+		"order": 1,
+		"bones": [ "bubble-3" ],
+		"target": "path-2"
+	},
+	{
+		"name": "path-3",
+		"order": 2,
+		"bones": [ "bubble-1" ],
+		"target": "path-3"
+	}
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"Ellipse 3": {
+				"Ellipse 3": {
+					"type": "mesh",
+					"uvs": [ 1, 1, 0, 1, 0, 0, 1, 0 ],
+					"triangles": [ 1, 2, 3, 1, 3, 0 ],
+					"vertices": [ 1, 3, 12.04, -11, 1, 1, 3, -10.96, -11, 1, 1, 3, -10.96, 11, 1, 1, 3, 12.04, 11, 1 ],
+					"hull": 4,
+					"edges": [ 0, 2, 2, 4, 4, 6, 0, 6 ],
+					"width": 23,
+					"height": 22
+				}
+			},
+			"Ellipse 4": {
+				"Ellipse 3": {
+					"type": "mesh",
+					"uvs": [ 1, 1, 0, 1, 0, 0, 1, 0 ],
+					"triangles": [ 1, 2, 3, 1, 3, 0 ],
+					"vertices": [ 1, 4, 12.59, -11.54, 1, 1, 4, -10.41, -11.54, 1, 1, 4, -10.41, 10.46, 1, 1, 4, 12.59, 10.46, 1 ],
+					"hull": 4,
+					"edges": [ 0, 2, 2, 4, 4, 6, 0, 6 ],
+					"width": 23,
+					"height": 22
+				}
+			},
+			"Ellipse 5": {
+				"Ellipse 3": {
+					"type": "mesh",
+					"uvs": [ 1, 1, 0, 1, 0, 0, 1, 0 ],
+					"triangles": [ 1, 2, 3, 1, 3, 0 ],
+					"vertices": [ 1, 5, 12.59, -10.46, 1, 1, 5, -10.41, -10.46, 1, 1, 5, -10.41, 11.54, 1, 1, 5, 12.59, 11.54, 1 ],
+					"hull": 4,
+					"edges": [ 0, 2, 2, 4, 4, 6, 0, 6 ],
+					"width": 23,
+					"height": 22
+				}
+			},
+			"Group 26": {
+				"Group 26": {
+					"type": "mesh",
+					"uvs": [ 1, 1, 0, 1, 0, 0, 1, 0 ],
+					"triangles": [ 1, 2, 3, 1, 3, 0 ],
+					"vertices": [ 1, 1, 55.37, -43.59, 1, 1, 1, -50.63, -43.59, 1, 1, 1, -50.63, 50.41, 1, 1, 1, 55.37, 50.41, 1 ],
+					"hull": 4,
+					"edges": [ 0, 2, 2, 4, 4, 6, 0, 6 ],
+					"width": 106,
+					"height": 91
+				}
+			},
+			"path-1": {
+				"path-1": {
+					"type": "path",
+					"lengths": [ 269.67, 534.08 ],
+					"vertexCount": 6,
+					"vertices": [ 27.11, 37.5, 10.54, 64.28, -43.52, 151.68, 67.86, 226.48, -1.11, 325.68, -33.75, 372.63 ]
+				}
+			},
+			"path-2": {
+				"path-1": {
+					"type": "path",
+					"lengths": [ 224.21, 444.09 ],
+					"vertexCount": 6,
+					"vertices": [ 46.61, 40.06, 34.23, 69.02, -6.3, 163.86, 93.58, 180.45, 45.6, 285.75, 21.88, 337.78 ]
+				}
+			},
+			"path-3": {
+				"path-1": {
+					"type": "path",
+					"lengths": [ 211.24, 419.53 ],
+					"vertexCount": 6,
+					"vertices": [ -6.18, 40.06, -18.56, 69.02, -59.09, 163.86, 21.84, 169.63, -26.15, 274.92, -49.86, 326.95 ]
+				}
+			},
+			"Rectangle 142": {
+				"Rectangle 142": {
+					"type": "mesh",
+					"uvs": [ 1, 1, 0, 1, 0, 0, 1, 0 ],
+					"triangles": [ 0, 1, 2, 0, 2, 3 ],
+					"vertices": [ 1, 2, -2.44, -4.51, 1, 1, 2, -2.47, 3.49, 1, 1, 2, 64.53, 3.78, 1, 1, 2, 64.56, -4.22, 1 ],
+					"hull": 4,
+					"edges": [ 0, 2, 2, 4, 4, 6, 0, 6 ],
+					"width": 8,
+					"height": 67
+				}
+			}
+		}
+	}
+],
+"animations": {
+	"animation": {
+		"slots": {
+			"Ellipse 3": {
+				"rgba": [
+					{ "time": 0.8333, "color": "ffffffff" },
+					{ "time": 1.5667, "color": "ffffff00" }
+				]
+			},
+			"Ellipse 4": {
+				"rgba": [
+					{ "time": 0.4667, "color": "ffffffff" },
+					{ "time": 1.2, "color": "ffffff00" }
+				]
+			},
+			"Ellipse 5": {
+				"rgba": [
+					{
+						"time": 0.0333,
+						"color": "ffffffff",
+						"curve": [ 0.356, 1, 0.678, 1, 0.356, 1, 0.678, 1, 0.356, 1, 0.678, 1, 0.356, 1, 0.678, 0 ]
+					},
+					{ "time": 1, "color": "ffffff00" }
+				]
+			}
+		},
+		"bones": {
+			"bone": {
+				"rotate": [
+					{
+						"value": 8.87,
+						"curve": [ 0.079, 11.33, 0.156, 13.1 ]
+					},
+					{
+						"time": 0.2333,
+						"value": 13.1,
+						"curve": [ 0.556, 13.1, 0.878, -18.75 ]
+					},
+					{
+						"time": 1.2,
+						"value": -18.75,
+						"curve": [ 1.468, -18.75, 1.735, 0.28 ]
+					},
+					{ "time": 2, "value": 8.87 }
+				],
+				"translate": [
+					{
+						"y": 3.21,
+						"curve": [ 0.156, 0, 0.319, 10.8, 0.156, 3.89, 0.311, 7.28 ]
+					},
+					{
+						"time": 0.4667,
+						"x": 27.59,
+						"y": 7.07,
+						"curve": [ 1.01, 89.42, 1.336, 46.01, 0.644, 6.83, 1.336, -1.75 ]
+					},
+					{
+						"time": 1.5,
+						"x": 30.61,
+						"y": -1.91,
+						"curve": [ 1.669, 15.41, 1.834, 0, 1.669, -2.07, 1.852, 2.57 ]
+					},
+					{ "time": 2, "y": 3.21 }
+				]
+			},
+			"bone2": {
+				"rotate": [
+					{
+						"value": -3.21,
+						"curve": [ 0.1, -4.26, 0.2, -5.01 ]
+					},
+					{
+						"time": 0.3,
+						"value": -5.01,
+						"curve": [ 0.622, -5.01, 0.944, 3.74 ]
+					},
+					{
+						"time": 1.2667,
+						"value": 3.74,
+						"curve": [ 1.511, 3.74, 1.756, -0.66 ]
+					},
+					{ "time": 2, "value": -3.21 }
+				],
+				"translate": [
+					{
+						"curve": [ 0.333, 0, 0.667, 0, 0.333, 0, 0.667, 8.16 ]
+					},
+					{
+						"time": 1,
+						"y": 8.16,
+						"curve": [ 1.333, 0, 1.667, 0, 1.333, 8.16, 1.667, 0 ]
+					},
+					{ "time": 2 }
+				]
+			},
+			"bubble-2": {
+				"scale": [
+					{
+						"time": 0.2,
+						"curve": [ 0.522, 1, 0.844, 0.223, 0.522, 1, 0.844, 0.223 ]
+					},
+					{ "time": 1.1667, "x": 0.223, "y": 0.223 }
+				]
+			},
+			"bubble-1": {
+				"scale": [
+					{
+						"time": 0.8,
+						"curve": [ 1.089, 1, 1.378, 0.21, 1.089, 1, 1.378, 0.21 ]
+					},
+					{ "time": 1.6667, "x": 0.21, "y": 0.21 }
+				]
+			}
+		},
+		"path": {
+			"path-1": {
+				"position": [
+					{},
+					{ "time": 1, "value": 0.954 }
+				]
+			},
+			"path-2": {
+				"position": [
+					{ "time": 0.4333 },
+					{ "time": 1.2333, "value": 1 }
+				]
+			},
+			"path-3": {
+				"position": [
+					{ "time": 0.7667 },
+					{ "time": 1.6333, "value": 1 }
+				]
+			}
+		}
+	}
+}
+}
