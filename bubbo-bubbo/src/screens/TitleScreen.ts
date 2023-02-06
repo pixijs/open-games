@@ -26,9 +26,12 @@ export class TitleScreen extends Container implements AppScreen
     /** An array of bundle IDs for dynamic asset loading. */
     public static assetBundles = ['images/title-screen'];
 
+    /** A container to assign user interaction to */
+    private readonly _hitContainer = new Container();
+    /** The hit area to be used by the cannon */
+    private readonly _hitArea: Rectangle;
+    /** A background visual element */
     private readonly _background: TilingSprite;
-    /** The hit area to be used by the background */
-    private readonly _backgroundHitArea: Rectangle;
     
     private _title!: Title;
     private _pixiLogo!: PixiLogo;
@@ -58,18 +61,23 @@ export class TitleScreen extends Container implements AppScreen
         this._background = new TilingSprite(Texture.from('background-tile'), 64, 64);
         this._background.tileScale.set(designConfig.backgroundTileScale);
         this._background.interactive = true;
-
-        // Create the background hit area
-        this._backgroundHitArea = new Rectangle(0, 0, 50, 50);
-        this._background.hitArea = this._backgroundHitArea;
-
         this.addChild(this._background);
+        
+        // Create the hit area
+        this._hitArea = new Rectangle();
+
+        // Prepare the container for interaction
+        this._hitContainer.interactive = true;
+        this._hitContainer.hitArea = this._hitArea;
+        this.addChild(this._hitContainer);
 
         // Add visual details like footer, cannon, portholes
         this._buildDetails();
 
         // Add buttons like the play button and audio button
         this._buildButtons();
+
+        // Add all parent containers to screen
         this.addChild(this._topAnimContainer, this._midAnimContainer, this._bottomAnimContainer);
     }
 
@@ -90,9 +98,8 @@ export class TitleScreen extends Container implements AppScreen
     public async show()
     {
         // Add container event listeners to handle the cannon movement
-        // Using a `globalpointermove` event allows interaction through other interactive elements.
-        this._background.on('globalpointermove', this._calculateAngle.bind(this));
-        this._background.on('pointertap', this._calculateAngle.bind(this));
+        this._hitContainer.on('pointermove', this._calculateAngle.bind(this));
+        this._hitContainer.on('pointertap', this._calculateAngle.bind(this));
 
         // Kill tweens of the screen container
         gsap.killTweensOf(this);
@@ -127,8 +134,8 @@ export class TitleScreen extends Container implements AppScreen
     /** Called when the screen is being hidden. */
     public async hide()
     {
-        // Remove all listeners on the background so they don't get triggered outside of the title screen
-        this._background.removeAllListeners();
+        // Remove all listeners on the hit container so they don't get triggered outside of the title screen
+        this._hitContainer.removeAllListeners();
 
         // Kill tweens of the screen container
         gsap.killTweensOf(this);
@@ -186,9 +193,10 @@ export class TitleScreen extends Container implements AppScreen
         this._portholeTwo.view.x = w - 40;
         this._portholeTwo.view.y = this._title.view.y + this._title.view.height + 10;
 
-        // Set hit area of background to fit screen
-        this._backgroundHitArea.width = w;
-        this._backgroundHitArea.height = h - boardConfig.bounceLine * 0.75;
+        // Set hit area of hit container to fit screen
+        // Leave a little room to prevent interaction bellow the cannon
+        this._hitArea.width = w;
+        this._hitArea.height = h - boardConfig.bounceLine * 0.75;
     }
 
     /**

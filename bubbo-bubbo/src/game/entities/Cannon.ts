@@ -1,3 +1,4 @@
+import gsap from 'gsap';
 import { Container, Sprite } from 'pixi.js';
 
 import type { BubbleType } from '../boardConfig';
@@ -10,14 +11,16 @@ export class Cannon
     /** The Container instance which contains all the visual elements for this class. */
     public view = new Container();
 
+    /** The view of the current bubble in the cannon. */
+    private readonly _bubbleView: BubbleView;
+    /** Define the default scale of the bubble, to keep constant values in one place */
+    private readonly _defaultBubbleScale = 2.5;
     /** Holds the references to the various cannon parts as Sprite objects. */
     private _parts: Record<string, Sprite> = {};
     /** The type of the current bubble in the cannon. */
-    private _type!: BubbleType;
+    private _type!: BubbleType | 'empty';
     /** The rotation angle of the cannon. */
     private _rotation = 0;
-    /** The view of the current bubble in the cannon. */
-    private readonly _currentBubble: BubbleView;
 
     constructor()
     {
@@ -25,9 +28,9 @@ export class Cannon
         this._build();
 
         // Create a bubble view that acts as an ammunition visualiser
-        this._currentBubble = new BubbleView();
-        this._currentBubble.view.scale.set(2.5);
-        this.view.addChild(this._currentBubble.view);
+        this._bubbleView = new BubbleView();
+        this._bubbleView.view.scale.set(0);
+        this.view.addChild(this._bubbleView.view);
     }
 
     /**
@@ -51,19 +54,36 @@ export class Cannon
 
     /**
      * Setter for the type of the current bubble in the cannon.
-     * @param type - The type of the bubble.
+     * @param value - The type of the bubble (or "empty" if you want no bubble).
      */
-    public set type(value: BubbleType)
+    public set type(value: BubbleType | 'empty')
     {
-        // If the new type is the same as the old type, return
-        if (value === this._type) return;
+        // Hide the bubble
+        this._bubbleView.view.scale.set(0);
+
+        // Store the new type
+        this._type = value;
+        
+        if (value === 'empty')
+        {
+            // Force the tint-ables to be white
+            this._parts['cannon-arrow'].tint = this._parts['cannon-main'].tint = 0xffffff;
+
+            return;
+        }
 
         // Set the color of the cannon arrow and main body using chain assignment
         this._parts['cannon-arrow'].tint = this._parts['cannon-main'].tint = boardConfig.bubbleTypeToColor[value];
         // Set the type of the current bubble view
-        this._currentBubble.type = value;
-        // Store the new type
-        this._type = value;
+        this._bubbleView.type = value;
+
+        // Animate the bubble view in
+        gsap.to(this._bubbleView.view.scale, {
+            x: this._defaultBubbleScale,
+            y: this._defaultBubbleScale,
+            duration: 0.4,
+            ease: 'back.out',
+        });
     }
 
     /**

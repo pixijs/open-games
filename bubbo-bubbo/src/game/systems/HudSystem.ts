@@ -167,7 +167,7 @@ export class HudSystem implements System
         });
     }
 
-    /** Called prior to the `start` function. */
+    /** Called prior to the `start` function at the beginning of the game. */
     public awake()
     {
         // Move the tutorial popout to outside the screen

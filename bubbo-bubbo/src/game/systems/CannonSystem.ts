@@ -95,6 +95,9 @@ export class CannonSystem implements System
             // Set up user interaction for the cannon
             this.game.hitContainer.on('pointermove', this._calculateAngle.bind(this));
             this.game.hitContainer.on('pointertap', this._fire.bind(this));
+
+            // Update the cannon and reserves' bubble type
+            this._loadNextShot();
         });
         
         // Nullify the projectile once the current one has connected to the grid
@@ -115,11 +118,10 @@ export class CannonSystem implements System
         });
     }
 
-    /** Called at the start of the game. */
-    public start()
+    /** Called prior to the `start` function at the beginning of the game. */
+    public awake()
     {
-        // Update the cannon and reserves' bubble type
-        this._loadNextShot();
+        this._emptyShots();
     }
 
     /** Resets the state of the system back to its initial state. */
@@ -172,6 +174,11 @@ export class CannonSystem implements System
         // If a projectile already exists, return and do not fire another
         if (this._projectile) return;
 
+        // Play audio at reduced speed to simulate a different sound, easy way to get multiple sfx out of one file
+        sfx.play('audio/bubble-land-sfx.wav', {
+            speed: 0.25,
+        });
+
         // Calculate the angle of the shot based on the position of the user's pointer
         this._calculateAngle(e);
 
@@ -213,6 +220,21 @@ export class CannonSystem implements System
 
         // Load the next shot into the cannon
         this._loadNextShot();
+    }
+
+    /** Remove bubbles from the cannon and bubble reserves. */
+    private _emptyShots()
+    {
+        // Set all the bubble reserves to be "empty"
+        for (let i = 0; i < this.reserveBubbleTypes.length; i++)
+        {
+            this.bubbleReserves[i].type = 'empty';
+        }
+
+        // Set the type of the cannon to be empty
+        this.currentBubbleType = 'empty';
+        
+        this.cannon.type = this.currentBubbleType;
     }
 
     /**
