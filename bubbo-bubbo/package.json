@@ -1,0 +1,44 @@
+{
+    "name": "bubbo-bubbo",
+    "version": "1.0.0",
+    "type": "module",
+    "description": "A simple PixiJS game project to help developers learn how a professional makes games using the PixiJS library.",
+    "author": {
+        "name": "AshsHub",
+        "url": "https://github.com/AshsHub"
+    },
+    "scripts": {
+        "start": "npm run build-assets && vite --open",
+        "build": "npm run build-assets && tsc && vite build",
+        "build-assets": "assetpack",
+        "preview": "npm run build && vite preview --open",
+        "lint": "eslint --ext .js,.ts,.tsx src",
+        "lint:fix": "eslint --ext .js,.ts,.tsx src --fix",
+        "format": "prettier --write src/**/*.{ts}"
+    },
+    "dependencies": {
+        "@pixi/sound": "^5.0.0",
+        "@pixi/ui": "^0.5.6",
+        "gsap": "^3.11.4",
+        "pixi-filters": "^5.1.1",
+        "pixi.js": "^7.1.1",
+        "typed-signals": "^2.5.0"
+    },
+    "devDependencies": {
+        "@assetpack/cli": "~0.3.4",
+        "@assetpack/plugin-compress": "~0.3.4",
+        "@assetpack/plugin-ffmpeg": "~0.3.4",
+        "@assetpack/plugin-json": "~0.3.4",
+        "@assetpack/plugin-manifest": "~0.3.4",
+        "@assetpack/plugin-mipmap": "~0.3.4",
+        "@assetpack/plugin-texture-packer": "~0.3.4",
+        "@assetpack/plugin-webfont": "~0.3.4",
+        "@typescript-eslint/eslint-plugin": "^5.49.0",
+        "@typescript-eslint/parser": "^5.49.0",
+        "eslint": "^8.32.0",
+        "eslint-plugin-simple-import-sort": "^10.0.0",
+        "prettier": "^2.8.3",
+        "typescript": "^4.9.3",
+        "vite": "^4.0.0"
+    }
+}
