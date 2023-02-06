@@ -32,7 +32,7 @@ This project is built on top of the following PixiJS-based libraries:
 git clone https://github.com/pixijs/open-games
 
 # Enter the project folder
-cd ./pixijs-match3
+cd ./puzzling-potions
 
 # Install dependencies
 npm install

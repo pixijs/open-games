@@ -10,8 +10,13 @@ Pixi Open Games is a collection of open source games powered by PixiJS. The goal
 
 Below is a list of games that are currently available in this repository. Each game has its own README file with more information about the game and how to run it.
 
-- [Bubbo Bubbo](/bubbo-bubbo/README.md)
-- [Puzzling Potions](/puzzling-potions/README.md)
+- Bubbo Bubbo
+  - [Code](/bubbo-bubbo/README.md)
+  - [Play](https://bubbo-bubbo.netlify.app/)
+
+- Puzzling Potions
+  - [Code](/puzzling-potions/README.md)
+  - [Play](https://puzzling-potions.netlify.app/)
 
 ## Tools
 
