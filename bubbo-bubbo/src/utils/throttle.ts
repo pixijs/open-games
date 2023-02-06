@@ -1,4 +1,4 @@
-const map: Record<string, number> = {};
+const map: Record<string, NodeJS.Timeout> = {};
 
 /**
  * Throttle function calls to a minimum interval, in millisecons, using a name as reference for simplicity
