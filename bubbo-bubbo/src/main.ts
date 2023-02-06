@@ -74,7 +74,7 @@ async function init()
         if (!hasInteracted)
         {
             // Only play audio if it hasn't already been played
-            bgm.play('audio/bubble-shooter-bg-music.wav');
+            bgm.play('audio/bubbo-bubbo-bg-music.wav');
         }
 
         hasInteracted = true;

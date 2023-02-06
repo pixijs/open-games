@@ -14,7 +14,7 @@ export type StorageData = typeof DEFAULT_STORAGE;
 /**
  * The ID of the local storage where the data is stored.
  */
-const STORAGE_ID = 'pixi-js-bubble-shooter';
+const STORAGE_ID = 'bubbo-bubbo';
     
 export const storage = {
     /**
