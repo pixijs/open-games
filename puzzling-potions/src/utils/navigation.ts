@@ -5,21 +5,32 @@ import { pool } from './pool';
 
 /** Interface for app screens */
 interface AppScreen extends Container {
+    /** Show the screen */
     show?(): Promise<void>;
+    /** Hide the screen */
     hide?(): Promise<void>;
+    /** Pause the screen */
     pause?(): Promise<void>;
+    /** Resume the screen */
     resume?(): Promise<void>;
+    /** Prepare screen, before showing */
     prepare?(): void;
+    /** Reset screen, after hidden */
     reset?(): void;
+    /** Update the screen, passing delta time/step */
     update?(delta: number): void;
+    /** Resize the screen */
     resize?(width: number, height: number): void;
+    /** Blur the screen */
     blur?(): void;
+    /** Focus the screen */
     focus?(): void;
 }
 
 /** Interface for app screens constructors */
 interface AppScreenConstructor {
     new (): AppScreen;
+    /** List of assets bundles required by the screen */
     assetBundles?: string[];
 }
 
@@ -134,6 +145,11 @@ class Navigation {
         await this.addAndShowScreen(this.currentScreen);
     }
 
+    /**
+     * Resize screens
+     * @param width Viewport width
+     * @param height Viewport height
+     */
     public resize(width: number, height: number) {
         this.width = width;
         this.height = height;
@@ -173,12 +189,18 @@ class Navigation {
         }
     }
 
+    /**
+     * Blur screens when lose focus
+     */
     public blur() {
         this.currentScreen?.blur?.();
         this.currentPopup?.blur?.();
         this.background?.blur?.();
     }
 
+    /**
+     * Focus screens
+     */
     public focus() {
         this.currentScreen?.focus?.();
         this.currentPopup?.focus?.();
@@ -186,4 +208,5 @@ class Navigation {
     }
 }
 
+/** Shared navigation instance */
 export const navigation = new Navigation();

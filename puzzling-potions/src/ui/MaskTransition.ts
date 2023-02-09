@@ -8,7 +8,9 @@ import { navigation } from '../utils/navigation';
  * scaling up (reveal) or down (cover) animated
  */
 export class MaskTransition {
+    /** Flat colour base to cover the screen */
     private base: Sprite;
+    /** A static cauldron sprite used as mask */
     private cauldron: Sprite;
 
     constructor() {

@@ -15,20 +15,30 @@ import { InfoPopup } from '../popups/InfoPopup';
 import { SettingsPopup } from '../popups/SettingsPopup';
 import { bgm } from '../utils/audio';
 
+/** Custom ease curve for y animation of the base to reveal the screen */
 const easeSoftBackOut = registerCustomEase(
     'M0,0,C0,0,0.05,0.228,0.09,0.373,0.12,0.484,0.139,0.547,0.18,0.654,0.211,0.737,0.235,0.785,0.275,0.864,0.291,0.896,0.303,0.915,0.325,0.944,0.344,0.97,0.356,0.989,0.38,1.009,0.413,1.039,0.428,1.073,0.604,1.074,0.72,1.074,0.822,1.035,0.91,1.011,0.943,1.002,1,1,1,1',
 );
 
 /** The first screen that shows up after loading */
 export class HomeScreen extends Container {
+    /** Assets bundles required by this screen */
     public static assetBundles = ['home', 'common'];
+    /** The game logo */
     private logo: Logo;
+    /** Animated dragon */
     private dragon: Dragon;
+    /** Button that leads to gameplay */
     private playButton: LargeButton;
+    /** Button that links to the Github project */
     private githubButton: SmallButton;
+    /** Button that links to the PixiJS page */
     private pixiButton: ImageButton;
+    /** Button that opens the info panel */
     private infoButton: RippleButton;
+    /** Button that opens the settings panel */
     private settingsButton: RippleButton;
+    /** The footer base, also used for transition in */
     private base: NineSlicePlane;
 
     constructor() {
@@ -139,9 +149,13 @@ export class HomeScreen extends Container {
 
         gsap.killTweensOf(this.base);
         gsap.killTweensOf(this.base.pivot);
+
+        // Make the flat colour base cover the entire screen, matching the visual state
+        // left from loading screen
         this.base.height = navigation.height * 1.25;
         this.base.pivot.y = navigation.height;
 
+        // Animate it to uncover the screen and rest at the bottom
         gsap.to(this.base, {
             height: 200,
             duration,

@@ -6,7 +6,9 @@ import { Spine } from 'pixi-spine';
  * Spine-animated little dragon, that shows up in Home and Result screens.
  */
 export class Dragon extends Container {
+    /** The spine animation */
     private spine: Spine;
+    /** Inner container for internal animations */
     private container: Container;
 
     constructor() {

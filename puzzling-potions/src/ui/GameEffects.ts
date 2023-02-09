@@ -37,6 +37,7 @@ const easeJumpToCauldronScale = registerCustomEase(
  * - Gird Explosion - Explode all pieces out of the grid, played when gameplay finishes
  */
 export class GameEffects extends Container {
+    /** The game screen instance */
     private game: GameScreen;
 
     constructor(game: GameScreen) {

@@ -15,8 +15,11 @@ type RippleButtonOptions = typeof defaultRippleButtonOptions;
  * Button with special ripple animation, used for settings, pause and info buttons
  */
 export class RippleButton extends FancyButton {
+    /** The button image */
     private image: Sprite;
+    /** The name of ripple texture */
     private ripple: string;
+    /** Pool of reusable ripples */
     private ripplePool: Sprite[] = [];
 
     constructor(options: Partial<RippleButtonOptions> = {}) {

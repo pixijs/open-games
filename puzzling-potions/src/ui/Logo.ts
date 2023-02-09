@@ -5,6 +5,7 @@ import gsap from 'gsap';
  * The game logo, presented in the Home screen
  */
 export class Logo extends Container {
+    /** The logo image */
     private image: Sprite;
 
     constructor() {

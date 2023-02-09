@@ -5,7 +5,9 @@ import { app } from '../main';
  * The app's animated background based on TilingSprite, always present in the screen
  */
 export class TiledBackground extends Container {
+    /** The direction that the background should animate */
     public direction = -Math.PI * 0.15;
+    /** The tiling sprite that will repeat the pattern */
     private sprite: TilingSprite;
 
     constructor() {

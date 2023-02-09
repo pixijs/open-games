@@ -14,7 +14,9 @@ type ImageButtonOptions = typeof defaultImageButtonOptions;
  * A simple sprite button, based on a single texture frame
  */
 export class ImageButton extends FancyButton {
+    /** The image used for this button */
     private image: Sprite;
+    /** Optional custom scale */
     private scaleOverride: number;
 
     constructor(options: Partial<ImageButtonOptions> = {}) {

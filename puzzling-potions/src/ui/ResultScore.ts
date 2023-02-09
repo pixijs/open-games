@@ -10,6 +10,7 @@ import { sfx } from '../utils/audio';
  * gameplay score and best score.
  */
 export class ResultScore extends Container {
+    /** The score message displayed */
     private label: Label;
 
     constructor(fill = 0xffffff) {

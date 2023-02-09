@@ -10,8 +10,11 @@ import { sfx } from '../utils/audio';
  * then shows a "Finished" message while the grid takes its time to complete processing
  */
 export class GameOvertime extends Container {
+    /** Label for the seconds left */
     private labelNum: Label;
+    /** Label for the final message */
     private labelOver: Label;
+    /** Number stroke sprites, for animation */
     private stroke: Sprite;
 
     constructor() {

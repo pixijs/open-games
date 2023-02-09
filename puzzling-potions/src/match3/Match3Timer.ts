@@ -4,10 +4,15 @@ import { Match3 } from './Match3';
  * Controls the gameplay session time.
  */
 export class Match3Timer {
+    /** The Match3 instance */
     private match3: Match3;
+    /** Current gameplay time in milliseconds - from `0` to `duration` */
     private time = 0;
+    /** Gameplay session duration, in milliseconds */
     private duration = 0;
+    /** True if the timer is paused */
     private paused = false;
+    /** True if the timer is running, even if its paused */
     private running = false;
 
     constructor(match3: Match3) {

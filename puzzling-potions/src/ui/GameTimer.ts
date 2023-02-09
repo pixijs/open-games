@@ -6,6 +6,7 @@ import { Label } from './Label';
  * once there is less than 10 seconds left.
  */
 export class GameTimer extends Container {
+    /** The remaining time displayed */
     private readonly label: Label;
 
     constructor() {

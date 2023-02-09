@@ -26,21 +26,37 @@ import { userStats } from '../utils/userStats';
 
 /** The screen tha holds the Match3 game */
 export class GameScreen extends Container {
+    /** Assets bundles required by this screen */
     public static assetBundles = ['game', 'common'];
+    /** The Math3 game */
     public readonly match3: Match3;
+    /** Animated cauldron */
     public readonly cauldron: Cauldron;
+    /** Inner container for the match3 */
     public readonly gameContainer: Container;
+    /** The gameplay timer display */
     public readonly timer: GameTimer;
+    /** The game score display */
     public readonly score: GameScore;
+    /** Combo message displayed when combo-ing */
     public readonly comboMessage: CloudLabel;
+    /** Combo level displayed when combo-ing */
     public readonly comboLevel: CloudLabel;
+    /** Button for pausing the game */
     public readonly pauseButton: RippleButton;
+    /** Button that opens the settings panel */
     public readonly settingsButton: RippleButton;
+    /** Countdown displayed before actual gameplay starts */
     public readonly countdown: GameCountdown;
+    /** Countdown displayed when the gameplay is about to finish */
     public readonly overtime: GameOvertime;
+    /** The time's up message that shows up when gameplay finishes */
     public readonly timesUp: GameTimesUp;
+    /** The match3 book shelf background */
     public readonly shelf?: Shelf;
+    /** The special effects layer for the match3 */
     public readonly effects?: GameEffects;
+    /** Set to true when gameplay is finished */
     private finished = false;
 
     constructor() {

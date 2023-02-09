@@ -7,8 +7,11 @@ import gsap from 'gsap';
  * control for music background only, leaving other sounds volumes unchanged.
  */
 class BGM {
+    /** Alias of the current music being played */
     public currentAlias?: string;
+    /** Current music instance being played */
     public current?: Sound;
+    /** Current volume set */
     private volume = 1;
 
     /** Play a background music, fading out and stopping the previous, if there is one */
@@ -55,6 +58,7 @@ class BGM {
  * have their volume changed. But because most of sound effects are short sounds, this is generally fine.
  */
 class SFX {
+    /** Volume scale for new instances */
     private volume = 1;
 
     /** Play an one-shot sound effect */

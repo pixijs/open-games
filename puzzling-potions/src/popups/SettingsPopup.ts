@@ -13,16 +13,27 @@ import { GameScreen } from '../screens/GameScreen';
 
 /** Popup for volume and game mode settings - game mode cannot be changed during gameplay */
 export class SettingsPopup extends Container {
+    /** The dark semi-transparent background covering current screen */
     private bg: Sprite;
+    /** Container for the popup UI components */
     private panel: Container;
+    /** The popup title label */
     private title: Label;
+    /** Button that closes the popup */
     private doneButton: LargeButton;
+    /** The panel background */
     private panelBase: RoundedBox;
+    /** The game build version label */
     private versionLabel: Label;
+    /** Layout that organises the UI components */
     private layout: Layout;
+    /** Slider that changes the master volume */
     private masterSlider: VolumeSlider;
+    /** Slider that changes background music volume */
     private bgmSlider: VolumeSlider;
+    /** Slider that changes sound effects volume */
     private sfxSlider: VolumeSlider;
+    /** Radio buttons to change the game mode (disabled during gameplay) */
     private mode: ModeSwitcher;
 
     constructor() {
@@ -97,9 +108,11 @@ export class SettingsPopup extends Container {
 
     /** Set things up just before showing the popup */
     public prepare() {
+        // Game mode switcher should be disabled during gameplay
         const canChangeMode = !(navigation.currentScreen instanceof GameScreen);
         this.mode.alpha = canChangeMode ? 1 : 0.3;
         this.mode.interactiveChildren = canChangeMode;
+
         this.masterSlider.value = userSettings.getMasterVolume() * 100;
         this.bgmSlider.value = userSettings.getBgmVolume() * 100;
         this.sfxSlider.value = userSettings.getSfxVolume() * 100;

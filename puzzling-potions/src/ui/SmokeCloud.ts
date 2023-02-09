@@ -5,10 +5,15 @@ import { app } from '../main';
  * The cloud that shows up on the top of the screen, during loading.
  */
 export class SmokeCloud extends Container {
+    /** The tint colour of this component */
     private color = 0x2c136c;
+    /** Rectangular base area of the cloud */
     private base: Sprite;
+    /** Container for animated cloud circles */
     private circlesContainer: Container;
+    /** Pool of reusable circles */
     private circlesPool: SmokeCloudCircle[] = [];
+    /** Circles currently being displayed */
     private circles: SmokeCloudCircle[] = [];
 
     constructor() {

@@ -9,69 +9,81 @@ import { Match3Stats } from './Match3Stats';
 import { Match3Timer } from './Match3Timer';
 import { Match3Position, Match3Type } from './Match3Utility';
 
+/** Interface for onMatch event data */
 export interface Match3OnMatchData {
+    /** List of all matches detected in the grid */
     matches: Match3Position[][];
+    /** Combo level - starting from 1 */
     combo: number;
 }
 
+/** Interface for onPop event data */
 export interface Match3OnPopData {
+    /** The type of the piece popped out */
     type: Match3Type;
+    /** The piece sprite */
     piece: Match3Piece;
+    /** Current combo level */
     combo: number;
+    /** Tells if the given type is a special type */
     isSpecial: boolean;
+    /** True if the piece was popped from special effect, not plain match */
     causedBySpecial: boolean;
 }
 
+/** Interface for onMove event data */
 export interface Match3OnMoveData {
+    /** The starting grid position of the move */
     from: Match3Position;
+    /** The ending grid position of the move */
     to: Match3Position;
+    /** True if is a valid movement (creates a match) */
     valid: boolean;
 }
 
 /**
- * The main match3 class that sets up game's sub-systems and provide some useful callbacks
+ * The main match3 class that sets up game's sub-systems and provide some useful callbacks.
+ * All game events are set as plain callbacks for simplicity
  */
 export class Match3 extends Container {
+    /** Match3 game basic configuration */
     public config: Match3Config;
-
-    // Match3 sub-systems
+    /** Counts the gameplay time */
     public timer: Match3Timer;
+    /** Compute score, grade, number of matches */
     public stats: Match3Stats;
+    /** Holds the grid state and display */
     public board: Match3Board;
+    /** Sort out actions that the player can take */
     public actions: Match3Actions;
+    /** Process matches and fills up the grid */
     public process: Match3Process;
+    /** Handles pieces with special powers */
     public special: Match3Special;
 
-    // All game events, as plain callbacks for simplicity
+    /** Fires when player move pieces */
     public onMove?: (data: Match3OnMoveData) => void;
+    /** Fires when a match is detected */
     public onMatch?: (data: Match3OnMatchData) => void;
+    /** Fires when a piece is popped out of the board */
     public onPop?: (data: Match3OnPopData) => void;
+    /** Fires when the game start auto-processing the grid */
     public onProcessStart?: () => void;
+    /** Fires when the game finishes auto-processing the grid */
     public onProcessComplete?: () => void;
+    /** Fires when game duration expires */
     public onTimesUp?: () => void;
 
     constructor() {
         super();
 
-        // Match3 game basic configuration
+        // Game sub-systems
         this.config = match3GetConfig();
-
-        // Counts the gameplay time
         this.timer = new Match3Timer(this);
-
-        // Compute score, grade, number of matches
         this.stats = new Match3Stats(this);
-
-        // Holds the grid state and display
         this.board = new Match3Board(this);
-
-        // Sort out actions that the player can take
         this.actions = new Match3Actions(this);
-
-        // Process matches and fills up the grid
         this.process = new Match3Process(this);
-
-        // Handles pieces with special powers
         this.special = new Match3Special(this);
     }
 

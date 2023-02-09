@@ -8,6 +8,7 @@ import {
     match3GetMatches,
 } from './Match3Utility';
 
+/** Interface for actions configuration */
 interface Match3ActionsConfig {
     freeMoves: boolean;
 }
@@ -17,13 +18,20 @@ interface Match3ActionsConfig {
  * Action effects happens instantly, and the game will deal with whatever state the grid ends up with.
  */
 export class Match3Actions {
+    /** The match3 instance */
     public match3: Match3;
+
+    /** Free all moves, meaning that they will always be valid regardles of matching results */
     public freeMoves = false;
 
     constructor(match3: Match3) {
         this.match3 = match3;
     }
 
+    /**
+     * Set up actions with given configuration
+     * @param config Actions config params
+     */
     public setup(config: Match3ActionsConfig) {
         this.freeMoves = config.freeMoves;
     }

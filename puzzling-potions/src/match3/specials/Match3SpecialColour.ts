@@ -1,8 +1,14 @@
 import { Match3 } from '../Match3';
 import { match3ForEach, Match3Position, Match3Type } from '../Match3Utility';
 
+/**
+ * Process a match list to find out matches at least 5 pieces long, then spawns the Colour Blast piece in the middle.
+ * Trigger the piece blast special, popping out all pieces of a single type in the grid.
+ */
 export class Match3SpecialColour {
+    /** The Match3 instance */
     public readonly match3: Match3;
+    /** The piece type designed for this special */
     public readonly pieceType: Match3Type;
 
     constructor(match3: Match3, pieceType: Match3Type) {
@@ -10,6 +16,10 @@ export class Match3SpecialColour {
         this.pieceType = pieceType;
     }
 
+    /**
+     * Process a match list to find out matches at least 5 pieces long, then spawns the Colour Blast piece in the middle.
+     * @param matches Match list to be processed
+     */
     public async process(matches: Match3Position[][]) {
         let i = matches.length;
         while (i--) {
@@ -22,7 +32,13 @@ export class Match3SpecialColour {
         }
     }
 
+    /**
+     * Check piece type and trigger the piece blast special, popping out all pieces of a single type in the grid.
+     * @param pieceType Piece type to be evaluated - the type must match for actually triggering the special
+     * @param position The grid position (row & column) that is the origin of the special
+     */
     public async trigger(pieceType: Match3Type) {
+        // Ignore if provided piece type does not match this special type
         if (pieceType !== this.pieceType) return;
 
         // Find out which piece type has most positions in the grid

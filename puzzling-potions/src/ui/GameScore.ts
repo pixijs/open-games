@@ -9,12 +9,19 @@ import { sfx } from '../utils/audio';
  * The game score that shows during gameplay, with points animation
  */
 export class GameScore extends Container {
+    /** Inner container for animation */
     private container: Container;
+    /** The animated cloud background */
     private cloud: Cloud;
+    /** The score number displayed */
     private label: Label;
+    /** Score currently set */
     private points = -1;
+    /** Turns false when hidden */
     private showing = true;
+    /** Points that will gradually increase until match actual points */
     private animatedPoints = 0;
+    /** Increases with the frequence that score is updated, for changing the sfx playback pitch */
     private intensity = 0;
 
     constructor() {
@@ -102,6 +109,8 @@ export class GameScore extends Container {
         if (this.label.text !== text) {
             this.label.text = text;
             const speed = Math.min(0.8 + this.intensity * 0.001, 2);
+            // Throttle sfx to a minimum interval, otherwise too many sounds instances
+            // will be played at the same time, making it very noisy
             throttle('score', 100, () => {
                 sfx.play('common/sfx-points.wav', { speed, volume: 0.2 });
             });

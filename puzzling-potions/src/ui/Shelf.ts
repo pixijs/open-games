@@ -5,7 +5,9 @@ import { Container, Sprite } from 'pixi.js';
  * rescaled to any number of rows and columns, to match the game grid size.
  */
 export class Shelf extends Container {
+    /** Inner container for shelf bulding blocks */
     private base: Container;
+    /** Inner container for shelf shadow blocks */
     private shadow: Container;
 
     constructor() {

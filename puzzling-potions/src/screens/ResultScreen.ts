@@ -19,20 +19,35 @@ import { userStats } from '../utils/userStats';
 
 /** APpears after gameplay ends, displaying scores and grade */
 export class ResultScreen extends Container {
+    /** Assets bundles required by this screen */
     public static assetBundles = ['result', 'common'];
+    /** The centered box area containing the results */
     private panel: Container;
+    /** Animated dragon */
     private dragon: Dragon;
+    /** The panel background */
     private panelBase: Sprite;
+    /** The screen title */
     private title: Label;
+    /** The current game mode label */
     private mode: Label;
+    /** The static white cauldron */
     private cauldron: Sprite;
+    /** The performance message, according to grade */
     private message: CloudLabel;
+    /** The gameplay final score in current game mode */
     private score: ResultScore;
+    /** The best score in current game mode */
     private bestScore: ResultScore;
+    /** The animated stars that represent the grade */
     private stars: ResultStars;
+    /** The footer base */
     private bottomBase: NineSlicePlane;
+    /** Button that goes back to the game to play again */
     private continueButton: LargeButton;
+    /** Button that opens the settings panel */
     private settingsButton: RippleButton;
+    /** A special transition that temporarely masks the entire screen */
     private maskTransition?: MaskTransition;
 
     constructor() {
@@ -133,7 +148,11 @@ export class ResultScreen extends Container {
     /** Show screen with animations */
     public async show() {
         bgm.play('common/bgm-main.mp3', { volume: 0.5 });
+        // GameScreen hide to a flat colour covering the viewport, which gets replaced
+        // by this transition, revealing this screen
         this.maskTransition?.playTransitionIn();
+
+        // Wait a little bit before showing all screen components
         await waitFor(0.5);
         const mode = userSettings.getGameMode();
         const performance = userStats.load(mode);

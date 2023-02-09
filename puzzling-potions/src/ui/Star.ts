@@ -5,6 +5,7 @@ import gsap from 'gsap';
  * A single star used in the Result stars animation
  */
 export class Star extends Container {
+    /** The star image, for internal animation */
     private image: Sprite;
 
     constructor() {

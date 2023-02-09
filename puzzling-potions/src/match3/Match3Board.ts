@@ -19,15 +19,25 @@ import {
  * and 'board' is its visual representation with sprites.
  */
 export class Match3Board {
+    /** The Match3 instance */
     public match3: Match3;
+    /** The grid state, with only numbers */
     public grid: Match3Grid = [];
+    /** All piece sprites currently being used in the grid */
     public pieces: Match3Piece[] = [];
+    /** Mask all pieces inside board dimensions */
     public piecesMask: Graphics;
+    /** A container for the pieces sprites */
     public piecesContainer: Container;
+    /** Number of rows in the boaard */
     public rows = 0;
+    /** Number of columns in the boaard */
     public columns = 0;
+    /** The size (width & height) of each board slot */
     public tileSize = 0;
+    /** List of common types available for the game */
     public commonTypes: Match3Type[] = [];
+    /** Map piece types to piece names */
     public typesMap!: Record<number, string>;
 
     constructor(match3: Match3) {

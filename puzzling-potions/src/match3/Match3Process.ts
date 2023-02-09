@@ -18,9 +18,13 @@ import {
  * in a way each step can be awaited/delayed as needed acording to what makes sense to the game flow.
  */
 export class Match3Process {
+    /** The Match3 instance */
     private match3: Match3;
+    /** Tells if it is currently processing or not */
     private processing = false;
+    /** The subsequent process round, resets when process starts */
     private round = 0;
+    /** The list of queued actions that the grid processing will take */
     private queue: AsyncQueue;
 
     constructor(match3: Match3) {

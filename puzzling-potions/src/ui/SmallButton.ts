@@ -18,7 +18,9 @@ type SmallButtonOptions = typeof defaultSmallButtonOptions;
  * A rectangular small button, with label idle and pressed states
  */
 export class SmallButton extends FancyButton {
+    /** The message displayed */
     public label: Label;
+    /** Inner container for animation */
     private container: Container;
 
     constructor(options: Partial<SmallButtonOptions> = {}) {

@@ -13,8 +13,11 @@ type AsyncQueueFn = () => Promise<void>;
  * meaning that the next function in queue will not be executed util resumed.
  */
 export class AsyncQueue {
+    /** Queue of async functions that will be executed one after another */
     private readonly queue: AsyncQueueFn[] = [];
+    /** Check if processing is paused */
     private paused = false;
+    /** Check if processing has been started and queue is not empty */
     private processing = false;
 
     /** Pause the execution queue */

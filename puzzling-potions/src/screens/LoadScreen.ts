@@ -8,10 +8,15 @@ import { app } from '../main';
 
 /** Screen shown while loading assets */
 export class LoadScreen extends Container {
+    /** Assets bundles required by this screen */
     public static assetBundles = ['preload'];
+    /** ANimated cauldron */
     private cauldron: Cauldron;
+    /** The PixiJS logo */
     private pixiLogo: PixiLogo;
+    /** The cloud animation at the top */
     private cloud: SmokeCloud;
+    /** LThe loading message display */
     private message: Text;
 
     constructor() {
@@ -56,6 +61,7 @@ export class LoadScreen extends Container {
 
     /** Hide screen with animations */
     public async hide() {
+        // Change then hide the loading message
         this.message.text = i18n.loadingDone;
         gsap.killTweensOf(this.message);
         gsap.to(this.message, {
@@ -64,6 +70,8 @@ export class LoadScreen extends Container {
             ease: 'linear',
             delay: 0.5,
         });
+
+        // Make the cloud cover the entire screen in a flat colour
         gsap.killTweensOf(this.cloud);
         await gsap.to(this.cloud, {
             height: app.renderer.height,

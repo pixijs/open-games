@@ -8,10 +8,15 @@ import { navigation } from '../utils/navigation';
 
 /** Popup that shows up when gameplay is paused */
 export class PausePopup extends Container {
+    /** The dark semi-transparent background covering current screen */
     private bg: Sprite;
+    /** Container for the popup UI components */
     private panel: Container;
+    /** The popup title label */
     private title: Label;
+    /** Button that closes the popup */
     private doneButton: LargeButton;
+    /** The panel background */
     private panelBase: RoundedBox;
 
     constructor() {

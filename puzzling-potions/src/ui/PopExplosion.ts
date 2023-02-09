@@ -6,6 +6,7 @@ import { randomRange } from '../utils/random';
  * Little explosion effect, that is used mainly for gameplay effects
  */
 export class PopExplosion extends Container {
+    /** List of animated particles */
     private particles: Sprite[] = [];
 
     constructor() {

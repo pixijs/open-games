@@ -13,9 +13,13 @@ const easeDropJumpOut = registerCustomEase('M0,0,C0,0,0.07,-0.63,0.402,-0.422,0.
  * play splash animation and set up an inner sprite that follows up the spine animation.
  */
 export class Cauldron extends Container {
+    /** Inner container for the cauldron */
     private container: Container;
+    /** The optional cauldron shadow, displayed in game screen */
     private shadow: Sprite;
+    /** The cauldron spine animation */
     private spine: Spine;
+    /** Optional content attached to the cauldron, that will follow its animation */
     private content?: Container;
 
     constructor(shadow = false) {
@@ -126,7 +130,6 @@ class CauldronCircle extends Sprite {
     constructor() {
         super();
         this.texture = Texture.from('circle');
-
         this.anchor.set(0.5);
         this.tint = 0x2c136c;
     }

@@ -9,16 +9,24 @@ import {
 } from '../utils/animation';
 import { app } from '../main';
 
+/** Default piece options */
 const defaultMatch3PieceOptions = {
+    /** Piece name, must match one of the textures available */
     name: '',
+    /** Attributed piece type in the grid */
     type: 0,
+    /** Piece size - width & height - in pixel */
     size: 50,
+    /** Set if the piece should be highlighted, like special types */
     highlight: false,
+    /** Enable or disable its interactivity */
     interactive: false,
 };
 
+/** Piece configuration parameters */
 export type Match3PieceOptions = typeof defaultMatch3PieceOptions;
 
+/** Custom ease curve for y animation of falling pieces */
 const easeSingleBounce = registerCustomEase(
     'M0,0,C0.14,0,0.27,0.191,0.352,0.33,0.43,0.462,0.53,0.963,0.538,1,0.546,0.985,0.672,0.83,0.778,0.83,0.888,0.83,0.993,0.983,1,1',
 );
@@ -30,19 +38,33 @@ const easeSingleBounce = registerCustomEase(
  * positioning conflicts.
  */
 export class Match3Piece extends Container {
+    /** The interactive area of the piece */
     private readonly area: Sprite;
+    /** The actual image of the piece */
     private readonly image: Sprite;
+    /** The highlight sprite that can be enabled or disabled */
     private readonly highlight: Sprite;
+    /** True if piece is being touched */
     private pressing = false;
+    /** True if piece is being dragged */
     private dragging = false;
+    /** The initial x position of the press */
     private pressX = 0;
+    /** The initial y position of the press */
     private pressY = 0;
+    /** True if animations are paused */
     private paused = false;
+    /** The row index of the piece */
     public row = 0;
+    /** The column index of the piece */
     public column = 0;
+    /** The piece type in the grid */
     public type = 0;
+    /** The name of the piece - must match one of the available textures */
     public name = '';
+    /** Callback that fires when the player drags the piece for a move */
     public onMove?: (from: Match3Position, to: Match3Position) => void;
+    /** Callback that fires when the player tap the piece */
     public onTap?: (position: Match3Position) => void;
 
     constructor() {

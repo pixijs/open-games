@@ -2,6 +2,7 @@ import { Container, Sprite } from 'pixi.js';
 
 /** PixiJS logo UI component */
 export class PixiLogo extends Container {
+    /** The logo image */
     private image: Sprite;
 
     constructor() {

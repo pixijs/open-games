@@ -14,9 +14,13 @@ export type CloudLabelOptions = typeof defaultCloudLabelOptions;
  * Class that composes a Cloud and a Label, used in different places in this app,
  */
 export class CloudLabel extends Container {
+    /** Inner container for components, for animation purposes */
     private container: Container;
+    /** The animated cloud background */
     private cloud: Cloud;
+    /** The message label */
     private label: Label;
+    /** Turns false if component is hidden */
     private showing = true;
 
     constructor(options: Partial<CloudLabelOptions> = {}) {

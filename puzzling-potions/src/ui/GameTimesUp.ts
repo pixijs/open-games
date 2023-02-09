@@ -9,8 +9,11 @@ import gsap from 'gsap';
  * transition to the Result screen
  */
 export class GameTimesUp extends Container {
+    /** Inner container for animation */
     private container: Container;
+    /** The animated cloud background */
     private cloud: Cloud;
+    /** The displayed message */
     private label: Label;
 
     constructor() {

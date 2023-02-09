@@ -17,8 +17,11 @@ const easeMidSlowMotion = registerCustomEase(
  * a regular "3, 2, 1... GO!" animation, for speed.
  */
 export class GameCountdown extends Container {
+    /** Inner container for internal animations */
     private container: Container;
+    /** The animated cloud background */
     private cloud: Cloud;
+    /** The message displaying */
     private label: Label;
 
     constructor() {

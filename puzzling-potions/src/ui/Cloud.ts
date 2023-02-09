@@ -16,11 +16,17 @@ export type CloudOptions = typeof defaultCloudOptions;
  * A cloud-like animated component formed by circles that can be reused in different parts of the game
  */
 export class Cloud extends Container {
+    /** Cloud display settings */
     private options: CloudOptions;
+    /** Rectangular area of the cloud */
     private base: Sprite;
+    /** Bottom container for cloud circles */
     private bottom: Container;
+    /** Top container for cloud circles */
     private top: Container;
+    /** Pool of circles that can be reused */
     private circlesPool: CloudCircle[] = [];
+    /** Currently displayed circles */
     private circles: CloudCircle[] = [];
 
     constructor(options: Partial<CloudOptions> = {}) {

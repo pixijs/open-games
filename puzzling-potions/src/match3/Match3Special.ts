@@ -24,9 +24,13 @@ export interface Match3SpecialHandlerConstructor {
 
 /** All available specials - handlers can be found inside `match3/specials/` folder */
 const availableSpecials: Record<string, Match3SpecialHandlerConstructor> = {
+    /** Pops out the entire row */
     'special-row': Match3SpecialRow,
+    /** Pops out the entire column */
     'special-column': Match3SpecialColumn,
+    /** Pops out all pieces of a single type */
     'special-colour': Match3SpecialColour,
+    /** Pops out surrounding pieces */
     'special-blast': Match3SpecialBlast,
 };
 
@@ -36,8 +40,11 @@ const availableSpecials: Record<string, Match3SpecialHandlerConstructor> = {
  * and release its power (trigger) when touched or popped out.
  */
 export class Match3Special {
+    /** The Match3 instance */
     public match3: Match3;
+    /** List of special types defined for this session */
     public specialTypes: Match3Type[] = [];
+    /** List of all special handlers - one per special type */
     public specialHandlers: Match3SpecialHandler[] = [];
 
     constructor(match3: Match3) {

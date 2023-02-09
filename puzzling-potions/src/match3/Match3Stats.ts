@@ -1,5 +1,6 @@
 import { Match3, Match3OnMatchData, Match3OnPopData } from './Match3';
 
+/** Default gameplay stats data */
 const defaultStatsData = {
     score: 0,
     matches: 0,
@@ -8,13 +9,16 @@ const defaultStatsData = {
     grade: 0,
 };
 
+/** gameplay stats data */
 export type Match3StatsData = typeof defaultStatsData;
 
 /**
  * Computes scores and general gameplay stats during the session.
  */
 export class Match3Stats {
+    /** The Match3 instance */
     private match3: Match3;
+    /** Current internal stats data */
     private data: Match3StatsData;
 
     constructor(match3: Match3) {

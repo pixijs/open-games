@@ -16,6 +16,7 @@ type LargeButtonOptions = typeof defaultLargeButtonOptions;
  * The big rectangle button, with a label, idle and pressed states
  */
 export class LargeButton extends FancyButton {
+    /** The buttoon message displayed */
     private label: Label;
 
     constructor(options: Partial<LargeButtonOptions> = {}) {

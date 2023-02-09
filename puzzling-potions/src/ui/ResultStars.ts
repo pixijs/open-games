@@ -8,11 +8,17 @@ import { Star } from './Star';
  * The group of 3 stars in the Result screen, representing the gameplay grade.
  */
 export class ResultStars extends Container {
+    /** Start instance for grade 1 */
     private star1: Star;
+    /** Start instance for grade 2 */
     private star2: Star;
+    /** Start instance for grade 3 */
     private star3: Star;
+    /** Background for star1 */
     private starSlot1: Star;
+    /** Background for star2 */
     private starSlot2: Star;
+    /** Background for star3 */
     private starSlot3: Star;
 
     constructor() {
