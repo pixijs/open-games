@@ -107,6 +107,10 @@ We encourage you to fork the repository and improve the game in any way you see 
 
 This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
 
+## GSAP
+
+This game uses GSAP for its animations. You can use the free version of GSAP for some commercial projects. However please check the licensing options from [GreenSock](https://greensock.com/licensing/).
+
 ---
 
 > Author [Mauro](https://github.com/maurodetarso)
