@@ -2,10 +2,10 @@ import {
     Assets,
     extensions,
     ExtensionType,
-    ResolverAssetsArray,
     resolveTextureUrl,
     ResolveURLParser,
     settings,
+    UnresolvedAsset,
 } from 'pixi.js';
 
 import manifest from '../src/manifest.json';
@@ -47,8 +47,8 @@ export function isBundleLoaded(bundle: string) {
         return false;
     }
 
-    for (const asset of bundleManifest.assets as ResolverAssetsArray) {
-        if (!Assets.cache.has(asset.name as string)) {
+    for (const asset of bundleManifest.assets as UnresolvedAsset[]) {
+        if (!Assets.cache.has(asset.alias as string)) {
             return false;
         }
     }

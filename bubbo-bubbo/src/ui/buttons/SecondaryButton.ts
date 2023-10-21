@@ -67,16 +67,8 @@ export class SecondaryButton extends FancyButton
             // Tint base asset if tint defined in options
             (this.defaultView as Sprite).tint = options.tint;
         }
+        this.onPress.connect(() =>  sfx.play('audio/secondary-button-press.wav'));
     }
 
-    /**
-     * Override function for the FancyButton, called when button is pressed
-     */
-    public override press()
-    {
-        // Since this is a common button, all button responses are done outside of this class
 
-        // Play audio
-        sfx.play('audio/secondary-button-press.wav');
-    }
 }

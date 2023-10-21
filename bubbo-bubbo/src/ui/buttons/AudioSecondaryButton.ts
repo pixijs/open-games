@@ -13,8 +13,7 @@ const DEFAULT_SCALE = 0.75;
  *
  * Uses elements from @pixi/ui.
  */
-export class AudioSecondaryButton extends FancyButton
-{
+export class AudioSecondaryButton extends FancyButton {
     /**
      * A reference to an object used to display the mute state
      *
@@ -22,21 +21,19 @@ export class AudioSecondaryButton extends FancyButton
      */
     private _switcher: Switcher;
 
-    constructor()
-    {
+    constructor() {
         // Check the muted state
         const isMuted = storage.getStorageItem('muted');
 
-        const switcher = new Switcher([
-            'icon-sound-on',
-            'icon-sound-off',
-        ],
-        [], // no trigger events, we will control switch manually
-        isMuted ? 1 : 0); // Force the visual switched state to be the muted state
-        
+        const switcher = new Switcher(
+            ['icon-sound-on', 'icon-sound-off'],
+            [], // no trigger events, we will control switch manually
+            isMuted ? 1 : 0,
+        ); // Force the visual switched state to be the muted state
+
         // Decrease scale to fit to parent button
         switcher.scale.set(0.95);
-        
+
         // Create text object to act as label
         const text = new Text(i18n.t('sound'), {
             fill: 0x000000,
@@ -68,26 +65,29 @@ export class AudioSecondaryButton extends FancyButton
             // Set animations using common scaling states based on default scale
             animations: getAnimations(DEFAULT_SCALE),
             // Set initial scale to default scale
-            scale:  DEFAULT_SCALE,
+            scale: DEFAULT_SCALE,
         });
 
         // Tint base asset
         (this.defaultView as Sprite).tint = 0x49c8ff;
 
         this._switcher = switcher;
+
+        this.onPress.connect(() => {
+            this.press();
+        });
     }
 
     /**
      * Override function for the FancyButton, called when button is pressed
      */
-    public override press()
-    {
+    public press() {
         // Toggling the mute state of audio
         const isMuted = storage.setStorageItem('muted', !storage.getStorageItem('muted'));
-        
+
         // Update the display
         this.forceSwitch(isMuted);
-        
+
         // Set the actual audio state
         audio.muted(isMuted);
 
@@ -99,8 +99,7 @@ export class AudioSecondaryButton extends FancyButton
      * This method updates the display of the mute state to match the provided muted value.
      * @param muted - The mute state
      */
-    public forceSwitch(muted: boolean)
-    {
+    public forceSwitch(muted: boolean) {
         // Force the visual switched state to be the muted state
         this._switcher.forceSwitch(muted ? 1 : 0);
     }
