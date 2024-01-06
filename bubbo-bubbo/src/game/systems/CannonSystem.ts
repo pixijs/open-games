@@ -130,6 +130,7 @@ export class CannonSystem implements System
         // Reset rotation of cannon and reset projectile shot count
         this.cannon.rotation = 0;
         this._shotProjectiles = 0;
+        this._projectile = null;
     }
 
     /** The x-position of the cannon in game space. */
