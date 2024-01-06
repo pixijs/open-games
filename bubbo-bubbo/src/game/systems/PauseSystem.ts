@@ -39,7 +39,7 @@ export class PauseSystem implements System
     public update()
     {
         // Only need to check if the game is not paused as the tweens cannot progress if paused
-        if (this.isPaused)
+        if (!this.isPaused)
         {
             this._tweenList.forEach((tween) =>
             {
