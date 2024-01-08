@@ -1,5 +1,5 @@
 import gsap from 'gsap';
-import type { DisplayObject } from 'pixi.js';
+import { DisplayObject, Point } from 'pixi.js';
 import { Container, Rectangle } from 'pixi.js';
 
 import { navigation } from '../navigation';
@@ -24,6 +24,8 @@ export class Game {
     public stage = new Container();
     /** Container to hold gameplay elements like bubbles. */
     public gameContainer = new Container();
+    /** Original game container position to use as reset for screen shake effects. */
+    public gameContainerPosition = new Point();
     /** Container to handle user interaction. */
     public hitContainer = new Container();
     /** A system manager to handle the common functions found in systems. */
@@ -165,8 +167,11 @@ export class Game {
     public resize(w: number, h: number) {
         // Sets game container to the bottom of the screen,
         // since the game should be anchor there
-        this.gameContainer.x = w * 0.5;
-        this.gameContainer.y = h;
+        this.gameContainerPosition.x = w * 0.5;
+        this.gameContainerPosition.y = h;
+
+        this.gameContainer.x = this.gameContainerPosition.x;
+        this.gameContainer.y = this.gameContainerPosition.y;
 
         // Offsets the hit area position back to top left of the screen,
         // it then sets the dimensions of the hit area to match the screen dimensions

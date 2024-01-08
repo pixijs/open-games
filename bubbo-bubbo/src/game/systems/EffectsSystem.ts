@@ -1,4 +1,3 @@
-import { Point } from 'pixi.js';
 import { ShockwaveFilter } from 'pixi-filters';
 
 import { sfx } from '../../audio';
@@ -26,11 +25,6 @@ export class EffectsSystem implements System {
     private _activeShockwave = false;
     /** The speed modification for the shockwave effect. */
     private _shockwaveSpeedMod = 1;
-    /**
-     * The last position of the game container before the shockwave effect was applied.
-     * This is used to restore the position of the container after the effect has completed.
-     */
-    private readonly _lastContainerPos = new Point();
     /** The intensity of the shockwave effect. */
     private _shockIntensity!: number;
 
@@ -41,9 +35,6 @@ export class EffectsSystem implements System {
      * @param intense Indicates whether the effect should be intense (default: false).
      */
     public shockwave(x: number, y: number, intense = false) {
-        // Store the last position of the game container
-        this._lastContainerPos.set(this.game.gameContainer.x, this.game.gameContainer.y);
-
         const { shockwaveFilter } = this;
 
         this._activeShockwave = true;
@@ -96,8 +87,8 @@ export class EffectsSystem implements System {
         }
 
         // Set the game container position back to its original position
-        this.game.gameContainer.x = this._lastContainerPos.x;
-        this.game.gameContainer.y = this._lastContainerPos.y;
+        this.game.gameContainer.x = this.game.gameContainerPosition.x;
+        this.game.gameContainer.y = this.game.gameContainerPosition.y;
     }
 
     /**
@@ -109,8 +100,10 @@ export class EffectsSystem implements System {
         if (!this._activeShockwave) return;
 
         // Update the position of the game container to simulate screen shake.
-        this.game.gameContainer.x = this._lastContainerPos.x + Math.random() * this._shockIntensity;
-        this.game.gameContainer.y = this._lastContainerPos.y + Math.random() * this._shockIntensity;
+        this.game.gameContainer.x =
+            this.game.gameContainerPosition.x + Math.random() * this._shockIntensity;
+        this.game.gameContainer.y =
+            this.game.gameContainerPosition.y + Math.random() * this._shockIntensity;
 
         // Stop the shockwave effect if the time has exceeded a certain threshold.
         if (this.shockwaveFilter.time > 0.4) this.stopShockwave();
