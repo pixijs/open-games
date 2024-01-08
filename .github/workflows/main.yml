@@ -10,4 +10,6 @@ jobs:
     strategy:
       matrix:
         game: [bubbo-bubbo, puzzling-potions]
-    uses: ./.github/actions/game
+    uses: ./.github/workflows/games-workflow.yml
+    with:
+      game: ${{ matrix.game }}
