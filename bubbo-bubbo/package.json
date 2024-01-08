@@ -11,7 +11,7 @@
         "prestart": "run-s assets",
         "start": "vite --open",
         "clean": "rimraf dist/* public/* .assetpack/*",
-        "prebuild": "run-s clean format:check lint types assets",
+        "prebuild": "run-s clean format:check lint assets types",
         "build": "vite build",
         "assets": "assetpack",
         "prepreview": "run-s build",
