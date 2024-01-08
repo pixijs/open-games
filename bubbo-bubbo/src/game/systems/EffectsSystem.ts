@@ -100,8 +100,10 @@ export class EffectsSystem implements System {
         if (!this._activeShockwave) return;
 
         // Update the position of the game container to simulate screen shake.
-        this.game.gameContainer.x = this.game.gameContainerPosition.x + Math.random() * this._shockIntensity;
-        this.game.gameContainer.y = this.game.gameContainerPosition.y + Math.random() * this._shockIntensity;
+        this.game.gameContainer.x =
+            this.game.gameContainerPosition.x + Math.random() * this._shockIntensity;
+        this.game.gameContainer.y =
+            this.game.gameContainerPosition.y + Math.random() * this._shockIntensity;
 
         // Stop the shockwave effect if the time has exceeded a certain threshold.
         if (this.shockwaveFilter.time > 0.4) this.stopShockwave();
