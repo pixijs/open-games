@@ -1,4 +1,4 @@
-import { Container, Sprite, Texture } from 'pixi.js';
+import { ColorSource, Container, Sprite, Texture } from 'pixi.js';
 import { app } from '../main';
 import gsap from 'gsap';
 import { randomRange } from '../utils/random';
@@ -210,7 +210,7 @@ class CloudCircle extends Container {
         return this.image.tint;
     }
 
-    public set tint(v: number) {
+    public set tint(v: ColorSource) {
         this.image.tint = v;
     }
 }

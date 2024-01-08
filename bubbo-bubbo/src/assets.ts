@@ -2,7 +2,6 @@ import {
     Assets,
     extensions,
     ExtensionType,
-    ResolverAssetsArray,
     resolveTextureUrl,
     ResolveURLParser,
     settings,
@@ -50,7 +49,7 @@ export function isBundleLoaded(bundle: string)
         return false;
     }
 
-    for (const asset of bundleManifest.assets as ResolverAssetsArray)
+    for (const asset of bundleManifest.assets)
     {
         if (!Assets.cache.has(asset.name as string))
         {
