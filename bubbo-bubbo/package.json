@@ -12,9 +12,10 @@
         "build": "npm run build-assets && tsc && vite build",
         "build-assets": "assetpack",
         "preview": "npm run build && vite preview --open",
-        "lint": "eslint --ext .js,.ts,.tsx src",
-        "lint:fix": "eslint --ext .js,.ts,.tsx src --fix",
-        "format": "prettier --write src/**/*.{ts}"
+        "lint": "eslint src",
+        "lint:fix": "eslint src --fix",
+        "format": "prettier --write src",
+        "types": "tsc"
     },
     "dependencies": {
         "@pixi/sound": "^5.2.2",

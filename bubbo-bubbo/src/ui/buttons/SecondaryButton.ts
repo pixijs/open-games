@@ -9,8 +9,7 @@ import { getAnimations } from './configs/animationConfig';
 /**
  * Options for the secondary button.
  */
-export interface SecondaryButtonOptions
-{
+export interface SecondaryButtonOptions {
     /** The text displayed on the button. */
     text: string;
     /** The tint color applied to the button. */
@@ -28,13 +27,11 @@ const DEFAULT_SCALE = 0.75;
  *
  * Uses elements from @pixi/ui.
  */
-export class SecondaryButton extends FancyButton
-{
+export class SecondaryButton extends FancyButton {
     /**
      * @param options - Options for the secondary button.
      */
-    constructor(options?: SecondaryButtonOptions)
-    {
+    constructor(options?: SecondaryButtonOptions) {
         // Create text object to act as label
         const text = new Text(options?.text ?? '', {
             // Predefine text styles that can be overwritten
@@ -62,13 +59,10 @@ export class SecondaryButton extends FancyButton
             ...options?.buttonOptions,
         });
 
-        if (options?.tint)
-        {
+        if (options?.tint) {
             // Tint base asset if tint defined in options
             (this.defaultView as Sprite).tint = options.tint;
         }
-        this.onPress.connect(() =>  sfx.play('audio/secondary-button-press.wav'));
+        this.onPress.connect(() => sfx.play('audio/secondary-button-press.wav'));
     }
-
-
 }

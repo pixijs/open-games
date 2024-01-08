@@ -19,8 +19,7 @@ import { ScoreSystem } from './systems/ScoreSystem';
 import { SpaceDecorSystem } from './systems/SpaceDecorSystem';
 
 /** A class that handles all of gameplay based features. */
-export class Game
-{
+export class Game {
     /** Container to hold all game visuals. */
     public stage = new Container();
     /** Container to hold gameplay elements like bubbles. */
@@ -37,8 +36,7 @@ export class Game
     /** The hit area to be used by the `hitContainer`. */
     private readonly _hitArea: Rectangle;
 
-    constructor()
-    {
+    constructor() {
         this.stage.addChild(this.gameContainer);
 
         // Prepare the container for interaction
@@ -58,10 +56,8 @@ export class Game
      * Adds `DisplayObject`s to the game container.
      * @param displayObjects - The `DisplayObject`s to add to the game container.
      */
-    public addToGame(...displayObjects: DisplayObject[])
-    {
-        displayObjects.forEach((displayObject) =>
-        {
+    public addToGame(...displayObjects: DisplayObject[]) {
+        displayObjects.forEach((displayObject) => {
             this.gameContainer.addChild(displayObject);
         });
     }
@@ -69,18 +65,15 @@ export class Game
     /**
      * Removes `DisplayObject`s from the game container.
      * @param displayObjects - The `DisplayObject`s to remove from the game container.
-    */
-    public removeFromGame(...displayObjects: DisplayObject[])
-    {
-        displayObjects.forEach((displayObject) =>
-        {
+     */
+    public removeFromGame(...displayObjects: DisplayObject[]) {
+        displayObjects.forEach((displayObject) => {
             displayObject.removeFromParent();
         });
     }
 
     /** Initialisation point of the Game, used to add systems to the game. */
-    public init()
-    {
+    public init() {
         // Add systems to system runner
         this.systems.add(SpaceDecorSystem);
         this.systems.add(PauseSystem);
@@ -96,10 +89,9 @@ export class Game
         // Initialise systems
         this.systems.init();
     }
-    
+
     /** Performs initial setup for the game. */
-    public async awake()
-    {
+    public async awake() {
         // Call `awake()` on the systems
         this.systems.awake();
         // Set the game container to be visible
@@ -107,15 +99,13 @@ export class Game
     }
 
     /** Starts the game logic. */
-    public async start()
-    {
+    public async start() {
         // Call `start()` on the systems.
         this.systems.start();
     }
 
     /** Handles the end of the game. */
-    public async gameOver()
-    {
+    public async gameOver() {
         // Set game over flag to be true
         this.isGameOver = true;
         // This includes disabling the AimSystem
@@ -126,8 +116,7 @@ export class Game
         await this.systems.get(HudSystem).closeHud();
         // Hide the game container to prevent it from being viewed behind the closed hud when the screen fades out
         this.gameContainer.visible = false;
-        gsap.delayedCall(1, () =>
-        {
+        gsap.delayedCall(1, () => {
             // Navigate to the ResultScreen after a 1 second delay
             // Send all relevant user stats
             navigation.goToScreen(ResultScreen, {
@@ -138,12 +127,10 @@ export class Game
                 highscore: this.stats.get('highscore'),
             });
         });
-
     }
 
     /** Ends the game logic. */
-    public async end()
-    {
+    public async end() {
         // Remove listeners on hit container to prevent unwanted interaction
         this.hitContainer.removeAllListeners();
         // Call `end()` on the systems
@@ -154,16 +141,14 @@ export class Game
      * Called every frame to update the game state
      * This includes updating the systems if the game is not paused or over.
      * @param delta - The time elapsed since the last update.
-    */
-    public update(delta: number)
-    {
+     */
+    public update(delta: number) {
         if (this.systems.get(PauseSystem).isPaused || this.isGameOver) return;
         this.systems.update(delta);
     }
 
     /** Resets the game to its initial state. */
-    public reset()
-    {
+    public reset() {
         // Set game over flag to be false
         this.isGameOver = false;
         // Reset the user's stats
@@ -177,8 +162,7 @@ export class Game
      * @param w - width of the screen.
      * @param h - height of the screen.
      */
-    public resize(w: number, h: number)
-    {
+    public resize(w: number, h: number) {
         // Sets game container to the bottom of the screen,
         // since the game should be anchor there
         this.gameContainer.x = w * 0.5;
