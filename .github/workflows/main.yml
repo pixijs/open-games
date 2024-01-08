@@ -10,4 +10,4 @@ jobs:
     strategy:
       matrix:
         game: [bubbo-bubbo, puzzling-potions]
-    uses: my-job: ./.github/actions/game
+    uses: ./.github/actions/game
