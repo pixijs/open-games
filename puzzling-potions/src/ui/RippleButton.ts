@@ -56,7 +56,7 @@ export class RippleButton extends FancyButton {
         gsap.killTweensOf(this.scale);
         gsap.killTweensOf(this.image);
         this.visible = true;
-        this.interactive = true;
+        this.eventMode = 'dynamic';
         if (animated) {
             this.image.alpha = 0;
             this.scale.set(1.5);
@@ -70,7 +70,7 @@ export class RippleButton extends FancyButton {
 
     /** Hide the component */
     public async hide(animated = true) {
-        this.interactive = false;
+        this.eventMode = 'none';
         gsap.killTweensOf(this.scale);
         gsap.killTweensOf(this.image);
         if (animated) {

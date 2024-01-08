@@ -6,8 +6,7 @@ const map: Record<string, NodeJS.Timeout> = {};
  * @param interval The minimum interval between calls in milliseconds
  * @param fn The throttled function
  */
-export function throttle(name: string, interval: number, fn: () => void)
-{
+export function throttle(name: string, interval: number, fn: () => void) {
     if (map[name]) return;
     fn();
     map[name] = setTimeout(() => delete map[name], interval);

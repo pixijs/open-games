@@ -16,8 +16,7 @@ export enum PhysicsState {
  * The physics body used to determine position in game space based on a variation of factors
  * Currently only used by `Bubble.ts`
  */
-export class PhysicsBody
-{
+export class PhysicsBody {
     /** Gravity applied to all physics bodies. */
     public static GRAVITY: number = 9.8 * (1 / 60);
     /** Unique identifier for this physics body. */
@@ -49,11 +48,9 @@ export class PhysicsBody
      * @param forceX X component of the force.
      * @param forceY Y component of the force.
      */
-    public applyForce(forceX: number, forceY: number)
-    {
+    public applyForce(forceX: number, forceY: number) {
         // Only apply force if not a static object
-        if (this.state !== PhysicsState.STATIC)
-        {
+        if (this.state !== PhysicsState.STATIC) {
             // Set force to force object, prevents need for creating new vector each time
             this._force.set(forceX, forceY);
             // Add force divided by mass to velocity
@@ -62,16 +59,14 @@ export class PhysicsBody
     }
 
     /** Sets the velocity of the body to zero. */
-    public zeroVelocity()
-    {
+    public zeroVelocity() {
         // Reset force and velocity
         this._force.setScalar(0);
         this.velocity.setScalar(0);
     }
 
     /** Resets the physics body to its initial state. */
-    public reset()
-    {
+    public reset() {
         // Reset main physics information
         this._force.set(0, 0);
         this.position.set(0, 0);
@@ -84,8 +79,7 @@ export class PhysicsBody
      * Getter for the state of the body.
      * @returns The physics state
      */
-    public get state()
-    {
+    public get state() {
         return this._state;
     }
 
@@ -93,22 +87,19 @@ export class PhysicsBody
      * Setter for the state of the body.
      * @param value The new state to set.
      */
-    public set state(value: number)
-    {
+    public set state(value: number) {
         // If the body is set to static, nullify constant forces
-        if (value === PhysicsState.STATIC)
-        {
+        if (value === PhysicsState.STATIC) {
             this.zeroVelocity();
         }
         this._state = value;
     }
-    
+
     /**
      * Gets the x position of the bubble.
      * @returns - The x position of the bubble.
      */
-    public get x(): number
-    {
+    public get x(): number {
         return this.position.x;
     }
 
@@ -116,8 +107,7 @@ export class PhysicsBody
      * Sets the x position of the bubble.
      * @param value - The new x position of the bubble.
      */
-    public set x(value: number)
-    {
+    public set x(value: number) {
         this.position.x = value;
     }
 
@@ -125,8 +115,7 @@ export class PhysicsBody
      * Gets the y position of the bubble.
      * @returns - The y position of the bubble.
      */
-    public get y(): number
-    {
+    public get y(): number {
         return this.position.y;
     }
 
@@ -134,8 +123,7 @@ export class PhysicsBody
      * Sets the y position of the bubble.
      * @param value - The new y position of the bubble.
      */
-    public set y(value: number)
-    {
+    public set y(value: number) {
         this.position.y = value;
     }
 }

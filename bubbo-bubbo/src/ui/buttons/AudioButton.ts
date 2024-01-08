@@ -11,26 +11,23 @@ const DEFAULT_SCALE = 0.75;
  *
  * Uses elements from @pixi/ui.
  */
-export class AudioButton extends FancyButton
-{
+export class AudioButton extends FancyButton {
     /**
      * A reference to an object used to display the mute state
      *
      * Switcher button from @pixi/ui. Acts similar to a html checkbox
      */
     private _switcher: Switcher;
-    
-    constructor()
-    {
+
+    constructor() {
         // Check the muted state
         const isMuted = storage.getStorageItem('muted');
 
-        const switcher = new Switcher([
-            'icon-sound-on',
-            'icon-sound-off',
-        ],
-        [], // no trigger events, we will control switch manually
-        isMuted ? 1 : 0); // Force the visual switched state to be the muted state
+        const switcher = new Switcher(
+            ['icon-sound-on', 'icon-sound-off'],
+            [], // no trigger events, we will control switch manually
+            isMuted ? 1 : 0,
+        ); // Force the visual switched state to be the muted state
 
         super({
             // Add the switcher as a view for the FancyButton
@@ -38,21 +35,24 @@ export class AudioButton extends FancyButton
             // Set animations using common scaling states based on default scale
             animations: getAnimations(DEFAULT_SCALE),
             // Anchor to center
-            anchor : 0.5,
+            anchor: 0.5,
             // Set initial scale to default scale
             scale: DEFAULT_SCALE,
         });
 
         this._switcher = switcher;
+
+        this.onPress.connect(() => {
+            this.press();
+        });
     }
-    
+
     /**
      * Override function for the FancyButton, called when button is pressed
      */
-    public override press()
-    {
+    public press() {
         const isMuted = storage.getStorageItem('muted');
-        
+
         // Update the display
         this.forceSwitch(!isMuted);
 
@@ -67,8 +67,7 @@ export class AudioButton extends FancyButton
      * This method updates the display of the mute state to match the provided muted value.
      * @param muted - The mute state
      */
-    public forceSwitch(muted: boolean)
-    {
+    public forceSwitch(muted: boolean) {
         // Force the visual switched state to be the muted state
         this._switcher.forceSwitch(muted ? 1 : 0);
     }

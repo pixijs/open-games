@@ -6,7 +6,7 @@ import { i18n } from '../utils/i18n';
 import gsap from 'gsap';
 import { navigation } from '../utils/navigation';
 import { userSettings } from '../utils/userSettings';
-import { Layout } from '@pixi/ui';
+import { List } from '@pixi/ui';
 import { VolumeSlider } from '../ui/VolumeSlider';
 import { ModeSwitcher } from '../ui/ModeSwitcher';
 import { GameScreen } from '../screens/GameScreen';
@@ -26,7 +26,7 @@ export class SettingsPopup extends Container {
     /** The game build version label */
     private versionLabel: Label;
     /** Layout that organises the UI components */
-    private layout: Layout;
+    private layout: List;
     /** Slider that changes the master volume */
     private masterSlider: VolumeSlider;
     /** Slider that changes background music volume */
@@ -67,7 +67,7 @@ export class SettingsPopup extends Container {
         this.versionLabel.y = this.panelBase.boxHeight * 0.5 - 15;
         this.panel.addChild(this.versionLabel);
 
-        this.layout = new Layout({ type: 'vertical', elementsMargin: 4 });
+        this.layout = new List({ type: 'vertical', elementsMargin: 4 });
         this.layout.x = -140;
         this.layout.y = -160;
         this.panel.addChild(this.layout);
@@ -91,6 +91,7 @@ export class SettingsPopup extends Container {
         this.layout.addChild(this.sfxSlider);
 
         this.mode = new ModeSwitcher();
+
         this.mode.onChange.connect(() => {
             userSettings.setGameMode(this.mode.getSelectedMode());
         });

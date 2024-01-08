@@ -17,8 +17,7 @@ import type { System } from '../SystemRunner';
 import { CannonSystem } from './CannonSystem';
 import { PauseSystem } from './PauseSystem';
 
-export class HudSystem implements System
-{
+export class HudSystem implements System {
     /**
      * A unique identifier used by the system runner.
      * The identifier is used by the runner to differentiate between different systems.
@@ -65,10 +64,9 @@ export class HudSystem implements System
      * Used to animate the top hud visual down
      */
     private _topTrayOffsetRatio = 0;
-    
+
     /** Called when the system is added to the game. */
-    public init()
-    {
+    public init() {
         this.view.addChild(this._gameHudContainer, this._decorContainer);
         this.game.stage.addChild(this.view);
 
@@ -95,7 +93,7 @@ export class HudSystem implements System
         this._hiddenTitle = new Title();
         this._hiddenTitle.view.scale.set(0.85);
         this._hiddenTitle.view.y -= 55;
-        
+
         this._roundedTray.addChild(this._hiddenTitle.view);
 
         // Create the bottom section of the hud
@@ -111,39 +109,45 @@ export class HudSystem implements System
         // Create the visual representation of the left bounds
         this._leftBorder = new NineSlicePlane(Texture.from('game-side-border'));
         this._leftBorder.x = -(designConfig.content.width * 0.5) - this._leftBorder.width;
-        
+
         // Create the visual representation of the right bounds
         this._rightBorder = new NineSlicePlane(Texture.from('game-side-border'));
-        this._rightBorder.x = (designConfig.content.width * 0.5);
+        this._rightBorder.x = designConfig.content.width * 0.5;
 
         // Get a reference to the pause system
         const pause = this.game.systems.get(PauseSystem);
 
         // Create the pause button
         this._pauseButton = new IconButton('icon-pause');
-        this._pauseButton.onPress.connect(() =>
-        {
+        this._pauseButton.onPress.connect(() => {
             // On press, pause the game
             pause.pause();
         });
-        this._pauseButton.x = (designConfig.content.width * 0.5) - 40;
+        this._pauseButton.x = designConfig.content.width * 0.5 - 40;
         this._pauseButton.y = -designConfig.content.height + 37;
 
         // Create a mask and fit it to the game bounds
-        this._mask = new Graphics().beginFill(0x030320).drawRect(
-            -designConfig.content.width * 0.5,
-            -designConfig.content.height,
-            designConfig.content.width,
-            designConfig.content.height,
-        );
+        this._mask = new Graphics()
+            .beginFill(0x030320)
+            .drawRect(
+                -designConfig.content.width * 0.5,
+                -designConfig.content.height,
+                designConfig.content.width,
+                designConfig.content.height,
+            );
 
         // Create the tutorial popout
         this._helperPanel = new HelperPanel();
-        this._helperPanel.view.y = -(designConfig.content.height) + 200;
+        this._helperPanel.view.y = -designConfig.content.height + 200;
 
         // Add hud to containers
         this._decorContainer.addChild(
-            this._mask, this._leftBorder, this._rightBorder, this._topTray, this._roundedTray);
+            this._mask,
+            this._leftBorder,
+            this._rightBorder,
+            this._topTray,
+            this._roundedTray,
+        );
         this._gameHudContainer.addChild(
             this._bottomTray,
             this._scoreCounter.view,
@@ -157,10 +161,8 @@ export class HudSystem implements System
         this._gameHudContainer.mask = this._mask;
 
         // Connect to the cannon system
-        this.game.systems.get(CannonSystem).signals.onCannonFire.connect((isFirst) =>
-        {
-            if (isFirst)
-            {
+        this.game.systems.get(CannonSystem).signals.onCannonFire.connect((isFirst) => {
+            if (isFirst) {
                 // On the first shot, hide the tutorial popout
                 this.game.systems.get(PauseSystem).addTween(this._helperPanel.hide());
             }
@@ -168,8 +170,7 @@ export class HudSystem implements System
     }
 
     /** Called prior to the `start` function at the beginning of the game. */
-    public awake()
-    {
+    public awake() {
         // Move the tutorial popout to outside the screen
         this._helperPanel.prepare();
         // Reset the top panel animation ratio
@@ -181,10 +182,8 @@ export class HudSystem implements System
     }
 
     /** Called at the start of the game. */
-    public start()
-    {
-        if (!this._hasShownHelper)
-        {
+    public start() {
+        if (!this._hasShownHelper) {
             // If the tutorial popout hasn't been seen yet, show it
             // Add the tween to the pause system
             this.game.systems.get(PauseSystem).addTween(this._helperPanel.show());
@@ -193,25 +192,24 @@ export class HudSystem implements System
     }
 
     /** Animate the top hud element down, in a closing motion */
-    public closeHud()
-    {
+    public closeHud() {
         // Close the hud
         // Add the tween to the pause system
-        return this.game.systems.get(PauseSystem).addTween(gsap.to(this, {
-            _topTrayOffsetRatio: 1,
-            duration: 2,
-            ease: 'bounce.out',
-            onUpdate: () =>
-            {
-                // Force the top tray position to be relative to the animation ratio
-                this._updateTopTrayHeight();
-            },
-            onComplete: () =>
-            {
-                // Hide the game hud to prevent it from being viewed behind the closed hud when the screen fades out
-                this._gameHudContainer.visible = false;
-            },
-        }));
+        return this.game.systems.get(PauseSystem).addTween(
+            gsap.to(this, {
+                _topTrayOffsetRatio: 1,
+                duration: 2,
+                ease: 'bounce.out',
+                onUpdate: () => {
+                    // Force the top tray position to be relative to the animation ratio
+                    this._updateTopTrayHeight();
+                },
+                onComplete: () => {
+                    // Hide the game hud to prevent it from being viewed behind the closed hud when the screen fades out
+                    this._gameHudContainer.visible = false;
+                },
+            }),
+        );
     }
 
     /**
@@ -220,8 +218,7 @@ export class HudSystem implements System
      * @param total - The total player score.
      * @param bubble - The bubble that updated the score.
      */
-    public updateScore(increment: number, total: number, bubble: Bubble)
-    {
+    public updateScore(increment: number, total: number, bubble: Bubble) {
         // Get a point toaster from the pool
         const toaster = pool.get(PointToaster);
 
@@ -235,7 +232,9 @@ export class HudSystem implements System
         this._toasterList.push(toaster);
         // Pop up the toaster and assign it score value and a callback for when the animation ends
         // Add the toaster animation to the pause system
-        this.game.systems.get(PauseSystem).addTween(toaster.popScore(increment, this._killToaster.bind(this)));
+        this.game.systems
+            .get(PauseSystem)
+            .addTween(toaster.popScore(increment, this._killToaster.bind(this)));
         // Add the toaster to the screen
         this.view.addChild(toaster.view);
         // Update the score counter
@@ -243,8 +242,7 @@ export class HudSystem implements System
     }
 
     /** Animate the visual line on impact */
-    public lineImpact()
-    {
+    public lineImpact() {
         this._laserLine.pulse();
     }
 
@@ -253,21 +251,18 @@ export class HudSystem implements System
      * The main update loop of the system, which maintains the shockwave effect over time.
      * @param delta - The time elapsed since the last update.
      */
-    public update(delta: number)
-    {
+    public update(delta: number) {
         // Update laser line
         this._laserLine.update(delta);
     }
 
     /** Resets the state of the system back to its initial state. */
-    public reset()
-    {
+    public reset() {
         // Reset the score back to zero
         this._scoreCounter.setScore(0);
 
         // Destroy all point toasters
-        removeAllFromArray(this._toasterList, (toaster: PointToaster) =>
-        {
+        removeAllFromArray(this._toasterList, (toaster: PointToaster) => {
             toaster.view.removeFromParent();
         });
     }
@@ -276,9 +271,8 @@ export class HudSystem implements System
      * Resizes the system whenever the window size changes.
      * @param w The new width of the window.
      * @param h The new height of the window.
-    */
-    public resize(w: number, h: number)
-    {
+     */
+    public resize(w: number, h: number) {
         this.view.x = w * 0.5;
         this.view.y = h;
 
@@ -290,24 +284,25 @@ export class HudSystem implements System
         // Set the left visual wall to the left boundary
         this._leftBorder.y = -h;
         this._leftBorder.height = h;
-        
+
         // Set the right visual wall to the right boundary
         this._rightBorder.y = -h;
         this._rightBorder.height = h;
-        
+
         // Position the score counter
-        this._scoreCounter.view.x = designConfig.content.width * 0.5 - this._scoreCounter.view.width - 30;
+        this._scoreCounter.view.x =
+            designConfig.content.width * 0.5 - this._scoreCounter.view.width - 30;
         this._scoreCounter.view.y = -70;
     }
 
     /** Updates the height of the top tray based on the current height of the main container. */
-    private _updateTopTrayHeight()
-    {
+    private _updateTopTrayHeight() {
         // Calculate the height of the top tray by subtracting the fixed content height from the window height
         const topTrayHeight = this._height - designConfig.content.height;
-    
+
         // Set the height of the top tray and its y position
-        this._topTray.height = topTrayHeight + (this._topTrayOffsetRatio * designConfig.content.height);
+        this._topTray.height =
+            topTrayHeight + this._topTrayOffsetRatio * designConfig.content.height;
         this._topTray.y = -this._height;
 
         // Reset the scale of the rounded tray
@@ -319,15 +314,14 @@ export class HudSystem implements System
         // Show or hide the rounded tray based on the modulus value
         this._roundedTray.visible = mod > 0.9;
         this._roundedTray.scale.set(Math.min(mod, 1));
-        this._roundedTray.y = (this._topTray.y + this._topTray.height) - (this._topTray.height * 0.5);
+        this._roundedTray.y = this._topTray.y + this._topTray.height - this._topTray.height * 0.5;
     }
-    
+
     /**
      * Kill a point toaster by removing it from parent and returning it to the pool.
      * @param toaster - The toaster to kill.
      */
-    private _killToaster(toaster: PointToaster)
-    {
+    private _killToaster(toaster: PointToaster) {
         // Remove from list of toasters
         removeFromArray(this._toasterList, toaster);
         // Remove from parent

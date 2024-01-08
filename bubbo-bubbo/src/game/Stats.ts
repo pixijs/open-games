@@ -23,8 +23,7 @@ export type StatType = typeof DEFAULT_STATS;
 export type StatKey = keyof StatType;
 
 /** A class that deals with user specific stats. */
-export class Stats
-{
+export class Stats {
     /**
      * An object containing the user's stats,
      * defaults to `DEFAULT_STATS` on instantiation.
@@ -32,8 +31,7 @@ export class Stats
      */
     private _stats = { ...DEFAULT_STATS };
 
-    constructor()
-    {
+    constructor() {
         // Sets the stat highscore to be the stored highscore
         this.set('highscore', storage.getStorageItem('highscore'));
     }
@@ -44,8 +42,7 @@ export class Stats
      * @param value - The value to be set.
      * @returns The same value put in.
      */
-    public set<T extends StatKey>(stat: T, value: StatType[T])
-    {
+    public set<T extends StatKey>(stat: T, value: StatType[T]) {
         this._stats[stat] = value;
 
         return this.get(stat);
@@ -62,10 +59,8 @@ export class Stats
      * @return The full stat object.
      */
     public get(): StatType;
-    public get<T extends StatKey>(stat?: T): StatType[T] | StatType
-    {
-        if (stat)
-        {
+    public get<T extends StatKey>(stat?: T): StatType[T] | StatType {
+        if (stat) {
             return this._stats[stat];
         }
 
@@ -79,14 +74,10 @@ export class Stats
      * @param value - The value to be incremented.
      * @returns The incremented stat.
      */
-    public increment<T extends StatKey>(stat: T, value: StatType[T] = 1)
-    {
-        if (typeof this._stats[stat] === 'number')
-        {
+    public increment<T extends StatKey>(stat: T, value: StatType[T] = 1) {
+        if (typeof this._stats[stat] === 'number') {
             (this._stats[stat] as number) += value as number;
-        }
-        else
-        {
+        } else {
             console.warn(`Cannot increment non-number stat: ${stat}`);
         }
 
@@ -94,8 +85,7 @@ export class Stats
     }
 
     /** Resets the player stats. The stats reset every game. */
-    public reset()
-    {
+    public reset() {
         this._stats = { ...DEFAULT_STATS };
     }
 }
