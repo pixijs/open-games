@@ -2,7 +2,6 @@ name: Build Games
 on:
   push:
     branches: [ '**' ]
-    tags: [ '**' ]
   pull_request:
     branches: [ '**' ]
 jobs:
@@ -10,6 +9,6 @@ jobs:
     strategy:
       matrix:
         game: [bubbo-bubbo, puzzling-potions]
-    uses: ./.github/workflows/games-workflow.yml
+    uses: ./.github/workflows/game-workflow.yml
     with:
       game: ${{ matrix.game }}

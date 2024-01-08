@@ -5,9 +5,6 @@ on:
       game:
         required: true
         type: string
-      build-command:
-        default: "npm run build"
-        type: string
 jobs:
   game-build-workflow:
     runs-on: ubuntu-latest
@@ -23,4 +20,9 @@ jobs:
       run: npm ci
     - name: Build Game
       working-directory: ./${{ inputs.game }}
-      run: ${{ inputs.build-command }}
+      run: npm run build
+    - name: Upload Game Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ inputs.game }}
+        path: ./${{ inputs.game }}/dist
