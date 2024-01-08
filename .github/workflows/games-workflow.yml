@@ -19,7 +19,9 @@ jobs:
       with:
         node-version: 18
     - name: Goto Directory
-      run: cd ${{ inputs.game }}
+      run: cd ./${{ inputs.game }}
+    - name: Echo Directory
+      run: pwd
     - name: Install dependencies
       run: npm ci
     - name: Build Game
