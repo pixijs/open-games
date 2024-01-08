@@ -19,8 +19,7 @@ export const app = new Application<HTMLCanvasElement>({
 let hasInteracted = false;
 
 /** Set up a resize function for the app */
-function resize()
-{
+function resize() {
     const windowWidth = window.innerWidth;
     const windowHeight = window.innerHeight;
     const minWidth = designConfig.content.width;
@@ -45,8 +44,7 @@ function resize()
 }
 
 /** Setup app and initialise assets */
-async function init()
-{
+async function init() {
     // Add pixi canvas element (app.view) to the document's body
     document.body.appendChild(app.view);
 
@@ -69,10 +67,8 @@ async function init()
     audio.muted(storage.getStorageItem('muted'));
 
     // Prepare for user interaction, and play the music on event
-    document.addEventListener('pointerdown', () =>
-    {
-        if (!hasInteracted)
-        {
+    document.addEventListener('pointerdown', () => {
+        if (!hasInteracted) {
             // Only play audio if it hasn't already been played
             bgm.play('audio/bubbo-bubbo-bg-music.wav');
         }
@@ -81,15 +77,11 @@ async function init()
     });
 
     // Check for visibility sate so we can mute the audio on "hidden"
-    document.addEventListener('visibilitychange', () =>
-    {
-        if (document.visibilityState !== 'visible')
-        {
+    document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState !== 'visible') {
             // Always mute on hidden
             audio.muted(true);
-        }
-        else
-        {
+        } else {
             // Only unmute if it was previously unmuted
             audio.muted(storage.getStorageItem('muted'));
         }
@@ -97,17 +89,12 @@ async function init()
 
     // Show first screen - go straight to game if '?play' param is present in url
     // This is used for debugging
-    if (getUrlParam('play') !== null)
-    {
+    if (getUrlParam('play') !== null) {
         await Assets.loadBundle(TitleScreen.assetBundles);
         await navigation.goToScreen(GameScreen);
-    }
-    else if (getUrlParam('loading') !== null)
-    {
+    } else if (getUrlParam('loading') !== null) {
         await navigation.goToScreen(LoadScreen);
-    }
-    else
-    {
+    } else {
         await navigation.goToScreen(TitleScreen);
     }
 }

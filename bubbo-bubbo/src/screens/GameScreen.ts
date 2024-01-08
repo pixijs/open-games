@@ -6,8 +6,7 @@ import { Game } from '../game/Game';
 import type { AppScreen } from '../navigation';
 
 /** The screen that contains all the gameplay */
-export class GameScreen extends Container implements AppScreen
-{
+export class GameScreen extends Container implements AppScreen {
     /** A unique identifier for the screen */
     public static SCREEN_ID = 'game';
     /** An array of bundle IDs for dynamic asset loading. */
@@ -16,8 +15,7 @@ export class GameScreen extends Container implements AppScreen
     private readonly _background: TilingSprite;
     private readonly _game: Game;
 
-    constructor()
-    {
+    constructor() {
         super();
 
         // Create the background
@@ -33,8 +31,7 @@ export class GameScreen extends Container implements AppScreen
     }
 
     /** Called when the screen is being shown. */
-    public async show()
-    {
+    public async show() {
         // Kill tweens of the screen container
         gsap.killTweensOf(this);
 
@@ -49,8 +46,7 @@ export class GameScreen extends Container implements AppScreen
     }
 
     /** Called when the screen is being hidden. */
-    public async hide()
-    {
+    public async hide() {
         // Kill tweens of the screen container
         gsap.killTweensOf(this);
         // End the game
@@ -64,8 +60,7 @@ export class GameScreen extends Container implements AppScreen
      * Called every frame.
      * @param delta - The time elapsed since the last update.
      */
-    public update(delta: number)
-    {
+    public update(delta: number) {
         this._game.update(delta);
     }
 
@@ -74,8 +69,7 @@ export class GameScreen extends Container implements AppScreen
      * @param w - width of the screen.
      * @param h - height of the screen.
      */
-    public resize(w: number, h: number)
-    {
+    public resize(w: number, h: number) {
         // Fit background to screen
         this._background.width = w;
         this._background.height = h;

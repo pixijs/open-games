@@ -6,8 +6,7 @@ import { boardConfig } from '../boardConfig';
 import { BubbleView } from './BubbleView';
 
 /** A class representing the cannon. */
-export class Cannon
-{
+export class Cannon {
     /** The Container instance which contains all the visual elements for this class. */
     public view = new Container();
 
@@ -22,8 +21,7 @@ export class Cannon
     /** The rotation angle of the cannon. */
     private _rotation = 0;
 
-    constructor()
-    {
+    constructor() {
         // Use a helper function to simplify building the cannon
         this._build();
 
@@ -36,8 +34,7 @@ export class Cannon
     /**
      * Getter for the rotation angle of the cannon.
      */
-    public get rotation(): number
-    {
+    public get rotation(): number {
         return this._rotation;
     }
 
@@ -45,8 +42,7 @@ export class Cannon
      * Setter for the rotation angle of the cannon.
      * @param value - The rotation of the cannon.
      */
-    public set rotation(value: number)
-    {
+    public set rotation(value: number) {
         this._rotation = value;
         // Using chain assignment, set the rotation on the relevant sprites
         this._parts['cannon-barrel'].rotation = this._parts['cannon-arrow'].rotation = value;
@@ -56,16 +52,14 @@ export class Cannon
      * Setter for the type of the current bubble in the cannon.
      * @param value - The type of the bubble (or "empty" if you want no bubble).
      */
-    public set type(value: BubbleType | 'empty')
-    {
+    public set type(value: BubbleType | 'empty') {
         // Hide the bubble
         this._bubbleView.view.scale.set(0);
 
         // Store the new type
         this._type = value;
-        
-        if (value === 'empty')
-        {
+
+        if (value === 'empty') {
             // Force the tint-ables to be white
             this._parts['cannon-arrow'].tint = this._parts['cannon-main'].tint = 0xffffff;
 
@@ -73,7 +67,8 @@ export class Cannon
         }
 
         // Set the color of the cannon arrow and main body using chain assignment
-        this._parts['cannon-arrow'].tint = this._parts['cannon-main'].tint = boardConfig.bubbleTypeToColor[value];
+        this._parts['cannon-arrow'].tint = this._parts['cannon-main'].tint =
+            boardConfig.bubbleTypeToColor[value];
         // Set the type of the current bubble view
         this._bubbleView.type = value;
 
@@ -89,39 +84,34 @@ export class Cannon
     /**
      * Getter for the type of the current bubble in the cannon
      */
-    public get type(): BubbleType
-    {
+    public get type(): BubbleType {
         return this._type;
     }
 
     /**
      * Helper function to build the cannon
      */
-    private _build()
-    {
+    private _build() {
         /**
          * This function loops over the provided ids and creates a sprite for each id
          * @param ids - A list of ids to create sprites for
          */
-        const create = (...ids: string[]) =>
-        {
-            ids.forEach((id: string) =>
-            {
+        const create = (...ids: string[]) => {
+            ids.forEach((id: string) => {
                 // Create a sprite using the id and set its anchor to 0.5
                 const element = Sprite.from(id);
 
                 element.anchor.set(0.5);
-    
+
                 // Add the newly created sprite to the `_parts` object with the id as the key
                 this._parts[id] = element;
-    
+
                 // Add the sprite to the view
                 this.view.addChild(element);
             });
         };
-    
+
         // Call the create function with the ids for the cannon parts
         create('cannon-barrel', 'cannon-main', 'cannon-arrow', 'cannon-top');
     }
-    
 }

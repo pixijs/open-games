@@ -3,6 +3,7 @@ import { Match3Mode } from '../match3/Match3Config';
 import { sfx } from '../utils/audio';
 
 import { i18n } from '../utils/i18n';
+import { Graphics } from 'pixi.js';
 
 type ItemConfig = { mode: Match3Mode; text: string };
 
@@ -35,32 +36,48 @@ export class ModeSwitcher extends RadioGroup {
         const radius = 18;
 
         super({
-            selectedItem: 0,
-            items: items.map((i) => i.text),
+            items: items.map(
+                (i) =>
+                    new CheckBox({
+                        text: i.text,
+                        style: {
+                            checked: new Graphics()
+                                .beginFill(bgColor)
+                                .drawRoundedRect(0, 0, width, height, radius)
+                                .endFill()
+                                .beginFill(fillColor)
+                                .drawRoundedRect(
+                                    padding,
+                                    padding,
+                                    width - padding * 2,
+                                    height - padding * 2,
+                                    radius - padding,
+                                )
+                                .endFill(),
+                            unchecked: new Graphics()
+                                .beginFill(bgColor)
+                                .drawRoundedRect(0, 0, width, height, radius)
+                                .endFill()
+                                .drawRoundedRect(
+                                    padding,
+                                    padding,
+                                    width - padding * 2,
+                                    height - padding * 2,
+                                    radius - padding,
+                                )
+                                .endFill(),
+
+                            text: {
+                                fontFamily: 'Arial Rounded MT Bold',
+                                fontSize: 20,
+                                fill: 0xffffff,
+                            },
+                        },
+                    }),
+            ),
             type: 'vertical',
             elementsMargin: 10,
-            style: {
-                bg: {
-                    color: bgColor,
-                    width,
-                    height,
-                    padding,
-                    radius,
-                },
-                checked: {
-                    color: bgColor,
-                    fillColor,
-                    width,
-                    height,
-                    padding,
-                    radius,
-                },
-                textStyle: {
-                    fontFamily: 'Arial Rounded MT Bold',
-                    fontSize: 20,
-                    fill: 0xffffff,
-                },
-            },
+            selectedItem: 0,
         });
 
         this.addChild(this.innerView);
@@ -88,7 +105,7 @@ export class ModeSwitcher extends RadioGroup {
         this['items'].forEach((item: CheckBox, key: number) => {
             item.forceCheck(key === id);
         });
-        this.value = this['options'].items[id];
+        this.value = this['options'].items[id].text;
         const changed = this.selected !== id;
         this.selected = id;
         if (changed) this.onChange.emit(id, this.value);

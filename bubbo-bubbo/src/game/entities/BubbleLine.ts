@@ -7,8 +7,7 @@ import type { Bubble } from './Bubble';
 export const MAX_BUBBLE_INDEX = 2 * boardConfig.bubblesPerLine - 2;
 
 /** A class representing a line of bubbles. Used to organise bubbles into rows. */
-export class BubbleLine
-{
+export class BubbleLine {
     /** The index to determine the line's position within the main grid. */
     public j!: number;
     /** Whether the line is even or odd. Which determines the line structure. */
@@ -31,8 +30,7 @@ export class BubbleLine
      * @param game - The game instance.
      * @param isEven - Whether the line is even or odd.
      */
-    public init(j: number, game: Game, isEven: boolean)
-    {
+    public init(j: number, game: Game, isEven: boolean) {
         this.j = j;
         this.isEven = isEven;
         this.bubbleCount = 0;
@@ -43,8 +41,7 @@ export class BubbleLine
     }
 
     /** The y-position of the line in game space. */
-    public get y()
-    {
+    public get y() {
         return this._y;
     }
 
@@ -52,13 +49,11 @@ export class BubbleLine
      * The y-position of the line in game space.
      * and updates the y-position of all the bubbles in the line.
      */
-    public set y(value: number)
-    {
+    public set y(value: number) {
         this._y = value;
-        
+
         // Update the y-position of all bubbles in the line
-        this.bubbles.forEach((bubble) =>
-        {
+        this.bubbles.forEach((bubble) => {
             if (bubble) bubble.y = this.y;
         });
     }
@@ -68,8 +63,7 @@ export class BubbleLine
      * @param bubble - The bubble to add.
      * @param x - The x-position of the bubble.
      */
-    public addBubble(bubble: Bubble, x: number)
-    {
+    public addBubble(bubble: Bubble, x: number) {
         bubble.x = x;
         bubble.y = this.y;
 
@@ -83,8 +77,7 @@ export class BubbleLine
          * This error is triggered when the number of bubbles in the line becomes too high, which shouldn't happen under normal circumstances.
          * It could indicate a problem with the game logic or the configuration of boardConfig.
          */
-        if (this.bubbleCount > boardConfig.bubblesPerLine)
-        {
+        if (this.bubbleCount > boardConfig.bubblesPerLine) {
             console.error('Number of bubble is too high!');
         }
     }
@@ -93,15 +86,14 @@ export class BubbleLine
      * Updates the vertical position of the BubbleLine based on the given ratio parameter.
      * @param ratio - The ratio of the position between `0` and `1`.
      */
-    public updatePosRatio(ratio = 1)
-    {
+    public updatePosRatio(ratio = 1) {
         // Previous grid position
-        const previousPos = boardConfig.screenTop + ((this.j - 1) * boardConfig.bubbleSize);
+        const previousPos = boardConfig.screenTop + (this.j - 1) * boardConfig.bubbleSize;
         // Current grid position
-        const newPos = boardConfig.screenTop + (this.j * boardConfig.bubbleSize);
+        const newPos = boardConfig.screenTop + this.j * boardConfig.bubbleSize;
 
         // Position between two positions based on the given ratio
-        const position = ((newPos - previousPos) * ratio) + previousPos;
+        const position = (newPos - previousPos) * ratio + previousPos;
 
         // Update this y position
         this.y = position;
@@ -112,8 +104,7 @@ export class BubbleLine
      * @param i - The index to check for a bubble.
      * @returns Whether there is a bubble at the given index.
      */
-    public hasBubbleAt(i: number)
-    {
+    public hasBubbleAt(i: number) {
         return this.bubbles[i] !== undefined;
     }
 
@@ -122,8 +113,7 @@ export class BubbleLine
      * @param i - The index to check for a bubble.
      * @returns The bubble at the given index, or undefined if there is no bubble.
      */
-    public getBubbleAt(i: number)
-    {
+    public getBubbleAt(i: number) {
         return this.bubbles[i];
     }
 
@@ -132,8 +122,7 @@ export class BubbleLine
      * @param bubble - The bubble that is to be removed.
      * @param drop - If the bubble is dropped to become a dynamic entity, or to just be destroyed
      */
-    public removeBubble(bubble: Bubble, drop = true)
-    {
+    public removeBubble(bubble: Bubble, drop = true) {
         // Empty the array at the bubble index
         this.bubbles[bubble.i] = undefined;
 
@@ -144,13 +133,11 @@ export class BubbleLine
          * This error is triggered when the number of bubbles in the line becomes negative, which shouldn't happen under normal circumstances.
          * It could indicate a problem with the game logic or the configuration of boardConfig.
          */
-        if (this.bubbleCount < 0)
-        {
+        if (this.bubbleCount < 0) {
             console.error('Number of bubble is too low!');
         }
 
-        if (drop)
-        {
+        if (drop) {
             // Drop the bubble to become a dynamic entity
             bubble.drop();
         }

@@ -10,15 +10,13 @@ const DEFAULT_SCALE = 0.75;
  *
  * Uses elements from @pixi/ui.
  */
-export class IconButton extends FancyButton
-{
+export class IconButton extends FancyButton {
     /**
      *
      * @param icon - string ID of the icon texture
      * @param scale - Base scale of the button, defaults to `DEFAULT_SCALE` constant
      */
-    constructor(icon: string, scale = DEFAULT_SCALE)
-    {
+    constructor(icon: string, scale = DEFAULT_SCALE) {
         super({
             // Set the base's asset
             defaultView: 'button-flat-small',
@@ -35,16 +33,11 @@ export class IconButton extends FancyButton
             // Set initial scale to given scale
             scale,
         });
-    }
 
-    /**
-     * Override function for the FancyButton, called when button is pressed
-     */
-    public override press()
-    {
-        // Play audio
-        sfx.play('audio/secondary-button-press.wav', {
-            speed: 1.1,
+        this.onPress.connect(() => {
+            sfx.play('audio/secondary-button-press.wav', {
+                speed: 1.1,
+            });
         });
     }
 }

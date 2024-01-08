@@ -10,8 +10,7 @@ import { lerp } from '../utils/maths/maths';
 import { randomRange } from '../utils/maths/rand';
 
 /** The default load screen for the game. */
-export class LoadScreen extends Container
-{
+export class LoadScreen extends Container {
     /** A unique identifier for the screen */
     public static SCREEN_ID = 'loader';
     /** An array of bundle IDs for dynamic asset loading. */
@@ -21,7 +20,7 @@ export class LoadScreen extends Container
     private readonly _spinner: Sprite;
     private readonly _cannon: Cannon;
     private readonly _pixiLogo: PixiLogo;
-    
+
     /** An added container to animate the pixi logo off screen. */
     private _bottomContainer = new Container();
     /** An rotational offset that gets randomised. */
@@ -29,8 +28,7 @@ export class LoadScreen extends Container
     /** A variable used to store the current time state of animation */
     private _tick = 0;
 
-    constructor()
-    {
+    constructor() {
         super();
 
         // Create the visual aspects of the load screen
@@ -54,8 +52,7 @@ export class LoadScreen extends Container
     }
 
     /** Called when the screen is being shown. */
-    public async show()
-    {
+    public async show() {
         // Kill tweens of the screen container
         gsap.killTweensOf(this);
 
@@ -68,8 +65,7 @@ export class LoadScreen extends Container
     }
 
     /** Called when the screen is being hidden. */
-    public async hide()
-    {
+    public async hide() {
         // Kill tweens of the screen container
         gsap.killTweensOf(this);
 
@@ -87,10 +83,9 @@ export class LoadScreen extends Container
      * Called every frame
      * @param delta - The time elapsed since the last update.
      */
-    public update(delta: number)
-    {
+    public update(delta: number) {
         // Rotate spinner
-        this._spinner.rotation -= (delta / 60);
+        this._spinner.rotation -= delta / 60;
 
         // Lerp the rotations of the cannon to the spinner rotation but with an offset
         this._cannon.rotation = lerp(
@@ -100,15 +95,12 @@ export class LoadScreen extends Container
         );
 
         // When tick is zero, randomise aforementioned offset
-        if (this._tick <= 0)
-        {
+        if (this._tick <= 0) {
             this._targetOffset = randomRange(Math.PI * 0.2, Math.PI * 0.5);
             this._tick = 1;
-        }
-        else
-        {
+        } else {
             // Decremented every frame using delta time
-            this._tick -= (delta / 60);
+            this._tick -= delta / 60;
         }
     }
 
@@ -117,8 +109,7 @@ export class LoadScreen extends Container
      * @param w - width of the screen.
      * @param h - height of the screen.
      */
-    public resize(w: number, h: number)
-    {
+    public resize(w: number, h: number) {
         // Fit background to screen
         this._background.width = w;
         this._background.height = h;
@@ -126,7 +117,7 @@ export class LoadScreen extends Container
         // Set visuals to their respective locations
         this._spinner.x = this._cannon.view.x = w * 0.5;
         this._spinner.y = this._cannon.view.y = h * 0.5;
-        
+
         this._pixiLogo.view.x = w * 0.5;
         this._pixiLogo.view.y = h - 55;
     }

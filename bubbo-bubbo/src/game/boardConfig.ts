@@ -104,10 +104,8 @@ export const boardConfig = {
  * @param group The group of bubble types to choose from ('all', 'regular', or 'special').
  * @returns A randomly selected bubble type.
 . */
-export function randomType(group?: 'all' | 'regular' | 'special')
-{
-    switch (group)
-    {
+export function randomType(group?: 'all' | 'regular' | 'special') {
+    switch (group) {
         case 'all':
             return randomItem([...boardConfig.specialBubbleTypes, ...boardConfig.bubbleTypes]);
         case 'special':
@@ -122,7 +120,6 @@ export function randomType(group?: 'all' | 'regular' | 'special')
  * @param type The type of the bubble.
  * @returns True if the type is a special bubble type, false otherwise.
 . */
-export function isSpecialType(type: BubbleType)
-{
+export function isSpecialType(type: BubbleType) {
     return boardConfig.specialBubbleTypes.includes(type);
 }

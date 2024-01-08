@@ -20,8 +20,7 @@ interface PortholeOptions {
 /**
  * Class to render the porthole decals found on multiple screens
  */
-export class Porthole
-{
+export class Porthole {
     /** Default options to be overwritten with custom options if need be. */
     public static DEFAULT_OPTIONS: PortholeOptions = {
         /** Color of the frame. */
@@ -52,30 +51,29 @@ export class Porthole
     /**
      * @param options An object with properties for customizing the porthole appearance.
      */
-    constructor(options?: PortholeOptions)
-    {
+    constructor(options?: PortholeOptions) {
         // Set the options to the default options or the provided options if any
         options = { ...Porthole.DEFAULT_OPTIONS, ...options };
 
         // Create the frame of the porthole
         this._frame = new Graphics()
-            .beginFill(options.frameColor)  // set the color of the frame
-            .drawCircle(0, 0, options.size + options.frameWidth);  // draw the frame as a circle
-        
+            .beginFill(options.frameColor) // set the color of the frame
+            .drawCircle(0, 0, options.size + options.frameWidth); // draw the frame as a circle
+
         this.view.addChild(this._frame);
 
         // Create the tiling sprite for the background
         this._background = new TilingSprite(Texture.from('background-tile-space'), 64, 64);
         this._background.anchor.set(0.5);
-        
+
         // Set the width and height of the background to be equal to the size of the porthole
         this._background.width = this._background.height = options.size * 2;
         this._frame.addChild(this._background);
 
         // create the mask for shaping the background
         this._mask = new Graphics().beginFill(options.frameColor).drawCircle(0, 0, options.size);
-        this._background.mask = this._mask;    // set the mask for the background
-        this.view.addChild(this._mask);   // add the mask to the view
+        this._background.mask = this._mask; // set the mask for the background
+        this.view.addChild(this._mask); // add the mask to the view
 
         // create the bubble view
         this._bubble = new BubbleView();
@@ -87,16 +85,14 @@ export class Porthole
     /**
      * Position bubbles to prepare for the animation of the bubbles.
      */
-    public start()
-    {
+    public start() {
         this._setBubble();
     }
 
     /**
      * Stop the animation of the bubbles.
      */
-    public stop()
-    {
+    public stop() {
         // Reset bubble position so it can no longer be in the middle of the view
         this._setBubble();
         // Kill the tweens of the bubble's view
@@ -105,9 +101,8 @@ export class Porthole
 
     /**
      * Sets the bubble with a random position on the circumference of the circle, as well as random attributes.
-    */
-    private _setBubble()
-    {
+     */
+    private _setBubble() {
         this._isBubbleSet = true;
         // Set random scale between 0.5 and 1
         this._bubble.view.scale.set(randomRange(0.5, 1, false));
@@ -130,12 +125,10 @@ export class Porthole
         gsap.delayedCall(randomRange(3, 6), this._moveBubble.bind(this));
     }
 
-    
     /**
      * Moves the bubble to a new random position on the circumference of the circle
      */
-    private _moveBubble()
-    {
+    private _moveBubble() {
         // If the bubble is not set, return from the method
         if (!this._isBubbleSet) return;
 

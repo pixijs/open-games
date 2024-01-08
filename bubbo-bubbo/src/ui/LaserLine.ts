@@ -4,8 +4,7 @@ import { Container, NineSlicePlane, Sprite, Texture } from 'pixi.js';
 import { designConfig } from '../game/designConfig';
 
 /** Class to render the laser line found in game. */
-export class LaserLine
-{
+export class LaserLine {
     /* The container instance that is the root of all visuals in this class. */
     public view = new Container();
 
@@ -28,14 +27,13 @@ export class LaserLine
     /** Whether the line is currently pulsing. */
     private _isPulsing = false;
 
-    constructor()
-    {
+    constructor() {
         // Create the line visual
         this._line = new NineSlicePlane(Texture.from('laser-line'));
         this._line.height -= 12;
         this._line.pivot.y = this._line.height * 0.5 - 6;
         this._line.width = designConfig.content.width;
-        
+
         // Create the glow visual
         this._glow = Sprite.from('laser-line-glow');
         this._glow.anchor.set(0.5);
@@ -49,8 +47,7 @@ export class LaserLine
      * Called every frame.
      * @param delta - The time elapsed since the last update.
      */
-    public update(delta: number)
-    {
+    public update(delta: number) {
         // If pulsing from tween, return to prevent animation mismatch
         if (this._isPulsing) return;
 
@@ -58,13 +55,10 @@ export class LaserLine
         this._targetAlpha += (delta / 60) * (this._alphaDirection * this._alphaSpeed);
 
         // If target alpha is lower than the minimum or greater than maximum, reverse the alpha direction
-        if (this._targetAlpha <= this._minAlpha)
-        {
+        if (this._targetAlpha <= this._minAlpha) {
             this._targetAlpha = this._minAlpha;
             this._alphaDirection = 1;
-        }
-        else if (this._targetAlpha >= this._maxAlpha)
-        {
+        } else if (this._targetAlpha >= this._maxAlpha) {
             this._targetAlpha = this._maxAlpha;
             this._alphaDirection = -1;
         }
@@ -76,8 +70,7 @@ export class LaserLine
     /**
      * Animate a pulsing effect
      */
-    public pulse()
-    {
+    public pulse() {
         // Update the flag to prevent the update animation overwriting this one
         this._isPulsing = true;
 
@@ -91,8 +84,7 @@ export class LaserLine
         gsap.to(this._glow, {
             alpha: this._targetAlpha,
             delay: 0.2,
-            onComplete: () =>
-            {
+            onComplete: () => {
                 // On complete, allow update function to take over glow alpha animation
                 this._isPulsing = false;
             },

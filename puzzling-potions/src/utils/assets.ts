@@ -1,7 +1,7 @@
-import { Assets, ResolverManifest } from 'pixi.js';
+import { Assets, AssetsManifest } from 'pixi.js';
 
 /** List of assets grouped in bundles, for dynamic loading */
-let assetsManifest: ResolverManifest = { bundles: [] };
+let assetsManifest: AssetsManifest = { bundles: [] };
 
 /** Store bundles already loaded */
 const loadedBundles: string[] = [];
