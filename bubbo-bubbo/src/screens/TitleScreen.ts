@@ -19,8 +19,7 @@ import { throttle } from '../utils/throttle';
 import { GameScreen } from './GameScreen';
 
 /** The screen presented at the start, after loading. */
-export class TitleScreen extends Container implements AppScreen
-{
+export class TitleScreen extends Container implements AppScreen {
     /** A unique identifier for the screen */
     public static SCREEN_ID = 'title';
     /** An array of bundle IDs for dynamic asset loading. */
@@ -32,7 +31,7 @@ export class TitleScreen extends Container implements AppScreen
     private readonly _hitArea: Rectangle;
     /** A background visual element */
     private readonly _background: TilingSprite;
-    
+
     private _title!: Title;
     private _pixiLogo!: PixiLogo;
     private _cannon!: Cannon;
@@ -53,8 +52,7 @@ export class TitleScreen extends Container implements AppScreen
     /** A container to group visual elements for easier animation */
     private _bottomAnimContainer = new Container();
 
-    constructor()
-    {
+    constructor() {
         super();
 
         // Create the background
@@ -62,7 +60,7 @@ export class TitleScreen extends Container implements AppScreen
         this._background.tileScale.set(designConfig.backgroundTileScale);
         this._background.interactive = true;
         this.addChild(this._background);
-        
+
         // Create the hit area
         this._hitArea = new Rectangle();
 
@@ -82,21 +80,19 @@ export class TitleScreen extends Container implements AppScreen
     }
 
     /** Called before `show` function, can receive `data` */
-    public prepare()
-    {
+    public prepare() {
         // Reset the animations of the portholes
         this._portholeOne.stop();
         this._portholeTwo.stop();
 
         // Reset the positions of the group containers
         gsap.set(this._topAnimContainer, { y: -350 });
-        gsap.set(this._midAnimContainer, {x: 200 });
-        gsap.set(this._bottomAnimContainer, {y: 350 });
+        gsap.set(this._midAnimContainer, { x: 200 });
+        gsap.set(this._bottomAnimContainer, { y: 350 });
     }
 
     /** Called when the screen is being shown. */
-    public async show()
-    {
+    public async show() {
         // Add container event listeners to handle the cannon movement
         this._hitContainer.on('pointermove', this._calculateAngle.bind(this));
         this._hitContainer.on('pointertap', this._calculateAngle.bind(this));
@@ -106,7 +102,7 @@ export class TitleScreen extends Container implements AppScreen
 
         // Reset screen data
         this.alpha = 0;
-        
+
         // Starts the animations for the background porthole details
         this._portholeOne.start();
         this._portholeTwo.start();
@@ -124,7 +120,7 @@ export class TitleScreen extends Container implements AppScreen
             duration: 0.75,
             ease: 'elastic.out(1, 0.5)',
         };
-        
+
         // Tween the containers back to their original position
         gsap.to(this._topAnimContainer, endData);
         gsap.to(this._midAnimContainer, endData);
@@ -132,8 +128,7 @@ export class TitleScreen extends Container implements AppScreen
     }
 
     /** Called when the screen is being hidden. */
-    public async hide()
-    {
+    public async hide() {
         // Remove all listeners on the hit container so they don't get triggered outside of the title screen
         this._hitContainer.removeAllListeners();
 
@@ -153,8 +148,7 @@ export class TitleScreen extends Container implements AppScreen
      * @param w - width of the screen.
      * @param h - height of the screen.
      */
-    public resize(w: number, h: number)
-    {
+    public resize(w: number, h: number) {
         // Fit background to screen
         this._background.width = w;
         this._background.height = h;
@@ -182,14 +176,11 @@ export class TitleScreen extends Container implements AppScreen
 
         this._playBtn.x = w * 0.5;
         this._playBtn.y =
-            this._cannon.view.y -
-            this._cannon.view.height / 2 -
-            this._playBtn.height / 2 +
-            10;
-            
+            this._cannon.view.y - this._cannon.view.height / 2 - this._playBtn.height / 2 + 10;
+
         this._portholeOne.view.x = 40;
         this._portholeOne.view.y = 40;
-    
+
         this._portholeTwo.view.x = w - 40;
         this._portholeTwo.view.y = this._title.view.y + this._title.view.height + 10;
 
@@ -203,20 +194,17 @@ export class TitleScreen extends Container implements AppScreen
      * Calculate the angle between the cannon and the user's pointer position.
      * @param e - The event data sent from the event listener.
      */
-    private _calculateAngle(e: FederatedPointerEvent)
-    {
+    private _calculateAngle(e: FederatedPointerEvent) {
         // Get global cannon position and calculate the angle in radians using the global mouse position
         const globalPos = this._cannon.view.getGlobalPosition();
         const angleRadians = Math.atan2(e.global.y - globalPos.y, e.global.x - globalPos.x);
 
         // Checks if the cannon has rotated enough to warrant an audio response
         // this prevents audio spam on minor movement
-        if (Math.abs(this._aimAngle - angleRadians) > Math.PI * 0.0002)
-        {
+        if (Math.abs(this._aimAngle - angleRadians) > Math.PI * 0.0002) {
             // Attempt to play audio, the throttle will prevent audio spam
             // Can only play audio every N milliseconds
-            throttle('cannon-audio', 150, () =>
-            {
+            throttle('cannon-audio', 150, () => {
                 sfx.play('audio/cannon-move.wav', {
                     volume: 0.2,
                 });
@@ -229,8 +217,7 @@ export class TitleScreen extends Container implements AppScreen
     }
 
     /** Add visual details to title screen. */
-    private _buildDetails()
-    {
+    private _buildDetails() {
         // Add the title card
         this._title = new Title();
         this._topAnimContainer.addChild(this._title.view);
@@ -261,12 +248,11 @@ export class TitleScreen extends Container implements AppScreen
     }
 
     /** Add buttons to screen. */
-    private _buildButtons()
-    {
+    private _buildButtons() {
         this._forkBtn = new PrimaryButton({
             text: i18n.t('forkGithub'),
             textStyle: {
-                fill: 0xE91E63,
+                fill: 0xe91e63,
                 fontFamily: 'Opensans Semibold',
                 fontWeight: 'bold',
                 align: 'center',
@@ -286,8 +272,7 @@ export class TitleScreen extends Container implements AppScreen
             },
         });
 
-        this._forkBtn.onPress.connect(() =>
-        {
+        this._forkBtn.onPress.connect(() => {
             window.open(designConfig.forkMeURL, '_blank')?.focus();
         });
 
@@ -300,8 +285,7 @@ export class TitleScreen extends Container implements AppScreen
             text: i18n.t('titlePlay'),
         });
 
-        this._playBtn.onPress.connect(() =>
-        {
+        this._playBtn.onPress.connect(() => {
             // Go to game screen when user presses play button
             navigation.goToScreen(GameScreen);
         });

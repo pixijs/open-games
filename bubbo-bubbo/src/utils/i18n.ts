@@ -21,8 +21,7 @@ export type I18nParams = Record<string, string | number>;
 /**
  * Class that provides methods for internationalization.
  */
-export class I18n
-{
+export class I18n {
     /**
      * Property that stores the i18n dictionary.
      */
@@ -34,18 +33,14 @@ export class I18n
      * @param params - The parameters to replace placeholders in the i18n string.
      * @returns The translated string.
      */
-    public t(k: I18nKey, params?: I18nParams)
-    {
+    public t(k: I18nKey, params?: I18nParams) {
         let str = this.dict[k];
 
-        if (params)
-        {
-            if (typeof params.variation === 'number')
-            {
+        if (params) {
+            if (typeof params.variation === 'number') {
                 const match = /\[(.*?)\]/.exec(str);
 
-                if (match)
-                {
+                if (match) {
                     /**
                      * Split the string by the "|" character to get an array of variations.
                      */
@@ -66,8 +61,7 @@ export class I18n
             /**
              * Iterate over all params to replace placeholders in the string.
              */
-            for (const f in params)
-            {
+            for (const f in params) {
                 /**
                  * Create a regular expression to match the placeholder for the current param.
                  */

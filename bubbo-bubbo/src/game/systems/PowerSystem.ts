@@ -9,8 +9,7 @@ import { LevelSystem } from './LevelSystem';
 import { PauseSystem } from './PauseSystem';
 
 /** The PowerSystem is responsible for handling powers in the game. */
-export class PowerSystem implements System
-{
+export class PowerSystem implements System {
     /**
      * A unique identifier used by the system runner.
      * The identifier is used by the runner to differentiate between different systems.
@@ -37,10 +36,8 @@ export class PowerSystem implements System
      * @param i - The row index of the power.
      * @param j - The column index of the power.
      */
-    public usePower(power: SpecialBubbleType, i: number, j: number)
-    {
-        switch (power)
-        {
+    public usePower(power: SpecialBubbleType, i: number, j: number) {
+        switch (power) {
             case 'super':
                 this._super(j);
                 break;
@@ -62,8 +59,7 @@ export class PowerSystem implements System
      * Use the super power. It removes all bubbles in a given line.
      * @param j - The column index of the power.
      */
-    private _super(j: number)
-    {
+    private _super(j: number) {
         // Get the LevelSystem.
         const level = this.game.systems.get(LevelSystem);
         // Get the grid line of the power.
@@ -71,12 +67,11 @@ export class PowerSystem implements System
 
         // Play the audio for the super power.
         sfx.play('audio/powerup-super.wav');
-        
+
         // Remove all bubbles in the line.
-        line.bubbles.forEach(async (bubble) =>
-        {
+        line.bubbles.forEach(async (bubble) => {
             if (!bubble) return;
-            
+
             // Remove the bubble, considering whether it's a special bubble type.
             await level.removeBubble(bubble, !isSpecialType(bubble.type));
         });
@@ -88,8 +83,7 @@ export class PowerSystem implements System
      * @param i - The row index of the power.
      * @param j - The column index of the power.
      */
-    private _bomb(i: number, j: number)
-    {
+    private _bomb(i: number, j: number) {
         // Get the LevelSystem instance
         const level = this.game.systems.get(LevelSystem);
 
@@ -97,8 +91,7 @@ export class PowerSystem implements System
         sfx.play('audio/powerup-bomb.wav');
 
         // Loop through all the bubbles that are up to two units away from the selected bubble
-        level.getNeighbours(i, j, boardConfig.power.blastRadius)?.forEach(async (bubble) =>
-        {
+        level.getNeighbours(i, j, boardConfig.power.blastRadius)?.forEach(async (bubble) => {
             // Remove the bubble
             await level.removeBubble(bubble, true);
         });
@@ -108,17 +101,17 @@ export class PowerSystem implements System
      * This function is called when the 'timer' power is used.
      * It pauses the level generation for a small period of time.
      */
-    private _timer()
-    {
+    private _timer() {
         // Play the 'powerup-time' sound effect
         sfx.play('audio/powerup-time');
 
         // Use the `gsap.delayedCall` function to add a 5 second delay before emitting the signal to state the power effect has ended
         // Add the tween to the pause system
-        this.game.systems.get(PauseSystem).addTween(gsap.delayedCall(boardConfig.power.timerFreezeTime, () =>
-        {
-            // Emit the 'timer' power used signal
-            this.signals.onPowerUsed.emit('timer', true);
-        }));
+        this.game.systems.get(PauseSystem).addTween(
+            gsap.delayedCall(boardConfig.power.timerFreezeTime, () => {
+                // Emit the 'timer' power used signal
+                this.signals.onPowerUsed.emit('timer', true);
+            }),
+        );
     }
 }

@@ -7,8 +7,7 @@ import { boardConfig } from '../boardConfig';
 /**
  * BubbleView is a class that represents the view of a bubble in the game.
  */
-export class BubbleView
-{
+export class BubbleView {
     /** The Container instance which contains all the visual elements for this class. */
     public view = new Container();
 
@@ -22,12 +21,11 @@ export class BubbleView
     private _type!: BubbleType;
     /** The timeline for the shimmer animation. */
     private readonly _shimmerTimeline: gsap.core.Timeline;
-    
+
     /**
      * @param type - The type of the bubble.
      */
-    constructor(type?: BubbleType)
-    {
+    constructor(type?: BubbleType) {
         // Initialize the sprite for the bubble
         this._sprite = Sprite.from(type ? `bubble-${type}` : Texture.WHITE);
         this._sprite.anchor.set(0.5);
@@ -42,7 +40,7 @@ export class BubbleView
         this._shadow.width = this._sprite.width * 1.1;
         this._shadow.height = this._sprite.height * 1.1;
         this._shadow.y = (this._shadow.height - this._sprite.height) * 1.5;
-        
+
         // Make the sprite for the bubble visible only if a type is provided
         this._sprite.visible = !!type;
         this._shadow.visible = !!type;
@@ -63,7 +61,8 @@ export class BubbleView
         const duration = 0.1;
 
         // Initialize the shimmer animation timeline
-        this._shimmerTimeline = gsap.timeline({ paused: true })
+        this._shimmerTimeline = gsap
+            .timeline({ paused: true })
             // Reset rotation and alpha of shine sprite
             .set(this._shine, { rotation: 0, alpha: 0 })
             // Animate around half a circle
@@ -73,16 +72,19 @@ export class BubbleView
                 duration,
             })
             // Fade alpha in then out
-            .to(this._shine, {
-                alpha: 1,
-                yoyo: true,
-                repeat: 1,
-                onComplete: () =>
+            .to(
+                this._shine,
                 {
-                    this._shine.visible = false;
+                    alpha: 1,
+                    yoyo: true,
+                    repeat: 1,
+                    onComplete: () => {
+                        this._shine.visible = false;
+                    },
+                    duration: duration * 0.6,
                 },
-                duration: duration * 0.6,
-            }, '<'); // '<' used to start this tween at the same point as the previous one
+                '<',
+            ); // '<' used to start this tween at the same point as the previous one
 
         // If the type argument is provided, then it sets the type of the bubble
         if (type) this.type = type;
@@ -92,8 +94,7 @@ export class BubbleView
      * Gets the type of the bubble.
      * @returns - The type of the bubble.
      */
-    public get type(): BubbleType
-    {
+    public get type(): BubbleType {
         return this._type;
     }
 
@@ -102,25 +103,23 @@ export class BubbleView
      * It updates the texture, tint, and visibility of the sprite and shadow based on the new type.
      * @param value - The type of the bubble (or "glow").
      */
-    public set type(value: BubbleType | 'glow')
-    {
+    public set type(value: BubbleType | 'glow') {
         // Store the new type
         this._type = value;
 
         // Update the texture of the sprite based on the new type
         this._sprite.texture = Texture.from(`bubble-${this._type}`);
-        
+
         // Update the tint of the shadow based on the new type
         this._shadow.tint = boardConfig.bubbleTypeToColor[value] ?? 0x606060;
-        
+
         // Make the sprite and shadow visible
         this._sprite.visible = true;
         this._shadow.visible = value !== 'glow';
     }
 
     /** This function starts the shimmer effect. */
-    public shimmer()
-    {
+    public shimmer() {
         // Reset the rotation and alpha values of the shine sprite, and also make it visible
         this._shine.rotation = 0;
         this._shine.alpha = 0;

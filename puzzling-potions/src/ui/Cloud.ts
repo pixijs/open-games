@@ -207,7 +207,7 @@ class CloudCircle extends Container {
     }
 
     public get tint() {
-        return this.image.tint;
+        return Number(this.image.tint);
     }
 
     public set tint(v: number) {

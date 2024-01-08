@@ -5,7 +5,6 @@
  * @param t - Interpolation factor (0 to 1).
  * @returns The interpolated value.
  */
-export function lerp(x: number, y: number, t: number): number
-{
-    return ((1 - t) * x) + (t * y);
+export function lerp(x: number, y: number, t: number): number {
+    return (1 - t) * x + t * y;
 }

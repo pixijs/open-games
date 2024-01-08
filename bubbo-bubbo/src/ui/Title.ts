@@ -7,34 +7,32 @@ import { i18n } from '../utils/i18n';
 /**
  * Class to render the game's title
  */
-export class Title
-{
+export class Title {
     /* The container instance that is the root of all visuals in this class */
     public view = new Container();
 
-    constructor()
-    {
+    constructor() {
         // Create main header
 
         // Add top part of the title
         const bubboText = i18n.t('gameTitle');
-        
+
         const titleTop = new Text(bubboText, {
             fontSize: 90,
             fontWeight: '900',
             fontFamily: 'Bungee Regular',
         });
-        
+
         titleTop.anchor.set(0.5);
         this.view.addChild(titleTop);
-        
+
         // Assign a random type to the top title's bubble
         const bubbleTop = new BubbleView(randomType());
-        
+
         bubbleTop.view.position.set(titleTop.width * 0.5 - 33.5, 7);
         bubbleTop.view.scale.set(1.6);
         titleTop.addChild(bubbleTop.view);
-        
+
         // Add bottom part of the title
         const titleBottom = new Text(bubboText, {
             fontSize: 90,
