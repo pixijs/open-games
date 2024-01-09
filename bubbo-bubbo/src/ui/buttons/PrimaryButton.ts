@@ -26,15 +26,18 @@ export class PrimaryButton extends FancyButton {
      */
     constructor(options: PrimaryButtonOptions) {
         // Create text object to act as label
-        const text = new Text(options?.text ?? '', {
+        const text = new Text({
+            text: options?.text ?? '',
+            style: {
             // Predefine text styles that can be overwritten
-            fill: 0x49c8ff,
-            fontFamily: 'Bungee Regular',
-            fontWeight: 'bold',
-            align: 'center',
-            fontSize: 40,
-            // Allow custom text style to overwrite predefined options
-            ...options?.textStyle,
+                fill: 0x49c8ff,
+                fontFamily: 'Bungee Regular',
+                fontWeight: 'bold',
+                align: 'center',
+                fontSize: 40,
+                // Allow custom text style to overwrite predefined options
+                ...options?.textStyle,
+            },
         });
 
         super({

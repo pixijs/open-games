@@ -17,10 +17,13 @@ export class Title {
         // Add top part of the title
         const bubboText = i18n.t('gameTitle');
 
-        const titleTop = new Text(bubboText, {
-            fontSize: 90,
-            fontWeight: '900',
-            fontFamily: 'Bungee Regular',
+        const titleTop = new Text({
+            text: bubboText,
+            style: {
+                fontSize: 90,
+                fontWeight: '900',
+                fontFamily: 'Bungee Regular',
+            },
         });
 
         titleTop.anchor.set(0.5);
@@ -34,10 +37,13 @@ export class Title {
         titleTop.addChild(bubbleTop.view);
 
         // Add bottom part of the title
-        const titleBottom = new Text(bubboText, {
-            fontSize: 90,
-            fontWeight: '900',
-            fontFamily: 'Bungee Regular',
+        const titleBottom = new Text({
+            text: bubboText,
+            style: {
+                fontSize: 90,
+                fontWeight: '900',
+                fontFamily: 'Bungee Regular',
+            },
         });
 
         titleBottom.y = titleTop.height - 20;
@@ -53,10 +59,13 @@ export class Title {
         titleBottom.addChild(bubbleBottom.view);
 
         // Create sub header
-        const subtitle = new Text(i18n.t('gameSubtitle'), {
-            fontSize: 32,
-            fontWeight: '900',
-            fontFamily: 'Bungee Regular',
+        const subtitle = new Text({
+            text: i18n.t('gameSubtitle'),
+            style: {
+                fontSize: 32,
+                fontWeight: '900',
+                fontFamily: 'Bungee Regular',
+            },
         });
 
         subtitle.anchor.set(0.5);

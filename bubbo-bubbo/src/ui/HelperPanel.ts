@@ -23,12 +23,15 @@ export class HelperPanel {
         const text = i18n.t(device.isMobileDevice() ? 'helperMobile' : 'helperDesktop');
 
         // Create a text object with the instructions text
-        const helpText = new Text(text, {
-            fontSize: 19,
-            fontWeight: '900',
-            fontFamily: 'Opensans Semibold',
-            fill: 0x000000,
-            align: 'center',
+        const helpText = new Text({
+            text,
+            style: {
+                fontSize: 19,
+                fontWeight: '900',
+                fontFamily: 'Opensans Semibold',
+                fill: 0x000000,
+                align: 'center',
+            },
         });
 
         helpText.anchor.set(0.5);

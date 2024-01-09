@@ -1,4 +1,4 @@
-import { Container, IPointData, Sprite } from 'pixi.js';
+import { Container, PointData, Sprite } from 'pixi.js';
 
 import { device } from '../../utils/device';
 import { distance } from '../../utils/maths/point';
@@ -282,7 +282,7 @@ export class SpaceDecorSystem {
      * Creates new decor elements at the specified points.
      * @param points An array of points where the new decor elements will be placed.
      */
-    private _createDecor(points: IPointData[]) {
+    private _createDecor(points: PointData[]) {
         // Loop through all the points
         points.forEach((point) => {
             // Determine whether to create a BubbleOrbit or Satellite decor element

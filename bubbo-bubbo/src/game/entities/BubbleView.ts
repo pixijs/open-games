@@ -27,7 +27,7 @@ export class BubbleView {
      */
     constructor(type?: BubbleType) {
         // Initialize the sprite for the bubble
-        this._sprite = Sprite.from(type ? `bubble-${type}` : Texture.WHITE);
+        this._sprite = type ? Sprite.from(`bubble-${type}`) : new Sprite(Texture.WHITE);
         this._sprite.anchor.set(0.5);
         this._sprite.width = boardConfig.bubbleSize;
         this._sprite.height = boardConfig.bubbleSize;
@@ -52,7 +52,9 @@ export class BubbleView {
         this._shine.visible = false;
 
         // Add the shine effect to the bubble sprite
-        this._sprite.addChild(this._shine);
+        this.view.addChild(this._sprite, this._shine);
+        // TODO: Confirm Transform Hierarchy
+        // this._sprite.addChild(this._shine);
 
         // Add the shadow and bubble sprite to the root container
         this.view.addChild(this._shadow, this._sprite);
@@ -109,6 +111,10 @@ export class BubbleView {
 
         // Update the texture of the sprite based on the new type
         this._sprite.texture = Texture.from(`bubble-${this._type}`);
+
+        // TODO: Resolve sizing issue when setting size on Texture.WHITE Sprite before setting texture
+        this._sprite.width = boardConfig.bubbleSize;
+        this._sprite.height = boardConfig.bubbleSize;
 
         // Update the tint of the shadow based on the new type
         this._shadow.tint = boardConfig.bubbleTypeToColor[value] ?? 0x606060;

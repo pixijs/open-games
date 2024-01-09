@@ -1,5 +1,5 @@
 import gsap from 'gsap';
-import { Container, IPointData, Point, Sprite } from 'pixi.js';
+import { Container, PointData, Point, Sprite } from 'pixi.js';
 
 import { boardConfig } from '../boardConfig';
 import { designConfig } from '../designConfig';
@@ -299,7 +299,7 @@ export class AimSystem implements System {
             const n = Math.ceil(distance / stepSize); // rounding up
 
             // Initialise an array to hold the new points
-            const points: IPointData[] = [];
+            const points: PointData[] = [];
 
             // Calculate the step values for x and y
             const stepX = (end.x - start.x) / n;

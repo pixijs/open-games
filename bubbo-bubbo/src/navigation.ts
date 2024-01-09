@@ -1,4 +1,4 @@
-import { Assets, Container } from 'pixi.js';
+import { Assets, Container, Ticker } from 'pixi.js';
 
 import { areBundlesLoaded } from './assets';
 import { app } from './main';
@@ -8,7 +8,7 @@ export interface AppScreen<T = any> extends Container {
     prepare?: (data?: T) => void;
     show?: () => Promise<void>;
     hide?: () => Promise<void>;
-    update?: (delta: number) => void;
+    update?: (time: Ticker) => void;
     resize?: (w: number, h: number) => void;
 }
 

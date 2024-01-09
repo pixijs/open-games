@@ -1,4 +1,5 @@
-import { ShockwaveFilter } from 'pixi-filters';
+// TODO: Filters v8 Types?
+import { ShockwaveFilter } from '@pixi/filter-shockwave';
 
 import { sfx } from '../../audio';
 import { randomRange } from '../../utils/maths/rand';
@@ -82,9 +83,8 @@ export class EffectsSystem implements System {
         this._activeShockwave = false;
 
         // Remove any filters from the game container
-        if (this.game.gameContainer.filters?.length) {
-            this.game.gameContainer.filters.length = 0;
-        }
+        // TODO: Better way to clear filters??
+        this.game.gameContainer.filters = [];
 
         // Set the game container position back to its original position
         this.game.gameContainer.x = this.game.gameContainerPosition.x;

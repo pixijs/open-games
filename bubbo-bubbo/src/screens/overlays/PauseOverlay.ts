@@ -23,41 +23,49 @@ class PausePanel {
         this._base.anchor.set(0.5);
         this.view.addChild(this._base);
 
-        this._titleText = new Text(i18n.t('paused'), {
-            fontSize: 30,
-            fontWeight: '900',
-            fontFamily: 'Bungee Regular',
-            fill: 0xffffff,
-            align: 'center',
+        this._titleText = new Text({
+            text: i18n.t('paused'),
+            style: {
+                fontSize: 30,
+                fontWeight: '900',
+                fontFamily: 'Bungee Regular',
+                fill: 0xffffff,
+                align: 'center',
+            },
         });
 
         this._titleText.anchor.set(0.5);
         this._titleText.y = -(this._base.height * 0.5) + 50;
-        this._base.addChild(this._titleText);
+        this.view.addChild(this._titleText);
 
-        this._scoreTitleText = new Text(i18n.t('score'), {
-            fontSize: 20,
-            fontWeight: '900',
-            fontFamily: 'Bungee Regular',
-            fill: 0x000000,
-            align: 'center',
+        this._scoreTitleText = new Text({
+            text: i18n.t('score'),
+            style: {
+                fontSize: 20,
+                fontWeight: '900',
+                fontFamily: 'Bungee Regular',
+                fill: 0x000000,
+                align: 'center',
+            },
         });
 
         this._scoreTitleText.anchor.set(0.5);
         this._scoreTitleText.y = -82;
-        this._base.addChild(this._scoreTitleText);
+        this.view.addChild(this._scoreTitleText);
 
-        this._scoreText = new Text('', {
-            fontSize: 60,
-            fontWeight: '900',
-            fontFamily: 'Bungee Regular',
-            fill: 0x000000,
-            align: 'center',
+        this._scoreText = new Text({
+            style: {
+                fontSize: 60,
+                fontWeight: '900',
+                fontFamily: 'Bungee Regular',
+                fill: 0x000000,
+                align: 'center',
+            },
         });
 
         this._scoreText.anchor.set(0.5);
         this._scoreText.y = -37;
-        this._base.addChild(this._scoreText);
+        this.view.addChild(this._scoreText);
     }
 
     /**
@@ -107,7 +115,7 @@ export class PauseOverlay extends Container implements AppScreen {
         super();
 
         // Create the background, this is used as an interaction blocker
-        this._background = new Graphics().beginFill(0x000000, 0.5).drawRect(0, 0, 50, 50);
+        this._background = new Graphics().rect(0, 0, 50, 50).fill({ color: 0x000000, alpha: 0.5 });
         // Prevent interaction behind overlay
         this._background.interactive = true;
         this.addChild(this._background);

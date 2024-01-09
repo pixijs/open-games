@@ -11,10 +11,7 @@ import { storage } from './storage';
 import { getUrlParam } from './utils/utils';
 
 /** The PixiJS app Application instance, shared across the project */
-export const app = new Application<HTMLCanvasElement>({
-    resolution: Math.max(window.devicePixelRatio, 2),
-    backgroundColor: 0xffffff,
-});
+export const app = new Application();
 
 let hasInteracted = false;
 
@@ -33,8 +30,8 @@ function resize() {
     const height = windowHeight * scale;
 
     // Update canvas style dimensions and scroll window up to avoid issues on mobile resize
-    app.renderer.view.style.width = `${windowWidth}px`;
-    app.renderer.view.style.height = `${windowHeight}px`;
+    app.renderer.canvas.style.width = `${windowWidth}px`;
+    app.renderer.canvas.style.height = `${windowHeight}px`;
     window.scrollTo(0, 0);
 
     // Update renderer  and navigation screens dimensions
@@ -45,8 +42,16 @@ function resize() {
 
 /** Setup app and initialise assets */
 async function init() {
-    // Add pixi canvas element (app.view) to the document's body
-    document.body.appendChild(app.view);
+    // Initialize the app
+    await app.init({
+        // TODO: Fix a couple of WebGPU only issues
+        preference: 'webgl',
+        resolution: Math.max(window.devicePixelRatio, 2),
+        backgroundColor: 0xffffff,
+    });
+
+    // Add pixi canvas element to the document's body
+    document.body.appendChild(app.canvas);
 
     // Whenever the window resizes, call the 'resize' function
     window.addEventListener('resize', resize);

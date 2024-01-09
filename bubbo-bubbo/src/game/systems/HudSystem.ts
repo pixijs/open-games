@@ -1,5 +1,5 @@
 import gsap from 'gsap';
-import { Container, Graphics, NineSlicePlane, Sprite, Texture } from 'pixi.js';
+import { Container, Graphics, NineSliceSprite, Sprite, Texture } from 'pixi.js';
 
 import { IconButton } from '../../ui/buttons/IconButton';
 import { HelperPanel } from '../../ui/HelperPanel';
@@ -40,12 +40,12 @@ export class HudSystem implements System {
 
     // All the visuals for the hud elements
     private _laserLine!: LaserLine;
-    private _topTray!: NineSlicePlane;
+    private _topTray!: NineSliceSprite;
     private _roundedTray!: Sprite;
     private _hiddenTitle!: Title;
-    private _bottomTray!: NineSlicePlane;
-    private _leftBorder!: NineSlicePlane;
-    private _rightBorder!: NineSlicePlane;
+    private _bottomTray!: NineSliceSprite;
+    private _leftBorder!: NineSliceSprite;
+    private _rightBorder!: NineSliceSprite;
     private _pauseButton!: IconButton;
     private _scoreCounter!: ScoreCounter;
     private _helperPanel!: HelperPanel;
@@ -79,7 +79,7 @@ export class HudSystem implements System {
 
         // Create the top section of the hud
         // Create the top hud element
-        this._topTray = new NineSlicePlane(Texture.from('top-tray'));
+        this._topTray = new NineSliceSprite({ texture: Texture.from('top-tray')});
         this._topTray.x = -designConfig.content.width * 0.5;
         this._topTray.width = designConfig.content.width;
 
@@ -97,7 +97,7 @@ export class HudSystem implements System {
         this._roundedTray.addChild(this._hiddenTitle.view);
 
         // Create the bottom section of the hud
-        this._bottomTray = new NineSlicePlane(Texture.from('bottom-tray'));
+        this._bottomTray = new NineSliceSprite({ texture: Texture.from('bottom-tray')});
         this._bottomTray.height = boardConfig.bounceLine - 30;
         this._bottomTray.pivot.y = this._bottomTray.height;
         this._bottomTray.x -= designConfig.content.width * 0.5;
@@ -107,11 +107,11 @@ export class HudSystem implements System {
         this._scoreCounter = new ScoreCounter();
 
         // Create the visual representation of the left bounds
-        this._leftBorder = new NineSlicePlane(Texture.from('game-side-border'));
+        this._leftBorder = new NineSliceSprite({ texture: Texture.from('game-side-border')});
         this._leftBorder.x = -(designConfig.content.width * 0.5) - this._leftBorder.width;
 
         // Create the visual representation of the right bounds
-        this._rightBorder = new NineSlicePlane(Texture.from('game-side-border'));
+        this._rightBorder = new NineSliceSprite({ texture: Texture.from('game-side-border')});
         this._rightBorder.x = designConfig.content.width * 0.5;
 
         // Get a reference to the pause system
@@ -128,13 +128,13 @@ export class HudSystem implements System {
 
         // Create a mask and fit it to the game bounds
         this._mask = new Graphics()
-            .beginFill(0x030320)
-            .drawRect(
+            .rect(
                 -designConfig.content.width * 0.5,
                 -designConfig.content.height,
                 designConfig.content.width,
                 designConfig.content.height,
-            );
+            )
+            .fill({ color: 0x030320});
 
         // Create the tutorial popout
         this._helperPanel = new HelperPanel();
