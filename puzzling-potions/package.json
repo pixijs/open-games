@@ -21,17 +21,17 @@
         "pixi.js": "^7.3.2"
     },
     "devDependencies": {
-        "@assetpack/cli": "~0.7.0",
-        "@assetpack/plugin-compress": "~0.7.0",
-        "@assetpack/plugin-ffmpeg": "~0.7.0",
-        "@assetpack/plugin-json": "~0.7.0",
-        "@assetpack/plugin-manifest": "~0.7.0",
-        "@assetpack/plugin-mipmap": "~0.7.0",
-        "@assetpack/plugin-texture-packer": "~0.7.0",
-        "@assetpack/plugin-webfont": "~0.7.0",
+        "@assetpack/cli": "^0.7.0",
+        "@assetpack/plugin-compress": "^0.7.0",
+        "@assetpack/plugin-ffmpeg": "^0.7.0",
+        "@assetpack/plugin-json": "^0.7.0",
+        "@assetpack/plugin-manifest": "^0.7.0",
+        "@assetpack/plugin-mipmap": "^0.7.0",
+        "@assetpack/plugin-texture-packer": "^0.7.0",
+        "@assetpack/plugin-webfont": "^0.7.0",
         "npm-run-all": "^4.1.5",
         "rimraf": "^5.0.5",
         "typescript": "^5.2.2",
-        "vite": "^4.5.0"
+        "vite": "^5.0.11"
     }
 }
