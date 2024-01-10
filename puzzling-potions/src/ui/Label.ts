@@ -12,10 +12,9 @@ export type LabelOptions = typeof defaultLabelStyle;
  * because it is the most common use in the app.
  */
 export class Label extends Text {
-    constructor(text?: string | number, style?: Partial<TextStyleOptions> | TextStyle, /*canvas?: ICanvas*/) {
+    constructor(text?: string | number, style?: Partial<TextStyleOptions> | TextStyle) {
         style = { ...defaultLabelStyle, ...style };
-        // TODO: What to do what canvas?
-        super({ text, style, /*canvas*/ });
+        super({ text, style });
         // Label is always centered, but this can be changed in instance afterwards
         this.anchor.set(0.5);
     }
