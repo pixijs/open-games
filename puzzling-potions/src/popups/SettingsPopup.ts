@@ -39,7 +39,7 @@ export class SettingsPopup extends Container {
     constructor() {
         super();
 
-        this.bg = Sprite.from(Texture.WHITE);
+        this.bg = new Sprite(Texture.WHITE);
         this.bg.tint = 0x0a0025;
         this.bg.interactive = true;
         this.addChild(this.bg);
@@ -73,19 +73,19 @@ export class SettingsPopup extends Container {
         this.panel.addChild(this.layout);
 
         this.masterSlider = new VolumeSlider(i18n.settingsMaster);
-        this.masterSlider.onUpdate.connect((v) => {
+        this.masterSlider.onValueUpdate.connect((v) => {
             userSettings.setMasterVolume(v / 100);
         });
         this.layout.addChild(this.masterSlider);
 
         this.bgmSlider = new VolumeSlider(i18n.settingsBgm);
-        this.bgmSlider.onUpdate.connect((v) => {
+        this.bgmSlider.onValueUpdate.connect((v) => {
             userSettings.setBgmVolume(v / 100);
         });
         this.layout.addChild(this.bgmSlider);
 
         this.sfxSlider = new VolumeSlider(i18n.settingsSfx);
-        this.sfxSlider.onUpdate.connect((v) => {
+        this.sfxSlider.onValueUpdate.connect((v) => {
             userSettings.setSfxVolume(v / 100);
         });
         this.layout.addChild(this.sfxSlider);
@@ -136,7 +136,8 @@ export class SettingsPopup extends Container {
     /** Dismiss the popup, animated */
     public async hide() {
         if (navigation.currentScreen) {
-            navigation.currentScreen.filters = null;
+            // TODO: Fix filters type issue
+            (navigation.currentScreen as any).filters = null;
         }
         gsap.killTweensOf(this.bg);
         gsap.killTweensOf(this.panel.pivot);

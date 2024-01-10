@@ -44,11 +44,11 @@ export class GameEffects extends Container {
         super();
         this.game = game;
         this.sortableChildren = true;
+        this.onRender = () => this.renderUpdate();
     }
 
-    /** Auto-update by overriding Container's updateTransform */
-    public updateTransform() {
-        super.updateTransform();
+    /** Auto-update every frame */
+    public renderUpdate() {
         // Update children z indexes to auto organise their order according
         // to their scales, to create a sort of a "3d depth" simulation
         for (const child of this.children) {

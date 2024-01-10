@@ -141,7 +141,7 @@ export class Match3 extends Container {
     }
 
     /** Update the timer */
-    public update(detlaMs: number) {
-        this.timer.update(detlaMs);
+    public update(deltaMs: number) {
+        this.timer.update(deltaMs);
     }
 }

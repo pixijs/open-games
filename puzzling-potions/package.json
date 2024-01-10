@@ -11,20 +11,20 @@
     },
     "dependencies": {
         "@pixi/sound": "^5.2.2",
-        "@pixi/ui": "^0.9.1",
+        "@pixi/ui": "^0.10.2",
         "gsap": "^3.12.2",
         "pixi-spine": "^4.0.4",
-        "pixi.js": "^7.3.2"
+        "pixi.js": "^8.0.0-rc.2"
     },
     "devDependencies": {
-        "@assetpack/cli": "~0.7.0",
-        "@assetpack/plugin-manifest": "~0.7.0",
-        "@assetpack/plugin-compress": "~0.7.0",
-        "@assetpack/plugin-ffmpeg": "~0.7.0",
-        "@assetpack/plugin-json": "~0.7.0",
-        "@assetpack/plugin-mipmap": "~0.7.0",
-        "@assetpack/plugin-texture-packer": "~0.7.0",
-        "@assetpack/plugin-webfont": "~0.7.0",
+        "@assetpack/cli": "^0.8.0",
+        "@assetpack/plugin-compress": "^0.8.0",
+        "@assetpack/plugin-ffmpeg": "^0.8.0",
+        "@assetpack/plugin-json": "^0.8.0",
+        "@assetpack/plugin-manifest": "^0.8.0",
+        "@assetpack/plugin-mipmap": "^0.8.0",
+        "@assetpack/plugin-texture-packer": "^0.8.0",
+        "@assetpack/plugin-webfont": "^0.8.0",
         "typescript": "^5.2.2",
         "vite": "^4.5.0"
     }

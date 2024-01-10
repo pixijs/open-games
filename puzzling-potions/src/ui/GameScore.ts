@@ -14,7 +14,7 @@ export class GameScore extends Container {
     /** The animated cloud background */
     private cloud: Cloud;
     /** The score number displayed */
-    private label: Label;
+    private messageLabel: Label;
     /** Score currently set */
     private points = -1;
     /** Turns false when hidden */
@@ -38,16 +38,16 @@ export class GameScore extends Container {
         });
         this.container.addChild(this.cloud);
 
-        this.label = new Label('0', { fill: 0xffffff, fontSize: 30 });
-        this.label.y = 8;
-        this.container.addChild(this.label);
+        this.messageLabel = new Label('0', { fill: 0xffffff, fontSize: 30 });
+        this.messageLabel.y = 8;
+        this.container.addChild(this.messageLabel);
         this.points = 0;
     }
 
     /** Reset score to 0 */
     public reset() {
         this.points = 0;
-        this.label.text = '0';
+        this.messageLabel.text = '0';
     }
 
     /** Set the score and play the points animation */
@@ -106,8 +106,8 @@ export class GameScore extends Container {
     private printPoints() {
         const points = Math.round(this.animatedPoints);
         const text = String(points);
-        if (this.label.text !== text) {
-            this.label.text = text;
+        if (this.messageLabel.text !== text) {
+            this.messageLabel.text = text;
             const speed = Math.min(0.8 + this.intensity * 0.001, 2);
             // Throttle sfx to a minimum interval, otherwise too many sounds instances
             // will be played at the same time, making it very noisy

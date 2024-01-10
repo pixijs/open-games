@@ -19,7 +19,7 @@ type SmallButtonOptions = typeof defaultSmallButtonOptions;
  */
 export class SmallButton extends FancyButton {
     /** The message displayed */
-    public label: Label;
+    public messageLabel: Label;
     /** Inner container for animation */
     private container: Container;
 
@@ -53,13 +53,13 @@ export class SmallButton extends FancyButton {
         if (this.pressedView) this.container.addChild(this.pressedView);
         if (this.disabledView) this.container.addChild(this.disabledView);
 
-        this.label = new Label(opts.text, {
+        this.messageLabel = new Label(opts.text, {
             fill: opts.labelColor,
             align: 'center',
             fontSize: opts.labelFontSize,
         });
-        this.label.y = -8;
-        this.container.addChild(this.label);
+        this.messageLabel.y = -8;
+        this.container.addChild(this.messageLabel);
 
         this.onDown.connect(this.handleDown.bind(this));
         this.onUp.connect(this.handleUp.bind(this));
@@ -74,11 +74,11 @@ export class SmallButton extends FancyButton {
 
     private handleDown() {
         sfx.play('common/sfx-press.wav');
-        this.label.y = -3;
+        this.messageLabel.y = -3;
     }
 
     private handleUp() {
-        this.label.y = -8;
+        this.messageLabel.y = -8;
     }
 
     public async show(animated = true) {

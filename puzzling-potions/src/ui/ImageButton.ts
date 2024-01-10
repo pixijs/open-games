@@ -1,5 +1,5 @@
 import { FancyButton } from '@pixi/ui';
-import { BLEND_MODES, Sprite } from 'pixi.js';
+import { Sprite } from 'pixi.js';
 import gsap from 'gsap';
 import { sfx } from '../utils/audio';
 
@@ -41,11 +41,11 @@ export class ImageButton extends FancyButton {
 
     private handleHover() {
         sfx.play('common/sfx-hover.wav');
-        this.image.blendMode = BLEND_MODES.ADD;
+        this.image.blendMode = 'add';
     }
 
     private handleOut() {
-        this.image.blendMode = BLEND_MODES.NORMAL;
+        this.image.blendMode = 'normal';
     }
 
     private handleDown() {

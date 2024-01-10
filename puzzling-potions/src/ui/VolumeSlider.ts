@@ -1,5 +1,5 @@
 import { Slider } from '@pixi/ui';
-import { Graphics } from '@pixi/graphics';
+import { Graphics } from 'pixi.js';
 import { Label } from './Label';
 
 /**
@@ -7,7 +7,7 @@ import { Label } from './Label';
  */
 export class VolumeSlider extends Slider {
     /** Message displayed for the slider */
-    public label: Label;
+    public messageLabel: Label;
 
     constructor(label: string, min = -0.1, max = 100, value = 100) {
         const width = 280;
@@ -50,14 +50,14 @@ export class VolumeSlider extends Slider {
 
         this.value = value;
 
-        this.label = new Label(label, {
+        this.messageLabel = new Label(label, {
             align: 'left',
             fill: 0xffffff,
             fontSize: 18,
         });
-        this.label.anchor.x = 0;
-        this.label.x = 10;
-        this.label.y = -18;
-        this.addChild(this.label);
+        this.messageLabel.anchor.x = 0;
+        this.messageLabel.x = 10;
+        this.messageLabel.y = -18;
+        this.addChild(this.messageLabel);
     }
 }

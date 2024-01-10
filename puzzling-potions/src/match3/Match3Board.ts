@@ -50,7 +50,8 @@ export class Match3Board {
         this.piecesMask.beginFill(0xff0000, 0.5);
         this.piecesMask.drawRect(-2, -2, 4, 4);
         this.match3.addChild(this.piecesMask);
-        this.piecesContainer.mask = this.piecesMask;
+        // TODO: Deprecated Graphics mask isn't drawn correctly - leaving for the subsequent PR
+        // this.piecesContainer.mask = this.piecesMask;
     }
 
     /**

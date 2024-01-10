@@ -17,7 +17,7 @@ type LargeButtonOptions = typeof defaultLargeButtonOptions;
  */
 export class LargeButton extends FancyButton {
     /** The buttoon message displayed */
-    private label: Label;
+    private messageLabel: Label;
 
     constructor(options: Partial<LargeButtonOptions> = {}) {
         const opts = { ...defaultLargeButtonOptions, ...options };
@@ -41,12 +41,12 @@ export class LargeButton extends FancyButton {
             anchor: 0.5,
         });
 
-        this.label = new Label(opts.text, {
+        this.messageLabel = new Label(opts.text, {
             fill: 0x4a4a4a,
             align: 'center',
         });
-        this.label.y = -13;
-        this.addChild(this.label);
+        this.messageLabel.y = -13;
+        this.addChild(this.messageLabel);
 
         this.onDown.connect(this.handleDown.bind(this));
         this.onUp.connect(this.handleUp.bind(this));
@@ -61,11 +61,11 @@ export class LargeButton extends FancyButton {
 
     private handleDown() {
         sfx.play('common/sfx-press.wav');
-        this.label.y = -5;
+        this.messageLabel.y = -5;
     }
 
     private handleUp() {
-        this.label.y = -13;
+        this.messageLabel.y = -13;
     }
 
     /** Show the component */
