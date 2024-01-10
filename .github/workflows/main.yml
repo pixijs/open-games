@@ -23,7 +23,7 @@ jobs:
     with:
       game: ${{ matrix.game }}
   deploy:
-    if: github.ref_name == 'dev'
+    if: github.ref_name == 'main'
     needs: build
     environment:
       name: github-pages
