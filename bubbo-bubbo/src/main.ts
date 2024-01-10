@@ -44,8 +44,6 @@ function resize() {
 async function init() {
     // Initialize the app
     await app.init({
-        // TODO: Fix a couple of WebGPU only issues
-        preference: 'webgl',
         resolution: Math.max(window.devicePixelRatio, 2),
         backgroundColor: 0xffffff,
     });

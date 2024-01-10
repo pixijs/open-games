@@ -48,16 +48,13 @@ export class BubbleView {
         // Initialize the sprite for the shine effect
         this._shine = Sprite.from('bubble-shine');
         this._shine.anchor.set(0.5);
+        this._shine.width = this._sprite.width;
+        this._shine.height = this._sprite.height;
         this._shine.alpha = 0;
         this._shine.visible = false;
 
-        // Add the shine effect to the bubble sprite
-        this.view.addChild(this._sprite, this._shine);
-        // TODO: Confirm Transform Hierarchy
-        // this._sprite.addChild(this._shine);
-
-        // Add the shadow and bubble sprite to the root container
-        this.view.addChild(this._shadow, this._sprite);
+        // Add the shadow, the sprite and the shine to the root container
+        this.view.addChild(this._shadow, this._sprite, this._shine);
 
         // Set the duration for the shimmer animation
         const duration = 0.1;

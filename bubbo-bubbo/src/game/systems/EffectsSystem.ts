@@ -83,8 +83,7 @@ export class EffectsSystem implements System {
         this._activeShockwave = false;
 
         // Remove any filters from the game container
-        // TODO: Better way to clear filters??
-        this.game.gameContainer.filters = [];
+        this.game.gameContainer.filters = null;
 
         // Set the game container position back to its original position
         this.game.gameContainer.x = this.game.gameContainerPosition.x;
