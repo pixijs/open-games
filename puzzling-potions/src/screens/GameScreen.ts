@@ -145,7 +145,7 @@ export class GameScreen extends Container {
 
     /** Update the screen */
     public update(time: Ticker) {
-        this.match3.update(time.deltaTime);
+        this.match3.update(time.deltaMS);
         this.timer.updateTime(this.match3.timer.getTimeRemaining());
         this.overtime.updateTime(this.match3.timer.getTimeRemaining());
         this.score.setScore(this.match3.stats.getScore());
