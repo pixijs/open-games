@@ -1,0 +1,28 @@
+name: Game Workflow
+on:
+  workflow_call:
+    inputs:
+      game:
+        required: true
+        type: string
+jobs:
+  game-build-workflow:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Use Node.js 18.x
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+    - name: Install dependencies
+      working-directory: ./${{ inputs.game }}
+      run: npm ci
+    - name: Build Game
+      working-directory: ./${{ inputs.game }}
+      run: npm run build
+    - name: Upload Game Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ inputs.game }}
+        path: ./${{ inputs.game }}/dist
