@@ -25,10 +25,13 @@ export class LoadScreen extends Container {
         this.cauldron = new Cauldron();
         this.addChild(this.cauldron);
 
-        this.message = new Text(i18n.loadingMessage, {
-            fill: 0x5c5c5c,
-            fontFamily: 'Verdana',
-            align: 'center',
+        this.message = new Text({
+            text: i18n.loadingMessage,
+            style: {
+                fill: 0x5c5c5c,
+                fontFamily: 'Verdana',
+                align: 'center',
+            },
         });
         this.message.anchor.set(0.5);
         this.addChild(this.message);
