@@ -40,7 +40,7 @@ export class Cauldron extends Container {
 
         this.spine = Spine.from({
             skeleton: 'preload/cauldron-skeleton.json',
-            atlas: 'preload/cauldron-skeleton.atlas'
+            atlas: 'preload/cauldron-skeleton.atlas',
         });
 
         this.spine.autoUpdate = true;
@@ -115,7 +115,7 @@ export class Cauldron extends Container {
     /** Add a sprite to the front of the cauldron that will follow up the spine animation */
     public addContent(content: Container) {
         if (!this.content) this.content = new Container();
-        // this.spine.addChild(this.content);
+        this.spine.addChild(this.content);
         this.content.addChild(content);
     }
 
