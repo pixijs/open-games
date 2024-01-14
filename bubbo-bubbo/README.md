@@ -22,8 +22,8 @@ To run this project, you need to have `Node.js` and `npm` installed on your syst
 # Clone the repository
 git clone https://github.com/pixijs/open-games
 
-# Clone the repository
-cd ./bubbo-bubbo
+# Go to the repository
+cd ./open-games/bubbo-bubbo
 
 # Install dependencies
 npm install
