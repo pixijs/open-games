@@ -15,7 +15,7 @@
     },
     "dependencies": {
         "@pixi/sound": "^5.2.2",
-        "@pixi/spine-pixi": "^1.0.3",
+        "@pixi/spine-pixi": "^1.0.4",
         "@pixi/ui": "^0.10.2",
         "gsap": "^3.12.2",
         "pixi.js": "^8.0.0-rc.2"
