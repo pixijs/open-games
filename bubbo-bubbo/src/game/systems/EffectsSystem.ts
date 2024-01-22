@@ -44,10 +44,10 @@ export class EffectsSystem implements System {
         this.game.gameContainer.filters = [shockwaveFilter];
 
         // Set the center of the shockwave filter to the specified x and y coordinates
-        shockwaveFilter.center = [
-            designConfig.content.width * 0.5 + x,
-            designConfig.content.height + y,
-        ];
+        shockwaveFilter.center = {
+            x: designConfig.content.width * 0.5 + x,
+            y: designConfig.content.height + y,
+        };
 
         // Reset the time property of the shockwave filter
         this.shockwaveFilter.time = 0;
