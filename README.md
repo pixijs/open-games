@@ -12,11 +12,11 @@ Below is a list of games that are currently available in this repository. Each g
 
 - Bubbo Bubbo
   - [Code](/bubbo-bubbo/README.md)
-  - [Play](https://bubbo-bubbo.netlify.app/)
+  - [Play](https://pixijs.io/open-games/bubbo-bubbo)
 
 - Puzzling Potions
   - [Code](/puzzling-potions/README.md)
-  - [Play](https://puzzling-potions.netlify.app/)
+  - [Play](https://pixijs.io/open-games/puzzling-potions)
 
 ## Tools
 
