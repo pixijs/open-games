@@ -1,5 +1,5 @@
 import { FancyButton } from '@pixi/ui';
-import { NineSlicePlane, Texture } from 'pixi.js';
+import { NineSliceSprite, Texture } from 'pixi.js';
 import { Label } from './Label';
 import gsap from 'gsap';
 import { sfx } from '../utils/audio';
@@ -22,17 +22,35 @@ export class LargeButton extends FancyButton {
     constructor(options: Partial<LargeButtonOptions> = {}) {
         const opts = { ...defaultLargeButtonOptions, ...options };
 
-        const defaultView = new NineSlicePlane(Texture.from('button-large'), 36, 42, 36, 52);
-        defaultView.width = opts.width;
-        defaultView.height = opts.height;
+        const defaultView = new NineSliceSprite({
+            texture: Texture.from('button-large'),
+            leftWidth: 36,
+            topHeight: 42,
+            rightWidth: 36,
+            bottomHeight: 52,
+            width: opts.width,
+            height: opts.height,
+        });
 
-        const hoverView = new NineSlicePlane(Texture.from('button-large-hover'), 36, 42, 36, 52);
-        hoverView.width = opts.width;
-        hoverView.height = opts.height;
+        const hoverView = new NineSliceSprite({ 
+            texture: Texture.from('button-large-hover'),
+            leftWidth: 36,
+            topHeight: 42,
+            rightWidth: 36,
+            bottomHeight: 52,
+            width: opts.width,
+            height: opts.height,
+        });
 
-        const pressedView = new NineSlicePlane(Texture.from('button-large-press'), 36, 42, 36, 52);
-        pressedView.width = opts.width;
-        pressedView.height = opts.height;
+        const pressedView = new NineSliceSprite({ 
+            texture: Texture.from('button-large-press'),
+            leftWidth: 36,
+            topHeight: 42,
+            rightWidth: 36,
+            bottomHeight: 52,
+            width: opts.width,
+            height: opts.height,
+        });
 
         super({
             defaultView,
