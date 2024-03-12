@@ -1,4 +1,5 @@
 export default {
+    base: './',
     server: {
         host: true,
         port: 8000
