@@ -79,7 +79,7 @@ export class HudSystem implements System {
 
         // Create the top section of the hud
         // Create the top hud element
-        this._topTray = new NineSliceSprite({ texture: Texture.from('top-tray')});
+        this._topTray = new NineSliceSprite({ texture: Texture.from('top-tray') });
         this._topTray.x = -designConfig.content.width * 0.5;
         this._topTray.width = designConfig.content.width;
 
@@ -94,10 +94,8 @@ export class HudSystem implements System {
         this._hiddenTitle.view.scale.set(0.85);
         this._hiddenTitle.view.y -= 55;
 
-        this._roundedTray.addChild(this._hiddenTitle.view);
-
         // Create the bottom section of the hud
-        this._bottomTray = new NineSliceSprite({ texture: Texture.from('bottom-tray')});
+        this._bottomTray = new NineSliceSprite({ texture: Texture.from('bottom-tray') });
         this._bottomTray.height = boardConfig.bounceLine - 30;
         this._bottomTray.pivot.y = this._bottomTray.height;
         this._bottomTray.x -= designConfig.content.width * 0.5;
@@ -107,11 +105,11 @@ export class HudSystem implements System {
         this._scoreCounter = new ScoreCounter();
 
         // Create the visual representation of the left bounds
-        this._leftBorder = new NineSliceSprite({ texture: Texture.from('game-side-border')});
+        this._leftBorder = new NineSliceSprite({ texture: Texture.from('game-side-border') });
         this._leftBorder.x = -(designConfig.content.width * 0.5) - this._leftBorder.width;
 
         // Create the visual representation of the right bounds
-        this._rightBorder = new NineSliceSprite({ texture: Texture.from('game-side-border')});
+        this._rightBorder = new NineSliceSprite({ texture: Texture.from('game-side-border') });
         this._rightBorder.x = designConfig.content.width * 0.5;
 
         // Get a reference to the pause system
@@ -134,7 +132,7 @@ export class HudSystem implements System {
                 designConfig.content.width,
                 designConfig.content.height,
             )
-            .fill({ color: 0x030320});
+            .fill({ color: 0x030320 });
 
         // Create the tutorial popout
         this._helperPanel = new HelperPanel();
@@ -147,6 +145,7 @@ export class HudSystem implements System {
             this._rightBorder,
             this._topTray,
             this._roundedTray,
+            this._hiddenTitle.view,
         );
         this._gameHudContainer.addChild(
             this._bottomTray,
@@ -232,9 +231,7 @@ export class HudSystem implements System {
         this._toasterList.push(toaster);
         // Pop up the toaster and assign it score value and a callback for when the animation ends
         // Add the toaster animation to the pause system
-        this.game.systems
-            .get(PauseSystem)
-            .addTween(toaster.popScore(increment, this._killToaster.bind(this)));
+        this.game.systems.get(PauseSystem).addTween(toaster.popScore(increment, this._killToaster.bind(this)));
         // Add the toaster to the screen
         this.view.addChild(toaster.view);
         // Update the score counter
@@ -290,8 +287,7 @@ export class HudSystem implements System {
         this._rightBorder.height = h;
 
         // Position the score counter
-        this._scoreCounter.view.x =
-            designConfig.content.width * 0.5 - this._scoreCounter.view.width - 30;
+        this._scoreCounter.view.x = designConfig.content.width * 0.5 - this._scoreCounter.view.width - 30;
         this._scoreCounter.view.y = -70;
     }
 
@@ -301,8 +297,7 @@ export class HudSystem implements System {
         const topTrayHeight = this._height - designConfig.content.height;
 
         // Set the height of the top tray and its y position
-        this._topTray.height =
-            topTrayHeight + this._topTrayOffsetRatio * designConfig.content.height;
+        this._topTray.height = topTrayHeight + this._topTrayOffsetRatio * designConfig.content.height;
         this._topTray.y = -this._height;
 
         // Reset the scale of the rounded tray
@@ -315,6 +310,8 @@ export class HudSystem implements System {
         this._roundedTray.visible = mod > 0.9;
         this._roundedTray.scale.set(Math.min(mod, 1));
         this._roundedTray.y = this._topTray.y + this._topTray.height - this._topTray.height * 0.5;
+        this._hiddenTitle.view.y = this._topTray.y + this._topTray.height * 0.5 - 55;
+        this._hiddenTitle.view.scale = this._roundedTray.scale.x * 0.85;
     }
 
     /**

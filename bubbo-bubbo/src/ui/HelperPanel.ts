@@ -35,11 +35,9 @@ export class HelperPanel {
         });
 
         helpText.anchor.set(0.5);
-
-        helpText.x = -75;
-        panel.addChild(helpText);
-
-        this.view.addChild(panel);
+        helpText.x = -55;
+        helpText.scale.set(0.75);
+        this.view.addChild(panel, helpText);
     }
 
     /**

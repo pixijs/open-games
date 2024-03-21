@@ -35,7 +35,8 @@ export class ScoreCounter {
         // Offset text
         this._scoreText.x = 20;
         this._scoreText.anchor.y = 0.5;
-        this._base.addChild(this._scoreText);
+        this._scoreText.scale.set(0.75);
+        this.view.addChild(this._scoreText);
 
         // Set the score to 0
         this.setScore(0);

@@ -1,5 +1,4 @@
-// TODO: Filters v8 Types?
-import { ShockwaveFilter } from '@pixi/filter-shockwave';
+import { ShockwaveFilter } from 'pixi-filters/shockwave';
 
 import { sfx } from '../../audio';
 import { randomRange } from '../../utils/maths/rand';
@@ -83,7 +82,7 @@ export class EffectsSystem implements System {
         this._activeShockwave = false;
 
         // Remove any filters from the game container
-        this.game.gameContainer.filters = null;
+        this.game.gameContainer.filters = [];
 
         // Set the game container position back to its original position
         this.game.gameContainer.x = this.game.gameContainerPosition.x;
@@ -99,10 +98,8 @@ export class EffectsSystem implements System {
         if (!this._activeShockwave) return;
 
         // Update the position of the game container to simulate screen shake.
-        this.game.gameContainer.x =
-            this.game.gameContainerPosition.x + Math.random() * this._shockIntensity;
-        this.game.gameContainer.y =
-            this.game.gameContainerPosition.y + Math.random() * this._shockIntensity;
+        this.game.gameContainer.x = this.game.gameContainerPosition.x + Math.random() * this._shockIntensity;
+        this.game.gameContainer.y = this.game.gameContainerPosition.y + Math.random() * this._shockIntensity;
 
         // Stop the shockwave effect if the time has exceeded a certain threshold.
         if (this.shockwaveFilter.time > 0.4) this.stopShockwave();

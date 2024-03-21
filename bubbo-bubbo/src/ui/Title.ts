@@ -17,6 +17,7 @@ export class Title {
         // Add top part of the title
         const bubboText = i18n.t('gameTitle');
 
+        const topWrapper = new Container();
         const titleTop = new Text({
             text: bubboText,
             style: {
@@ -27,15 +28,17 @@ export class Title {
         });
 
         titleTop.anchor.set(0.5);
-        this.view.addChild(titleTop);
+        topWrapper.addChild(titleTop);
+        this.view.addChild(topWrapper);
 
         // Assign a random type to the top title's bubble
         const bubbleTop = new BubbleView(randomType());
 
         bubbleTop.view.position.set(titleTop.width * 0.5 - 33.5, 7);
         bubbleTop.view.scale.set(1.6);
-        titleTop.addChild(bubbleTop.view);
+        topWrapper.addChild(bubbleTop.view);
 
+        const bottomWrapper = new Container();
         // Add bottom part of the title
         const titleBottom = new Text({
             text: bubboText,
@@ -46,17 +49,18 @@ export class Title {
             },
         });
 
-        titleBottom.y = titleTop.height - 20;
+        bottomWrapper.y = titleTop.height - 20;
 
         titleBottom.anchor.set(0.5);
-        this.view.addChild(titleBottom);
+        bottomWrapper.addChild(titleBottom);
+        this.view.addChild(bottomWrapper);
 
         // Assign a random type to the bottom title's bubble
         const bubbleBottom = new BubbleView(randomType());
 
         bubbleBottom.view.position.set(titleBottom.width * 0.5 - 33.5, 7);
         bubbleBottom.view.scale.set(1.6);
-        titleBottom.addChild(bubbleBottom.view);
+        bottomWrapper.addChild(bubbleBottom.view);
 
         // Create sub header
         const subtitle = new Text({
@@ -69,7 +73,7 @@ export class Title {
         });
 
         subtitle.anchor.set(0.5);
-        subtitle.y = titleBottom.y + titleBottom.height - 30;
+        subtitle.y = bottomWrapper.y + bottomWrapper.height - 30;
         this.view.addChild(subtitle);
     }
 }

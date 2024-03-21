@@ -12,8 +12,7 @@ import manifest from '../src/manifest.json';
 
 export const resolveJsonUrl = {
     extension: ExtensionType.ResolveParser,
-    test: (value: string): boolean =>
-        Resolver.RETINA_PREFIX.test(value) && value.endsWith('.json'),
+    test: (value: string): boolean => Resolver.RETINA_PREFIX.test(value) && value.endsWith('.json'),
     parse: resolveTextureUrl.parse,
 } as ResolveURLParser;
 

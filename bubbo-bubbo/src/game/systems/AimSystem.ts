@@ -158,12 +158,7 @@ export class AimSystem implements System {
      * @param angle - The angle of the line
      * @param alreadyIntersected - Whether or not the line has already intersected the outer wall (should only be used by the function itself)
      */
-    private _calculateEdgeNodes(
-        originX: number,
-        originY: number,
-        angle: number,
-        alreadyIntersected?: Line,
-    ) {
+    private _calculateEdgeNodes(originX: number, originY: number, angle: number, alreadyIntersected?: Line) {
         // Get a line instance from the object pool and add it to the `_aimLines` array
         const line = pool.get(Line);
 

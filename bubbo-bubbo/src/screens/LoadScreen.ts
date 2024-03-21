@@ -97,11 +97,7 @@ export class LoadScreen extends Container {
         this._spinner.rotation -= delta / 60;
 
         // Lerp the rotations of the cannon to the spinner rotation but with an offset
-        this._cannon.rotation = lerp(
-            this._cannon.rotation,
-            this._spinner.rotation - this._targetOffset,
-            0.1,
-        );
+        this._cannon.rotation = lerp(this._cannon.rotation, this._spinner.rotation - this._targetOffset, 0.1);
 
         // When tick is zero, randomise aforementioned offset
         if (this._tick <= 0) {

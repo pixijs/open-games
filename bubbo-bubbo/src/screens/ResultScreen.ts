@@ -214,17 +214,11 @@ class ResultsPanel {
         const verticalGap = 30;
 
         // Create stat instances and attach to panel
-        this._bubblesPoppedStat = new StatView(
-            i18n.t('resultsBreakdownPopped'),
-            breakdownPanel.width * 0.9,
-        );
+        this._bubblesPoppedStat = new StatView(i18n.t('resultsBreakdownPopped'), breakdownPanel.width * 0.9);
         this._bubblesPoppedStat.view.y = verticalOffset - verticalGap;
         this._comboStat = new StatView(i18n.t('resultsBreakdownCombo'), breakdownPanel.width * 0.9);
         this._comboStat.view.y = verticalOffset;
-        this._powerupsUsedStat = new StatView(
-            i18n.t('resultsBreakdownPowerups'),
-            breakdownPanel.width * 0.9,
-        );
+        this._powerupsUsedStat = new StatView(i18n.t('resultsBreakdownPowerups'), breakdownPanel.width * 0.9);
         this._powerupsUsedStat.view.y = verticalOffset + verticalGap;
 
         informationContainer.addChild(

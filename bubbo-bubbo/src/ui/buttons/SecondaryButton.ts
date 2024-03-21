@@ -36,7 +36,7 @@ export class SecondaryButton extends FancyButton {
         const text = new Text({
             text: options?.text ?? '',
             style: {
-            // Predefine text styles that can be overwritten
+                // Predefine text styles that can be overwritten
                 fill: 0x000000,
                 fontFamily: 'Bungee Regular',
                 fontWeight: 'bold',

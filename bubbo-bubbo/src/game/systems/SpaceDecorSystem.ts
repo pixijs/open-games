@@ -100,17 +100,13 @@ class BubbleOrbit {
             this._subBubbles[i].type = randomType();
 
             // Scale the sub-bubble based on the main bubble's scale.
-            this._subBubbles[i].view.scale.set(
-                this._mainBubble.view.scale.x * randomRange(0.3, 0.7, false),
-            );
+            this._subBubbles[i].view.scale.set(this._mainBubble.view.scale.x * randomRange(0.3, 0.7, false));
 
             // Initialize the orbit angle, direction, radius, and speed for this sub-bubble.
             this._orbitAngles[i] = Math.random() * Math.PI;
             this._orbitDirections[i] = Math.sign(randomRange(-1, 1, false));
-            this._orbitRadii[i] =
-                this._mainBubble.view.width * 0.5 + this._subBubbles[i].view.width * 0.5 + 10;
-            this._orbitSpeeds[i] =
-                (this._subBubbles[i].view.scale.x / this._mainBubble.view.scale.x) * 0.5;
+            this._orbitRadii[i] = this._mainBubble.view.width * 0.5 + this._subBubbles[i].view.width * 0.5 + 10;
+            this._orbitSpeeds[i] = (this._subBubbles[i].view.scale.x / this._mainBubble.view.scale.x) * 0.5;
 
             this.view.addChild(this._subBubbles[i].view);
         }
@@ -211,10 +207,7 @@ export class SpaceDecorSystem {
             count--;
 
             // Check if the point is within the minimum width from the center
-            if (
-                Math.abs(x - this._width / 2) < minWidth &&
-                Math.abs(y - this._height / 2) < minWidth
-            ) {
+            if (Math.abs(x - this._width / 2) < minWidth && Math.abs(y - this._height / 2) < minWidth) {
                 continue;
             }
 
@@ -269,9 +262,7 @@ export class SpaceDecorSystem {
         // Check if the window width is greater than the minimum width for the content
         if (w > designConfig.content.width * 2) {
             // Determine the number of decor elements based on whether the device is a mobile device or not
-            const decorCount = device.isMobileDevice()
-                ? designConfig.decorCountMobile
-                : designConfig.decorCountDesktop;
+            const decorCount = device.isMobileDevice() ? designConfig.decorCountMobile : designConfig.decorCountDesktop;
 
             // Generate the new decor elements
             this._createDecor(this.generateRandomPoints(decorCount));

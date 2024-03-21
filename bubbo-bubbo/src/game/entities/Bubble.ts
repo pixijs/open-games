@@ -81,9 +81,7 @@ export class Bubble extends SpoofBubble {
 
         // Used to debug the visuals of the physics body, only accounts for body radius and centers on bubble view
         if (designConfig.debugBody) {
-            this.view.addChild(
-                new Graphics().circle(0, 0, this.body.radius).fill({ color: 0xffffff, alpha: 0.5 }),
-            );
+            this.view.addChild(new Graphics().circle(0, 0, this.body.radius).fill({ color: 0xffffff, alpha: 0.5 }));
         }
     }
 

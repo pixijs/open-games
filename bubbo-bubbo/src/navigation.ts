@@ -156,11 +156,9 @@ class Navigation {
 
         // Unlink resize handler if exists
         if (isOverlay) {
-            this.currentOverlayResize &&
-                window.removeEventListener('resize', this.currentOverlayResize);
+            this.currentOverlayResize && window.removeEventListener('resize', this.currentOverlayResize);
         } else {
-            this.currentScreenResize &&
-                window.removeEventListener('resize', this.currentScreenResize);
+            this.currentScreenResize && window.removeEventListener('resize', this.currentScreenResize);
         }
 
         // Unlink update function if method is available

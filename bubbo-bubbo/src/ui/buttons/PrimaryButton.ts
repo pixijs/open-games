@@ -29,7 +29,7 @@ export class PrimaryButton extends FancyButton {
         const text = new Text({
             text: options?.text ?? '',
             style: {
-            // Predefine text styles that can be overwritten
+                // Predefine text styles that can be overwritten
                 fill: 0x49c8ff,
                 fontFamily: 'Bungee Regular',
                 fontWeight: 'bold',
