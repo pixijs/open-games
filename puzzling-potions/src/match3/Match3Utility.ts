@@ -292,7 +292,7 @@ export function match3ApplyGravity(grid: Match3Grid) {
     for (let r = rows - 1; r >= 0; r--) {
         for (let c = 0; c < columns; c++) {
             let position = { row: r, column: c };
-            let belowPosition = { row: r + 1, column: c };
+            const belowPosition = { row: r + 1, column: c };
             let hasChanged = false;
 
             // Skip this one if position below is out of bounds
