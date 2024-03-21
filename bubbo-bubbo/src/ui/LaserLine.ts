@@ -1,5 +1,5 @@
 import gsap from 'gsap';
-import { Container, NineSlicePlane, Sprite, Texture } from 'pixi.js';
+import { Container, NineSliceSprite, Sprite, Texture } from 'pixi.js';
 
 import { designConfig } from '../game/designConfig';
 
@@ -9,7 +9,7 @@ export class LaserLine {
     public view = new Container();
 
     /** The visual line. */
-    private readonly _line: NineSlicePlane;
+    private readonly _line: NineSliceSprite;
     /** The glowing effect of the line. */
     private readonly _glow: Sprite;
     /** The alpha target for glow effect */
@@ -29,7 +29,7 @@ export class LaserLine {
 
     constructor() {
         // Create the line visual
-        this._line = new NineSlicePlane(Texture.from('laser-line'));
+        this._line = new NineSliceSprite({ texture: Texture.from('laser-line') });
         this._line.height -= 12;
         this._line.pivot.y = this._line.height * 0.5 - 6;
         this._line.width = designConfig.content.width;

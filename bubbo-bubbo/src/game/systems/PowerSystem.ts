@@ -103,7 +103,7 @@ export class PowerSystem implements System {
      */
     private _timer() {
         // Play the 'powerup-time' sound effect
-        sfx.play('audio/powerup-time');
+        sfx.play('audio/powerup-time.wav');
 
         // Use the `gsap.delayedCall` function to add a 5 second delay before emitting the signal to state the power effect has ended
         // Add the tween to the pause system

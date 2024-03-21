@@ -1,5 +1,5 @@
 import gsap from 'gsap';
-import { Container, IPointData, Point, Sprite } from 'pixi.js';
+import { Container, PointData, Point, Sprite } from 'pixi.js';
 
 import { boardConfig } from '../boardConfig';
 import { designConfig } from '../designConfig';
@@ -158,12 +158,7 @@ export class AimSystem implements System {
      * @param angle - The angle of the line
      * @param alreadyIntersected - Whether or not the line has already intersected the outer wall (should only be used by the function itself)
      */
-    private _calculateEdgeNodes(
-        originX: number,
-        originY: number,
-        angle: number,
-        alreadyIntersected?: Line,
-    ) {
+    private _calculateEdgeNodes(originX: number, originY: number, angle: number, alreadyIntersected?: Line) {
         // Get a line instance from the object pool and add it to the `_aimLines` array
         const line = pool.get(Line);
 
@@ -299,7 +294,7 @@ export class AimSystem implements System {
             const n = Math.ceil(distance / stepSize); // rounding up
 
             // Initialise an array to hold the new points
-            const points: IPointData[] = [];
+            const points: PointData[] = [];
 
             // Calculate the step values for x and y
             const stepX = (end.x - start.x) / n;

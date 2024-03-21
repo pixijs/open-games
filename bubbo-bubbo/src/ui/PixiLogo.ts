@@ -19,9 +19,12 @@ export class PixiLogo {
 
         // If the header parameter is present, add the header text above the logo
         if (header) {
-            const headerText = new Text(header, {
-                fontSize: 20,
-                align: 'center',
+            const headerText = new Text({
+                text: header,
+                style: {
+                    fontSize: 20,
+                    align: 'center',
+                },
             });
 
             headerText.anchor.set(0.5);

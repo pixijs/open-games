@@ -35,12 +35,15 @@ export class AudioSecondaryButton extends FancyButton {
         switcher.scale.set(0.95);
 
         // Create text object to act as label
-        const text = new Text(i18n.t('sound'), {
-            fill: 0x000000,
-            fontFamily: 'Bungee Regular',
-            fontWeight: 'bold',
-            align: 'center',
-            fontSize: 40,
+        const text = new Text({
+            text: i18n.t('sound'),
+            style: {
+                fill: 0x000000,
+                fontFamily: 'Bungee Regular',
+                fontWeight: 'bold',
+                align: 'center',
+                fontSize: 40,
+            },
         });
 
         super({

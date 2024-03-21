@@ -18,20 +18,25 @@ export class ScoreCounter {
         this._base.scale.set(0.75);
         this.view.addChild(this._base);
 
-        this._scoreText = new Text('', {
-            fontSize: 40,
-            fontWeight: '900',
-            fontFamily: 'Bungee Regular',
-            fill: 0x000000,
-            stroke: 0xffffff,
-            strokeThickness: 5,
-            align: 'left',
+        this._scoreText = new Text({
+            style: {
+                fontSize: 40,
+                fontWeight: '900',
+                fontFamily: 'Bungee Regular',
+                fill: 0x000000,
+                stroke: {
+                    color: 0xffffff,
+                    width: 5,
+                },
+                align: 'left',
+            },
         });
 
         // Offset text
         this._scoreText.x = 20;
         this._scoreText.anchor.y = 0.5;
-        this._base.addChild(this._scoreText);
+        this._scoreText.scale.set(0.75);
+        this.view.addChild(this._scoreText);
 
         // Set the score to 0
         this.setScore(0);

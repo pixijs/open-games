@@ -1,5 +1,5 @@
 import gsap from 'gsap';
-import { DisplayObject, Point } from 'pixi.js';
+import { Point } from 'pixi.js';
 import { Container, Rectangle } from 'pixi.js';
 
 import { navigation } from '../navigation';
@@ -55,22 +55,22 @@ export class Game {
     }
 
     /**
-     * Adds `DisplayObject`s to the game container.
-     * @param displayObjects - The `DisplayObject`s to add to the game container.
+     * Adds views (Containers, Sprites, etc.) to the game container.
+     * @param views - The views to add to the game container.
      */
-    public addToGame(...displayObjects: DisplayObject[]) {
-        displayObjects.forEach((displayObject) => {
-            this.gameContainer.addChild(displayObject);
+    public addToGame(...views: Container[]) {
+        views.forEach((view) => {
+            this.gameContainer.addChild(view);
         });
     }
 
     /**
-     * Removes `DisplayObject`s from the game container.
-     * @param displayObjects - The `DisplayObject`s to remove from the game container.
+     * Removes views (Containers, Sprites, etc.) from the game container.
+     * @param views - The views to remove from the game container.
      */
-    public removeFromGame(...displayObjects: DisplayObject[]) {
-        displayObjects.forEach((displayObject) => {
-            displayObject.removeFromParent();
+    public removeFromGame(...views: Container[]) {
+        views.forEach((view) => {
+            view.removeFromParent();
         });
     }
 

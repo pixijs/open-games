@@ -20,14 +20,18 @@ export class PointToaster {
         this._tint = 0xffffff;
 
         // Create score text
-        this._pointText = new Text('', {
-            fontSize: 40,
-            fontWeight: '900',
-            fontFamily: 'Bungee Regular',
-            fill: this._tint,
-            stroke: 0x000000,
-            strokeThickness: 3,
-            align: 'center',
+        this._pointText = new Text({
+            style: {
+                fontSize: 40,
+                fontWeight: '900',
+                fontFamily: 'Bungee Regular',
+                fill: this._tint,
+                stroke: {
+                    color: 0x000000,
+                    width: 3,
+                },
+                align: 'center',
+            },
         });
 
         this._pointText.anchor.set(0.5);

@@ -33,15 +33,18 @@ export class SecondaryButton extends FancyButton {
      */
     constructor(options?: SecondaryButtonOptions) {
         // Create text object to act as label
-        const text = new Text(options?.text ?? '', {
-            // Predefine text styles that can be overwritten
-            fill: 0x000000,
-            fontFamily: 'Bungee Regular',
-            fontWeight: 'bold',
-            align: 'center',
-            fontSize: 40,
-            // Allow custom text style to overwrite predefined options
-            ...options?.textStyle,
+        const text = new Text({
+            text: options?.text ?? '',
+            style: {
+                // Predefine text styles that can be overwritten
+                fill: 0x000000,
+                fontFamily: 'Bungee Regular',
+                fontWeight: 'bold',
+                align: 'center',
+                fontSize: 40,
+                // Allow custom text style to overwrite predefined options
+                ...options?.textStyle,
+            },
         });
 
         super({

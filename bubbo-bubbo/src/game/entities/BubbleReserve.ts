@@ -23,28 +23,31 @@ export class BubbleReserve {
     private _base: Sprite;
 
     constructor() {
+        const baseWrapper = new Container();
+        baseWrapper.scale.set(0.9);
+        this.view.addChild(baseWrapper);
+
         // Create a sprite instance from the "bubble-reserve-base" texture.
         this._base = Sprite.from('bubble-reserve-base');
-
         // Set the anchor point and scale of the base.
         this._base.anchor.set(0.5);
-        this._base.scale.set(0.9);
+        baseWrapper.addChild(this._base);
 
-        this.view.addChild(this._base);
+        const ringWrapper = new Container();
+        ringWrapper.scale = 0.85;
+        ringWrapper.y -= 2;
+        baseWrapper.addChild(ringWrapper);
 
         const ring = Sprite.from('bubble-reserve-ring');
-
         // Set the anchor point and scale of the base to be less than the base.
         // Move two pixels to offset the shadow
         ring.anchor.set(0.5);
-        ring.scale.set(0.85);
-        ring.y -= 2;
-        this._base.addChild(ring);
+        ringWrapper.addChild(ring);
 
         // Create the bubble view to represent the next shot for the cannon
         this._bubbleView = new BubbleView();
         this._bubbleView.view.scale.set(0);
-        ring.addChild(this._bubbleView.view);
+        ringWrapper.addChild(this._bubbleView.view);
     }
 
     /**

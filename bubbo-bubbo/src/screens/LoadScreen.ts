@@ -1,5 +1,5 @@
 import gsap from 'gsap';
-import { Container, Sprite, Texture, TilingSprite } from 'pixi.js';
+import { Container, Sprite, Texture, Ticker, TilingSprite } from 'pixi.js';
 
 import { randomType } from '../game/boardConfig';
 import { designConfig } from '../game/designConfig';
@@ -32,8 +32,15 @@ export class LoadScreen extends Container {
         super();
 
         // Create the visual aspects of the load screen
-        this._background = new TilingSprite(Texture.from('background-tile'), 64, 64);
-        this._background.tileScale.set(designConfig.backgroundTileScale);
+        this._background = new TilingSprite({
+            texture: Texture.from('background-tile'),
+            width: 64,
+            height: 64,
+            tileScale: {
+                x: designConfig.backgroundTileScale,
+                y: designConfig.backgroundTileScale,
+            },
+        });
         this.addChild(this._background);
 
         this._spinner = Sprite.from('loading-circle');
@@ -81,18 +88,16 @@ export class LoadScreen extends Container {
 
     /**
      * Called every frame
-     * @param delta - The time elapsed since the last update.
+     * @param time - Ticker object with time related data.
      */
-    public update(delta: number) {
+    public update(time: Ticker) {
+        const delta = time.deltaTime;
+
         // Rotate spinner
         this._spinner.rotation -= delta / 60;
 
         // Lerp the rotations of the cannon to the spinner rotation but with an offset
-        this._cannon.rotation = lerp(
-            this._cannon.rotation,
-            this._spinner.rotation - this._targetOffset,
-            0.1,
-        );
+        this._cannon.rotation = lerp(this._cannon.rotation, this._spinner.rotation - this._targetOffset, 0.1);
 
         // When tick is zero, randomise aforementioned offset
         if (this._tick <= 0) {
