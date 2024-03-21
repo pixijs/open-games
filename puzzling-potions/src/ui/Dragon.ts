@@ -19,7 +19,7 @@ export class Dragon extends Container {
 
         this.spine = Spine.from({
             skeleton: 'common/dragon-skeleton.json',
-            atlas: 'common/dragon-skeleton.atlas'
+            atlas: 'common/dragon-skeleton.atlas',
         });
         // this.spine.autoUpdate = true;
         this.spine.scale.set(0.3);

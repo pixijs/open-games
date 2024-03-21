@@ -51,7 +51,7 @@ export class ModeSwitcher extends RadioGroup {
                                     height - padding * 2,
                                     radius - padding,
                                 )
-                                .fill({ color: fillColor}),
+                                .fill({ color: fillColor }),
                             unchecked: new Graphics()
                                 .roundRect(0, 0, width, height, radius)
                                 .fill({ color: bgColor })

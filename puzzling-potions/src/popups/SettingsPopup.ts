@@ -136,8 +136,7 @@ export class SettingsPopup extends Container {
     /** Dismiss the popup, animated */
     public async hide() {
         if (navigation.currentScreen) {
-            // TODO: Fix filters type issue
-            (navigation.currentScreen as any).filters = null;
+            navigation.currentScreen.filters = [];
         }
         gsap.killTweensOf(this.bg);
         gsap.killTweensOf(this.panel.pivot);

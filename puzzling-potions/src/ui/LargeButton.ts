@@ -32,7 +32,7 @@ export class LargeButton extends FancyButton {
             height: opts.height,
         });
 
-        const hoverView = new NineSliceSprite({ 
+        const hoverView = new NineSliceSprite({
             texture: Texture.from('button-large-hover'),
             leftWidth: 36,
             topHeight: 42,
@@ -42,7 +42,7 @@ export class LargeButton extends FancyButton {
             height: opts.height,
         });
 
-        const pressedView = new NineSliceSprite({ 
+        const pressedView = new NineSliceSprite({
             texture: Texture.from('button-large-press'),
             leftWidth: 36,
             topHeight: 42,

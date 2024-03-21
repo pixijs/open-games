@@ -56,7 +56,7 @@ export class HomeScreen extends Container {
             leftWidth: 32,
             topHeight: 32,
             rightWidth: 32,
-            bottomHeight: 32
+            bottomHeight: 32,
         });
         this.base.tint = 0x2c136c;
         this.addChild(this.base);
