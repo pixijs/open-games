@@ -19,7 +19,7 @@ export class CloudLabel extends Container {
     /** The animated cloud background */
     private cloud: Cloud;
     /** The message label */
-    private label: Label;
+    private messageLabel: Label;
     /** Turns false if component is hidden */
     private showing = true;
 
@@ -38,21 +38,21 @@ export class CloudLabel extends Container {
         });
         this.container.addChild(this.cloud);
 
-        this.label = new Label('', {
+        this.messageLabel = new Label('', {
             fill: opts.labelColor,
             fontSize: 18,
         });
-        this.container.addChild(this.label);
+        this.container.addChild(this.messageLabel);
     }
 
     /** Get label text */
     public get text() {
-        return this.label.text;
+        return this.messageLabel.text;
     }
 
     /** Set label text */
     public set text(v: string | number) {
-        this.label.text = v;
+        this.messageLabel.text = v;
     }
 
     /** Present label and form cloud */
@@ -65,15 +65,15 @@ export class CloudLabel extends Container {
             const duration = 1;
             this.cloud.playFormAnimation(duration * 0.5);
             this.container.alpha = 0;
-            this.label.scale.set(3);
+            this.messageLabel.scale.set(3);
             this.container.scale.set(0.5);
             gsap.to(this.container, { alpha: 1, duration: duration * 0.5, ease: 'linear' });
-            gsap.to(this.label.scale, { x: 1, y: 1, duration, ease: 'expo.out' });
+            gsap.to(this.messageLabel.scale, { x: 1, y: 1, duration, ease: 'expo.out' });
             await gsap.to(this.container.scale, { x: 1, y: 1, duration, ease: 'expo.out' });
         } else {
             this.container.alpha = 1;
-            this.label.alpha = 1;
-            this.label.scale.set(1);
+            this.messageLabel.alpha = 1;
+            this.messageLabel.scale.set(1);
         }
     }
 
@@ -93,7 +93,7 @@ export class CloudLabel extends Container {
     private killTweens() {
         gsap.killTweensOf(this.container);
         gsap.killTweensOf(this.container.scale);
-        gsap.killTweensOf(this.label);
-        gsap.killTweensOf(this.label.scale);
+        gsap.killTweensOf(this.messageLabel);
+        gsap.killTweensOf(this.messageLabel.scale);
     }
 }

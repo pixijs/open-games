@@ -1,4 +1,4 @@
-import { Container, NineSlicePlane, Texture } from 'pixi.js';
+import { Container, NineSliceSprite, Texture } from 'pixi.js';
 import { navigation } from '../utils/navigation';
 import { GameScreen } from './GameScreen';
 import gsap from 'gsap';
@@ -39,7 +39,7 @@ export class HomeScreen extends Container {
     /** Button that opens the settings panel */
     private settingsButton: RippleButton;
     /** The footer base, also used for transition in */
-    private base: NineSlicePlane;
+    private base: NineSliceSprite;
 
     constructor() {
         super();
@@ -51,7 +51,13 @@ export class HomeScreen extends Container {
         this.dragon.playIdle();
         this.addChild(this.dragon);
 
-        this.base = new NineSlicePlane(Texture.from('rounded-rectangle'), 32, 32, 32, 32);
+        this.base = new NineSliceSprite({
+            texture: Texture.from('rounded-rectangle'),
+            leftWidth: 32,
+            topHeight: 32,
+            rightWidth: 32,
+            bottomHeight: 32,
+        });
         this.base.tint = 0x2c136c;
         this.addChild(this.base);
 

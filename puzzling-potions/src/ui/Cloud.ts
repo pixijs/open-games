@@ -33,7 +33,7 @@ export class Cloud extends Container {
         super();
 
         this.options = { ...defaultCloudOptions, ...options };
-        this.base = Sprite.from(Texture.WHITE);
+        this.base = new Sprite(Texture.WHITE);
         this.base.tint = this.options.color;
         this.base.anchor.set(0.5);
         this.addChild(this.base);
@@ -46,6 +46,8 @@ export class Cloud extends Container {
 
         this.width = this.options.width;
         this.height = this.options.height;
+
+        this.onRender = () => this.renderUpdate();
     }
 
     /** Get cloud width from its base, not visible area */
@@ -116,9 +118,8 @@ export class Cloud extends Container {
         }
     }
 
-    /** Auto-update by overriding Container's updateTransform */
-    public updateTransform() {
-        super.updateTransform();
+    /** Auto-update every frame */
+    public renderUpdate() {
         const delta = app.ticker.deltaTime;
         for (const circle of this.circles) {
             circle.update(delta);

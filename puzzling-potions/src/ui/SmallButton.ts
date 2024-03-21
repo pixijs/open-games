@@ -1,5 +1,5 @@
 import { FancyButton } from '@pixi/ui';
-import { Container, NineSlicePlane, Texture } from 'pixi.js';
+import { Container, NineSliceSprite, Texture } from 'pixi.js';
 import { Label } from './Label';
 import gsap from 'gsap';
 import { sfx } from '../utils/audio';
@@ -19,24 +19,42 @@ type SmallButtonOptions = typeof defaultSmallButtonOptions;
  */
 export class SmallButton extends FancyButton {
     /** The message displayed */
-    public label: Label;
+    public messageLabel: Label;
     /** Inner container for animation */
     private container: Container;
 
     constructor(options: Partial<SmallButtonOptions> = {}) {
         const opts = { ...defaultSmallButtonOptions, ...options };
 
-        const defaultView = new NineSlicePlane(Texture.from('button-small'), 16, 16, 16, 20);
-        defaultView.width = opts.width;
-        defaultView.height = opts.height;
+        const defaultView = new NineSliceSprite({
+            texture: Texture.from('button-small'),
+            leftWidth: 16,
+            topHeight: 16,
+            rightWidth: 16,
+            bottomHeight: 20,
+            width: opts.width,
+            height: opts.height,
+        });
 
-        const hoverView = new NineSlicePlane(Texture.from('button-small-hover'), 16, 16, 16, 20);
-        hoverView.width = opts.width;
-        hoverView.height = opts.height;
+        const hoverView = new NineSliceSprite({
+            texture: Texture.from('button-small-hover'),
+            leftWidth: 16,
+            topHeight: 16,
+            rightWidth: 16,
+            bottomHeight: 20,
+            width: opts.width,
+            height: opts.height,
+        });
 
-        const pressedView = new NineSlicePlane(Texture.from('button-small-press'), 16, 16, 16, 20);
-        pressedView.width = opts.width;
-        pressedView.height = opts.height;
+        const pressedView = new NineSliceSprite({
+            texture: Texture.from('button-small-press'),
+            leftWidth: 16,
+            topHeight: 16,
+            rightWidth: 16,
+            bottomHeight: 20,
+            width: opts.width,
+            height: opts.height,
+        });
 
         super({
             defaultView,
@@ -53,13 +71,13 @@ export class SmallButton extends FancyButton {
         if (this.pressedView) this.container.addChild(this.pressedView);
         if (this.disabledView) this.container.addChild(this.disabledView);
 
-        this.label = new Label(opts.text, {
+        this.messageLabel = new Label(opts.text, {
             fill: opts.labelColor,
             align: 'center',
             fontSize: opts.labelFontSize,
         });
-        this.label.y = -8;
-        this.container.addChild(this.label);
+        this.messageLabel.y = -8;
+        this.container.addChild(this.messageLabel);
 
         this.onDown.connect(this.handleDown.bind(this));
         this.onUp.connect(this.handleUp.bind(this));
@@ -74,11 +92,11 @@ export class SmallButton extends FancyButton {
 
     private handleDown() {
         sfx.play('common/sfx-press.wav');
-        this.label.y = -3;
+        this.messageLabel.y = -3;
     }
 
     private handleUp() {
-        this.label.y = -8;
+        this.messageLabel.y = -8;
     }
 
     public async show(animated = true) {

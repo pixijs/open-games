@@ -1,12 +1,7 @@
 import { Container, FederatedPointerEvent, Sprite, Texture } from 'pixi.js';
 import gsap from 'gsap';
 import { Match3Position } from './Match3Utility';
-import {
-    resolveAndKillTweens,
-    registerCustomEase,
-    pauseTweens,
-    resumeTweens,
-} from '../utils/animation';
+import { resolveAndKillTweens, registerCustomEase, pauseTweens, resumeTweens } from '../utils/animation';
 import { app } from '../main';
 
 /** Default piece options */
@@ -77,7 +72,7 @@ export class Match3Piece extends Container {
         this.image.anchor.set(0.5);
         this.addChild(this.image);
 
-        this.area = Sprite.from(Texture.WHITE);
+        this.area = new Sprite(Texture.WHITE);
         this.area.anchor.set(0.5);
         this.area.alpha = 0;
         this.addChild(this.area);
@@ -87,6 +82,8 @@ export class Match3Piece extends Container {
         this.area.on('pointerup', this.onPointerUp);
         this.area.on('pointerupoutside', this.onPointerUp);
         this.area.on('pointercancel', this.onPointerUp);
+
+        this.onRender = () => this.renderUpdate();
     }
 
     /**
@@ -216,9 +213,7 @@ export class Match3Piece extends Container {
         this.unlock();
     }
 
-    public updateTransform() {
-        super.updateTransform();
-
+    public renderUpdate() {
         if (this.paused) return;
         if (this.highlight.visible) {
             this.highlight.rotation += app.ticker.deltaTime * 0.03;

@@ -104,11 +104,7 @@ export function match3GetRandomType(types: Match3Type[], exclude?: Match3Type[])
  * @param positionA The first piece to swap
  * @param positionB The second piece to swap
  */
-export function match3SwapPieces(
-    grid: Match3Grid,
-    positionA: Match3Position,
-    positionB: Match3Position,
-) {
+export function match3SwapPieces(grid: Match3Grid, positionA: Match3Position, positionB: Match3Position) {
     const typeA = match3GetPieceType(grid, positionA);
     const typeB = match3GetPieceType(grid, positionB);
 
@@ -148,9 +144,7 @@ export function match3GetPieceType(grid: Match3Grid, position: Match3Position) {
 export function match3IsValidPosition(grid: Match3Grid, position: Match3Position) {
     const rows = grid.length;
     const cols = grid[0].length;
-    return (
-        position.row >= 0 && position.row < rows && position.column >= 0 && position.column < cols
-    );
+    return position.row >= 0 && position.row < rows && position.column >= 0 && position.column < cols;
 }
 
 /**
@@ -158,10 +152,7 @@ export function match3IsValidPosition(grid: Match3Grid, position: Match3Position
  * @param grid The grid in context
  * @param fn Callback for each position in the grid
  */
-export function match3ForEach(
-    grid: Match3Grid,
-    fn: (position: Match3Position, type: Match3Type) => void,
-) {
+export function match3ForEach(grid: Match3Grid, fn: (position: Match3Position, type: Match3Type) => void) {
     for (let r = 0; r < grid.length; r++) {
         for (let c = 0; c < grid[r].length; c++) {
             fn({ row: r, column: c }, grid[r][c]);
@@ -176,11 +167,7 @@ export function match3ForEach(
  * @param orientation If the search is horizontal or vertical
  * @returns
  */
-function match3GetMatchesByOrientation(
-    grid: Match3Grid,
-    matchSize: number,
-    orientation: Match3Orientation,
-) {
+function match3GetMatchesByOrientation(grid: Match3Grid, matchSize: number, orientation: Match3Orientation) {
     const matches = [];
     const rows = grid.length;
     const columns = grid[0].length;
@@ -305,7 +292,7 @@ export function match3ApplyGravity(grid: Match3Grid) {
     for (let r = rows - 1; r >= 0; r--) {
         for (let c = 0; c < columns; c++) {
             let position = { row: r, column: c };
-            let belowPosition = { row: r + 1, column: c };
+            const belowPosition = { row: r + 1, column: c };
             let hasChanged = false;
 
             // Skip this one if position below is out of bounds

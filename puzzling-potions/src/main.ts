@@ -1,4 +1,4 @@
-import 'pixi-spine';
+import '@pixi/spine-pixi';
 
 import { Application } from 'pixi.js';
 import { initAssets } from './utils/assets';
@@ -12,10 +12,7 @@ import { getUrlParam } from './utils/getUrlParams';
 import { sound } from '@pixi/sound';
 
 /** The PixiJS app Application instance, shared across the project */
-export const app = new Application<HTMLCanvasElement>({
-    resolution: Math.max(window.devicePixelRatio, 2),
-    backgroundColor: 0xffffff,
-});
+export const app = new Application();
 
 /** Set up a resize function for the app */
 function resize() {
@@ -32,8 +29,8 @@ function resize() {
     const height = windowHeight * scale;
 
     // Update canvas style dimensions and scroll window up to avoid issues on mobile resize
-    app.renderer.view.style.width = `${windowWidth}px`;
-    app.renderer.view.style.height = `${windowHeight}px`;
+    app.renderer.canvas.style.width = `${windowWidth}px`;
+    app.renderer.canvas.style.height = `${windowHeight}px`;
     window.scrollTo(0, 0);
 
     // Update renderer  and navigation screens dimensions
@@ -54,8 +51,14 @@ function visibilityChange() {
 
 /** Setup app and initialise assets */
 async function init() {
-    // Add pixi canvas element (app.view) to the document's body
-    document.body.appendChild(app.view);
+    // Initialize app
+    await app.init({
+        resolution: Math.max(window.devicePixelRatio, 2),
+        backgroundColor: 0xffffff,
+    });
+
+    // Add pixi canvas element (app.canvas) to the document's body
+    document.body.appendChild(app.canvas);
 
     // Whenever the window resizes, call the 'resize' function
     window.addEventListener('resize', resize);

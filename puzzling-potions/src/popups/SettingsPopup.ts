@@ -39,7 +39,7 @@ export class SettingsPopup extends Container {
     constructor() {
         super();
 
-        this.bg = Sprite.from(Texture.WHITE);
+        this.bg = new Sprite(Texture.WHITE);
         this.bg.tint = 0x0a0025;
         this.bg.interactive = true;
         this.addChild(this.bg);
@@ -123,7 +123,7 @@ export class SettingsPopup extends Container {
     /** Present the popup, animated */
     public async show() {
         if (navigation.currentScreen) {
-            navigation.currentScreen.filters = [new BlurFilter(5)];
+            navigation.currentScreen.filters = [new BlurFilter({ strength: 4 })];
         }
         gsap.killTweensOf(this.bg);
         gsap.killTweensOf(this.panel.pivot);
@@ -136,7 +136,7 @@ export class SettingsPopup extends Container {
     /** Dismiss the popup, animated */
     public async hide() {
         if (navigation.currentScreen) {
-            navigation.currentScreen.filters = null;
+            navigation.currentScreen.filters = [];
         }
         gsap.killTweensOf(this.bg);
         gsap.killTweensOf(this.panel.pivot);

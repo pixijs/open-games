@@ -2,7 +2,7 @@
 export const match3ValidModes = ['test', 'easy', 'normal', 'hard'] as const;
 
 /** The game mode type */
-export type Match3Mode = typeof match3ValidModes[number];
+export type Match3Mode = (typeof match3ValidModes)[number];
 
 /**
  * Map of all available blocks for the game, ordered by game mode.

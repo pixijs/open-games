@@ -22,7 +22,7 @@ export class PausePopup extends Container {
     constructor() {
         super();
 
-        this.bg = Sprite.from(Texture.WHITE);
+        this.bg = new Sprite(Texture.WHITE);
         this.bg.tint = 0x0a0025;
         this.bg.interactive = true;
         this.addChild(this.bg);
@@ -67,7 +67,7 @@ export class PausePopup extends Container {
     /** Dismiss the popup, animated */
     public async hide() {
         if (navigation.currentScreen) {
-            navigation.currentScreen.filters = null;
+            navigation.currentScreen.filters = [];
         }
         gsap.killTweensOf(this.bg);
         gsap.killTweensOf(this.panel.pivot);

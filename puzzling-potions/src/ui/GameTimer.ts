@@ -7,15 +7,15 @@ import { Label } from './Label';
  */
 export class GameTimer extends Container {
     /** The remaining time displayed */
-    private readonly label: Label;
+    private readonly messageLabel: Label;
 
     constructor() {
         super();
-        this.label = new Label('5:00', {
+        this.messageLabel = new Label('5:00', {
             fontSize: 36,
             fill: 0xffffff,
         });
-        this.addChild(this.label);
+        this.addChild(this.messageLabel);
     }
 
     /**
@@ -30,13 +30,13 @@ export class GameTimer extends Container {
         const seconds = Math.floor(remaining / 1000) % 60;
 
         // Update label text with minutes and seconds
-        this.label.text = String(minutes) + ':' + String(seconds).padStart(2, '0');
+        this.messageLabel.text = String(minutes) + ':' + String(seconds).padStart(2, '0');
 
         // Flash timer if it is close to finish
         if (remaining > 1 && remaining < 11000) {
-            this.label.tint = Math.floor(remaining * 0.005) % 2 ? 0xff0000 : 0xffffff;
+            this.messageLabel.tint = Math.floor(remaining * 0.005) % 2 ? 0xff0000 : 0xffffff;
         } else {
-            this.label.tint = 0xffffff;
+            this.messageLabel.tint = 0xffffff;
         }
     }
 }

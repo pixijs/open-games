@@ -14,7 +14,7 @@ export class GameTimesUp extends Container {
     /** The animated cloud background */
     private cloud: Cloud;
     /** The displayed message */
-    private label: Label;
+    private messageLabel: Label;
 
     constructor() {
         super();
@@ -30,11 +30,11 @@ export class GameTimesUp extends Container {
         });
         this.container.addChild(this.cloud);
 
-        this.label = new Label(i18n.timesUp, {
+        this.messageLabel = new Label(i18n.timesUp, {
             fill: 0xffffff,
             fontSize: 70,
         });
-        this.container.addChild(this.label);
+        this.container.addChild(this.messageLabel);
         this.visible = false;
     }
 
@@ -44,12 +44,12 @@ export class GameTimesUp extends Container {
 
         gsap.killTweensOf(this.container.scale);
         gsap.killTweensOf(this.container);
-        gsap.killTweensOf(this.label);
+        gsap.killTweensOf(this.messageLabel);
         this.visible = true;
-        this.label.scale.set(0.5);
-        this.label.alpha = 0;
-        gsap.to(this.label, { alpha: 1, duration, ease: 'linear' });
-        gsap.to(this.label.scale, { x: 1, y: 1, duration, ease: 'expo.out' });
+        this.messageLabel.scale.set(0.5);
+        this.messageLabel.alpha = 0;
+        gsap.to(this.messageLabel, { alpha: 1, duration, ease: 'linear' });
+        gsap.to(this.messageLabel.scale, { x: 1, y: 1, duration, ease: 'expo.out' });
         await this.cloud.playFormAnimation(duration);
     }
 
@@ -59,10 +59,10 @@ export class GameTimesUp extends Container {
 
         gsap.killTweensOf(this.cloud);
         gsap.killTweensOf(this.cloud.scale);
-        gsap.killTweensOf(this.label.scale);
-        gsap.killTweensOf(this.label);
-        gsap.to(this.label, { alpha: 0, duration, ease: 'linear' });
-        gsap.to(this.label.scale, { x: 5, y: 5, duration, ease: 'expo.in' });
+        gsap.killTweensOf(this.messageLabel.scale);
+        gsap.killTweensOf(this.messageLabel);
+        gsap.to(this.messageLabel, { alpha: 0, duration, ease: 'linear' });
+        gsap.to(this.messageLabel.scale, { x: 5, y: 5, duration, ease: 'expo.in' });
         gsap.to(this.cloud, { height: 1000, duration, ease: 'expo.in' });
         await gsap.to(this.cloud.scale, { x: 9, y: 9, duration, ease: 'expo.in' });
     }

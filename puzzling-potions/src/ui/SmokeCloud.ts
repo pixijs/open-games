@@ -19,12 +19,14 @@ export class SmokeCloud extends Container {
     constructor() {
         super();
 
-        this.base = Sprite.from(Texture.WHITE);
+        this.base = new Sprite(Texture.WHITE);
         this.base.tint = this.color;
         this.addChild(this.base);
 
         this.circlesContainer = new Container();
         this.addChild(this.circlesContainer);
+
+        this.onRender = () => this.renderUpdate();
     }
 
     /** Get base width - the visible with is a bit larger */
@@ -89,9 +91,8 @@ export class SmokeCloud extends Container {
         }
     }
 
-    /** Auto-update by overriding Container's updateTransform */
-    public updateTransform() {
-        super.updateTransform();
+    /** Auto-update every frame */
+    public renderUpdate() {
         const delta = app.ticker.deltaTime;
         for (const circle of this.circles) {
             circle.update(delta);

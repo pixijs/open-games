@@ -22,7 +22,7 @@ export class GameCountdown extends Container {
     /** The animated cloud background */
     private cloud: Cloud;
     /** The message displaying */
-    private label: Label;
+    private messageLabel: Label;
 
     constructor() {
         super();
@@ -38,23 +38,23 @@ export class GameCountdown extends Container {
         });
         this.container.addChild(this.cloud);
 
-        this.label = new Label('', {
+        this.messageLabel = new Label('', {
             fill: 0xffffff,
             fontSize: 70,
         });
-        this.container.addChild(this.label);
+        this.container.addChild(this.messageLabel);
         this.visible = false;
     }
 
     /** Play "Ready?" animation */
     private async playReadyAnimation() {
         sfx.play('common/sfx-countdown.wav', { speed: 0.8, volume: 0.5 });
-        gsap.killTweensOf(this.label);
-        gsap.killTweensOf(this.label.scale);
-        this.label.text = i18n.countdownReady;
-        this.label.scale.set(0);
-        this.label.y = -5;
-        await gsap.to(this.label.scale, {
+        gsap.killTweensOf(this.messageLabel);
+        gsap.killTweensOf(this.messageLabel.scale);
+        this.messageLabel.text = i18n.countdownReady;
+        this.messageLabel.scale.set(0);
+        this.messageLabel.y = -5;
+        await gsap.to(this.messageLabel.scale, {
             x: 1,
             y: 1,
             duration: 0.7,
@@ -64,22 +64,22 @@ export class GameCountdown extends Container {
 
     /** Play "GO!" animation */
     private async playGoAnimation() {
-        gsap.killTweensOf(this.label);
-        gsap.killTweensOf(this.label.scale);
-        await gsap.to(this.label, { alpha: 0, duration: 0.2, ease: 'sine.in' });
-        await gsap.to(this.label.scale, {
+        gsap.killTweensOf(this.messageLabel);
+        gsap.killTweensOf(this.messageLabel.scale);
+        await gsap.to(this.messageLabel, { alpha: 0, duration: 0.2, ease: 'sine.in' });
+        await gsap.to(this.messageLabel.scale, {
             x: 1.5,
             y: 1.5,
             duration: 0.2,
             ease: 'sine.in',
         });
         sfx.play('common/sfx-countdown.wav', { speed: 1.2, volume: 0.5 });
-        this.label.y = 0;
-        this.label.text = i18n.countdownGo;
-        this.label.scale.set(0.8);
-        gsap.to(this.label, { alpha: 1, duration: 0.2, ease: 'linear' });
-        gsap.to(this.label, { alpha: 0, duration: 0.2, ease: 'linear', delay: 0.6 });
-        await gsap.to(this.label.scale, {
+        this.messageLabel.y = 0;
+        this.messageLabel.text = i18n.countdownGo;
+        this.messageLabel.scale.set(0.8);
+        gsap.to(this.messageLabel, { alpha: 1, duration: 0.2, ease: 'linear' });
+        gsap.to(this.messageLabel, { alpha: 0, duration: 0.2, ease: 'linear', delay: 0.6 });
+        await gsap.to(this.messageLabel.scale, {
             x: 3,
             y: 3,
             duration: 0.8,

@@ -1,5 +1,5 @@
 import { FancyButton } from '@pixi/ui';
-import { NineSlicePlane, Texture } from 'pixi.js';
+import { NineSliceSprite, Texture } from 'pixi.js';
 import { Label } from './Label';
 import gsap from 'gsap';
 import { sfx } from '../utils/audio';
@@ -17,22 +17,40 @@ type LargeButtonOptions = typeof defaultLargeButtonOptions;
  */
 export class LargeButton extends FancyButton {
     /** The buttoon message displayed */
-    private label: Label;
+    private messageLabel: Label;
 
     constructor(options: Partial<LargeButtonOptions> = {}) {
         const opts = { ...defaultLargeButtonOptions, ...options };
 
-        const defaultView = new NineSlicePlane(Texture.from('button-large'), 36, 42, 36, 52);
-        defaultView.width = opts.width;
-        defaultView.height = opts.height;
+        const defaultView = new NineSliceSprite({
+            texture: Texture.from('button-large'),
+            leftWidth: 36,
+            topHeight: 42,
+            rightWidth: 36,
+            bottomHeight: 52,
+            width: opts.width,
+            height: opts.height,
+        });
 
-        const hoverView = new NineSlicePlane(Texture.from('button-large-hover'), 36, 42, 36, 52);
-        hoverView.width = opts.width;
-        hoverView.height = opts.height;
+        const hoverView = new NineSliceSprite({
+            texture: Texture.from('button-large-hover'),
+            leftWidth: 36,
+            topHeight: 42,
+            rightWidth: 36,
+            bottomHeight: 52,
+            width: opts.width,
+            height: opts.height,
+        });
 
-        const pressedView = new NineSlicePlane(Texture.from('button-large-press'), 36, 42, 36, 52);
-        pressedView.width = opts.width;
-        pressedView.height = opts.height;
+        const pressedView = new NineSliceSprite({
+            texture: Texture.from('button-large-press'),
+            leftWidth: 36,
+            topHeight: 42,
+            rightWidth: 36,
+            bottomHeight: 52,
+            width: opts.width,
+            height: opts.height,
+        });
 
         super({
             defaultView,
@@ -41,12 +59,12 @@ export class LargeButton extends FancyButton {
             anchor: 0.5,
         });
 
-        this.label = new Label(opts.text, {
+        this.messageLabel = new Label(opts.text, {
             fill: 0x4a4a4a,
             align: 'center',
         });
-        this.label.y = -13;
-        this.addChild(this.label);
+        this.messageLabel.y = -13;
+        this.addChild(this.messageLabel);
 
         this.onDown.connect(this.handleDown.bind(this));
         this.onUp.connect(this.handleUp.bind(this));
@@ -61,11 +79,11 @@ export class LargeButton extends FancyButton {
 
     private handleDown() {
         sfx.play('common/sfx-press.wav');
-        this.label.y = -5;
+        this.messageLabel.y = -5;
     }
 
     private handleUp() {
-        this.label.y = -13;
+        this.messageLabel.y = -13;
     }
 
     /** Show the component */

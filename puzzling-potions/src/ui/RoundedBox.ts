@@ -1,4 +1,4 @@
-import { Container, NineSlicePlane, Texture } from 'pixi.js';
+import { Container, NineSliceSprite, Texture } from 'pixi.js';
 
 const defaultRoundedBoxOptions = {
     color: 0x2c136c,
@@ -16,26 +16,38 @@ export type RoundedBoxOptions = typeof defaultRoundedBoxOptions;
  */
 export class RoundedBox extends Container {
     /** The rectangular area, that scales without distorting rounded corners */
-    private image: NineSlicePlane;
+    private image: NineSliceSprite;
     /** Optional shadow matching the box image, with y offest */
-    private shadow?: NineSlicePlane;
+    private shadow?: NineSliceSprite;
 
     constructor(options: Partial<RoundedBoxOptions> = {}) {
         super();
         const opts = { ...defaultRoundedBoxOptions, ...options };
-        this.image = new NineSlicePlane(Texture.from('rounded-rectangle'), 34, 34, 34, 34);
-        this.image.width = opts.width;
-        this.image.height = opts.height;
-        this.image.tint = opts.color;
+        this.image = new NineSliceSprite({
+            texture: Texture.from('rounded-rectangle'),
+            leftWidth: 34,
+            topHeight: 34,
+            rightWidth: 34,
+            bottomHeight: 34,
+            width: opts.width,
+            height: opts.height,
+            tint: opts.color,
+        });
         this.image.x = -this.image.width * 0.5;
         this.image.y = -this.image.height * 0.5;
         this.addChild(this.image);
 
         if (opts.shadow) {
-            this.shadow = new NineSlicePlane(Texture.from('rounded-rectangle'), 34, 34, 34, 34);
-            this.shadow.width = opts.width;
-            this.shadow.height = opts.height;
-            this.shadow.tint = opts.shadowColor;
+            this.shadow = new NineSliceSprite({
+                texture: Texture.from('rounded-rectangle'),
+                leftWidth: 34,
+                topHeight: 34,
+                rightWidth: 34,
+                bottomHeight: 34,
+                width: opts.width,
+                height: opts.height,
+                tint: opts.shadowColor,
+            });
             this.shadow.x = -this.shadow.width * 0.5;
             this.shadow.y = -this.shadow.height * 0.5 + opts.shadowOffset;
             this.addChildAt(this.shadow, 0);

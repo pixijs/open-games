@@ -1,4 +1,4 @@
-import { Container, NineSlicePlane, Sprite, Texture } from 'pixi.js';
+import { Container, NineSliceSprite, Sprite, Texture } from 'pixi.js';
 import gsap from 'gsap';
 import { Label } from '../ui/Label';
 import { i18n } from '../utils/i18n';
@@ -42,7 +42,7 @@ export class ResultScreen extends Container {
     /** The animated stars that represent the grade */
     private stars: ResultStars;
     /** The footer base */
-    private bottomBase: NineSlicePlane;
+    private bottomBase: NineSliceSprite;
     /** Button that goes back to the game to play again */
     private continueButton: LargeButton;
     /** Button that opens the settings panel */
@@ -102,7 +102,13 @@ export class ResultScreen extends Container {
         this.stars.y = -10;
         this.panel.addChild(this.stars);
 
-        this.bottomBase = new NineSlicePlane(Texture.from('rounded-rectangle'), 32, 32, 32, 32);
+        this.bottomBase = new NineSliceSprite({
+            texture: Texture.from('rounded-rectangle'),
+            leftWidth: 32,
+            topHeight: 32,
+            rightWidth: 32,
+            bottomHeight: 32,
+        });
         this.bottomBase.tint = 0x2c136c;
         this.bottomBase.height = 200;
         this.addChild(this.bottomBase);
