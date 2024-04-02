@@ -67,8 +67,7 @@ export class Cannon {
         }
 
         // Set the color of the cannon arrow and main body using chain assignment
-        this._parts['cannon-arrow'].tint = this._parts['cannon-main'].tint =
-            boardConfig.bubbleTypeToColor[value];
+        this._parts['cannon-arrow'].tint = this._parts['cannon-main'].tint = boardConfig.bubbleTypeToColor[value];
         // Set the type of the current bubble view
         this._bubbleView.type = value;
 

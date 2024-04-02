@@ -1,5 +1,5 @@
 import gsap from 'gsap';
-import { Container, Texture, TilingSprite } from 'pixi.js';
+import { Container, Texture, Ticker, TilingSprite } from 'pixi.js';
 
 import { designConfig } from '../game/designConfig';
 import { Game } from '../game/Game';
@@ -19,9 +19,15 @@ export class GameScreen extends Container implements AppScreen {
         super();
 
         // Create the background
-        this._background = new TilingSprite(Texture.from('background-tile-space'), 64, 64);
-        this._background.tileScale.set(designConfig.backgroundTileScale);
-
+        this._background = new TilingSprite({
+            texture: Texture.from('background-tile-space'),
+            width: 64,
+            height: 64,
+            tileScale: {
+                x: designConfig.backgroundTileScale,
+                y: designConfig.backgroundTileScale,
+            },
+        });
         this.addChild(this._background);
 
         // Create an instance of the game and initialise
@@ -58,10 +64,10 @@ export class GameScreen extends Container implements AppScreen {
 
     /**
      * Called every frame.
-     * @param delta - The time elapsed since the last update.
+     * @param time - Ticker object with time related data.
      */
-    public update(delta: number) {
-        this._game.update(delta);
+    public update(time: Ticker) {
+        this._game.update(time.deltaTime);
     }
 
     /**

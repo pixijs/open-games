@@ -5,13 +5,7 @@ import { Signal } from 'typed-signals';
 import { sfx } from '../../audio';
 import { normalize, scale, sub } from '../../utils/maths/point';
 import { randomRange } from '../../utils/maths/rand';
-import {
-    boardConfig,
-    BubbleType,
-    isSpecialType,
-    randomType,
-    SpecialBubbleType,
-} from '../boardConfig';
+import { boardConfig, BubbleType, isSpecialType, randomType, SpecialBubbleType } from '../boardConfig';
 import { designConfig } from '../designConfig';
 import { Bubble, SpoofBubble } from '../entities/Bubble';
 import { BubbleLine, MAX_BUBBLE_INDEX } from '../entities/BubbleLine';
@@ -252,14 +246,8 @@ export class LevelSystem implements System {
         // The number of new lines is incremented by 1
         this._newLineCount++;
 
-        const {
-            urgentMinLines,
-            animInTime,
-            urgentAnimInTime,
-            maxDecrement,
-            decrementIn,
-            animInDecrement,
-        } = boardConfig.newLine;
+        const { urgentMinLines, animInTime, urgentAnimInTime, maxDecrement, decrementIn, animInDecrement } =
+            boardConfig.newLine;
 
         // Determine urgency based on the amount of lines in the grid
         const isUrgent = this.lines.length < urgentMinLines;
@@ -280,10 +268,7 @@ export class LevelSystem implements System {
         This decrement is capped by the maxDecrement configuration parameter
         */
         if (this._newLineCount % decrementIn === 0) {
-            this._newLineSpeedDecrement = Math.min(
-                this._newLineSpeedDecrement + animInDecrement,
-                maxDecrement,
-            );
+            this._newLineSpeedDecrement = Math.min(this._newLineSpeedDecrement + animInDecrement, maxDecrement);
         }
     }
 
@@ -438,8 +423,7 @@ export class LevelSystem implements System {
         let selection = 0;
 
         // Set the amount of total chance remaining after subtracting the chance of previous selected bubble types in a random selection process
-        let remainingChance =
-            Math.random() * totalChance - chancePerType.get(boardConfig.bubbleTypes[0])!;
+        let remainingChance = Math.random() * totalChance - chancePerType.get(boardConfig.bubbleTypes[0])!;
 
         while (selection < boardConfig.bubbleTypes.length && remainingChance > 0) {
             // Increment selection
@@ -485,8 +469,7 @@ export class LevelSystem implements System {
 
         // If the gridJ is one more than the bottom line, then a new line is added
         // Otherwise, the bubble is placed on the existing line gridJ.
-        const line: BubbleLine =
-            gridJ === this.getLine('bottom').j + 1 ? this.addLine(false) : this.lines[gridJ];
+        const line: BubbleLine = gridJ === this.getLine('bottom').j + 1 ? this.addLine(false) : this.lines[gridJ];
 
         // Connecting the bubble to the grid location (gridI and line.j).
         bubble.connect(gridI, line.j);
@@ -495,9 +478,7 @@ export class LevelSystem implements System {
         const gridExpectedEven = gridI % 2 === 0;
 
         if (gridExpectedEven !== line.isEven) {
-            console.error(
-                `Trying to set even = ${gridExpectedEven} where line is even = ${line.isEven}`,
-            );
+            console.error(`Trying to set even = ${gridExpectedEven} where line is even = ${line.isEven}`);
         }
 
         // Add bubble to the line, set its x position
@@ -711,11 +692,7 @@ export class LevelSystem implements System {
      * @param gridHit - An object that holds the coordinates of the bubble that the projectile hit.
      * @param prioritiseSide - A string value either "left" or "right" which represents the side that should be prioritized to connect the projectile (should only be used by the function).
      */
-    public handleConnect(
-        projectile: Bubble,
-        gridHit: { i: number; j: number },
-        prioritiseSide?: 'left' | 'right',
-    ) {
+    public handleConnect(projectile: Bubble, gridHit: { i: number; j: number }, prioritiseSide?: 'left' | 'right') {
         // Get the line holding the bubble that has been hit
         const hitLine = this.lines[gridHit.j];
         // Get the neighbouring coordinates of that hit bubble
@@ -735,8 +712,7 @@ export class LevelSystem implements System {
         spoof.i = gridHit.i;
 
         // Determine which side the project hit
-        const side: typeof prioritiseSide =
-            projectileX < this.calculateBubbleX(spoof) ? 'left' : 'right';
+        const side: typeof prioritiseSide = projectileX < this.calculateBubbleX(spoof) ? 'left' : 'right';
 
         neighbours.forEach((coords) => {
             spoof.i = coords.i;
@@ -752,9 +728,7 @@ export class LevelSystem implements System {
             // If prioritiseSide is defined, it filters the neighboring bubbles to only include those on the specified side.
             if (prioritiseSide && prioritiseSide !== relativeSide) return;
 
-            const dist = Math.sqrt(
-                Math.pow(projectileX - estimatedPosX, 2) + Math.pow(projectileY - estimatedPosY, 2),
-            );
+            const dist = Math.sqrt(Math.pow(projectileX - estimatedPosX, 2) + Math.pow(projectileY - estimatedPosY, 2));
 
             distances.push({
                 i: coords.i,
@@ -773,10 +747,7 @@ export class LevelSystem implements System {
         distances = distances
             .splice(0, 3)
             // Filter this list again to only include valid grid positions (where there is no bubble yet and it is within the grid bounds).
-            .filter(
-                (value) =>
-                    this.isValidGrid(value.i, value.j, true) && !this.getBubbleAt(value.i, value.j),
-            );
+            .filter((value) => this.isValidGrid(value.i, value.j, true) && !this.getBubbleAt(value.i, value.j));
 
         // If there are no valid positions left, the function calls itself again with the closest neighboring bubble (backup) and the prioritized side.
         if (distances.length === 0 && backup) {
@@ -932,10 +903,7 @@ export class LevelSystem implements System {
 
                 // Add the unvisited neighbours that match the type or if matchType is false
                 const toAdd = neighbours.filter(
-                    (n) =>
-                        n &&
-                        !visited.includes(n) &&
-                        (!matchType || !isSpecial(n.type) || initialBubble === current),
+                    (n) => n && !visited.includes(n) && (!matchType || !isSpecial(n.type) || initialBubble === current),
                 )!;
 
                 toVisit.push(...toAdd);

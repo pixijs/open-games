@@ -36,6 +36,8 @@ export class Porthole {
 
     /** The outer frame of the porthole. */
     private readonly _frame: Graphics;
+    /** The container for the content behind the frame - grouped for masking */
+    public readonly _portView = new Container();
     /** For the background behind the bubbles. */
     private readonly _background: TilingSprite;
     /** Mask that shapes the background and hides anything outside of the given size. */
@@ -57,27 +59,35 @@ export class Porthole {
 
         // Create the frame of the porthole
         this._frame = new Graphics()
-            .beginFill(options.frameColor) // set the color of the frame
-            .drawCircle(0, 0, options.size + options.frameWidth); // draw the frame as a circle
+            .circle(0, 0, options.size + options.frameWidth) // draw the frame as a circle
+            .fill({ color: options.frameColor }); // fill the drawn circle with the frame color
 
         this.view.addChild(this._frame);
 
         // Create the tiling sprite for the background
-        this._background = new TilingSprite(Texture.from('background-tile-space'), 64, 64);
-        this._background.anchor.set(0.5);
+        this._background = new TilingSprite({
+            texture: Texture.from('background-tile-space'),
+            width: 64,
+            height: 64,
+            anchor: { x: 0.5, y: 0.5 },
+        });
 
         // Set the width and height of the background to be equal to the size of the porthole
         this._background.width = this._background.height = options.size * 2;
-        this._frame.addChild(this._background);
-
-        // create the mask for shaping the background
-        this._mask = new Graphics().beginFill(options.frameColor).drawCircle(0, 0, options.size);
-        this._background.mask = this._mask; // set the mask for the background
-        this.view.addChild(this._mask); // add the mask to the view
+        this._portView.addChild(this._background);
 
         // create the bubble view
         this._bubble = new BubbleView();
-        this._background.addChild(this._bubble.view);
+        this._portView.addChild(this._bubble.view);
+
+        // create the mask for shaping the port view
+        this._mask = new Graphics().circle(0, 0, options.size).fill({ color: options.frameColor });
+        this.view.addChild(this._mask); // add the mask to the view
+
+        // Mask the port view and add to the main view
+        this._portView.mask = this._mask;
+        this.view.addChild(this._portView);
+
         // Assign value to radius
         this._radius = this._frame.width * 0.5;
     }

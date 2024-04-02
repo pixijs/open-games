@@ -64,7 +64,7 @@ export class Match3SpecialBlast {
         }
 
         // Find out matches with repeated positions (crossed matches)
-        for (let posStr in matchesPerPosition) {
+        for (const posStr in matchesPerPosition) {
             // Ignore matches without repeated positions
             if (matchesPerPosition[posStr].length < 2) continue;
 

@@ -62,11 +62,11 @@ export class Match3Timer {
 
     /**
      * Update timer's internal time and fire the time up callback when finishes
-     * @param deltaMs The delta time in milliseconds
+     * @param delta The delta time in milliseconds
      */
-    public update(deltaMs: number) {
+    public update(delta: number) {
         if (!this.running || this.paused) return;
-        this.time += deltaMs;
+        this.time += delta;
         if (this.time >= this.duration) {
             this.stop();
             this.match3.onTimesUp?.();

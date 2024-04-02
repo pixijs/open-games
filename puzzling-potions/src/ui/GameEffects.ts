@@ -13,19 +13,13 @@ import { waitFor } from '../utils/asyncUtils';
 import { throttle } from '../utils/throttle';
 
 /** Custom ease curve for x tweens of pieces flying to cauldron */
-const easeJumpToCauldronX = registerCustomEase(
-    'M0,0,C0,0,0.063,-0.304,0.374,-0.27,0.748,-0.228,1,1,1,1',
-);
+const easeJumpToCauldronX = registerCustomEase('M0,0,C0,0,0.063,-0.304,0.374,-0.27,0.748,-0.228,1,1,1,1');
 
 /** Custom ease curve for y tweens of pieces flying to cauldron */
-const easeJumpToCauldronY = registerCustomEase(
-    'M0,0 C0,0 0.326,1.247 0.662,1.29 0.898,1.32 1,1 1,1 ',
-);
+const easeJumpToCauldronY = registerCustomEase('M0,0 C0,0 0.326,1.247 0.662,1.29 0.898,1.32 1,1 1,1 ');
 
 /** Custom ease curve for scale tweens of pieces flying to cauldron */
-const easeJumpToCauldronScale = registerCustomEase(
-    'M0,0,C0,0,0.043,-1.694,0.356,-1.694,1.026,-1.694,1,1,1,1',
-);
+const easeJumpToCauldronScale = registerCustomEase('M0,0,C0,0,0.043,-1.694,0.356,-1.694,1.026,-1.694,1,1,1,1');
 
 /**
  * All gameplay special effects, isolated on its own class in a way that can be changed freely, without affecting gameplay.
@@ -44,11 +38,11 @@ export class GameEffects extends Container {
         super();
         this.game = game;
         this.sortableChildren = true;
+        this.onRender = () => this.renderUpdate();
     }
 
-    /** Auto-update by overriding Container's updateTransform */
-    public updateTransform() {
-        super.updateTransform();
+    /** Auto-update every frame */
+    public renderUpdate() {
         // Update children z indexes to auto organise their order according
         // to their scales, to create a sort of a "3d depth" simulation
         for (const child of this.children) {
@@ -162,9 +156,7 @@ export class GameEffects extends Container {
         animatedPiece.alpha = 1;
         this.addChild(animatedPiece);
         await waitFor(randomRange(0, 0.3));
-        throttle('pieceExplosion', 100, () =>
-            sfx.play('common/sfx-incorrect.wav', { volume: 0.5 }),
-        );
+        throttle('pieceExplosion', 100, () => sfx.play('common/sfx-incorrect.wav', { volume: 0.5 }));
         this.playPopExplosion(position);
         const upTime = duration * 0.4;
         const downTime = duration * 0.6;
