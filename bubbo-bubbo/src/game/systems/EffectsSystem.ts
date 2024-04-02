@@ -1,4 +1,4 @@
-import { ShockwaveFilter } from 'pixi-filters';
+import { ShockwaveFilter } from 'pixi-filters/shockwave';
 
 import { sfx } from '../../audio';
 import { randomRange } from '../../utils/maths/rand';
@@ -43,10 +43,10 @@ export class EffectsSystem implements System {
         this.game.gameContainer.filters = [shockwaveFilter];
 
         // Set the center of the shockwave filter to the specified x and y coordinates
-        shockwaveFilter.center = [
-            designConfig.content.width * 0.5 + x,
-            designConfig.content.height + y,
-        ];
+        shockwaveFilter.center = {
+            x: designConfig.content.width * 0.5 + x,
+            y: designConfig.content.height + y,
+        };
 
         // Reset the time property of the shockwave filter
         this.shockwaveFilter.time = 0;
@@ -82,9 +82,7 @@ export class EffectsSystem implements System {
         this._activeShockwave = false;
 
         // Remove any filters from the game container
-        if (this.game.gameContainer.filters?.length) {
-            this.game.gameContainer.filters.length = 0;
-        }
+        this.game.gameContainer.filters = [];
 
         // Set the game container position back to its original position
         this.game.gameContainer.x = this.game.gameContainerPosition.x;
@@ -100,10 +98,8 @@ export class EffectsSystem implements System {
         if (!this._activeShockwave) return;
 
         // Update the position of the game container to simulate screen shake.
-        this.game.gameContainer.x =
-            this.game.gameContainerPosition.x + Math.random() * this._shockIntensity;
-        this.game.gameContainer.y =
-            this.game.gameContainerPosition.y + Math.random() * this._shockIntensity;
+        this.game.gameContainer.x = this.game.gameContainerPosition.x + Math.random() * this._shockIntensity;
+        this.game.gameContainer.y = this.game.gameContainerPosition.y + Math.random() * this._shockIntensity;
 
         // Stop the shockwave effect if the time has exceeded a certain threshold.
         if (this.shockwaveFilter.time > 0.4) this.stopShockwave();

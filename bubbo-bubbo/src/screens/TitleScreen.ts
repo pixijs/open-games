@@ -56,9 +56,16 @@ export class TitleScreen extends Container implements AppScreen {
         super();
 
         // Create the background
-        this._background = new TilingSprite(Texture.from('background-tile'), 64, 64);
-        this._background.tileScale.set(designConfig.backgroundTileScale);
-        this._background.interactive = true;
+        this._background = new TilingSprite({
+            texture: Texture.from('background-tile'),
+            width: 64,
+            height: 64,
+            tileScale: {
+                x: designConfig.backgroundTileScale,
+                y: designConfig.backgroundTileScale,
+            },
+            interactive: true,
+        });
         this.addChild(this._background);
 
         // Create the hit area
@@ -175,8 +182,7 @@ export class TitleScreen extends Container implements AppScreen {
         this._cannon.view.y = h - this._footer.height * 0.5;
 
         this._playBtn.x = w * 0.5;
-        this._playBtn.y =
-            this._cannon.view.y - this._cannon.view.height / 2 - this._playBtn.height / 2 + 10;
+        this._playBtn.y = this._cannon.view.y - this._cannon.view.height / 2 - this._playBtn.height / 2 + 10;
 
         this._portholeOne.view.x = 40;
         this._portholeOne.view.y = 40;
@@ -226,9 +232,7 @@ export class TitleScreen extends Container implements AppScreen {
         const type = randomType();
 
         // Use the type to assign a colour
-        this._footer = new Graphics()
-            .beginFill(boardConfig.bubbleTypeToColor[type])
-            .drawEllipse(0, 0, 300, 125);
+        this._footer = new Graphics().ellipse(0, 0, 300, 125).fill({ color: boardConfig.bubbleTypeToColor[type] });
         this._bottomAnimContainer.addChild(this._footer);
 
         this._cannon = new Cannon();
