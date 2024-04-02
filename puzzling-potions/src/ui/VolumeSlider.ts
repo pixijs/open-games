@@ -1,5 +1,5 @@
 import { Slider } from '@pixi/ui';
-import { Graphics } from '@pixi/graphics';
+import { Graphics } from 'pixi.js';
 import { Label } from './Label';
 
 /**
@@ -7,7 +7,7 @@ import { Label } from './Label';
  */
 export class VolumeSlider extends Slider {
     /** Message displayed for the slider */
-    public label: Label;
+    public messageLabel: Label;
 
     constructor(label: string, min = -0.1, max = 100, value = 100) {
         const width = 280;
@@ -22,23 +22,22 @@ export class VolumeSlider extends Slider {
         const backgroundColor = 0xcf4b00;
 
         const bg = new Graphics()
-            .beginFill(borderColor)
-            .drawRoundedRect(0, 0, width, height, radius)
-            .beginFill(backgroundColor)
-            .drawRoundedRect(border, border, width - border * 2, height - border * 2, radius);
+            .roundRect(0, 0, width, height, radius)
+            .fill({ color: borderColor })
+            .roundRect(border, border, width - border * 2, height - border * 2, radius)
+            .fill({ color: backgroundColor });
 
         const fill = new Graphics()
-            .beginFill(borderColor)
-            .drawRoundedRect(0, 0, width, height, radius)
-            .beginFill(fillColor)
-            .drawRoundedRect(border, border, width - border * 2, height - border * 2, radius);
+            .roundRect(0, 0, width, height, radius)
+            .fill({ color: borderColor })
+            .roundRect(border, border, width - border * 2, height - border * 2, radius)
+            .fill({ color: fillColor });
 
         const slider = new Graphics()
-            .beginFill(borderColor)
-            .drawCircle(0, 0, handleRadius + handleBorder)
-            .beginFill(meshColor)
-            .drawCircle(0, 0, handleRadius)
-            .endFill();
+            .circle(0, 0, handleRadius + handleBorder)
+            .fill({ color: borderColor })
+            .circle(0, 0, handleRadius)
+            .fill({ color: meshColor });
 
         super({
             bg,
@@ -50,14 +49,14 @@ export class VolumeSlider extends Slider {
 
         this.value = value;
 
-        this.label = new Label(label, {
+        this.messageLabel = new Label(label, {
             align: 'left',
             fill: 0xffffff,
             fontSize: 18,
         });
-        this.label.anchor.x = 0;
-        this.label.x = 10;
-        this.label.y = -18;
-        this.addChild(this.label);
+        this.messageLabel.anchor.x = 0;
+        this.messageLabel.x = 10;
+        this.messageLabel.y = -18;
+        this.addChild(this.messageLabel);
     }
 }

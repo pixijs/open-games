@@ -1,6 +1,6 @@
-import { Assets, Container } from 'pixi.js';
+import { Container } from 'pixi.js';
 import gsap from 'gsap';
-import { Spine } from 'pixi-spine';
+import { Spine } from '@pixi/spine-pixi';
 
 /**
  * Spine-animated little dragon, that shows up in Home and Result screens.
@@ -17,9 +17,11 @@ export class Dragon extends Container {
         this.container = new Container();
         this.addChild(this.container);
 
-        const skeleton = Assets.cache.get('common/dragon-skeleton.json');
-        this.spine = new Spine(skeleton.spineData);
-        this.spine.autoUpdate = true;
+        this.spine = Spine.from({
+            skeleton: 'common/dragon-skeleton.json',
+            atlas: 'common/dragon-skeleton.atlas',
+        });
+        // this.spine.autoUpdate = true;
         this.spine.scale.set(0.3);
         this.spine.x = -30;
         this.spine.y = 130;

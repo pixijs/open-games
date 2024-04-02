@@ -1,9 +1,9 @@
-import { Assets, Container, Sprite, Texture } from 'pixi.js';
-import { Spine } from 'pixi-spine';
+import { Container, Sprite, Texture } from 'pixi.js';
 import gsap from 'gsap';
 import { randomRange } from '../utils/random';
 import { registerCustomEase } from '../utils/animation';
 import { pool } from '../utils/pool';
+import { Spine } from '@pixi/spine-pixi';
 
 /** Custom ease curve for splash drops y animation */
 const easeDropJumpOut = registerCustomEase('M0,0,C0,0,0.07,-0.63,0.402,-0.422,0.83,-0.152,1,1,1,1');
@@ -38,12 +38,17 @@ export class Cauldron extends Container {
         this.shadow.visible = shadow;
         this.container.addChild(this.shadow);
 
-        const skeleton = Assets.cache.get('preload/cauldron-skeleton.json');
-        this.spine = new Spine(skeleton.spineData);
+        this.spine = Spine.from({
+            skeleton: 'preload/cauldron-skeleton.json',
+            atlas: 'preload/cauldron-skeleton.atlas',
+        });
+
         this.spine.autoUpdate = true;
         this.spine.y = 50;
         this.spine.state.setAnimation(0, 'animation', true);
         this.container.addChild(this.spine);
+
+        this.onRender = () => this.renderUpdate();
     }
 
     /** Show cauldron */
@@ -114,9 +119,8 @@ export class Cauldron extends Container {
         this.content.addChild(content);
     }
 
-    /** Auto-update by overriding Container's updateTransform */
-    public updateTransform() {
-        super.updateTransform();
+    /** Auto-update every frame */
+    public renderUpdate() {
         if (!this.content) return;
         const bone = this.spine.skeleton.bones[1] as any;
         this.content.x = bone.ax;

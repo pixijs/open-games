@@ -87,9 +87,7 @@ export class Match3Actions {
 
         const type = match3GetPieceType(this.match3.board.grid, from);
         const specialFrom = this.match3.special.isSpecial(type);
-        const specialTo = this.match3.special.isSpecial(
-            match3GetPieceType(this.match3.board.grid, to),
-        );
+        const specialTo = this.match3.special.isSpecial(match3GetPieceType(this.match3.board.grid, to));
 
         // Always allow move that either or both are special pieces
         if (specialFrom || specialTo) return true;
@@ -153,14 +151,10 @@ export class Match3Actions {
                 pieceA.animateSwap(viewPositionA.x, viewPositionA.y),
                 pieceB.animateSwap(viewPositionB.x, viewPositionB.y),
             ]);
-        } else if (
-            this.match3.special.isSpecial(match3GetPieceType(this.match3.board.grid, positionA))
-        ) {
+        } else if (this.match3.special.isSpecial(match3GetPieceType(this.match3.board.grid, positionA))) {
             // Pop piece A if is special
             await this.match3.board.popPiece(positionA);
-        } else if (
-            this.match3.special.isSpecial(match3GetPieceType(this.match3.board.grid, positionB))
-        ) {
+        } else if (this.match3.special.isSpecial(match3GetPieceType(this.match3.board.grid, positionB))) {
             // Pop piece B if is special
             await this.match3.board.popPiece(positionB);
         }

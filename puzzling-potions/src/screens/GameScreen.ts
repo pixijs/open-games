@@ -1,4 +1,4 @@
-import { Container } from 'pixi.js';
+import { Container, Ticker } from 'pixi.js';
 import gsap from 'gsap';
 import { Match3, Match3OnMatchData, Match3OnMoveData, Match3OnPopData } from '../match3/Match3';
 import { Shelf } from '../ui/Shelf';
@@ -19,7 +19,6 @@ import { bgm } from '../utils/audio';
 import { userSettings } from '../utils/userSettings';
 import { GameTimesUp } from '../ui/GameTimesUp';
 import { GameOvertime } from '../ui/GameOvertime';
-import { app } from '../main';
 import { waitFor } from '../utils/asyncUtils';
 import { match3GetConfig, Match3Mode } from '../match3/Match3Config';
 import { userStats } from '../utils/userStats';
@@ -55,7 +54,7 @@ export class GameScreen extends Container {
     /** The match3 book shelf background */
     public readonly shelf?: Shelf;
     /** The special effects layer for the match3 */
-    public readonly effects?: GameEffects;
+    public readonly vfx?: GameEffects;
     /** Set to true when gameplay is finished */
     private finished = false;
 
@@ -109,8 +108,8 @@ export class GameScreen extends Container {
         this.timer = new GameTimer();
         this.cauldron.addContent(this.timer);
 
-        this.effects = new GameEffects(this);
-        this.addChild(this.effects);
+        this.vfx = new GameEffects(this);
+        this.addChild(this.vfx);
 
         this.countdown = new GameCountdown();
         this.addChild(this.countdown);
@@ -145,8 +144,8 @@ export class GameScreen extends Container {
     }
 
     /** Update the screen */
-    public update() {
-        this.match3.update(app.ticker.deltaMS);
+    public update(time: Ticker) {
+        this.match3.update(time.deltaMS);
         this.timer.updateTime(this.match3.timer.getTimeRemaining());
         this.overtime.updateTime(this.match3.timer.getTimeRemaining());
         this.score.setScore(this.match3.stats.getScore());
@@ -213,7 +212,7 @@ export class GameScreen extends Container {
     /** Hide screen with animations */
     public async hide() {
         this.overtime.hide();
-        this.effects?.playGridExplosion();
+        this.vfx?.playGridExplosion();
         await waitFor(0.3);
         await this.timesUp.playRevealAnimation();
         await this.timesUp.playExpandAnimation();
@@ -221,7 +220,7 @@ export class GameScreen extends Container {
 
     /** Fired when the player moves a piece */
     private onMove(data: Match3OnMoveData) {
-        this.effects?.onMove(data);
+        this.vfx?.onMove(data);
     }
 
     /** Fired when match3 detects one or more matches in the grid */
@@ -232,12 +231,12 @@ export class GameScreen extends Container {
             this.comboLevel.text = 'x' + data.combo;
         }
 
-        this.effects?.onMatch(data);
+        this.vfx?.onMatch(data);
     }
 
     /** Fired when a piece is poped out fro the board */
     private onPop(data: Match3OnPopData) {
-        this.effects?.onPop(data);
+        this.vfx?.onPop(data);
     }
 
     /** Fires when the match3 grid finishes auto-processing */

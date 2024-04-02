@@ -1,4 +1,4 @@
-import { Container } from 'pixi.js';
+import { Container, Ticker } from 'pixi.js';
 import { areBundlesLoaded, loadBundles } from './assets';
 import { app } from '../main';
 import { pool } from './pool';
@@ -18,7 +18,7 @@ interface AppScreen extends Container {
     /** Reset screen, after hidden */
     reset?(): void;
     /** Update the screen, passing delta time/step */
-    update?(delta: number): void;
+    update?(time: Ticker): void;
     /** Resize the screen */
     resize?(width: number, height: number): void;
     /** Blur the screen */

@@ -42,30 +42,26 @@ export class ModeSwitcher extends RadioGroup {
                         text: i.text,
                         style: {
                             checked: new Graphics()
-                                .beginFill(bgColor)
-                                .drawRoundedRect(0, 0, width, height, radius)
-                                .endFill()
-                                .beginFill(fillColor)
-                                .drawRoundedRect(
+                                .roundRect(0, 0, width, height, radius)
+                                .fill({ color: bgColor })
+                                .roundRect(
                                     padding,
                                     padding,
                                     width - padding * 2,
                                     height - padding * 2,
                                     radius - padding,
                                 )
-                                .endFill(),
+                                .fill({ color: fillColor }),
                             unchecked: new Graphics()
-                                .beginFill(bgColor)
-                                .drawRoundedRect(0, 0, width, height, radius)
-                                .endFill()
-                                .drawRoundedRect(
+                                .roundRect(0, 0, width, height, radius)
+                                .fill({ color: bgColor })
+                                .roundRect(
                                     padding,
                                     padding,
                                     width - padding * 2,
                                     height - padding * 2,
                                     radius - padding,
-                                )
-                                .endFill(),
+                                ),
 
                             text: {
                                 fontFamily: 'Arial Rounded MT Bold',

@@ -11,32 +11,32 @@ import { sfx } from '../utils/audio';
  */
 export class ResultScore extends Container {
     /** The score message displayed */
-    private label: Label;
+    private messageLabel: Label;
 
     constructor(fill = 0xffffff) {
         super();
-        this.label = new Label('', { fill });
-        this.addChild(this.label);
+        this.messageLabel = new Label('', { fill });
+        this.addChild(this.messageLabel);
     }
 
     /** Show the component */
     public async show(animated = true) {
-        gsap.killTweensOf(this.label);
+        gsap.killTweensOf(this.messageLabel);
         this.visible = true;
         if (animated) {
-            this.label.scale.set(0);
-            this.label.text = 0 + i18n.pointsSuffix;
-            await gsap.to(this.label.scale, { x: 1, y: 1, duration: 0.3, ease: 'back.out' });
+            this.messageLabel.scale.set(0);
+            this.messageLabel.text = 0 + i18n.pointsSuffix;
+            await gsap.to(this.messageLabel.scale, { x: 1, y: 1, duration: 0.3, ease: 'back.out' });
         } else {
-            this.label.text = 0 + i18n.pointsSuffix;
-            this.label.scale.set(1);
+            this.messageLabel.text = 0 + i18n.pointsSuffix;
+            this.messageLabel.scale.set(1);
         }
     }
 
     /** Set the label text */
     public setText(text: string, speed = 1) {
-        if (this.label.text !== text) {
-            this.label.text = text;
+        if (this.messageLabel.text !== text) {
+            this.messageLabel.text = text;
             throttle('score', 100, () => {
                 sfx.play('common/sfx-points.wav', { speed, volume: 0.3 });
             });
@@ -45,7 +45,7 @@ export class ResultScore extends Container {
 
     /** Play score animation, increasing it gradually */
     public async playScore(points: number) {
-        this.label.text = 0 + i18n.pointsSuffix;
+        this.messageLabel.text = 0 + i18n.pointsSuffix;
         if (points === 0) return;
         const score = { points: 0 };
         await gsap.to(score, {
