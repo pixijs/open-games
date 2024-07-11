@@ -300,7 +300,7 @@ export class ResultScreen extends Container implements AppScreen {
     /** A unique identifier for the screen. */
     public static SCREEN_ID = 'result';
     /** An array of bundle IDs for dynamic asset loading. */
-    public static assetBundles = ['images/results-screen'];
+    public static assetBundles = ['results-screen'];
 
     private _background: TilingSprite;
     /** An animated background decor instance. */

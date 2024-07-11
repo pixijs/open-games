@@ -1,28 +1,19 @@
-import { compressJpg, compressPng } from '@assetpack/plugin-compress';
-import { audio } from '@assetpack/plugin-ffmpeg';
-import { json } from '@assetpack/plugin-json';
-import { pixiManifest } from '@assetpack/plugin-manifest';
-import { pixiTexturePacker } from '@assetpack/plugin-texture-packer';
-import { webfont } from '@assetpack/plugin-webfont';
+import { pixiPipes } from '@assetpack/core/pixi';
 
 export default {
     entry: './raw-assets',
     output: './public/assets/',
-    cache: false,
-    plugins: {
-        webfont: webfont(),
-        compressJpg: compressJpg(),
-        compressPng: compressPng(),
-        audio: audio(),
-        json: json(),
-        texture: pixiTexturePacker({
+    cache: true,
+    pipes: [
+        ...pixiPipes({
             texturePacker: {
-                removeFileExtension: true,
+                texturePacker: {
+                    removeFileExtension: true,
+                },
             },
+            manifest: {
+                output: './public/assets/assets-manifest.json',
+            }
         }),
-        manifest: pixiManifest({
-            output: './public/assets/assets-manifest.json'
-        }),
-    },
+    ],
 };
-

@@ -97,7 +97,7 @@ export class PauseOverlay extends Container implements AppScreen {
     /** A unique identifier for the screen */
     public static SCREEN_ID = 'pause';
     /** An array of bundle IDs for dynamic asset loading. */
-    public static assetBundles = ['images/pause-overlay'];
+    public static assetBundles = ['pause-overlay'];
 
     private readonly _background: Graphics;
     private readonly _panel: PausePanel;

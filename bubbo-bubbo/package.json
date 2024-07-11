@@ -10,7 +10,7 @@
     "scripts": {
         "prestart": "run-s assets",
         "start": "vite --open",
-        "clean": "rimraf dist/* public/* .assetpack/*",
+        "clean": "rimraf dist/* public/*",
         "prebuild": "run-s clean format:check lint assets types",
         "build": "vite build --base \"./\"",
         "assets": "assetpack",
@@ -24,30 +24,22 @@
     },
     "dependencies": {
         "gsap": "^3.12.5",
-        "pixi.js": "^8.0.3",
-        "pixi-filters": "^6.0.0",
-        "@pixi/ui": "^2.0.0",
+        "pixi.js": "^8.2.4",
+        "pixi-filters": "^6.0.4",
+        "@pixi/ui": "^2.1.2",
         "@pixi/sound": "6.0.0",
         "typed-signals": "^2.5.0"
     },
     "devDependencies": {
-        "@assetpack/cli": "^0.8.0",
-        "@assetpack/core": "^0.8.0",
-        "@assetpack/plugin-compress": "^0.8.0",
-        "@assetpack/plugin-ffmpeg": "^0.8.0",
-        "@assetpack/plugin-json": "^0.8.0",
-        "@assetpack/plugin-manifest": "^0.8.0",
-        "@assetpack/plugin-mipmap": "^0.8.0",
-        "@assetpack/plugin-texture-packer": "^0.8.0",
-        "@assetpack/plugin-webfont": "^0.8.0",
-        "@typescript-eslint/eslint-plugin": "^7.2.0",
-        "@typescript-eslint/parser": "^7.2.0",
+        "@assetpack/core": "^1.0.0-rc",
+        "@typescript-eslint/eslint-plugin": "^7.16.0",
+        "@typescript-eslint/parser": "^7.16.0",
         "eslint": "^8.57.0",
-        "eslint-plugin-simple-import-sort": "^12.0.0",
+        "eslint-plugin-simple-import-sort": "^12.1.1",
         "npm-run-all": "^4.1.5",
-        "prettier": "^3.2.5",
-        "rimraf": "^5.0.5",
-        "typescript": "^5.4.2",
-        "vite": "^5.1.6"
+        "prettier": "^3.3.2",
+        "rimraf": "^6.0.1",
+        "typescript": "^5.5.3",
+        "vite": "^5.3.3"
     }
 }

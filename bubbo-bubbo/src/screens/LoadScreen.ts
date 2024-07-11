@@ -14,7 +14,7 @@ export class LoadScreen extends Container {
     /** A unique identifier for the screen */
     public static SCREEN_ID = 'loader';
     /** An array of bundle IDs for dynamic asset loading. */
-    public static assetBundles = ['images/preload'];
+    public static assetBundles = ['preload'];
 
     private readonly _background: TilingSprite;
     private readonly _spinner: Sprite;

@@ -10,7 +10,7 @@ export class GameScreen extends Container implements AppScreen {
     /** A unique identifier for the screen */
     public static SCREEN_ID = 'game';
     /** An array of bundle IDs for dynamic asset loading. */
-    public static assetBundles = ['images/game-screen'];
+    public static assetBundles = ['game-screen'];
 
     private readonly _background: TilingSprite;
     private readonly _game: Game;
