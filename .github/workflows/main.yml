@@ -18,7 +18,7 @@ jobs:
   build:
     strategy:
       matrix:
-        game: [bubbo-bubbo-anxin, puzzling-potions-anxin]
+        game: [bubbo-bubbo, puzzling-potions]
     uses: ./.github/workflows/game-workflow.yml
     with:
       game: ${{ matrix.game }}
@@ -27,7 +27,7 @@ jobs:
     needs: build
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.deployment.outputs.page_url }}/${{github.ref_name}}
     runs-on: ubuntu-latest
     steps:
       - name: Download Artifacts
