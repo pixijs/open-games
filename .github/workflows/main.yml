@@ -18,7 +18,7 @@ jobs:
   build:
     strategy:
       matrix:
-        game: [bubbo-bubbo, puzzling-potions]
+        game: [bubbo-bubbo-anxin, puzzling-potions-anxin]
     uses: ./.github/workflows/game-workflow.yml
     with:
       game: ${{ matrix.game }}
