@@ -23,7 +23,7 @@ jobs:
     with:
       game: ${{ matrix.game }}
   deploy:
-    if: github.ref_name == 'main'
+    if: github.ref_name == 'anxin'
     needs: build
     environment:
       name: github-pages
