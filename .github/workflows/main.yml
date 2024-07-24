@@ -16,6 +16,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   build:
+    if: github.ref != 'refs/heads/gh-pages'
     strategy:
       matrix:
         game: [bubbo-bubbo, puzzling-potions]
@@ -23,6 +24,7 @@ jobs:
     with:
       game: ${{ matrix.game }}
   deploy:
+    if: github.ref != 'refs/heads/gh-pages'
     needs: build
     runs-on: ubuntu-latest
     steps:
