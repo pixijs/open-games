@@ -26,6 +26,11 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout gh-pages branch
+        uses: actions/checkout@v3
+        with:
+          ref: gh-pages
+          fetch-depth: 0
       - name: Create branch directory
         run: mkdir -p ${{github.ref_name}}
       - name: Download Artifacts
@@ -38,17 +43,14 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v4
       
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          # Upload entire repository
-          path: '.'
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
-        with:
-          preview: true
+      - name: Commit and push changes
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git commit -m "Update deployment for ${{ github.ref_name }}"
+          git push
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}${{ steps.branch-name.outputs.current_branch }}
+      url: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/${{ github.ref_name }}
 
