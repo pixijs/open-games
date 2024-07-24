@@ -26,18 +26,23 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Create branch directory
+        run: mkdir -p ${{github.ref_name}}
       - name: Download Artifacts
         uses: actions/download-artifact@v4
+        with:
+          path: ${{ github.ref_name }}
+      - name: Display structure of downloaded files
+        run: ls -R
+        working-directory: ${{ github.ref_name }}
       - name: Setup Pages
         uses: actions/configure-pages@v4
-      - name: Get branch name
-        id: branch-name
-        uses: tj-actions/branch-names@v7
+      
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository
-          path: './${{github.ref_name}}'
+          path: '.'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
