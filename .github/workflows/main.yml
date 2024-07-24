@@ -45,5 +45,5 @@ jobs:
           preview: true
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}/${{ steps.branch-name.outputs.current_branch }}
+      url: ${{ steps.deployment.outputs.page_url }}${{ steps.branch-name.outputs.current_branch }}
 
