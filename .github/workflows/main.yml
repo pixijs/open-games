@@ -23,17 +23,16 @@ jobs:
     with:
       game: ${{ matrix.game }}
   deploy:
-    if: github.ref_name == 'anxin'
     needs: build
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}/${{github.ref_name}}
     runs-on: ubuntu-latest
     steps:
       - name: Download Artifacts
         uses: actions/download-artifact@v4
       - name: Setup Pages
         uses: actions/configure-pages@v4
+      - name: Get branch name
+        id: branch-name
+        uses: tj-actions/branch-names@v7
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
@@ -42,4 +41,9 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          preview: true
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}/${{ steps.branch-name.outputs.current_branch }}
 
