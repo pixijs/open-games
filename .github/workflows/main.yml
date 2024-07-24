@@ -23,17 +23,21 @@ jobs:
     with:
       game: ${{ matrix.game }}
   deploy:
-    if: github.ref_name == 'main'
     needs: build
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
+      - name: Create branch directory
+        run: mkdir -p ${{github.ref_name}}
       - name: Download Artifacts
         uses: actions/download-artifact@v4
+        with:
+          path: ${{ github.ref_name }}
+      - name: Display structure of downloaded files
+        run: ls -R
+        working-directory: ${{ github.ref_name }}
       - name: Setup Pages
         uses: actions/configure-pages@v4
+      
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
@@ -42,4 +46,9 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          preview: true
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}${{ steps.branch-name.outputs.current_branch }}
 
