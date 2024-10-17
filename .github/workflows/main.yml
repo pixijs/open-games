@@ -18,7 +18,7 @@ jobs:
   build:
     strategy:
       matrix:
-        game: connectgame
+        game: [connectgame]
     uses: ./.github/workflows/game-workflow.yml
     with:
       game: ${{ matrix.game }}
