@@ -1,4 +1,4 @@
-# Puzzling Potions
+# nf-core/connectgame
 
 Open-source Match-3 game done in PixiJS. The goal of this project is to provide a simple and comprehensive example of professional game development using PixiJS technologies.
 
@@ -29,10 +29,10 @@ This project is built on top of the following PixiJS-based libraries:
 
 ```sh
 # Clone the repository
-git clone https://github.com/pixijs/open-games
+git clone https://github.com/maxulysse/connectgame
 
 # Enter the project folder
-cd ./puzzling-potions
+cd ./connectgame/connectgame
 
 # Install dependencies
 npm install
