@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 28.3.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+
+<svg
+   version="1.1"
+   id="Layer_1"
+   x="0px"
+   y="0px"
+   viewBox="0 0 280 280"
+   xml:space="preserve"
+   sodipodi:docname="piece-frog.svg"
+   width="280"
+   height="280"
+   inkscape:version="1.4 (1:1.4+202410161351+e7c3feb100)"
+   inkscape:export-filename="piece-frog.png"
+   inkscape:export-xdpi="51.42857"
+   inkscape:export-ydpi="51.42857"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+   id="defs4"><rect
+     x="88.306943"
+     y="283.80024"
+     width="244.21437"
+     height="124.84775"
+     id="rect1" /></defs><sodipodi:namedview
+   id="namedview4"
+   pagecolor="#ffffff"
+   bordercolor="#000000"
+   borderopacity="0.25"
+   inkscape:showpageshadow="2"
+   inkscape:pageopacity="0.0"
+   inkscape:pagecheckerboard="0"
+   inkscape:deskcolor="#d1d1d1"
+   inkscape:zoom="0.821"
+   inkscape:cx="126.06577"
+   inkscape:cy="360.53593"
+   inkscape:window-width="1920"
+   inkscape:window-height="1128"
+   inkscape:window-x="0"
+   inkscape:window-y="0"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="Layer_1" />
+<style
+   type="text/css"
+   id="style1">
+	.st0{fill:#3D95FD;}
+</style>
+
+
+
+
+<g
+   id="g1"
+   transform="matrix(7.137551,0,0,7.137551,8.0553018,15.092857)"><path
+     fill="#a0041e"
+     d="m 1,17 8,-7 16,1 1,16 -7,8 C 19,35 19.001,29.001 13,23 6.999,16.999 1,17 1,17 Z"
+     id="path1-0" /><path
+     fill="#ffac33"
+     d="m 0.973,35 c 0,0 -0.036,-7.979 2.985,-11 C 6.979,20.979 15,21.187 15,21.187 15,21.187 14.999,29 11.999,32 c -3,3 -11.026,3 -11.026,3 z"
+     id="path2-2" /><circle
+     fill="#ffcc4d"
+     cx="8.9989996"
+     cy="27"
+     r="4"
+     id="circle2" /><path
+     fill="#55acee"
+     d="m 35.999,0 c 0,0 -10,0 -22,10 -6,5 -6,14 -4,16 2,2 11,2 16,-4 10,-12 10,-22 10,-22 z"
+     id="path3-3" /><path
+     d="M 26.999,5 C 25.376,5 23.986,5.971 23.358,7.36 23.86,7.133 24.413,7 24.999,7 c 2.209,0 4,1.791 4,4 0,0.586 -0.133,1.139 -0.359,1.64 1.389,-0.627 2.359,-2.017 2.359,-3.64 0,-2.209 -1.791,-4 -4,-4 z"
+     id="path4-7" /><path
+     fill="#a0041e"
+     d="M 8,28 C 8,28 8,24 9,23 10,22 22.001,12.001 23,13 23.999,13.999 13.999,26 12.999,27 11.999,28 8,28 8,28 Z"
+     id="path5" /></g></svg>
