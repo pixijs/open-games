@@ -35,7 +35,7 @@ npm run start
 # Building the game
 ```sh
 # Compile the game into a bundle, which can be found in `dist/`
-npm run build`
+npm run build
 ```
 # Known issues
 - Asset bundles aren't currently watched, so any assets being added or removed would mean you have to run `npm run build-assets` again
