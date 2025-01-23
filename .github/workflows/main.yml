@@ -16,6 +16,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   build:
+    if: github.ref != 'refs/heads/gh-pages'
     strategy:
       matrix:
         game: [bubbo-bubbo, puzzling-potions]
@@ -23,23 +24,36 @@ jobs:
     with:
       game: ${{ matrix.game }}
   deploy:
-    if: github.ref_name == 'main'
+    if: github.ref != 'refs/heads/gh-pages'
     needs: build
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout gh-pages branch
+        uses: actions/checkout@v3
+        with:
+          ref: gh-pages
+          fetch-depth: 0
+          token: ${{ secrets.PAT }}
+      - name: Create branch directory
+        run: mkdir -p ${{github.ref_name}}
       - name: Download Artifacts
         uses: actions/download-artifact@v4
+        with:
+          path: ${{ github.ref_name }}
+      - name: Display structure of downloaded files
+        run: ls -R
+        working-directory: ${{ github.ref_name }}
       - name: Setup Pages
         uses: actions/configure-pages@v4
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          # Upload entire repository
-          path: '.'
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      
+      - name: Commit and push changes
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git commit -m "Update deployment for ${{ github.ref_name }}"
+          git push https://${{ secrets.PAT }}@github.com/${{ github.repository }}.git HEAD:gh-pages
+    environment:
+      name: github-pages
+      url: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/${{ github.ref_name }}
 
