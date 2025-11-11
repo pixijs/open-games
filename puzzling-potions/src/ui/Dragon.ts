@@ -1,6 +1,6 @@
 import { Container } from 'pixi.js';
 import gsap from 'gsap';
-import { Spine } from '@pixi/spine-pixi';
+import { Spine } from '@esotericsoftware/spine-pixi-v8';
 
 /**
  * Spine-animated little dragon, that shows up in Home and Result screens.

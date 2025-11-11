@@ -46,7 +46,7 @@ class StatView {
             style: {
                 fontSize: 18,
                 fontWeight: '100',
-                fontFamily: 'Opensans Semibold',
+                fontFamily: 'Opensans-Semibold',
                 fill: 0x000000,
                 align: 'left',
             },
@@ -60,7 +60,7 @@ class StatView {
             style: {
                 fontSize: 18,
                 fontWeight: '100',
-                fontFamily: 'Opensans Semibold',
+                fontFamily: 'Opensans-Semibold',
                 fill: 0x000000,
                 align: 'right',
             },
@@ -119,7 +119,7 @@ class ResultsPanel {
             style: {
                 fontSize: 30,
                 fontWeight: '900',
-                fontFamily: 'Bungee Regular',
+                fontFamily: 'Bungee-Regular',
                 fill: 0x000000,
                 align: 'center',
             },
@@ -193,7 +193,7 @@ class ResultsPanel {
             style: {
                 fontSize: 16,
                 fontWeight: '900',
-                fontFamily: 'Bungee Regular',
+                fontFamily: 'Bungee-Regular',
                 fill: 0x000000,
                 align: 'center',
             },
@@ -265,7 +265,7 @@ class ResultsPanel {
             style: {
                 fontSize: 22,
                 fontWeight: '900',
-                fontFamily: 'Bungee Regular',
+                fontFamily: 'Bungee-Regular',
                 fill: 0x000000,
                 align: 'center',
             },
@@ -279,7 +279,7 @@ class ResultsPanel {
             style: {
                 fontSize: 50,
                 fontWeight: '900',
-                fontFamily: 'Bungee Regular',
+                fontFamily: 'Bungee-Regular',
                 fill: 0x000000,
                 align: 'center',
             },

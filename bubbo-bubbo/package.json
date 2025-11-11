@@ -23,23 +23,23 @@
         "types": "tsc"
     },
     "dependencies": {
-        "gsap": "^3.12.5",
-        "pixi.js": "^8.2.4",
-        "pixi-filters": "^6.0.4",
-        "@pixi/ui": "^2.1.2",
-        "@pixi/sound": "6.0.0",
-        "typed-signals": "^2.5.0"
+        "gsap": "^3.13.0",
+        "pixi.js": "^8.14.1",
+        "pixi-filters": "^6.1.4",
+        "@pixi/ui": "^2.2.7",
+        "@pixi/sound": "6.0.1",
+        "typed-signals": "^3.0.0"
     },
     "devDependencies": {
-        "@assetpack/core": "^1.0.0-rc",
-        "@typescript-eslint/eslint-plugin": "^7.16.0",
+        "@assetpack/core": "^1.7.0",
+        "@typescript-eslint/eslint-plugin": "^7.18.0",
         "@typescript-eslint/parser": "^7.16.0",
-        "eslint": "^8.57.0",
+        "eslint": "^8.57.1",
         "eslint-plugin-simple-import-sort": "^12.1.1",
         "npm-run-all": "^4.1.5",
-        "prettier": "^3.3.2",
-        "rimraf": "^6.0.1",
-        "typescript": "^5.5.3",
-        "vite": "^5.3.3"
+        "prettier": "^3.6.2",
+        "rimraf": "^6.1.0",
+        "typescript": "^5.9.3",
+        "vite": "^7.2.2"
     }
 }

@@ -38,7 +38,7 @@ export class SecondaryButton extends FancyButton {
             style: {
                 // Predefine text styles that can be overwritten
                 fill: 0x000000,
-                fontFamily: 'Bungee Regular',
+                fontFamily: 'Bungee-Regular',
                 fontWeight: 'bold',
                 align: 'center',
                 fontSize: 40,

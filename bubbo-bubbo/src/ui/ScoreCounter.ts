@@ -22,7 +22,7 @@ export class ScoreCounter {
             style: {
                 fontSize: 40,
                 fontWeight: '900',
-                fontFamily: 'Bungee Regular',
+                fontFamily: 'Bungee-Regular',
                 fill: 0x000000,
                 stroke: {
                     color: 0xffffff,

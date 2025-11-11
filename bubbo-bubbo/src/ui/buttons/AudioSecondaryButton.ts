@@ -39,7 +39,7 @@ export class AudioSecondaryButton extends FancyButton {
             text: i18n.t('sound'),
             style: {
                 fill: 0x000000,
-                fontFamily: 'Bungee Regular',
+                fontFamily: 'Bungee-Regular',
                 fontWeight: 'bold',
                 align: 'center',
                 fontSize: 40,

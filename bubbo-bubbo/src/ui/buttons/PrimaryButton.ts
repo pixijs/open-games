@@ -31,7 +31,7 @@ export class PrimaryButton extends FancyButton {
             style: {
                 // Predefine text styles that can be overwritten
                 fill: 0x49c8ff,
-                fontFamily: 'Bungee Regular',
+                fontFamily: 'Bungee-Regular',
                 fontWeight: 'bold',
                 align: 'center',
                 fontSize: 40,

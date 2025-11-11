@@ -28,7 +28,7 @@ class PausePanel {
             style: {
                 fontSize: 30,
                 fontWeight: '900',
-                fontFamily: 'Bungee Regular',
+                fontFamily: 'Bungee-Regular',
                 fill: 0xffffff,
                 align: 'center',
             },
@@ -43,7 +43,7 @@ class PausePanel {
             style: {
                 fontSize: 20,
                 fontWeight: '900',
-                fontFamily: 'Bungee Regular',
+                fontFamily: 'Bungee-Regular',
                 fill: 0x000000,
                 align: 'center',
             },
@@ -57,7 +57,7 @@ class PausePanel {
             style: {
                 fontSize: 60,
                 fontWeight: '900',
-                fontFamily: 'Bungee Regular',
+                fontFamily: 'Bungee-Regular',
                 fill: 0x000000,
                 align: 'center',
             },

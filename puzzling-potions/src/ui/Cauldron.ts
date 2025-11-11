@@ -3,7 +3,7 @@ import gsap from 'gsap';
 import { randomRange } from '../utils/random';
 import { registerCustomEase } from '../utils/animation';
 import { pool } from '../utils/pool';
-import { Spine } from '@pixi/spine-pixi';
+import { Spine } from '@esotericsoftware/spine-pixi-v8';
 
 /** Custom ease curve for splash drops y animation */
 const easeDropJumpOut = registerCustomEase('M0,0,C0,0,0.07,-0.63,0.402,-0.422,0.83,-0.152,1,1,1,1');

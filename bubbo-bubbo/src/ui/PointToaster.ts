@@ -24,7 +24,7 @@ export class PointToaster {
             style: {
                 fontSize: 40,
                 fontWeight: '900',
-                fontFamily: 'Bungee Regular',
+                fontFamily: 'Bungee-Regular',
                 fill: this._tint,
                 stroke: {
                     color: 0x000000,

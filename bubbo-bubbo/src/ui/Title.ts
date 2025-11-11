@@ -23,7 +23,7 @@ export class Title {
             style: {
                 fontSize: 90,
                 fontWeight: '900',
-                fontFamily: 'Bungee Regular',
+                fontFamily: 'Bungee-Regular',
             },
         });
 
@@ -45,7 +45,7 @@ export class Title {
             style: {
                 fontSize: 90,
                 fontWeight: '900',
-                fontFamily: 'Bungee Regular',
+                fontFamily: 'Bungee-Regular',
             },
         });
 
@@ -68,7 +68,7 @@ export class Title {
             style: {
                 fontSize: 32,
                 fontWeight: '900',
-                fontFamily: 'Bungee Regular',
+                fontFamily: 'Bungee-Regular',
             },
         });
 

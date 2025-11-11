@@ -257,7 +257,7 @@ export class TitleScreen extends Container implements AppScreen {
             text: i18n.t('forkGithub'),
             textStyle: {
                 fill: 0xe91e63,
-                fontFamily: 'Opensans Semibold',
+                fontFamily: 'Opensans-Semibold',
                 fontWeight: 'bold',
                 align: 'center',
                 fontSize: 16,

@@ -28,7 +28,7 @@ export class HelperPanel {
             style: {
                 fontSize: 19,
                 fontWeight: '900',
-                fontFamily: 'Opensans Semibold',
+                fontFamily: 'Opensans-Semibold',
                 fill: 0x000000,
                 align: 'center',
             },
