@@ -26,6 +26,6 @@ Below is a list of tools that are used in the games. These tools are also open s
 - [PixiJS Sound](https://github.com/pixijs/sound) A WebAudio API playback library, with filters.
 - [PixiJS UI](https://github.com/pixijs/ui) For commonly used UI components in PixiJS.
 - [PixiJS AssetPack](https://github.com/pixijs/assetpack) Compile and optimise assets for the web.
-- [PixiJS Spine](https://github.com/pixijs/spine) Spine animation support for PixiJS
+- [PixiJS Spine](https://github.com/EsotericSoftware/spine-runtimes/blob/4.2/spine-ts/README.md) Spine animation support for PixiJS
 
 For more plugins and tools, check out the PixiJS Organization on GitHub: https://github.com/pixijs
