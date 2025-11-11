@@ -601,7 +601,7 @@ export class LevelSystem implements System {
         }
 
         // Get the parent's bubble
-        const parent = bubble.view.parent;
+        const parent = bubble.view.parent!;
 
         // If drop, add bubble to top of grid container
         if (drop) parent.addChild(parent.removeChild(bubble.view));

@@ -10,11 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
-    - name: Use Node.js 18.x
-      uses: actions/setup-node@v3
+      uses: actions/checkout@v4
+    - name: Use Node.js 24.x
+      uses: actions/setup-node@v4
       with:
-        node-version: 18
+        node-version: 24
     - name: Install dependencies
       working-directory: ./${{ inputs.game }}
       run: npm ci

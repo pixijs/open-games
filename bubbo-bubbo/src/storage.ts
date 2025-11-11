@@ -27,7 +27,7 @@ export const storage = {
      * Retrieves the storage data.
      * @returns The storage data if it exists, undefined otherwise.
      */
-    getStorage(): StorageData {
+    getStorage(): StorageData | undefined {
         const data = localStorage.getItem(STORAGE_ID);
 
         return data ? JSON.parse(data) : undefined;
@@ -38,7 +38,7 @@ export const storage = {
      * @returns The retrieved value.
      */
     getStorageItem<T extends keyof StorageData>(key: T): StorageData[T] {
-        const data = this.getStorage();
+        const data = this.getStorage()!;
 
         return data[key];
     },
@@ -49,7 +49,7 @@ export const storage = {
      * @returns The set value.
      */
     setStorageItem<T extends keyof StorageData>(key: T, value: StorageData[T]): StorageData[T] {
-        const data = this.getStorage();
+        const data = this.getStorage()!;
 
         // Check if storage and intended item exists
         if (data && key in data) {
