@@ -183,7 +183,7 @@ class Navigation {
 
         // If there is a screen already created, hide it
         if (current) {
-            await this._removeScreen(current);
+            await this._removeScreen(current, isOverlay);
         }
 
         // Load assets for the new screen, if available
