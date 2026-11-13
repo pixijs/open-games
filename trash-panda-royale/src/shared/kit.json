@@ -1,0 +1,1312 @@
+{
+  "_": "Collider templates, in each model's own frame (glTF: +Z out of its front, +X its left; Blender (x, y) is (x, -y) here). The map turns and places them (map.ts placeParts); assets-src/blender reads them to check the models (the walk probe). Ramps rise toward +z (dir 1) or -z (dir -1), from lo to hi.",
+  "buildings": {
+    "bld_house": {
+      "roof": 5.2,
+      "boxes": [
+        {
+          "x": 0,
+          "z": 0,
+          "hx": 4.3,
+          "hz": 4.3,
+          "top": 5.2,
+          "tag": "Building"
+        },
+        {
+          "x": 2.6,
+          "z": -1.8,
+          "hx": 0.43,
+          "hz": 0.43,
+          "top": 8.4,
+          "tag": "RoofClutter"
+        },
+        {
+          "x": 0,
+          "z": 4.6,
+          "hx": 1.03,
+          "hz": 0.3,
+          "base": 2.61,
+          "top": 2.75,
+          "grab": false,
+          "tag": "Awning"
+        }
+      ],
+      "ramps": [
+        {
+          "x": 0,
+          "z": 2.25,
+          "hx": 4.5,
+          "hz": 2.25,
+          "dir": -1,
+          "lo": 5.2,
+          "hi": 8.02,
+          "solid": true,
+          "tag": "Roof"
+        },
+        {
+          "x": 0,
+          "z": -2.25,
+          "hx": 4.5,
+          "hz": 2.25,
+          "dir": 1,
+          "lo": 5.2,
+          "hi": 8.02,
+          "solid": true,
+          "tag": "Roof"
+        }
+      ]
+    },
+    "bld_shop": {
+      "roof": 4.97,
+      "boxes": [
+        {
+          "x": 0,
+          "z": 0,
+          "hx": 5.95,
+          "hz": 4.45,
+          "top": 4.97,
+          "tag": "Building"
+        },
+        {
+          "x": 0,
+          "z": 3.7,
+          "hx": 1.56,
+          "hz": 0.11,
+          "top": 6.46,
+          "grab": false,
+          "tag": "RoofClutter"
+        },
+        {
+          "x": 3.4,
+          "z": -2.1,
+          "hx": 0.65,
+          "hz": 0.45,
+          "top": 5.15,
+          "tag": "RoofClutter"
+        },
+        {
+          "x": -3.8,
+          "z": -2.6,
+          "hx": 0.18,
+          "hz": 0.18,
+          "top": 5.75,
+          "grab": false,
+          "tag": "RoofClutter"
+        },
+        {
+          "x": -1.45,
+          "z": 4.68,
+          "hx": 0.28,
+          "hz": 0.25,
+          "top": 1.06,
+          "grab": false,
+          "tag": "Prop"
+        },
+        {
+          "x": 1.45,
+          "z": 4.68,
+          "hx": 0.28,
+          "hz": 0.25,
+          "top": 1.06,
+          "grab": false,
+          "tag": "Prop"
+        }
+      ],
+      "ramps": [
+        {
+          "x": 0,
+          "z": 4.875,
+          "hx": 5.6,
+          "hz": 0.475,
+          "dir": -1,
+          "lo": 2.92,
+          "hi": 3.4,
+          "solid": true,
+          "thick": 0.3,
+          "tag": "Awning"
+        }
+      ],
+      "stairs": {
+        "_": "a steel flight up the +X side, from beside the front corner to a landing by the back corner (mirrored for the -X side)",
+        "need": 1.35,
+        "ramps": [
+          {
+            "x": 6.55,
+            "z": 0.05,
+            "hx": 0.6,
+            "hz": 3.45,
+            "dir": -1,
+            "lo": 0,
+            "hi": 4.97,
+            "solid": true,
+            "stairs": true,
+            "tag": "Stairs"
+          }
+        ],
+        "boxes": [
+          {
+            "x": 6.55,
+            "z": -3.93,
+            "hx": 0.6,
+            "hz": 0.53,
+            "base": 4.8,
+            "top": 4.97,
+            "tag": "Landing"
+          }
+        ]
+      }
+    },
+    "bld_apartment": {
+      "roof": 13.67,
+      "boxes": [
+        {
+          "x": 0,
+          "z": 0,
+          "hx": 5.75,
+          "hz": 5.45,
+          "top": 13.67,
+          "tag": "Building"
+        },
+        {
+          "x": 0,
+          "z": 5.48,
+          "hx": 5.9,
+          "hz": 0.12,
+          "base": 13.2,
+          "top": 13.94,
+          "grab": false,
+          "tag": "RoofClutter"
+        },
+        {
+          "x": 0,
+          "z": -5.48,
+          "hx": 5.9,
+          "hz": 0.12,
+          "base": 13.2,
+          "top": 13.94,
+          "grab": false,
+          "tag": "RoofClutter"
+        },
+        {
+          "x": 5.78,
+          "z": 0,
+          "hx": 0.12,
+          "hz": 5.6,
+          "base": 13.2,
+          "top": 13.94,
+          "grab": false,
+          "tag": "RoofClutter"
+        },
+        {
+          "x": -5.78,
+          "z": 0,
+          "hx": 0.12,
+          "hz": 5.6,
+          "base": 13.2,
+          "top": 13.94,
+          "grab": false,
+          "tag": "RoofClutter"
+        },
+        {
+          "x": 2.7,
+          "z": -2.4,
+          "hx": 1.0,
+          "hz": 1.0,
+          "top": 16.12,
+          "tag": "RoofClutter"
+        },
+        {
+          "x": -3.0,
+          "z": -2.6,
+          "hx": 1.2,
+          "hz": 1.1,
+          "top": 15.69,
+          "tag": "RoofClutter"
+        },
+        {
+          "x": -3.6,
+          "z": 5.73,
+          "hx": 1.35,
+          "hz": 0.28,
+          "base": 3.3,
+          "top": 3.46,
+          "grab": false,
+          "tag": "Landing"
+        },
+        {
+          "x": 3.6,
+          "z": 5.73,
+          "hx": 1.35,
+          "hz": 0.28,
+          "base": 3.3,
+          "top": 3.46,
+          "grab": false,
+          "tag": "Landing"
+        },
+        {
+          "x": -3.6,
+          "z": 5.73,
+          "hx": 1.35,
+          "hz": 0.28,
+          "base": 6.6,
+          "top": 6.76,
+          "grab": false,
+          "tag": "Landing"
+        },
+        {
+          "x": 3.6,
+          "z": 5.73,
+          "hx": 1.35,
+          "hz": 0.28,
+          "base": 6.6,
+          "top": 6.76,
+          "grab": false,
+          "tag": "Landing"
+        },
+        {
+          "x": -3.6,
+          "z": 5.73,
+          "hx": 1.35,
+          "hz": 0.28,
+          "base": 9.9,
+          "top": 10.06,
+          "grab": false,
+          "tag": "Landing"
+        },
+        {
+          "x": 3.6,
+          "z": 5.73,
+          "hx": 1.35,
+          "hz": 0.28,
+          "base": 9.9,
+          "top": 10.06,
+          "grab": false,
+          "tag": "Landing"
+        },
+        {
+          "x": 0,
+          "z": 5.7,
+          "hx": 1.05,
+          "hz": 0.25,
+          "base": 2.77,
+          "top": 2.91,
+          "grab": false,
+          "tag": "Awning"
+        }
+      ],
+      "stairs": {
+        "_": "a fire escape up the +X side: two lanes (inner by the wall, outer beyond it), four flights switching back between landings that span both lanes, the top one level with the roof (mirrored for the -X side)",
+        "need": 2.4,
+        "ramps": [
+          {
+            "x": 6.3,
+            "z": 0.6,
+            "hx": 0.55,
+            "hz": 2.3,
+            "dir": -1,
+            "lo": 0,
+            "hi": 3.42,
+            "solid": true,
+            "stairs": true,
+            "tag": "Stairs"
+          },
+          {
+            "x": 7.4,
+            "z": 0.6,
+            "hx": 0.55,
+            "hz": 2.3,
+            "dir": 1,
+            "lo": 3.42,
+            "hi": 6.84,
+            "solid": true,
+            "thick": 0.3,
+            "stairs": true,
+            "tag": "Stairs"
+          },
+          {
+            "x": 6.3,
+            "z": 0.6,
+            "hx": 0.55,
+            "hz": 2.3,
+            "dir": -1,
+            "lo": 6.84,
+            "hi": 10.25,
+            "solid": true,
+            "thick": 0.3,
+            "stairs": true,
+            "tag": "Stairs"
+          },
+          {
+            "x": 7.4,
+            "z": 0.6,
+            "hx": 0.55,
+            "hz": 2.3,
+            "dir": 1,
+            "lo": 10.25,
+            "hi": 13.67,
+            "solid": true,
+            "thick": 0.3,
+            "stairs": true,
+            "tag": "Stairs"
+          }
+        ],
+        "boxes": [
+          {
+            "x": 6.85,
+            "z": -2.3,
+            "hx": 1.1,
+            "hz": 0.6,
+            "base": 3.27,
+            "top": 3.42,
+            "tag": "Landing"
+          },
+          {
+            "x": 6.85,
+            "z": 3.5,
+            "hx": 1.1,
+            "hz": 0.6,
+            "base": 6.69,
+            "top": 6.84,
+            "tag": "Landing"
+          },
+          {
+            "x": 6.85,
+            "z": -2.3,
+            "hx": 1.1,
+            "hz": 0.6,
+            "base": 10.1,
+            "top": 10.25,
+            "tag": "Landing"
+          },
+          {
+            "x": 6.85,
+            "z": 3.5,
+            "hx": 1.1,
+            "hz": 0.6,
+            "base": 13.52,
+            "top": 13.67,
+            "tag": "Landing"
+          }
+        ]
+      }
+    },
+    "bld_tower": {
+      "roof": 23.9,
+      "boxes": [
+        {
+          "x": 0,
+          "z": 0,
+          "hx": 7.0,
+          "hz": 7.0,
+          "top": 23.9,
+          "tag": "Building"
+        },
+        {
+          "x": 0,
+          "z": 0,
+          "hx": 4.8,
+          "hz": 4.8,
+          "top": 25.2,
+          "tag": "RoofClutter"
+        },
+        {
+          "x": 0,
+          "z": 0,
+          "hx": 3.2,
+          "hz": 3.2,
+          "top": 26.2,
+          "tag": "RoofClutter"
+        },
+        {
+          "x": 0,
+          "z": 6.9,
+          "hx": 2.5,
+          "hz": 0.6,
+          "base": 3.4,
+          "top": 3.7,
+          "tag": "Awning"
+        },
+        {
+          "x": -3.6,
+          "z": 6.62,
+          "hx": 0.7,
+          "hz": 0.3,
+          "top": 1.25,
+          "grab": false,
+          "tag": "Prop"
+        },
+        {
+          "x": 3.6,
+          "z": 6.62,
+          "hx": 0.7,
+          "hz": 0.3,
+          "top": 1.25,
+          "grab": false,
+          "tag": "Prop"
+        }
+      ]
+    },
+    "bld_donut": {
+      "roof": 4.25,
+      "boxes": [
+        {
+          "x": 0,
+          "z": 0,
+          "hx": 4.85,
+          "hz": 4.85,
+          "top": 4.25,
+          "tag": "Building"
+        },
+        {
+          "x": 0,
+          "z": 4.25,
+          "hx": 1.52,
+          "hz": 0.08,
+          "top": 5.86,
+          "grab": false,
+          "tag": "RoofClutter"
+        },
+        {
+          "x": 0,
+          "z": -0.3,
+          "hx": 1.1,
+          "hz": 1.1,
+          "top": 4.55,
+          "tag": "RoofClutter"
+        },
+        {
+          "x": 0,
+          "z": -0.3,
+          "hx": 1.6,
+          "hz": 0.85,
+          "top": 6.13,
+          "tag": "RoofClutter"
+        },
+        {
+          "x": -1.75,
+          "z": -0.3,
+          "hx": 0.85,
+          "hz": 0.85,
+          "top": 9.63,
+          "tag": "RoofClutter"
+        },
+        {
+          "x": 1.75,
+          "z": -0.3,
+          "hx": 0.85,
+          "hz": 0.85,
+          "top": 9.63,
+          "tag": "RoofClutter"
+        },
+        {
+          "x": 0,
+          "z": -0.3,
+          "hx": 0.9,
+          "hz": 0.85,
+          "base": 7.93,
+          "top": 9.63,
+          "tag": "RoofClutter"
+        }
+      ],
+      "ramps": [
+        {
+          "x": -2.75,
+          "z": 5.15,
+          "hx": 1.4,
+          "hz": 0.3,
+          "dir": -1,
+          "lo": 2.85,
+          "hi": 3.15,
+          "solid": true,
+          "thick": 0.3,
+          "tag": "Awning"
+        },
+        {
+          "x": 2.75,
+          "z": 5.15,
+          "hx": 1.4,
+          "hz": 0.3,
+          "dir": -1,
+          "lo": 2.85,
+          "hi": 3.15,
+          "solid": true,
+          "thick": 0.3,
+          "tag": "Awning"
+        }
+      ]
+    }
+  },
+  "setpieces": {
+    "_": "The mishaps, in their own frame (+z: the side facing the street). 'models' are drawn there; 'buildings' are whole buildings (with their own colliders) placed with them.",
+    "sinkhole": {
+      "pits": [
+        {
+          "x": 0,
+          "z": 0,
+          "hx": 8,
+          "hz": 4,
+          "floor": -2.2
+        }
+      ],
+      "ramps": [
+        {
+          "x": 4.5,
+          "z": 0,
+          "hx": 2.2,
+          "hz": 3.5,
+          "ax": "x",
+          "dir": 1,
+          "lo": -2.2,
+          "hi": 0,
+          "solid": true,
+          "tag": "Rubble"
+        },
+        {
+          "x": -9.0,
+          "z": -2.4,
+          "hx": 1.1,
+          "hz": 0.9,
+          "ax": "x",
+          "dir": 1,
+          "lo": 0,
+          "hi": 0.6,
+          "solid": true,
+          "tag": "Slab"
+        },
+        {
+          "x": 9.1,
+          "z": 2.6,
+          "hx": 0.9,
+          "hz": 0.8,
+          "ax": "x",
+          "dir": -1,
+          "lo": 0,
+          "hi": 0.5,
+          "solid": true,
+          "tag": "Slab"
+        }
+      ],
+      "boxes": [
+        {
+          "x": -10.6,
+          "z": -2.33,
+          "hx": 0.3,
+          "hz": 1.67,
+          "top": 1.0,
+          "grab": false,
+          "tag": "Barrier"
+        },
+        {
+          "x": -10.6,
+          "z": 2.33,
+          "hx": 0.3,
+          "hz": 1.67,
+          "top": 1.0,
+          "grab": false,
+          "tag": "Barrier"
+        },
+        {
+          "x": 10.6,
+          "z": -2.33,
+          "hx": 0.3,
+          "hz": 1.67,
+          "top": 1.0,
+          "grab": false,
+          "tag": "Barrier"
+        },
+        {
+          "x": 10.6,
+          "z": 2.33,
+          "hx": 0.3,
+          "hz": 1.67,
+          "top": 1.0,
+          "grab": false,
+          "tag": "Barrier"
+        }
+      ],
+      "models": [
+        {
+          "model": "sinkhole",
+          "x": 0,
+          "z": 0,
+          "yaw": 0
+        }
+      ],
+      "keep": {
+        "hx": 11.5,
+        "hz": 7.5
+      }
+    },
+    "demolition": {
+      "boxes": [
+        {
+          "x": 0,
+          "z": -3,
+          "hx": 7,
+          "hz": 3,
+          "top": 3.3,
+          "tag": "Slab"
+        },
+        {
+          "x": -2,
+          "z": -4,
+          "hx": 5,
+          "hz": 2,
+          "top": 6.6,
+          "tag": "Slab"
+        },
+        {
+          "x": -4.2,
+          "z": -4.6,
+          "hx": 2.8,
+          "hz": 1.4,
+          "top": 9.9,
+          "tag": "Slab"
+        },
+        {
+          "x": 3.5,
+          "z": 2.3,
+          "hx": 1.5,
+          "hz": 1.1,
+          "top": 1.2,
+          "tag": "Rubble"
+        },
+        {
+          "x": 4.2,
+          "z": -4.4,
+          "hx": 0.75,
+          "hz": 0.7,
+          "top": 4.5,
+          "tag": "Debris"
+        },
+        {
+          "x": 1.9,
+          "z": -4.9,
+          "hx": 0.7,
+          "hz": 0.6,
+          "top": 7.8,
+          "tag": "Debris"
+        },
+        {
+          "x": -6.8,
+          "z": -2.5,
+          "hx": 0.2,
+          "hz": 3.5,
+          "top": 8.4,
+          "grab": false,
+          "tag": "Wall"
+        },
+        {
+          "x": -1.6,
+          "z": -5.8,
+          "hx": 5.4,
+          "hz": 0.2,
+          "top": 11.2,
+          "grab": false,
+          "tag": "Wall"
+        },
+        {
+          "x": 9.6,
+          "z": -4,
+          "hx": 0.45,
+          "hz": 0.45,
+          "top": 22,
+          "grab": false,
+          "tag": "Crane"
+        },
+        {
+          "x": -1.5,
+          "z": -1.4,
+          "hx": 0.55,
+          "hz": 0.55,
+          "base": 11.3,
+          "top": 12.8,
+          "tag": "Crane"
+        },
+        {
+          "x": -4.6,
+          "z": 6.6,
+          "hx": 2.6,
+          "hz": 0.08,
+          "top": 2.0,
+          "grab": false,
+          "tag": "Barrier"
+        },
+        {
+          "x": 4.6,
+          "z": 6.6,
+          "hx": 2.6,
+          "hz": 0.08,
+          "top": 2.0,
+          "grab": false,
+          "tag": "Barrier"
+        }
+      ],
+      "models": [
+        {
+          "model": "bld_demolished",
+          "x": 0,
+          "z": 0,
+          "yaw": 0
+        },
+        {
+          "model": "crane",
+          "x": 9.6,
+          "z": -4,
+          "yaw": 0
+        }
+      ],
+      "keep": {
+        "hx": 11,
+        "hz": 7.5
+      }
+    },
+    "collapsed": {
+      "ramps": [
+        {
+          "x": -0.5,
+          "z": 1.75,
+          "hx": 2.8,
+          "hz": 4.75,
+          "dir": -1,
+          "lo": 0,
+          "hi": 4.97,
+          "solid": true,
+          "tag": "Rubble"
+        }
+      ],
+      "boxes": [
+        {
+          "x": 2.2,
+          "z": -3.2,
+          "hx": 3.4,
+          "hz": 1.4,
+          "top": 4.97,
+          "tag": "Rubble"
+        },
+        {
+          "x": -1.0,
+          "z": -4.8,
+          "hx": 5.0,
+          "hz": 0.25,
+          "top": 7.5,
+          "grab": false,
+          "tag": "Wall"
+        },
+        {
+          "x": -5.8,
+          "z": -1.0,
+          "hx": 0.25,
+          "hz": 4.0,
+          "top": 6.0,
+          "grab": false,
+          "tag": "Wall"
+        },
+        {
+          "x": 4.3,
+          "z": 4.3,
+          "hx": 0.9,
+          "hz": 0.7,
+          "top": 0.8,
+          "tag": "Rubble"
+        },
+        {
+          "x": -4.4,
+          "z": 4.6,
+          "hx": 0.6,
+          "hz": 0.5,
+          "top": 0.6,
+          "tag": "Rubble"
+        }
+      ],
+      "models": [
+        {
+          "model": "bld_collapsed",
+          "x": 0,
+          "z": 0,
+          "yaw": 0
+        }
+      ],
+      "buildings": [
+        {
+          "model": "bld_shop",
+          "x": 11.6,
+          "z": 0.5,
+          "yaw": 0
+        }
+      ],
+      "keep": {
+        "x": 5.5,
+        "hx": 13,
+        "hz": 7
+      }
+    },
+    "shell": {
+      "ramps": [
+        {
+          "x": -3.8,
+          "z": 1.3,
+          "hx": 0.9,
+          "hz": 2.1,
+          "dir": -1,
+          "lo": 0,
+          "hi": 3.3,
+          "solid": true,
+          "tag": "Slab"
+        }
+      ],
+      "boxes": [
+        {
+          "x": -3.75,
+          "z": 4.8,
+          "hx": 2.25,
+          "hz": 0.2,
+          "top": 4.2,
+          "grab": false,
+          "tag": "Wall"
+        },
+        {
+          "x": 3.75,
+          "z": 4.8,
+          "hx": 2.25,
+          "hz": 0.2,
+          "top": 4.2,
+          "grab": false,
+          "tag": "Wall"
+        },
+        {
+          "x": 0.0,
+          "z": -4.8,
+          "hx": 4.0,
+          "hz": 0.2,
+          "top": 4.2,
+          "grab": false,
+          "tag": "Wall"
+        },
+        {
+          "x": 5.5,
+          "z": -4.8,
+          "hx": 0.5,
+          "hz": 0.2,
+          "top": 4.2,
+          "grab": false,
+          "tag": "Wall"
+        },
+        {
+          "x": 4.5,
+          "z": -4.8,
+          "hx": 0.5,
+          "hz": 0.2,
+          "base": 2.2,
+          "top": 4.2,
+          "grab": false,
+          "tag": "Wall"
+        },
+        {
+          "x": -5.8,
+          "z": 0,
+          "hx": 0.2,
+          "hz": 5.0,
+          "top": 4.2,
+          "grab": false,
+          "tag": "Wall"
+        },
+        {
+          "x": 5.8,
+          "z": 0,
+          "hx": 0.2,
+          "hz": 5.0,
+          "top": 4.2,
+          "grab": false,
+          "tag": "Wall"
+        },
+        {
+          "x": -3.8,
+          "z": -2.8,
+          "hx": 2.0,
+          "hz": 2.0,
+          "base": 3.0,
+          "top": 3.3,
+          "tag": "Slab"
+        },
+        {
+          "x": 2.5,
+          "z": -2.0,
+          "hx": 0.8,
+          "hz": 0.6,
+          "top": 0.9,
+          "tag": "Debris"
+        },
+        {
+          "x": 3.8,
+          "z": 2.4,
+          "hx": 0.5,
+          "hz": 0.5,
+          "top": 0.6,
+          "tag": "Debris"
+        }
+      ],
+      "models": [
+        {
+          "model": "bld_shell",
+          "x": 0,
+          "z": 0,
+          "yaw": 0
+        }
+      ],
+      "bins": [
+        {
+          "x": 2.6,
+          "z": 0.6
+        }
+      ],
+      "keep": {
+        "hx": 7.5,
+        "hz": 6.5
+      }
+    },
+    "clocktower": {
+      "boxes": [
+        {
+          "x": 0,
+          "z": 0,
+          "hx": 3.0,
+          "hz": 3.0,
+          "top": 0.4,
+          "tag": "Slab"
+        },
+        {
+          "x": 0,
+          "z": 0,
+          "hx": 2.2,
+          "hz": 2.2,
+          "top": 16.8,
+          "grab": false,
+          "tag": "Building"
+        },
+        {
+          "x": 0,
+          "z": 5.6,
+          "hx": 0.9,
+          "hz": 0.3,
+          "top": 0.45,
+          "grab": false,
+          "tag": "Prop"
+        },
+        {
+          "x": 0,
+          "z": -5.6,
+          "hx": 0.9,
+          "hz": 0.3,
+          "top": 0.45,
+          "grab": false,
+          "tag": "Prop"
+        },
+        {
+          "x": 5.6,
+          "z": 0,
+          "hx": 0.3,
+          "hz": 0.9,
+          "top": 0.45,
+          "grab": false,
+          "tag": "Prop"
+        },
+        {
+          "x": -5.6,
+          "z": 0,
+          "hx": 0.3,
+          "hz": 0.9,
+          "top": 0.45,
+          "grab": false,
+          "tag": "Prop"
+        }
+      ],
+      "models": [
+        {
+          "model": "lm_clocktower",
+          "x": 0,
+          "z": 0,
+          "yaw": 0,
+          "fade": [
+            2.2,
+            2.2,
+            16.8
+          ]
+        },
+        {
+          "model": "bench",
+          "x": 0,
+          "z": 5.6,
+          "yaw": 3.141592653589793
+        },
+        {
+          "model": "bench",
+          "x": 0,
+          "z": -5.6,
+          "yaw": 0
+        },
+        {
+          "model": "bench",
+          "x": 5.6,
+          "z": 0,
+          "yaw": -1.5707963267948966
+        },
+        {
+          "model": "bench",
+          "x": -5.6,
+          "z": 0,
+          "yaw": 1.5707963267948966
+        }
+      ],
+      "bins": [
+        {
+          "x": -4.4,
+          "z": 4.4
+        }
+      ],
+      "keep": {
+        "hx": 9.5,
+        "hz": 8
+      }
+    },
+    "maple": {
+      "boxes": [
+        {
+          "x": 0,
+          "z": 0,
+          "hx": 2.3,
+          "hz": 2.3,
+          "top": 0.32,
+          "tag": "Slab"
+        },
+        {
+          "x": 0,
+          "z": 0,
+          "hx": 3.05,
+          "hz": 1.6,
+          "top": 0.32,
+          "tag": "Slab"
+        },
+        {
+          "x": 0,
+          "z": 0,
+          "hx": 1.6,
+          "hz": 3.05,
+          "top": 0.32,
+          "tag": "Slab"
+        },
+        {
+          "x": 0,
+          "z": 0,
+          "hx": 0.8,
+          "hz": 0.8,
+          "top": 6.0,
+          "grab": false,
+          "tag": "Prop"
+        }
+      ],
+      "models": [
+        {
+          "model": "lm_maple",
+          "x": 0,
+          "z": 0,
+          "yaw": 0
+        }
+      ],
+      "keep": {
+        "hx": 3.4,
+        "hz": 3.4
+      }
+    },
+    "millyard": {
+      "boxes": [
+        {
+          "x": -3,
+          "z": -1,
+          "hx": 6,
+          "hz": 4.5,
+          "top": 4.6,
+          "tag": "Building"
+        },
+        {
+          "x": -7.5,
+          "z": -7.0,
+          "hx": 1.3,
+          "hz": 1.3,
+          "top": 24.0,
+          "grab": false,
+          "tag": "Wall"
+        },
+        {
+          "x": -3,
+          "z": 4.4,
+          "hx": 4,
+          "hz": 0.9,
+          "top": 1.0,
+          "tag": "Slab"
+        },
+        {
+          "x": 4.0,
+          "z": 2.4,
+          "hx": 0.6,
+          "hz": 0.6,
+          "top": 1.2,
+          "tag": "Prop"
+        },
+        {
+          "x": 4.0,
+          "z": 1.0,
+          "hx": 0.6,
+          "hz": 0.7,
+          "top": 2.4,
+          "tag": "Prop"
+        },
+        {
+          "x": 4.8,
+          "z": -2.2,
+          "hx": 0.2,
+          "hz": 0.2,
+          "top": 10.5,
+          "grab": false,
+          "tag": "Prop"
+        },
+        {
+          "x": 9.2,
+          "z": -2.2,
+          "hx": 0.2,
+          "hz": 0.2,
+          "top": 10.5,
+          "grab": false,
+          "tag": "Prop"
+        },
+        {
+          "x": 4.8,
+          "z": -6.6,
+          "hx": 0.2,
+          "hz": 0.2,
+          "top": 10.5,
+          "grab": false,
+          "tag": "Prop"
+        },
+        {
+          "x": 9.2,
+          "z": -6.6,
+          "hx": 0.2,
+          "hz": 0.2,
+          "top": 10.5,
+          "grab": false,
+          "tag": "Prop"
+        },
+        {
+          "x": 7.0,
+          "z": -4.4,
+          "hx": 2.7,
+          "hz": 2.7,
+          "base": 10.5,
+          "top": 14.2,
+          "grab": false,
+          "tag": "Wall"
+        },
+        {
+          "x": 9.6,
+          "z": 5.6,
+          "hx": 0.35,
+          "hz": 0.35,
+          "top": 0.95,
+          "tag": "Prop"
+        },
+        {
+          "x": 10.4,
+          "z": 5.0,
+          "hx": 0.35,
+          "hz": 0.35,
+          "top": 0.95,
+          "tag": "Prop"
+        },
+        {
+          "x": -10.2,
+          "z": 5.4,
+          "hx": 0.6,
+          "hz": 0.5,
+          "top": 0.8,
+          "tag": "Prop"
+        }
+      ],
+      "models": [
+        {
+          "model": "lm_millyard",
+          "x": 0,
+          "z": 0,
+          "yaw": 0,
+          "fade": [
+            6,
+            4.5,
+            4.6,
+            -3,
+            -1
+          ],
+          "roof": 4.6
+        },
+        {
+          "model": "drum",
+          "x": 9.6,
+          "z": 5.6,
+          "yaw": 2.6,
+          "tint": 16731486
+        },
+        {
+          "model": "drum",
+          "x": 10.4,
+          "z": 5.0,
+          "yaw": 0.9,
+          "tint": 16765503
+        }
+      ],
+      "bins": [
+        {
+          "x": -10.4,
+          "z": 7.4
+        }
+      ],
+      "keep": {
+        "hx": 12,
+        "hz": 9.5
+      }
+    },
+    "racsign": {
+      "boxes": [
+        {
+          "x": 0,
+          "z": 0,
+          "hx": 0.3,
+          "hz": 0.3,
+          "top": 8.5,
+          "grab": false,
+          "tag": "Prop"
+        },
+        {
+          "x": 0,
+          "z": 0,
+          "hx": 3.2,
+          "hz": 0.35,
+          "base": 8.5,
+          "top": 14.0,
+          "grab": false,
+          "tag": "Sign"
+        }
+      ],
+      "models": [
+        {
+          "model": "lm_racsign",
+          "x": 0,
+          "z": 0,
+          "yaw": 0
+        }
+      ],
+      "keep": {
+        "hx": 1.2,
+        "hz": 1.2
+      }
+    }
+  }
+}

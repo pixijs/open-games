@@ -1,0 +1,88 @@
+{
+  "$comment": "Test poses for the character rigs (raccoon.glb / human.glb), rendered by assets-src/blender/build_characters_props.py into assets-src/previews/poses_*.png. joints: node -> [x, y, z] rotation in radians, @pixi/3d / three.js Euler XYZ in glTF axes (+Y up, +Z = the model's front, +X = the model's left), i.e. exactly what CharacterView writes with node.rotation.set(x, y, z) (rest rotations are identity). Joints a model does not have are ignored (people have no ears/tail). body: the whole-model transform the game puts on CharacterView.body (rot = Euler XYZ about the feet, y = lift in metres). 'idle' is the Animator's base pose; the others add the pose on top of it.",
+  "poses": {
+    "idle": {
+      "joints": {
+        "arm_l": [0, 0, 0.1], "arm_r": [0, 0, -0.1],
+        "forearm_l": [-0.25, 0, 0], "forearm_r": [-0.25, 0, 0],
+        "ear_l": [0, 0, 0.15], "ear_r": [0, 0, -0.15],
+        "tail_0": [0.5, 0, 0], "tail_1": [0.3, 0, 0], "tail_2": [0.2, 0, 0]
+      }
+    },
+    "walk_left_step": {
+      "joints": {
+        "leg_l": [-0.6, 0, 0], "leg_r": [0.6, 0, 0],
+        "foot_l": [0.36, 0, 0], "foot_r": [-0.36, 0, 0],
+        "arm_l": [0.5, 0, 0.1], "arm_r": [-0.5, 0, -0.1],
+        "forearm_l": [-0.55, 0, 0], "forearm_r": [-0.55, 0, 0],
+        "hips": [0, 0, 0.12], "torso": [0.05, 0.15, 0],
+        "ear_l": [0, 0, 0.15], "ear_r": [0, 0, -0.15],
+        "tail_0": [0.5, -0.25, 0], "tail_1": [0.3, 0, 0], "tail_2": [0.2, 0, 0]
+      }
+    },
+    "aim": {
+      "joints": {
+        "arm_r": [-1.57, 0, 0], "forearm_r": [-0.15, 0, 0],
+        "arm_l": [0, 0, 0.1], "forearm_l": [-0.25, 0, 0],
+        "ear_l": [0, 0, 0.15], "ear_r": [0, 0, -0.15],
+        "tail_0": [0.5, 0, 0], "tail_1": [0.3, 0, 0], "tail_2": [0.2, 0, 0]
+      }
+    },
+    "aim_two_handed": {
+      "joints": {
+        "arm_r": [-1.45, 0.15, 0], "forearm_r": [-0.15, 0, 0],
+        "arm_l": [-1.35, 0, -0.55], "forearm_l": [-0.6, 0, 0],
+        "ear_l": [0, 0, 0.15], "ear_r": [0, 0, -0.15],
+        "tail_0": [0.5, 0, 0], "tail_1": [0.3, 0, 0], "tail_2": [0.2, 0, 0]
+      }
+    },
+    "throw_windup": {
+      "joints": {
+        "arm_r": [-2.6, 0, 0], "forearm_r": [-0.15, 0, 0],
+        "arm_l": [0, 0, 0.1], "forearm_l": [-0.25, 0, 0],
+        "ear_l": [0, 0, 0.15], "ear_r": [0, 0, -0.15],
+        "tail_0": [0.5, 0, 0], "tail_1": [0.3, 0, 0], "tail_2": [0.2, 0, 0]
+      }
+    },
+    "sit_drive": {
+      "joints": {
+        "leg_l": [-1.45, 0, 0], "leg_r": [-1.45, 0, 0],
+        "foot_l": [1.3, 0, 0], "foot_r": [1.3, 0, 0],
+        "arm_l": [-1.2, 0, 0.1], "arm_r": [-1.2, 0, -0.1],
+        "forearm_l": [-0.5, 0, 0], "forearm_r": [-0.5, 0, 0],
+        "ear_l": [0.4, 0, 0.15], "ear_r": [0.4, 0, -0.15],
+        "tail_0": [-0.4, 0, 0], "tail_1": [0.3, 0, 0], "tail_2": [0.2, 0, 0]
+      }
+    },
+    "arms_up_panic": {
+      "joints": {
+        "arm_l": [-2.9, 0, 0.3], "arm_r": [-2.9, 0, -0.3],
+        "forearm_l": [-0.25, 0, 0], "forearm_r": [-0.25, 0, 0],
+        "head": [0, 1.1, 0],
+        "ear_l": [-0.8, 0, 0.15], "ear_r": [-0.8, 0, -0.15],
+        "tail_0": [1.0, 0, 0], "tail_1": [0.3, 0, 0], "tail_2": [0.2, 0, 0]
+      }
+    },
+    "gallop": {
+      "joints": {
+        "torso": [1.15, 0, 0], "head": [-0.9, 0, 0],
+        "arm_l": [-0.35, 0, 0.1], "arm_r": [-0.35, 0, -0.1],
+        "forearm_l": [-0.2, 0, 0], "forearm_r": [-0.2, 0, 0],
+        "leg_l": [-0.6, 0, 0], "leg_r": [-0.6, 0, 0],
+        "ear_l": [0.7, 0, 0.15], "ear_r": [0.7, 0, -0.15],
+        "tail_0": [-0.1, 0, 0], "tail_1": [-0.1, 0, 0], "tail_2": [0.2, 0, 0]
+      },
+      "body": {"rot": [0, 0, 0], "y": -0.12}
+    },
+    "ko_lying": {
+      "joints": {
+        "leg_l": [0, 0, 0.2], "leg_r": [0, 0, -0.2],
+        "arm_l": [0, 0, 1.2], "arm_r": [0, 0, -1.2],
+        "forearm_l": [-0.25, 0, 0], "forearm_r": [-0.25, 0, 0],
+        "ear_l": [0, 0, 0.15], "ear_r": [0, 0, -0.15],
+        "tail_0": [-0.5, 0, 0], "tail_1": [0.3, 0, 0], "tail_2": [0.2, 0, 0]
+      },
+      "body": {"rot": [-1.5708, 0, 0], "y": 0.16}
+    }
+  }
+}
