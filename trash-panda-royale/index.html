@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Trash Panda Royale</title>
+    <link rel="icon" type="image/png" href="/assets/icons/raccoon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Semi+Condensed:wght@500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --ink: #2b2340; --pink: #ff5d8f; --sun: #ffd23f; --sky: #6ec3ff; --sheet: rgba(26, 20, 48, .9); --mist: #cfc6f2;
+        --display: "Bebas Neue", Impact, "Arial Narrow", sans-serif;
+        --body: "Barlow Semi Condensed", "Arial Narrow", system-ui, sans-serif;
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; height: 100%; overflow: hidden; background: #9ad7ff; font-family: var(--body); color: var(--ink); }
+      canvas { display: block; }
+      body > canvas { cursor: none; } /* the game's: it draws its own crosshair */
+
+      /* The menu: your raccoon stands in the middle of the town, your name over its head and
+         "DRESS ME UP!" at its feet; the logo floats top left, the keys bottom left, and PLAY! is
+         a sunny wedge in the corner. DRESS ME UP! slides in the wardrobe: a dark sheet down the
+         left with a slanted sunny edge (the raccoon steps right to make room), and turns into
+         LOOKIN' GOOD!, which slides it away again; "credits", by the keys, slides in the same
+         sheet with the credits on it instead. Bebas Neue for the big words, Barlow Semi
+         Condensed for the rest. Every size is a number of design pixels times --u, which
+         follows the window's size. */
+      #menu {
+        --side: calc(430 * var(--u)); --pad: calc(24 * var(--u)); --cut: calc(90 * var(--u)); --band: calc(12 * var(--u));
+        --play-w: calc(480 * var(--u)); --play-h: calc(160 * var(--u));
+        --u: clamp(0.7px, min(calc(100vh / 760), calc(100vw / 1100)), 1.7px);
+        position: fixed; inset: 0; z-index: 10; display: grid; grid-template-columns: var(--side) 1fr; grid-template-rows: minmax(0, 1fr) auto;
+        column-gap: calc(var(--pad) * 3); padding: var(--pad) var(--pad) var(--pad) calc(var(--pad) * 1.4);
+        transition: opacity .4s ease; color: #fff; font-weight: 600;
+      }
+      @supports (height: 100dvh) {
+        #menu { --u: clamp(0.7px, min(calc(100dvh / 760), calc(100vw / 1100)), 1.7px); }
+      }
+      /* big words over the town get an ink outline (thicker for bigger text); text on the sheet a soft shadow */
+      #menu, #menu * {
+        --o: max(1.5px, .06em);
+        text-shadow: var(--o) var(--o) 0 var(--ink), calc(-1 * var(--o)) calc(-1 * var(--o)) 0 var(--ink), var(--o) calc(-1 * var(--o)) 0 var(--ink),
+          calc(-1 * var(--o)) var(--o) 0 var(--ink), 0 .1em 0 var(--ink), 0 .18em .3em rgba(10, 6, 24, .45);
+      }
+      #side, #side *, #credits, #credits *, #foot, #foot * { text-shadow: 0 calc(1 * var(--u)) calc(3 * var(--u)) rgba(10, 6, 24, .45); }
+      /* an opaque sky while loading (and while joining: it hides the camera's jump to your spawn) */
+      #menu::before {
+        content: ""; position: absolute; inset: 0; z-index: -2;
+        background: radial-gradient(circle at 65% 35%, #c8ecff 0%, #8fd0ff 55%, #6ab6f5 100%);
+        transition: opacity .6s ease;
+      }
+      /* the sheet (::before) and its sunny slanted edge (::after): off to the left until DRESS
+         ME UP! (or "credits") slides it in; #menu.open while it's in */
+      #sheet {
+        position: absolute; top: 0; bottom: 0; left: 0; z-index: -1; pointer-events: none;
+        width: calc(var(--side) + var(--pad) * 3.4 + var(--cut) + var(--band));
+        transition: transform .35s cubic-bezier(.2, .8, .2, 1);
+      }
+      #menu:not(.open) #sheet { transform: translateX(-100%); }
+      #sheet::before, #sheet::after { content: ""; position: absolute; top: 0; bottom: 0; left: 0; }
+      #sheet::before {
+        right: var(--band); background: var(--sheet); backdrop-filter: blur(8px);
+        clip-path: polygon(0 0, 100% 0, calc(100% - var(--cut)) 100%, 0 100%);
+      }
+      #sheet::after {
+        right: 0; background: var(--sun);
+        clip-path: polygon(calc(100% - var(--band)) 0, 100% 0, calc(100% - var(--cut)) 100%, calc(100% - var(--cut) - var(--band)) 100%);
+      }
+      @media (prefers-reduced-motion: reduce) { #sheet { transition: none; } }
+      #menu.stage::before { opacity: 0; }
+      #menu.stage.joining::before { opacity: 1; transition-duration: .25s; }
+      #menu.hidden { opacity: 0; pointer-events: none; }
+      button { font: inherit; color: inherit; cursor: pointer; background: none; border: 0; padding: 0; }
+      :focus-visible { outline: calc(3 * var(--u)) solid var(--sky); outline-offset: calc(4 * var(--u)); border-radius: calc(6 * var(--u)); }
+
+      /* the demo tab, top right: whose demo this is, and where to get the source. A corner of the dark
+         sheet hanging from the top, its left side slanted like PLAY!'s with a sunny band along
+         it (the sheet's edge), its bottom and its words turned like the logo; a label like the
+         credits' over sunny words like BACK's. Brighter under the pointer, nothing moves. */
+      #demo {
+        --s: calc(22 * var(--u)); --t: calc(8 * var(--u)); --b: calc(7 * var(--u));
+        position: absolute; top: 0; right: 0; z-index: 2; isolation: isolate;
+        display: flex; align-items: center; white-space: nowrap; text-decoration: none;
+        padding: calc(10 * var(--u)) calc(18 * var(--u)) calc(12 * var(--u) + var(--t)) calc(var(--s) + var(--b) + 12 * var(--u));
+        transition: opacity .3s ease;
+      }
+      #demo::before, #demo::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+      #demo::before { background: var(--sun); clip-path: polygon(var(--s) 0, 100% 0, 100% calc(100% - var(--t)), 0 100%); transition: background .12s; }
+      #demo::after {
+        background: var(--sheet); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+        clip-path: polygon(calc(var(--s) + var(--b)) 0, 100% 0, 100% calc(100% - var(--t)), var(--b) 100%);
+      }
+      #demo, #demo * { text-shadow: 0 calc(1 * var(--u)) calc(3 * var(--u)) rgba(10, 6, 24, .45); }
+      #demo > span { display: flex; flex-direction: column; gap: calc(2 * var(--u)); transform: rotate(-3deg); }
+      #demo small { font-size: max(11px, calc(13 * var(--u))); font-weight: 700; line-height: 1.2; letter-spacing: .04em; color: var(--mist); }
+      #demo b {
+        font-family: var(--display); font-weight: 400; font-size: max(20px, calc(24 * var(--u))); line-height: 1;
+        letter-spacing: .04em; text-transform: uppercase; color: var(--sun); transition: color .12s;
+      }
+      #demo:hover b, #demo:focus-visible b { color: #fff3b0; }
+      #demo:hover::before, #demo:focus-visible::before { background: #fff3b0; }
+      #demo:focus-visible { outline: none; }
+      #demo:focus-visible b { text-decoration: underline calc(3 * var(--u)); text-underline-offset: calc(4 * var(--u)); }
+      #menu.stage.joining #demo { opacity: 0; pointer-events: none; }
+
+      /* the logo, top of the sheet: a picture (already tilted) */
+      #title { position: absolute; top: calc(12 * var(--u)); left: var(--pad); margin: 0; z-index: 1; pointer-events: none; }
+      #title img { display: block; width: calc(370 * var(--u)); height: auto; }
+
+      /* the raccoon's stage: all of the town, or right of the wardrobe while it's open. Drag it
+         round; your name floats over its head, DRESS ME UP! at its feet and, while dressing,
+         the hint under that (MenuStage puts them there), clear of PLAY! */
+      #stage { grid-column: 1 / -1; grid-row: 1 / -1; position: relative; min-height: 0; cursor: grab; touch-action: none; margin-bottom: calc(var(--play-h) * .55); }
+      #menu.open #stage { grid-column: 2; }
+      #stage.dragging { cursor: grabbing; }
+      #spin {
+        position: absolute; left: 50%; top: 80%; z-index: 2; transform: translate(-50%, calc(66 * var(--u))); font-size: calc(17 * var(--u)); font-weight: 700;
+        white-space: nowrap; opacity: 0; transition: opacity .3s; pointer-events: none;
+      }
+      #menu.stage.dressing #spin { opacity: .9; }
+      #menu.stage.joining #spin, #menu.stage.joining #nametag, #menu.stage.joining #dress { opacity: 0; pointer-events: none; }
+      /* DRESS ME UP!: sunny words (and a top hat) at the raccoon's feet, turned like the logo;
+         brighter under the pointer, nothing moves. While dressing it says LOOKIN' GOOD! */
+      #dress {
+        position: absolute; left: 50%; top: 80%; z-index: 3; transform: translate(-50%, calc(8 * var(--u))) rotate(-3deg);
+        display: flex; align-items: center; gap: calc(4 * var(--u)); white-space: nowrap;
+        font-family: var(--display); font-weight: 400; font-size: calc(40 * var(--u)); line-height: 1; letter-spacing: .04em; color: var(--sun);
+        opacity: 0; pointer-events: none; transition: opacity .6s, color .12s;
+      }
+      #menu.stage #dress { opacity: 1; pointer-events: auto; }
+      #menu.credits #dress { opacity: 0; pointer-events: none; transition-duration: .2s; }
+      #dress canvas { flex: none; width: calc(50 * var(--u)); height: calc(50 * var(--u)); margin: calc(-8 * var(--u)) 0; transform: rotate(-14deg); }
+      #dress kbd { font-size: .6em; margin-left: calc(4 * var(--u)); }
+      #dress:hover { color: #fff3b0; }
+      #dress .done, #menu.dressing #dress .go { display: none; }
+      #menu.dressing #dress .done { display: inline; }
+      #dress:focus-visible { outline: none; }
+      #dress:focus-visible .go, #dress:focus-visible .done { text-decoration: underline calc(3 * var(--u)); text-underline-offset: calc(5 * var(--u)); }
+      #nametag {
+        position: absolute; left: 70%; top: 32%; z-index: 2; display: flex; align-items: center; gap: calc(8 * var(--u));
+        transform: translate(-50%, -100%); transition: opacity .3s;
+      }
+      #name {
+        width: calc(250 * var(--u)); font-family: var(--display); font-size: calc(44 * var(--u)); font-weight: 400; letter-spacing: .04em;
+        text-align: center; color: #fff; background: none; border: 0; border-bottom: calc(3 * var(--u)) dashed rgba(255, 255, 255, .55);
+        padding: 0 0 calc(1 * var(--u)); outline: none; caret-color: var(--sun); border-radius: 0;
+      }
+      #name:hover, #name:focus { border-bottom-color: var(--sun); }
+      #name::placeholder { color: rgba(255, 255, 255, .75); }
+      #dice { font-size: calc(28 * var(--u)); opacity: .85; transition: opacity .12s; }
+      #dice:hover { opacity: 1; }
+
+      /* The wardrobe, on the sheet: it fades in once the sheet is in, and out as it goes. One
+         vertical rhythm (design px): 40 under the logo, 18 under the heading, 14 between rows.
+         Nothing here moves or changes size when hovered or picked (colours, glows and
+         underlines only), so nothing around it shifts either. */
+      /* (room either side for the pictures' glow, which must not make the sheet scroll sideways) */
+      #side { grid-column: 1; grid-row: 1; display: flex; flex-direction: column; min-height: 0; overflow: hidden auto;
+        scrollbar-width: none; padding: calc(263 * var(--u)) calc(12 * var(--u)) 0; margin: 0 calc(-12 * var(--u));
+        transition: opacity .15s ease, visibility 0s linear .15s; }
+      #menu:not(.dressing) #side { opacity: 0; visibility: hidden; }
+      #menu.dressing #side { transition: opacity .25s ease .15s, visibility 0s; }
+      @media (prefers-reduced-motion: reduce) { #side, #menu.dressing #side { transition: none; } }
+      .looks-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: calc(18 * var(--u)); }
+      .looks-head b { font-family: var(--display); font-weight: 400; font-size: calc(34 * var(--u)); line-height: 1; letter-spacing: .05em; }
+      .surprise { font-size: calc(18 * var(--u)); font-weight: 700; color: var(--sun); text-decoration-thickness: calc(2 * var(--u)); text-underline-offset: calc(4 * var(--u)); }
+      .surprise:hover { text-decoration: underline; }
+      #looks { display: flex; flex-direction: column; gap: calc(14 * var(--u)); margin-bottom: calc(28 * var(--u)); }
+      /* a row: what it is, and in sun what you wear, over its pictures */
+      .opt { display: flex; flex-direction: column; gap: calc(4 * var(--u)); }
+      .opt-head { display: flex; align-items: baseline; gap: calc(10 * var(--u)); min-width: 0; line-height: calc(22 * var(--u)); }
+      .opt-head span { font-size: calc(12 * var(--u)); font-weight: 700; text-transform: uppercase; letter-spacing: .16em; color: var(--mist); }
+      .opt-head b { font-size: calc(17 * var(--u)); font-weight: 600; color: var(--sun); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      /* The pictures float on the sheet, a little dim; brighter under the pointer; the one you
+         wear lit, a soft sunny glow behind it and a sunny underline. */
+      .tiles { --tile: calc(66 * var(--u)); display: flex; align-items: center; gap: calc(6.8 * var(--u)); }
+      .tiles-gap { flex: none; width: calc(16 * var(--u)); }
+      .tile { position: relative; flex: none; width: var(--tile); height: var(--tile); isolation: isolate; opacity: .72; transition: opacity .1s; }
+      .tile canvas { display: block; width: 100%; height: 100%; }
+      .tile::before {
+        content: ""; position: absolute; inset: -14%; z-index: -1; border-radius: 50%; opacity: 0; transition: opacity .1s;
+        background: radial-gradient(closest-side, rgba(255, 210, 63, .4), rgba(255, 210, 63, .12) 65%, rgba(255, 210, 63, 0));
+      }
+      .tile::after {
+        content: ""; position: absolute; left: 26%; right: 26%; bottom: calc(-5 * var(--u)); height: calc(3 * var(--u));
+        border-radius: 99px; background: var(--sun); opacity: 0;
+      }
+      .tile:hover { opacity: .92; }
+      .tile[aria-pressed="true"], .tile[aria-pressed="true"]::before, .tile[aria-pressed="true"]::after { opacity: 1; }
+      /* (no pictures: their names) */
+      .tile.named { width: auto; height: calc(30 * var(--u)); font-size: calc(17 * var(--u)); }
+      .tile.named[aria-pressed="true"] { color: var(--sun); }
+
+      /* The colours, last: an open palette takes the free room above PLAY! and moves nothing.
+         Three pickers in fixed columns (the colour you have, what it's for over its name); a
+         click opens its palette under them. */
+      .colours { display: flex; flex-direction: column; gap: calc(14 * var(--u)); margin-top: calc(4 * var(--u)); }
+      .picks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: calc(12 * var(--u)); }
+      .pick { display: flex; align-items: center; gap: calc(10 * var(--u)); min-width: 0; text-align: left; color: #ece8ff; transition: color .1s; }
+      .pick .dot {
+        flex: none; width: calc(30 * var(--u)); height: calc(30 * var(--u)); border-radius: 50%; background: var(--c); transition: box-shadow .1s;
+        box-shadow: 0 0 0 calc(2.5 * var(--u)) rgba(255, 255, 255, .35), 0 calc(3 * var(--u)) calc(6 * var(--u)) rgba(10, 6, 24, .45);
+      }
+      .pick > span { display: flex; flex-direction: column; min-width: 0; line-height: 1.15; }
+      .pick b { font-size: calc(11 * var(--u)); font-weight: 700; text-transform: uppercase; letter-spacing: .16em; color: var(--mist); }
+      .pick small { font-size: calc(18 * var(--u)); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .pick small::after { content: "▾"; display: inline-block; margin-left: calc(4 * var(--u)); font-size: .8em; }
+      .pick:hover { color: #fff3b0; }
+      .pick:hover .dot { box-shadow: 0 0 0 calc(2.5 * var(--u)) rgba(255, 255, 255, .8), 0 calc(3 * var(--u)) calc(6 * var(--u)) rgba(10, 6, 24, .45); }
+      .pick[aria-expanded="true"], .pick[aria-expanded="true"] b { color: var(--sun); }
+      .pick[aria-expanded="true"] small::after { content: "▴"; }
+      .pick[aria-expanded="true"] .dot { box-shadow: 0 0 0 calc(3 * var(--u)) var(--ink), 0 0 0 calc(6 * var(--u)) var(--sun); }
+      .pick:disabled { opacity: .35; cursor: default; }
+      .palette { display: flex; flex-direction: column; gap: calc(10 * var(--u)); animation: fadein .15s ease-out; }
+      .palette[hidden] { display: none; }
+      .palette .group { display: flex; flex-wrap: wrap; align-items: center; gap: calc(9 * var(--u)) calc(10 * var(--u)); }
+      .palette .sw-gap { width: calc(10 * var(--u)); }
+      @keyframes fadein { from { opacity: 0; } }
+      @media (prefers-reduced-motion: reduce) { .palette { animation: none; } }
+      .sw {
+        width: calc(28 * var(--u)); height: calc(28 * var(--u)); border-radius: 50%; background: var(--c); transition: box-shadow .1s;
+        box-shadow: 0 0 0 calc(2.5 * var(--u)) rgba(255, 255, 255, .35), 0 calc(3 * var(--u)) calc(6 * var(--u)) rgba(10, 6, 24, .45);
+      }
+      .sw:hover { box-shadow: 0 0 0 calc(2.5 * var(--u)) rgba(255, 255, 255, .9), 0 calc(3 * var(--u)) calc(6 * var(--u)) rgba(10, 6, 24, .45); }
+      .sw[aria-pressed="true"] { box-shadow: 0 0 0 calc(3 * var(--u)) var(--ink), 0 0 0 calc(6 * var(--u)) #fff, 0 calc(3 * var(--u)) calc(8 * var(--u)) rgba(10, 6, 24, .5); }
+
+      /* The credits, on the same sheet (the wardrobe or them, never both): who made what, in
+         the wardrobe's rhythm under the logo, and BACK at the foot of the sheet where the keys
+         were. They hold still too: a link only brightens and underlines. */
+      #credits { grid-column: 1; grid-row: 1 / -1; display: flex; flex-direction: column; min-height: 0; overflow: hidden auto;
+        scrollbar-width: none; padding-top: calc(263 * var(--u)); transition: opacity .15s ease, visibility 0s linear .15s; }
+      #menu:not(.credits) #credits { opacity: 0; visibility: hidden; }
+      #menu.credits #credits { transition: opacity .25s ease .15s, visibility 0s; }
+      @media (prefers-reduced-motion: reduce) { #credits, #menu.credits #credits { transition: none; } }
+      .roll { display: flex; flex-direction: column; gap: calc(18 * var(--u)); margin: 0; }
+      .roll div { display: flex; flex-direction: column; gap: calc(3 * var(--u)); }
+      .roll dt { font-size: calc(12 * var(--u)); font-weight: 700; line-height: 1.2; text-transform: uppercase; letter-spacing: .16em; color: var(--mist); }
+      .roll dd { margin: 0; font-size: calc(16 * var(--u)); font-weight: 500; line-height: 1.25; color: #ddd6fb; }
+      .roll dd.who { font-family: var(--display); font-weight: 400; font-size: calc(32 * var(--u)); line-height: 1; letter-spacing: .04em; color: #fff; }
+      #credits a { color: var(--sun); font-weight: 700; text-decoration: none; text-decoration-thickness: calc(2 * var(--u)); text-underline-offset: calc(3 * var(--u)); transition: color .12s; }
+      #credits a:hover, #credits a:focus-visible { color: #fff3b0; text-decoration-line: underline; }
+      #credits a:focus-visible { outline: none; }
+      #back {
+        align-self: flex-start; margin-top: auto; padding-top: calc(10 * var(--u));
+        /* (room for the arrow, from a fallback font that hangs lower: else the sheet scrolls) */
+        font-family: var(--display); font-weight: 400; font-size: calc(34 * var(--u)); line-height: 1.35; letter-spacing: .04em; color: var(--sun); transition: color .12s;
+      }
+      #back kbd { font-family: var(--body); font-size: .45em; letter-spacing: .06em; margin-left: calc(6 * var(--u)); }
+      #back:hover { color: #fff3b0; }
+      #back:focus-visible { outline: none; text-decoration: underline calc(3 * var(--u)); text-underline-offset: calc(5 * var(--u)); }
+
+      /* PLAY!: a sunny wedge in the bottom-right corner, over the town, its left side slanted
+         like the sheet's edge (a pink band along it) and its top turned like the logo. Until
+         the game is ready (under the loading screen) it is dark; then it fills with sun and
+         says PLAY! (Enter presses it too). Under the pointer it brightens and a sheen sweeps
+         across it once; nothing in it moves. */
+      #play {
+        --s: calc(64 * var(--u)); --t: calc(26 * var(--u)); --b: calc(12 * var(--u));
+        position: absolute; right: 0; bottom: 0; z-index: 3; width: var(--play-w); height: var(--play-h);
+        display: flex; flex-direction: column; align-items: center; justify-content: center; gap: calc(2 * var(--u));
+        padding: var(--t) calc(12 * var(--u)) calc(10 * var(--u)) calc(var(--s) * .75 + var(--b)); isolation: isolate;
+        font-family: var(--display); font-weight: 400; color: #fff;
+      }
+      #play::before, #play .wedge { content: ""; position: absolute; inset: 0; pointer-events: none; }
+      #play::before { z-index: -2; background: var(--pink); clip-path: polygon(var(--s) var(--t), 100% 0, 100% 100%, 0 100%); transition: background .12s; }
+      #play .wedge { z-index: -1; overflow: hidden; background: var(--sheet); clip-path: polygon(calc(var(--s) + var(--b)) var(--t), 100% 0, 100% 100%, var(--b) 100%); }
+      /* the sun: speed stripes along the slanted edge, over a warm gradient */
+      #progress {
+        --stripes: repeating-linear-gradient(115deg, rgba(255, 255, 255, 0) 0 calc(26 * var(--u)), rgba(255, 255, 255, .16) calc(26 * var(--u)) calc(40 * var(--u)));
+        position: absolute; inset: 0 auto 0 0; width: 0; transition: width .2s;
+        background: var(--stripes), linear-gradient(180deg, #ffe680 0%, var(--sun) 48%, #ffb627 100%);
+      }
+      #play .wedge::after {
+        content: ""; position: absolute; inset: 0; background: linear-gradient(115deg, transparent 40%, rgba(255, 255, 255, .75) 50%, transparent 60%) no-repeat;
+        background-size: 250% 100%; background-position: 160% 0;
+      }
+      #play .label { font-size: calc(64 * var(--u)); line-height: .9; letter-spacing: .04em; white-space: nowrap; transform: rotate(-3deg); }
+      #play .sub {
+        max-width: 100%; font-family: var(--body); font-size: calc(15 * var(--u)); font-weight: 700; line-height: 1.2; letter-spacing: .06em;
+        text-align: center; transform: rotate(-3deg); overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+      }
+      #play kbd { color: inherit; }
+      #play:not(.ready) .enter, #status:not(:empty) + .enter { display: none; }
+      #play:disabled { cursor: progress; }
+      /* loaded: all sun, ink letters standing out of it */
+      #play.ready { color: var(--ink); }
+      #play.ready #progress { width: 100% !important; }
+      #play.ready, #play.ready * { text-shadow: 0 .045em 0 rgba(170, 92, 0, .38); }
+      #play.ready .label { font-size: calc(106 * var(--u)); }
+      #play.ready:disabled .label, #play.ready.again .label { font-size: calc(80 * var(--u)); }
+      #play.ready:enabled:hover #progress { background: var(--stripes), linear-gradient(180deg, #fff09a 0%, #ffdc4a 48%, #ffbf33 100%); }
+      #play.ready:enabled:hover .wedge::after { animation: sheen .7s ease-out; }
+      #play.ready:enabled:active #progress { background: var(--stripes), linear-gradient(180deg, #ffd23f 0%, #ffb627 100%); }
+      #play:focus-visible { outline: none; }
+      #play:focus-visible::before { background: var(--sky); }
+      #play:focus-visible .label { text-decoration: underline calc(5 * var(--u)); text-underline-offset: calc(6 * var(--u)); }
+      @keyframes sheen { from { background-position: 160% 0; } to { background-position: -60% 0; } }
+      @media (prefers-reduced-motion: reduce) { #play.ready:enabled:hover .wedge::after { animation: none; } }
+      @media (pointer: coarse) { #play .enter { display: none; } }
+      /* the keys, bottom left: on the sheet while dressing, else over a soft shade with no edge */
+      #foot { grid-column: 1; grid-row: 2; position: relative; padding-top: calc(16 * var(--u)); }
+      /* (the shade: a line through the keys, its shadow spread over them and blurred out) */
+      #foot::before {
+        content: ""; position: absolute; z-index: -1; pointer-events: none; transition: opacity .3s;
+        left: 0; right: 0; top: 58%; height: 0;
+        box-shadow: 0 0 calc(60 * var(--u)) calc(64 * var(--u)) rgba(26, 20, 48, .5);
+      }
+      #menu.dressing #foot::before { opacity: 0; }
+      /* (the credits take its place) */
+      #foot { transition: opacity .15s ease, visibility 0s; }
+      #menu.credits #foot { opacity: 0; visibility: hidden; transition: opacity .15s ease, visibility 0s linear .15s; }
+      .keys { font-size: calc(16 * var(--u)); font-weight: 500; line-height: 1.5; color: #ddd6fb; }
+      kbd { font: inherit; font-weight: 700; color: var(--sun); }
+      /* the hints follow whatever was touched last: keys and mouse, or a pad (main.ts sets html.pad
+         and gives each kbd[data-pad] the pad's own label and colour) */
+      html:not(.pad) .for-pad, html.pad .for-keys { display: none; }
+      .powered { margin-top: calc(8 * var(--u)); font-size: calc(13 * var(--u)); font-weight: 500; color: var(--mist); }
+      .powered > span { opacity: .8; }
+      #credits-open { margin-left: calc(10 * var(--u)); font-weight: 700; color: var(--sun); text-decoration-thickness: calc(2 * var(--u)); text-underline-offset: calc(3 * var(--u)); transition: color .12s; }
+      #credits-open:hover { color: #fff3b0; text-decoration-line: underline; }
+      #credits-open kbd { margin-left: calc(4 * var(--u)); }
+
+      /* tall narrow screens (phones): the logo on top, the raccoon under it in the town, the
+         keys, and PLAY! along the bottom. Dressing, the raccoon moves up top and the sheet
+         slides up from the bottom under it, its sunny edge slanting across, with the outfit
+         (or the credits) on it. */
+      @media (max-aspect-ratio: 3/4) {
+        #menu {
+          --pad: calc(16 * var(--u)); --cut: calc(46 * var(--u)); --top: 46vh;
+          --u: clamp(0.62px, min(calc(62vh / 760), calc(100vw / 430)), 1.5px);
+          --play-w: 100vw; --play-h: calc(138 * var(--u));
+          grid-template-columns: 1fr; grid-template-rows: auto minmax(0, 1fr) auto; column-gap: 0;
+          padding: 0 var(--pad) calc(var(--play-h) + 8 * var(--u));
+        }
+        #menu.open { grid-template-rows: var(--top) minmax(0, 1fr) 0; padding-bottom: 0; }
+        #sheet { top: calc(var(--top) - var(--cut) * .4 - var(--band)); width: 100%; }
+        #menu:not(.open) #sheet { transform: translateY(100%); }
+        #sheet::before { top: var(--band); right: 0; clip-path: polygon(0 var(--cut), 100% 0, 100% 100%, 0 100%); }
+        #sheet::after { clip-path: polygon(0 var(--cut), 100% 0, 100% var(--band), 0 calc(var(--cut) + var(--band))); }
+        #title { position: static; grid-row: 1; justify-self: center; margin-top: calc(40 * var(--u) + max(13.2px, 15.6 * var(--u)) + max(20px, 24 * var(--u))); }
+        #demo { left: 0; right: 0; width: fit-content; margin: 0 auto; }
+        #menu.open #demo { display: none; }
+        #title img { width: calc(260 * var(--u)); margin: 0 auto; }
+        #stage { grid-column: 1; grid-row: 2; margin-bottom: 0; }
+        #menu.open #stage { grid-column: 1; grid-row: 1; }
+        #foot { grid-row: 3; }
+        #menu.open #title, #menu.open #foot { display: none; }
+        #side {
+          grid-column: 1; grid-row: 2; padding-top: calc(18 * var(--u)); padding-bottom: calc(var(--play-h) + 8 * var(--u)); justify-content: flex-start;
+          scroll-padding-bottom: calc(var(--play-h) + 8 * var(--u));
+        }
+        #credits { grid-row: 2; padding-top: calc(18 * var(--u)); padding-bottom: calc(var(--play-h) + 8 * var(--u)); }
+        .tiles { --tile: calc(76 * var(--u)); }
+        #play { --s: calc(40 * var(--u)); --t: calc(22 * var(--u)); }
+        #play.ready .label { font-size: calc(84 * var(--u)); }
+        .keys, .powered { text-align: center; }
+        /* (dressing, the hint would land on the sheet: a phone's raccoon is dragged anyway) */
+        #menu.stage.dressing #spin { opacity: 0; }
+        #nametag { left: 50%; top: 30vh; }
+      }
+      @supports (height: 100dvh) {
+        @media (max-aspect-ratio: 3/4) {
+          #menu { --top: 46dvh; --u: clamp(0.62px, min(calc(62dvh / 760), calc(100vw / 430)), 1.5px); }
+          #nametag { top: 30dvh; }
+        }
+      }
+
+      /* The loading screen, over everything until the town and its shaders are ready: the logo,
+         a sunny bar whose stripes keep marching (on the compositor, so through a busy main
+         thread too), what it's doing, and a tip that changes every few seconds. Plain HTML, so
+         it's up before the game's code has downloaded. */
+      #loading {
+        position: fixed; inset: 0; z-index: 30; display: flex; flex-direction: column; align-items: center; justify-content: center;
+        gap: clamp(10px, 2.2vh, 22px); padding: 24px; text-align: center; color: #fff; font-weight: 600;
+        background: radial-gradient(circle at 65% 35%, #c8ecff 0%, #8fd0ff 55%, #6ab6f5 100%);
+        transition: opacity .5s ease;
+      }
+      #loading.done { opacity: 0; pointer-events: none; }
+      #loading, #loading * {
+        --o: max(1.5px, .06em);
+        text-shadow: var(--o) var(--o) 0 var(--ink), calc(-1 * var(--o)) calc(-1 * var(--o)) 0 var(--ink), var(--o) calc(-1 * var(--o)) 0 var(--ink),
+          calc(-1 * var(--o)) var(--o) 0 var(--ink), 0 .1em 0 var(--ink), 0 .18em .3em rgba(10, 6, 24, .45);
+      }
+      #loading img { display: block; width: min(440px, 72vw, 46vh); height: auto; margin-bottom: clamp(4px, 1.5vh, 16px); }
+      #load-track {
+        width: min(440px, 80vw); height: 28px; padding: 4px; border-radius: 14px;
+        background: var(--sheet); border: 3px solid var(--ink); box-shadow: 0 4px 0 var(--ink);
+      }
+      #load-bar {
+        position: relative; display: block; height: 100%; width: 3%; min-width: 14px; border-radius: 8px; overflow: hidden;
+        background: linear-gradient(180deg, #ffe680 0%, var(--sun) 48%, #ffb627 100%); transition: width .3s ease-out;
+      }
+      /* (one stripe period is 22px across the 115deg stripes, 24.27px along the bar) */
+      #load-bar::after {
+        content: ""; position: absolute; top: 0; bottom: 0; left: 0; right: -25px;
+        background: repeating-linear-gradient(115deg, rgba(255, 255, 255, 0) 0 12px, rgba(255, 255, 255, .28) 12px 22px);
+        animation: march .7s linear infinite;
+      }
+      @keyframes march { to { transform: translateX(-24.27px); } }
+      #loading.failed #load-bar::after { animation: none; }
+      #load-status { min-height: 1.3em; font-size: clamp(15px, 2.3vh, 20px); font-weight: 700; letter-spacing: .06em; }
+      #loading.failed #load-status { color: var(--pink); }
+      #load-tip {
+        max-width: min(560px, 88vw); min-height: 3.9em; margin: clamp(6px, 2vh, 20px) 0 0;
+        font-size: clamp(16px, 2.5vh, 22px); line-height: 1.3;
+      }
+      #load-tip b { display: block; font-family: var(--display); font-weight: 400; font-size: 1.4em; letter-spacing: .08em; color: var(--sun); }
+      #load-tip.out span { opacity: 0; }
+      #load-tip:has(span:empty) { visibility: hidden; }
+      #load-tip span { transition: opacity .3s ease; }
+      @media (prefers-reduced-motion: reduce) { #load-bar::after { animation: none; } #load-tip span { transition: none; } }
+    </style>
+  </head>
+  <body>
+    <div id="loading">
+      <img src="/assets/logo.webp" alt="Trash Panda Royale" width="1286" height="819" fetchpriority="high" />
+      <div id="load-track" role="progressbar" aria-label="loading" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="load-bar"></i></div>
+      <div id="load-status" aria-live="polite">loading…</div>
+      <p id="load-tip"><b>TIP</b><span></span></p>
+    </div>
+    <script>
+      // a tip while it loads, another every few seconds (inline: it runs before the game's code has downloaded)
+      (() => {
+        const tips = [
+          "Hide in a trash can, but careful: a hit on the can pops you right back out.",
+          "Trash cans hide weapons too. Dig through them!",
+          "Jump into a car, a train or a ledge to climb up onto it.",
+          "Trains keep to a timetable. Hop on a moving one to ride across town, or get flattened by it.",
+          "A cup of coffee gives you the zoomies: run into a wall to crawl right up it.",
+          "The longer you wind up a stink bomb, the further it flies.",
+          "Steal a car and drift round the corners with the handbrake.",
+          "Go down a manhole to scurry through the sewer. Nobody sees you down there, but the manholes you pass under rattle.",
+          "On Garbage Day the garbage truck brings a golden dumpster full of loot. Follow the marker!",
+          "The fumigation gas closes in every round: stay inside the circle on your minimap.",
+          "Knocked out? You come back as a seagull: poop on the living and snatch their loot.",
+          "The last raccoon standing wins, and wears the crown into the next round.",
+          "Cars plough through hydrants, benches and trash bags, and send them flying.",
+          "Bushes don't stop you: push right through them. Cars can too.",
+        ];
+        const tip = document.querySelector("#load-tip span");
+        let i = Math.floor(Math.random() * tips.length);
+        const next = () => { tip.textContent = tips[i++ % tips.length]; };
+        next();
+        const timer = setInterval(() => {
+          if (!document.getElementById("loading")) return clearInterval(timer);
+          tip.parentElement.classList.add("out");
+          setTimeout(() => { next(); tip.parentElement.classList.remove("out"); }, 300);
+        }, 5000);
+      })();
+    </script>
+    <div id="menu">
+      <div id="sheet"></div>
+      <h1 id="title"><img src="/assets/logo.webp" alt="Trash Panda Royale" width="1286" height="819" fetchpriority="high" /></h1>
+      <a id="demo" href="https://github.com/pixijs/open-games/tree/main/trash-panda-royale" target="_blank" rel="noopener">
+        <span><small>Demo: Colyseus + PixiJS</small><b>Get source-code<span aria-hidden="true"> →</span></b></span>
+      </a>
+      <div id="stage"></div>
+      <div id="nametag">
+        <input id="name" maxlength="14" autocomplete="off" spellcheck="false" aria-label="your name" />
+        <button id="dice" type="button" title="random name" aria-label="random name">🎲</button>
+      </div>
+      <button id="dress" type="button" aria-expanded="false" aria-controls="side" disabled>
+        <canvas width="192" height="192" aria-hidden="true"></canvas>
+        <span class="go">DRESS ME UP!</span><span class="done">LOOKIN' GOOD!</span><span class="for-pad"><kbd data-pad="x"></kbd></span>
+      </button>
+      <div id="spin">drag to spin</div>
+      <div id="side" inert>
+        <div class="looks-head"><b>YOUR RACCOON</b><button id="surprise" class="surprise" type="button">🎲 surprise me<span class="for-pad"> <kbd data-pad="y"></kbd></span></button></div>
+        <div id="looks"></div>
+      </div>
+      <div id="credits" inert>
+        <div class="looks-head"><b>CREDITS</b></div>
+        <dl class="roll">
+          <div><dt>a game by</dt><dd class="who">Endel Dreyer</dd></div>
+          <div><dt>multiplayer</dt><dd class="who">Colyseus</dd><dd><a href="https://colyseus.io" target="_blank" rel="noopener">colyseus.io</a></dd></div>
+          <div><dt>rendering</dt><dd class="who">PixiJS + PixiJS 3D</dd><dd><a href="https://pixijs.com" target="_blank" rel="noopener">pixijs.com</a></dd></div>
+          <div><dt>soundtrack</dt><dd class="who">Trash Panda Caper &amp; Dumpster Dash</dd><dd>made with <a href="https://github.com/endel/claude-soundtrack-composer" target="_blank" rel="noopener">endel/claude-soundtrack-composer</a></dd></div>
+        </dl>
+        <button id="back" type="button">← BACK<kbd class="for-keys">Esc</kbd><kbd class="for-pad" data-pad="b"></kbd></button>
+      </div>
+      <div id="foot">
+        <div class="keys"><span class="for-keys"><kbd>WASD</kbd> scurry · <kbd>mouse</kbd> aim, click to pop · <kbd>E</kbd> steal a car, hide in a can · <kbd>G</kbd> hold, let go: stink bomb · <kbd>C</kbd> camera · <kbd>F1</kbd> all the keys</span><span class="for-pad"><kbd>left stick</kbd> scurry, hold <kbd data-pad="a"></kbd> to run · <kbd>right stick</kbd> aim, <kbd data-pad="rt"></kbd> to pop · <kbd data-pad="y"></kbd> steal a car, hide in a can · <kbd data-pad="lt"></kbd> hold, let go: stink bomb · <kbd data-pad="r3"></kbd> camera · <kbd data-pad="menu"></kbd> all the buttons</span></div>
+        <div class="powered"><span>multiplayer by Colyseus 0.18 · rendered with PixiJS 3D</span><button id="credits-open" type="button" aria-expanded="false" aria-controls="credits">credits<span class="for-pad"><kbd data-pad="view"></kbd></span></button></div>
+      </div>
+      <button id="play" disabled>
+        <span class="wedge"><i id="progress"></i></span>
+        <span class="label">LOADING…</span>
+        <small class="sub"><span id="status"></span><span class="enter">or press <kbd class="for-keys">Enter</kbd><kbd class="for-pad" data-pad="a"></kbd></span></small>
+      </button>
+    </div>
+    <script type="module" src="/src/client/main.ts"></script>
+  </body>
+</html>
