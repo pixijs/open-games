@@ -119,7 +119,7 @@ export class Fx {
   private v = new Vector3();
 
   constructor() {
-    const softTex = soft();
+    const softTex = soft(), puffTex = puff();
     this.fire = new ParticleSystem3D({
       texture: softTex, blendMode: "add", capacity: 2500, emitRate: 0, autoUpdate: false,
       shape: new SphereShape({ radius: 0.3 }), life: [0.25, 0.7], speed: [2, 8],
@@ -127,7 +127,7 @@ export class Fx {
       color: 0xffe08a, colorEnd: 0xff3b1f, drag: 2.5, gravity: -3,
     });
     this.smoke = new ParticleSystem3D({
-      texture: puff(), capacity: 2500, emitRate: 0, autoUpdate: false,
+      texture: puffTex, capacity: 2500, emitRate: 0, autoUpdate: false,
       shape: new SphereShape({ radius: 0.4 }), life: [1.2, 2.6], speed: [0.5, 2.5],
       size: [0.6, 1.2], sizeEnd: [2.2, 3.6], alpha: 0.75, alphaEnd: 0,
       color: 0x8a8f99, colorEnd: 0xd8dbe2, drag: 1.2, gravity: -1.6, spin: [-1, 1],
@@ -149,13 +149,13 @@ export class Fx {
       life: 0.45, speed: 0, size: 1, sizeEnd: 14, alpha: 0.9, alphaEnd: 0, color: 0xfff0c0,
     });
     this.dust = new ParticleSystem3D({
-      texture: puff(), capacity: 1200, emitRate: 0, autoUpdate: false,
+      texture: puffTex, capacity: 1200, emitRate: 0, autoUpdate: false,
       shape: new ConeShape({ angle: 80, radius: 0.3 }), life: [0.4, 0.8], speed: [1, 3],
       size: [0.3, 0.5], sizeEnd: [0.9, 1.3], alpha: 0.6, alphaEnd: 0, color: 0xf3ead8, drag: 3,
     });
     // the same features as the smoke (so the same shader program), at a fraction of the size
     this.wisps = new ParticleSystem3D({
-      texture: puff(), capacity: 600, emitRate: 0, autoUpdate: false,
+      texture: puffTex, capacity: 600, emitRate: 0, autoUpdate: false,
       shape: new SphereShape({ radius: 0.04 }), life: [0.5, 0.9], speed: [0.2, 0.6],
       size: [0.1, 0.16], sizeEnd: [0.32, 0.5], alpha: 0.7, alphaEnd: 0,
       color: 0x8fdc4c, colorEnd: 0xd6f5b0, drag: 1.5, gravity: -1.2, spin: [-1, 1],

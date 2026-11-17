@@ -18,6 +18,9 @@ const MAX_STEP = 3;
 const GAP = 0.12;
 /** Marks fade in steps this often (s): a fade over seconds doesn't need every frame. */
 const FADE_EVERY = 0.1;
+/** Bytes of one piece's positions and UVs (four corners, float32). */
+const QUAD_POS_BYTES = 4 * 3 * 4;
+const QUAD_UV_BYTES = 4 * 2 * 4;
 
 /**
  * The picture of a piece of mark: across it (v) a tyre's soft-edged stripe; along it (u) its
@@ -72,7 +75,10 @@ export class SkidMarks {
   private used = 0;
   private now = 0;
   private fadeAt = 0;
+  /** Pieces laid since the last upload: from .. to - 1 (all of them once the ring wraps round). */
   private dirty = false;
+  private dirtyFrom = 0;
+  private dirtyTo = 0;
 
   constructor() {
     const n = MAX * 4;
@@ -114,6 +120,9 @@ export class SkidMarks {
     const q = this.next;
     this.next = (q + 1) % MAX;
     if (q >= this.used) this.used = q + 1;
+    if (!this.dirty) { this.dirtyFrom = q; this.dirtyTo = q + 1; }
+    else if (q === this.dirtyTo) this.dirtyTo = q + 1;
+    else { this.dirtyFrom = 0; this.dirtyTo = MAX; }
     const pos = this.geo.positions as Float32Array;
     const corner = (v: number, cx: number, cy: number, cz: number, born: number, h: number) => {
       const i = q * 4 + v;
@@ -149,8 +158,8 @@ export class SkidMarks {
       uv[i * 2] = 1 - a;
       if (a > 0) alive = true;
     }
-    this.geo.attributes.aUV.buffer.update();
-    if (this.dirty) this.geo.attributes.aPosition.buffer.update();
+    this.geo.attributes.aUV.buffer.update(this.used * QUAD_UV_BYTES);
+    if (this.dirty) this.geo.attributes.aPosition.buffer.update((this.dirtyTo - this.dirtyFrom) * QUAD_POS_BYTES, this.dirtyFrom * QUAD_POS_BYTES);
     this.dirty = false;
     this.mesh.visible = alive;
     // forget wheels long gone (a car that drove off, or out of view)

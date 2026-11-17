@@ -116,7 +116,8 @@ export class CarView {
     const type = CAR_TYPES[kind];
     this.halfL = type.halfL;
     this.halfW = type.halfW;
-    this.model = instance(type.model, { recolor: { Paint: paint }, unique: kind === 2 || kind === CAR_GARBAGE });
+    // (Glass too: a copied material's colour is rounded to 8 bits, and these two cars' glass has always had that shade)
+    this.model = instance(type.model, { recolor: { Paint: paint }, own: kind === 2 || kind === CAR_GARBAGE ? ["SirenBlue", "SirenRed", "Beacon", "Glass"] : undefined });
     this.sq.tune(SQ, 16, 0.32);
     this.sq.tune(PUFF, 16, 0.55);
     this.root.addChild(this.model);

@@ -24,8 +24,10 @@ export function canvasTexture(w: number, h: number, draw: (ctx: CanvasRenderingC
   return t;
 }
 
-/** Yellow and black hazard stripes. */
-export const tapeTexture = () => canvasTexture(64, 16, (ctx, w, h) => {
+let tape: Texture | null = null, dash: Texture | null = null;
+
+/** Yellow and black hazard stripes (one texture, shared). */
+export const tapeTexture = () => (tape ??= canvasTexture(64, 16, (ctx, w, h) => {
   ctx.fillStyle = "#ffd23f";
   ctx.fillRect(0, 0, w, h);
   ctx.fillStyle = "#2b2340";
@@ -34,13 +36,13 @@ export const tapeTexture = () => canvasTexture(64, 16, (ctx, w, h) => {
     ctx.moveTo(x, h); ctx.lineTo(x + 8, h); ctx.lineTo(x + 8 + h, 0); ctx.lineTo(x + h, 0);
     ctx.fill();
   }
-});
+}));
 
-/** White dashes on transparent. */
-export const dashTexture = () => canvasTexture(32, 4, (ctx, w, h) => {
+/** White dashes on transparent (one texture, shared). */
+export const dashTexture = () => (dash ??= canvasTexture(32, 4, (ctx, w, h) => {
   ctx.fillStyle = "white";
   ctx.fillRect(0, 0, w * 0.55, h);
-});
+}));
 
 /**
  * A ring of quads around a centre, rebuilt in place when it moves: a vertical wall (radius r,

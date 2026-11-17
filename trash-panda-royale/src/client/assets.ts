@@ -24,9 +24,9 @@ const prepared = new Set<unknown>();
 const lowFx = typeof location !== "undefined" && new URLSearchParams(location.search).get("fx") === "low";
 
 /**
- * Tiling textures (the GLBs' and the ground's): repeat, mipmapped, a little anisotropic
- * filtering for walls seen at an angle. Must run before the texture's first upload (WebGL
- * fixes the mip count then): models load while the app is stopped, so it does.
+ * Tiling textures (the ground's): repeat, mipmapped, a little anisotropic filtering for
+ * walls seen at an angle. Must run before the texture's first upload (WebGL fixes the mip
+ * count then): they load while the app is stopped, so it does.
  */
 export function prepTexture(t: Texture) {
   const s = t.source;
@@ -64,16 +64,7 @@ export async function loadModels(onProgress: (f: number) => void) {
   let done = 0;
   await Promise.all(MODEL_NAMES.map(async (name) => {
     try {
-      const url = `assets/models/${name}.glb`;
-      let src: Scene3DSource | null = null;
-      for (let attempt = 0; !src; attempt++) {
-        try {
-          src = await Assets.load<Scene3DSource>(url);
-        } catch (e) {
-          if (attempt >= 3) throw e;
-          await new Promise((r) => setTimeout(r, 300 * (attempt + 1)));
-        }
-      }
+      const src = await Assets.load<Scene3DSource>(`assets/models/${name}.glb`, { strategy: "retry", retryCount: 3, retryDelay: 600 });
       sources.set(name, src);
       for (const mat of src.materials) {
         // cute assets: never let a glTF default turn them into dark metal
@@ -81,7 +72,8 @@ export async function loadModels(onProgress: (f: number) => void) {
         // see-through car glass: blended, so cull its back faces (state, not a shader feature)
         if (mat instanceof Material3D && mat.alphaMode === "blend") mat.state.culling = true;
       }
-      for (const t of src.textures ?? []) if (t) prepTexture(t);
+      // (the glTF loader sets wrap and mipmaps from each GLB's sampler; glTF has no anisotropy)
+      for (const t of src.textures ?? []) if (t) t.source.style.maxAnisotropy = lowFx ? 1 : 4;
     } catch (e) {
       console.warn(`model ${name} failed to load`, e);
     }

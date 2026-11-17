@@ -99,7 +99,7 @@ interface Occluder {
   slot: number;
   faded: boolean;
   /** Each mesh's shared opaque material and its see-through copy (built on first fade). */
-  swap: { mesh: Mesh3D; opaque: Material3D; clear: Material3D; cast: boolean }[] | null;
+  swap: { mesh: Mesh3D; opaque: Material3D; clear: Material3D }[] | null;
   clears: Material3D[];
 }
 
@@ -417,15 +417,12 @@ export class CityView {
         if (!(mesh.material instanceof Material3D)) return;
         let clear = clones.get(mesh.material);
         if (!clear) clones.set(mesh.material, (clear = fadeClone(mesh.material)));
-        o.swap!.push({ mesh, opaque: mesh.material, clear, cast: mesh.castShadow });
+        o.swap!.push({ mesh, opaque: mesh.material, clear });
       });
       o.clears = [...clones.values()];
     }
-    for (const s of o.swap) {
-      s.mesh.material = on ? s.clear : s.opaque;
-      // (blended meshes cast no shadow: the proxy box casts it instead)
-      s.mesh.castShadow = on ? false : s.cast;
-    }
+    // (a blended mesh casts no shadow, whatever its castShadow says: the proxy box casts it instead)
+    for (const s of o.swap) s.mesh.material = on ? s.clear : s.opaque;
     this.shadowProxies.setVisibleAt(o.slot, on);
   }
 

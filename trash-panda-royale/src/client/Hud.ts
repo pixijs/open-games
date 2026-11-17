@@ -1,11 +1,11 @@
-import { Container, Graphics, Sprite, Text, type TextStyleOptions } from "pixi.js";
+import { BitmapText, Color, Container, FillGradient, Graphics, GraphicsContext, Sprite, Text, type TextStyleOptions } from "pixi.js";
 import { AOI_IN, AOI_OUT, MAP_HALF, PICKUP_ZOOMIES, WEAPONS, Weapon } from "../shared/constants.js";
 import { CITY } from "../shared/map.js";
 import { MANHOLES, SEWER } from "../shared/sewer.js";
 import { LOOKS } from "../shared/districts.js";
 import { DISTRICTS } from "../shared/layout.js";
 import { TRACK_LENGTH, trackPoint } from "../shared/train.js";
-import { FREE, WEAPON_ICONS, iconSprite, setIconSize, iconTexture, RichLine, type IconName, type Part } from "./icons.js";
+import { FREE, WEAPON_ICONS, bitmapFont, iconSprite, setIconSize, iconTexture, RichLine, type IconName, type Part } from "./icons.js";
 
 /** The HUD's text face, and the display face of its big words (the same pair as the start screen). */
 export const FONT = "'Barlow Semi Condensed', 'Arial Narrow', system-ui, sans-serif";
@@ -20,6 +20,9 @@ const style = (size: number, fill = 0xffffff, extra: Partial<TextStyleOptions> =
   ...extra,
 });
 
+const NET_STYLE: TextStyleOptions = { fontFamily: "ui-monospace, Consolas, monospace", fontSize: 12, fill: 0xd9f2ff, lineHeight: 15, stroke: { color: 0x1b1530, width: 3 } };
+const netFont = (res: number) => bitmapFont("net", NET_STYLE, res, [[" ", "~"]]);
+
 /**
  * How big the HUD is drawn: it grows and shrinks with the window, smoothly (1 at 1280×720).
  * A little less than in proportion: a bigger window shows more of the town, not just bigger
@@ -31,17 +34,19 @@ export function hudScale(w: number, h: number) {
 }
 
 /**
- * A soft dark shade with no edge, centred on (cx, cy): stacked ellipses, each a little
- * darker, instead of a panel (the HUD has no boxes; a blur filter would compile a new
- * shader the first time it shows).
+ * A soft dark shade with no edge, to fill an ellipse with instead of a panel (the HUD has no
+ * boxes; a blur filter would compile a new shader the first time it shows). It darkens toward
+ * the middle in 32 rings, each a layer of `step` alpha over the one outside it (enough rings
+ * that none shows).
  */
-function shade(g: Graphics, cx: number, cy: number, rx: number, ry: number, alpha = 0.55) {
-  // (enough layers that no ring shows)
+function shadeFill(step: number) {
   const n = 32;
-  for (let i = 0; i < n; i++) {
-    const k = 1 - i / n;
-    g.ellipse(cx, cy, rx * k, ry * k).fill({ color: INK, alpha: 1 - (1 - alpha) ** (1 / n) });
-  }
+  const fill = new FillGradient({ type: "radial" });
+  const at = (layers: number) => new Color(INK).setAlpha(1 - (1 - step) ** layers);
+  // from the middle out, one layer fewer past each ring, and clear past the last ring (pixi
+  // fills the gradient's texture with its last colour before drawing the gradient over it)
+  for (let i = 0; i < n; i++) fill.addColorStop(i / n, at(n - i)).addColorStop((i + 1) / n, at(n - i));
+  return fill.addColorStop(1, at(0));
 }
 
 /** A name tag. `show`: how far it's faded in (0..1), toward 1 while they're `inSight`. */
@@ -75,6 +80,28 @@ export function chargeColor(k: number): number {
 /** The wind-up meter's size (HUD units). */
 const METER_W = 92, METER_H = 16;
 
+/** Minimap dots of one kind, reused frame to frame like `mapIcon`'s icons: all share one drawing, and only move. */
+class DotPool {
+  readonly layer = new Container();
+  private used = 0;
+  constructor(private context: GraphicsContext) {}
+
+  /** The next dot this frame, at map (x, y). */
+  at(x: number, y: number): Graphics {
+    const g = (this.layer.children[this.used] as Graphics | undefined) ?? this.layer.addChild(new Graphics(this.context));
+    this.used++;
+    g.visible = true;
+    g.position.set(x, y);
+    return g;
+  }
+
+  /** Hides the dots this frame didn't use. */
+  end() {
+    for (let i = this.used; i < this.layer.children.length; i++) this.layer.children[i].visible = false;
+    this.used = 0;
+  }
+}
+
 /** Extra minimap markers: gulls (out of the round), the sewer while you're down it, and Garbage Day's truck and dumpster. */
 export interface MapExtras {
   gulls: { x: number; z: number }[];
@@ -85,8 +112,11 @@ export interface MapExtras {
   dumpster: { x: number; z: number; coming: boolean; open: boolean } | null;
 }
 
-/** A splat of goo on the screen (a gull got you): a blob, its drips, how long it's been there. */
-interface Goo { g: Graphics; drips: { x: number; y: number; r: number; v: number }[]; life: number; x: number; y: number; s: number }
+/**
+ * A splat of goo on the screen (a gull got you): the blob, and the trickles drawn over it so far
+ * (their own drawing: one more doesn't redraw the blob), its drips, how long it's been there.
+ */
+interface Goo { root: Container; trickles: Graphics; drips: { x: number; y: number; r: number; v: number }[]; life: number; x: number; y: number; s: number }
 const GOO_LIFE = 3.6;
 
 /** Ammo icon per weapon slot (fists need none). */
@@ -105,7 +135,18 @@ export class Hud {
 
   // over the raccoon winding up a stink bomb: how far it'll go
   private meter = new Container();
-  private meterBar = new Graphics();
+  /**
+   * The meter's parts, bottom to top: its track; the bar, drawn white and coloured by its tint;
+   * the bar again, white, for the flash (it only fades in and out); a highlight along the bar;
+   * the ticks. Only the bar and its highlight are redrawn, when the bar's length changes.
+   */
+  private meterTrack = new Graphics();
+  private meterFill = new Graphics();
+  private meterFlash = new Graphics(this.meterFill.context);
+  private meterShine = new Graphics();
+  private meterTicks = new Graphics();
+  /** The length the bar is drawn at. */
+  private meterFw = -1;
   private meterIcon = iconSprite("wpn_grenade", 30);
   private meterMax = new Text({ text: "MAX!", style: style(24, 0xff5d8f, { fontFamily: DISPLAY, fontWeight: "400", letterSpacing: 1.5 }) });
   /** How wound up (0..1), or -1: nobody is. */
@@ -195,17 +236,24 @@ export class Hud {
   private mapSewer = new Container();
   private mapPipe = new Graphics();
   private pipeEdge = -1;
-  private mapDyn = new Graphics();
+  /** Cars (white, wrecks dark: a tint), the train's cars and gulls; the pulsing ring round where the golden dumpster is headed. */
+  private carDots = new DotPool(new GraphicsContext().rect(-1.6, -1.6, 3.2, 3.2).fill(0xffffff));
+  private trainDots = new DotPool(new GraphicsContext().circle(0, 0, 2.6).fill(0xff5a5f).stroke({ width: 1, color: INK }));
+  private gullDots = new DotPool(new GraphicsContext().circle(0, 0, 2.4).fill(0xffffff).stroke({ width: 1, color: INK }));
+  private mapRing = new Graphics();
   /** Us, drawn once pointing along +z, moved and turned. */
   private mapArrow = new Graphics();
   private mapIcons = new Container();
   private mapPool = new Map<IconName, Sprite[]>();
   private readonly mapSize = 200;
 
-  private netPanel = new Text({ text: "", style: { fontFamily: "ui-monospace, Consolas, monospace", fontSize: 12, fill: 0xd9f2ff, lineHeight: 15, stroke: { color: 0x1b1530, width: 3 } } });
+  /** Its numbers change nearly every frame: a BitmapText. */
+  private netPanel = new BitmapText({ text: "", style: { fontFamily: netFont(1), fontSize: 12, lineHeight: 15 } });
   private help = new Container();
   private board = new Container();
   private boardKey = "";
+  /** The scoreboard's shade, about 0.8 opaque in the middle (a gradient draws into a texture of its own: freed with the HUD). */
+  private boardShade = shadeFill(12 / 255);
   showNet = false;
   showHelp = true;
 
@@ -220,7 +268,7 @@ export class Hud {
     this.hpText.anchor.set(0, 0.5);
     this.weaponText.anchor.set(0, 0.5);
     this.map.addChild(this.mapStatic, this.mapClip, this.mapIcons);
-    this.mapClip.addChild(this.mapZone, this.mapView, this.mapSeen, this.mapSewer, this.mapDyn, this.mapArrow);
+    this.mapClip.addChild(this.mapZone, this.mapView, this.mapSeen, this.mapSewer, this.carDots.layer, this.trainDots.layer, this.gullDots.layer, this.mapRing, this.mapArrow);
     const mask = new Graphics().roundRect(0, 0, this.mapSize, this.mapSize, 14).fill(0xffffff);
     this.map.addChild(mask);
     this.mapClip.mask = mask;
@@ -235,13 +283,17 @@ export class Hud {
     this.meterIcon.position.set(-METER_W / 2 - 4, -METER_H / 2);
     this.meterMax.anchor.set(0.5, 1);
     this.meterMax.position.set(0, -METER_H - 8);
-    this.meter.addChild(this.meterBar, this.meterIcon, this.meterMax);
+    const w = METER_W, h = METER_H;
+    this.meterTrack.roundRect(-w / 2 - 3, -h - 3, w + 6, h + 6, (h + 6) / 2).fill({ color: INK, alpha: 0.85 });
+    for (const q of [0.25, 0.5, 0.75]) this.meterTicks.rect(-w / 2 + (w - 2) * q, -h + 2, 2, h - 4).fill({ color: INK, alpha: 0.6 });
+    this.meter.addChild(this.meterTrack, this.meterFill, this.meterFlash, this.meterShine, this.meterTicks, this.meterIcon, this.meterMax);
     this.meter.visible = false;
     this.buildRack();
     this.buildHelp();
     this.markerArrow.poly([0, -11, 9, 8, 0, 3, -9, 8]).fill(0xffe066).stroke({ width: 3, color: INK, join: "round" });
     this.marker.addChild(this.markerLine, this.markerArrow);
     this.marker.visible = false;
+    this.root.once("destroyed", () => this.boardShade.destroy());
   }
 
   // ------------------------------------------------------------------ static parts
@@ -412,10 +464,8 @@ export class Hud {
    * centre of the server's StateView for us.
    */
   drawMap(me: { x: number; z: number; yaw: number } | null, players: { x: number; z: number }[], cars: { x: number; z: number; wreck: boolean }[], trains: { x: number; z: number; loco: boolean }[], pickups: { x: number; z: number; kind: number }[], zone: { x: number; z: number; r: number; nx: number; nz: number; nr: number; final: boolean } | null = null, seen: number[] | null = null, view: { x: number; z: number } | null = null, extra: MapExtras | null = null) {
-    const g = this.mapDyn;
     const s = this.mapSize / (MAP_HALF * 2);
     const m = (v: number) => (v + MAP_HALF) * s;
-    g.clear();
     this.mapUsed.clear();
     const zoneAt = zone && zone.r < 200 ? [zone.x, zone.z, zone.r, zone.nx, zone.nz, zone.nr, +zone.final] : [];
     if (zoneAt.length !== this.zoneAt.length || zoneAt.some((v, i) => v !== this.zoneAt[i])) {
@@ -450,22 +500,27 @@ export class Hud {
         p.stroke({ width: 2.6, color: 0x7dffa0, join: "round", cap: "round" });
       }
     }
-    for (const c of cars) g.rect(m(c.x) - 1.6, m(c.z) - 1.6, 3.2, 3.2).fill(c.wreck ? 0x333333 : 0xffffff);
-    for (const t of trains) if (!t.loco) g.circle(m(t.x), m(t.z), 2.6).fill(0xff5a5f).stroke({ width: 1, color: INK });
+    for (const c of cars) this.carDots.at(m(c.x), m(c.z)).tint = c.wreck ? 0x333333 : 0xffffff;
+    for (const t of trains) if (!t.loco) this.trainDots.at(m(t.x), m(t.z));
     for (const c of pickups) this.mapIcon(c.kind === PICKUP_ZOOMIES ? "coffee" : WEAPON_ICONS[c.kind] ?? "food", 13).position.set(m(c.x), m(c.z));
     for (const t of trains) if (t.loco) this.mapIcon("train_loco", 17).position.set(m(t.x), m(t.z));
     for (const p of players) this.mapIcon("raccoon", 15).position.set(m(p.x), m(p.z));
+    // Garbage Day: where the dumpster is headed (a pulsing gold ring: it changes size every frame,
+    // so it alone is redrawn), and the truck
+    const d = extra?.dumpster;
+    this.mapRing.visible = !!d && !d.open;
     if (extra) {
-      for (const q of extra.gulls) g.circle(m(q.x), m(q.z), 2.4).fill(0xffffff).stroke({ width: 1, color: INK });
-      // Garbage Day: where the dumpster is headed (a pulsing gold ring), and the truck
-      const d = extra.dumpster;
+      for (const q of extra.gulls) this.gullDots.at(m(q.x), m(q.z));
       if (d) {
         const pulse = 5 + 2.5 * Math.sin(performance.now() / 180);
-        if (!d.open) g.circle(m(d.x), m(d.z), pulse + (d.coming ? 3 : 0)).stroke({ width: 2, color: 0xffd23f, alpha: 0.9 });
+        if (!d.open) this.mapRing.clear().circle(m(d.x), m(d.z), pulse + (d.coming ? 3 : 0)).stroke({ width: 2, color: 0xffd23f, alpha: 0.9 });
         if (!d.coming) this.mapIcon("dumpster_gold", 17).position.set(m(d.x), m(d.z));
       }
       if (extra.truck) this.mapIcon("car_garbage", 18).position.set(m(extra.truck.x), m(extra.truck.z));
     }
+    this.carDots.end();
+    this.trainDots.end();
+    this.gullDots.end();
     for (const [name, pool] of this.mapPool) {
       for (let i = this.mapUsed.get(name) ?? 0; i < pool.length; i++) pool[i].visible = false;
     }
@@ -491,6 +546,7 @@ export class Hud {
     const s = hudScale(screenW, screenH);
     this.s = s;
     this.res = resolution * s;
+    this.netPanel.style.fontFamily = netFont(this.res);
     this.root.scale.set(s);
     const w = screenW / s, h = screenH / s;
     this.w = w;
@@ -712,10 +768,13 @@ export class Hud {
           .stroke({ width: s * 0.07, color: k === 1 ? 0x8f9a6a : 0xa9ad98, alpha: 0.8, cap: "round" });
       }
       g.ellipse(-s * 0.18, -s * 0.2, s * 0.14, s * 0.07).fill({ color: 0xffffff, alpha: 0.95 });
-      g.position.set(x, y);
-      this.gooLayer.addChild(g);
+      const root = new Container();
+      const trickles = new Graphics();
+      root.addChild(g, trickles);
+      root.position.set(x, y);
+      this.gooLayer.addChild(root);
       const drips = Array.from({ length: 3 + ((Math.random() * 3) | 0) }, () => ({ x: (Math.random() - 0.5) * s, y: s * 0.35, r: 6 + Math.random() * 9, v: 12 + Math.random() * 30 }));
-      this.goos.push({ g, drips, life: GOO_LIFE, x, y, s });
+      this.goos.push({ root, trickles, drips, life: GOO_LIFE, x, y, s });
     }
   }
 
@@ -807,7 +866,7 @@ export class Hud {
       });
       y += 30;
     });
-    shade(bg, 0, (y + 6) / 2, width * 0.85, (y + 6) * 0.95, 0.8);
+    bg.ellipse(0, (y + 6) / 2, width * 0.85, (y + 6) * 0.95).fill(this.boardShade);
   }
 
   /** A kill-feed / event row: text and icons. */
@@ -820,9 +879,10 @@ export class Hud {
     while (this.feed.length > 6) this.feed.pop()!.line.destroy(FREE);
   }
 
-  /** A rising word or two at a screen position (CSS px). */
-  popup(parts: Part[], x: number, y: number, color = 0xffe066) {
-    const line = new RichLine(style(26, color), 30, 4);
+  /** A rising word or two at a screen position (CSS px). `bitmap`: its words will change (a damage number). */
+  popup(parts: Part[], x: number, y: number, color = 0xffe066, bitmap = false) {
+    const look = style(26, color);
+    const line = new RichLine(look, 30, 4, bitmap ? bitmapFont(`popup-${color}`, look, this.res, "0123456789") : undefined);
     line.set(parts);
     line.pivot.x = line.lineWidth / 2;
     this.popupLayer.addChild(line);
@@ -839,7 +899,7 @@ export class Hud {
     const fresh = live && live.pop.life > POPUP_LIFE - DAMAGE_ADD_S && this.popups.includes(live.pop);
     if (!fresh && amount <= 0) return;
     if (!fresh) {
-      this.popup([String(amount)], x, y, 0xffffff);
+      this.popup([String(amount)], x, y, 0xffffff, true);
       this.damageNumbers.set(key, { pop: this.popups[this.popups.length - 1], total: amount });
       return;
     }
@@ -877,19 +937,22 @@ export class Hud {
     if (how === "throw") this.bumpT = 0.3;
   }
 
-  /** Draw the meter at `k`, white-hot by `flash`, all in `tint` if given. */
+  /** Show the meter at `k`, white-hot by `flash`, all in `tint` if given. */
   private drawMeter(k: number, flash: number, tint?: number) {
-    const g = this.meterBar.clear();
+    const on = k > 0.001;
+    this.meterFill.visible = this.meterShine.visible = on;
+    this.meterFlash.visible = on && flash > 0;
+    if (!on) return;
     const w = METER_W, h = METER_H;
-    g.roundRect(-w / 2 - 3, -h - 3, w + 6, h + 6, (h + 6) / 2).fill({ color: INK, alpha: 0.85 });
-    if (k > 0.001) {
-      const fw = Math.max(h - 2, (w - 2) * k);
-      g.roundRect(-w / 2 + 1, -h + 1, fw, h - 2, (h - 2) / 2).fill(tint ?? chargeColor(k));
-      if (flash > 0) g.roundRect(-w / 2 + 1, -h + 1, fw, h - 2, (h - 2) / 2).fill({ color: 0xffffff, alpha: flash });
+    const fw = Math.max(h - 2, (w - 2) * k);
+    if (fw !== this.meterFw) {
+      this.meterFw = fw;
+      this.meterFill.clear().roundRect(-w / 2 + 1, -h + 1, fw, h - 2, (h - 2) / 2).fill(0xffffff);
       // a highlight along its top
-      g.roundRect(-w / 2 + 5, -h + 3, Math.max(0, fw - 8), 3, 1.5).fill({ color: 0xffffff, alpha: 0.35 });
+      this.meterShine.clear().roundRect(-w / 2 + 5, -h + 3, Math.max(0, fw - 8), 3, 1.5).fill({ color: 0xffffff, alpha: 0.35 });
     }
-    for (const q of [0.25, 0.5, 0.75]) g.rect(-w / 2 + (w - 2) * q, -h + 2, 2, h - 4).fill({ color: INK, alpha: 0.6 });
+    this.meterFill.tint = tint ?? chargeColor(k);
+    this.meterFlash.alpha = flash;
   }
 
   private updateMeter(dt: number) {
@@ -1044,16 +1107,16 @@ export class Hud {
       const q = this.goos[i];
       q.life -= dt;
       q.y += dt * (8 + (GOO_LIFE - q.life) * 10);
-      q.g.position.set(q.x, q.y);
-      q.g.alpha = Math.min(1, q.life / 0.8);
+      q.root.position.set(q.x, q.y);
+      q.root.alpha = Math.min(1, q.life / 0.8);
       if (q.drips.length) {
-        // drips: a trickle down from the blob (redrawn as part of it)
+        // drips: a trickle down from the blob
         for (const d of q.drips) d.y += d.v * dt;
       }
-      if (q.life <= 0) { q.g.destroy(); this.goos.splice(i, 1); continue; }
+      if (q.life <= 0) { q.root.destroy(FREE); this.goos.splice(i, 1); continue; }
       if (Math.random() < dt * 4) {
         const d = q.drips[(Math.random() * q.drips.length) | 0];
-        if (d) q.g.roundRect(d.x - d.r / 2, d.y - d.r, d.r, d.r * 2.2, d.r / 2).fill({ color: 0xfafaf2, alpha: 0.9 });
+        if (d) q.trickles.roundRect(d.x - d.r / 2, d.y - d.r, d.r, d.r * 2.2, d.r / 2).fill({ color: 0xfafaf2, alpha: 0.9 });
       }
     }
     // with no panels behind them, the help and the scoreboard would run into each other

@@ -1,6 +1,6 @@
 import { Callbacks, Client, Predict, type InputHandle, type PredictedSpawns, type Reconciler, type Room, type SpawnHandle } from "@colyseus/sdk";
 import type { PredictedEventChannel } from "@colyseus/sdk/predict";
-import { Container3D, DirectionalLight, Frustum, Mesh3D, Vector3, View3D } from "@pixi/3d";
+import { Container3D, DirectionalLight, Mesh3D, Vector3, View3D } from "@pixi/3d";
 import { BloomEffect, TiltShiftEffect } from "@pixi/3d/extras";
 import { Point, UPDATE_PRIORITY, type Application, type GlProgram, type Ticker } from "pixi.js";
 import type { server } from "../app.config.js";
@@ -584,13 +584,13 @@ export class Game {
 
     // draw everything, wherever the camera points
     t = performance.now();
-    const camera = this.view3d.camera;
-    const all = new Frustum();
-    for (let i = 3; i < 24; i += 4) all.planesData[i] = 1e9;
-    camera.cullFrustum = all;
+    const cull = this.view3d.cull;
+    this.view3d.cull = "off";
     this.app.renderer.render(this.app.stage);
     this.app.renderer.render(this.app.stage);
-    camera.cullFrustum = camera.frustum;
+    this.view3d.cull = cull;
+    // and once culled, as in play (under WebGPU the culling is a compute pass, with pipelines of its own)
+    this.app.renderer.render(this.app.stage);
     performance.measure("ttm warm-up frame", { start: t });
 
     undoDrops();

@@ -1,4 +1,4 @@
-import { Container3D, Material3D, Mesh3D, Quaternion, Vector3 } from "@pixi/3d";
+import { Container3D, getAttributeData, Material3D, Mesh3D, Quaternion, Vector3 } from "@pixi/3d";
 import { Matrix } from "pixi.js";
 import { PLAYER_RADIUS, Weapon } from "../../shared/constants.js";
 import { Animator, Ch, RIG_STEP, type AnimEvent, type AnimInput, type Pose, type RigShape } from "../anim/Animator.js";
@@ -45,7 +45,7 @@ function measureRig(body: Container3D): RigShape | null {
     const zy: number[] = [];
     for (const m of [n, ...n.children]) {
       if (!(m instanceof Mesh3D) || (m !== n && m.label !== "Mesh3D")) continue;
-      const p = m.geometry.positions;
+      const p = getAttributeData(m.geometry, "aPosition", 3);
       for (let i = 0; i + 2 < p.length; i += 3) zy.push(p[i + 2], p[i + 1]);
     }
     const out = new Float32Array(Math.round((Math.PI * 2) / RIG_STEP));

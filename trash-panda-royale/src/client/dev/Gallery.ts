@@ -1,4 +1,4 @@
-import { Box, Container3D, Material3D, Matrix4, Mesh3D, Vector3 } from "@pixi/3d";
+import { Box, Container3D, getAttributeData, Material3D, Matrix4, Mesh3D, Vector3 } from "@pixi/3d";
 import { Container, Point, Text, type Ticker } from "pixi.js";
 import { CAR_FUSE_MS, CAR_TYPES, GRAVITY, JUMP_VELOCITY, RUN_SPEED, WALK_SPEED, WALL_SPEED, Weapon, ZOOMIES_SPEED } from "../../shared/constants.js";
 import { mulberry32 } from "../../shared/map.js";
@@ -534,7 +534,7 @@ export function startGallery(game: Game, params: URLSearchParams) {
     const lowest = (meshes: Mesh3D[]) => {
       let best: number[] | null = null;
       for (const m of meshes) {
-        const pos = m.geometry.positions, e = m.getGlobalTransform(m4).elements;
+        const pos = getAttributeData(m.geometry, "aPosition", 3), e = m.getGlobalTransform(m4).elements;
         for (let q = 0; q + 2 < pos.length; q += 3) {
           const x = pos[q], y = pos[q + 1], z = pos[q + 2];
           const wy = e[1] * x + e[5] * y + e[9] * z + e[13];
