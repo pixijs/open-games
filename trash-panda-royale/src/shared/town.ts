@@ -53,6 +53,12 @@ export interface Box {
   grab?: false;
   /** What it is (`SolidTag`), for drawing and debugging. */
   tag?: number;
+  /**
+   * A ruin's glassless windows: boxes through it (poking out of both its faces) that shots and
+   * sightlines go through (`rayStatic`, `segmentClear`). Bodies, cars and stink bombs don't:
+   * to them it's the whole box.
+   */
+  holes?: Box[];
 }
 
 /**
@@ -438,6 +444,7 @@ export function placeParts(set: PartSet, x: number, z: number, rot: number, out:
     if (b.grab === false) extra.grab = false;
     const t = tag(b.tag);
     if (t !== undefined) extra.tag = t;
+    if (b.holes) extra.holes = b.holes.map((h) => makeBox(wx(h.x, h.z), wz(h.x, h.z), rot, h.hx, h.hz, h.top, { base: h.base }));
     out.boxes.push(makeBox(wx(b.x, b.z), wz(b.x, b.z), rot, b.hx, b.hz, b.top, extra));
   }
   for (const r of set.ramps ?? []) {

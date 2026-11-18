@@ -4,7 +4,7 @@ import { BLAST_KICK, BLAST_LIFT, EV_FIRE, stepPlayer, type InputLike, type Playe
 import {
   AIM_Q, autoPitch, BLAST_CONE, BLAST_FAR, BLAST_FULL, DRIVE_EYE_Y, EYE_Y, GUN_Y, newPellet, pelletDamage, pelletDir, shotHeight, shotYaw, tracePellet, type ShotTarget,
 } from "../src/shared/hitscan.ts";
-import { makeBox, makePit, makeRamp, makeStaticWorld, rayStatic, withStaticWorld } from "../src/shared/map.ts";
+import { CITY, makeBox, makePit, makeRamp, makeStaticWorld, rayStatic, segmentClear, withStaticWorld, type Box } from "../src/shared/map.ts";
 
 const near = (a: number, b: number, eps = 1e-6) => Math.abs(a - b) < eps;
 
@@ -37,6 +37,51 @@ describe("rays in 3D through the town (shared)", () => {
   it("a solid ramp is a wedge", () => {
     assert.ok(near(ray(20, 1, -10, 0, 0, 1), 8), "in where its surface reaches the shot's height");
     assert.strictEqual(ray(20, 5, -10, 0, 0, 1), 50, "over its top end");
+  });
+
+  it("a wall's window lets a ray through, but not under its sill, over it, or out through its jamb", () => {
+    // a wall 0.4 thick along z at x = 0, a window through it 1..2 m up, z -0.5..0.5
+    const wall = makeBox(0, 0, 0, 0.2, 3, 4, { holes: [makeBox(0, 0, 0, 0.4, 0.5, 2, { base: 1 })] });
+    const ww = makeStaticWorld([wall]);
+    const r = (ox: number, oy: number, oz: number, dx: number, dz: number) => {
+      const l = Math.hypot(dx, dz);
+      return withStaticWorld(ww, () => rayStatic(ox, oy, oz, dx / l, 0, dz / l, 50));
+    };
+    assert.strictEqual(r(-3, 1.5, 0, 1, 0), 50, "through it");
+    assert.ok(near(r(-3, 0.5, 0, 1, 0), 2.8), "under its sill");
+    assert.ok(near(r(-3, 2.5, 0, 1, 0), 2.8), "over it");
+    assert.ok(near(r(-3, 1.5, 1, 1, 0), 2.8), "beside it");
+    // in through the window at z 0.4, into its jamb at z 0.5 (x -0.1)
+    assert.ok(near(r(-0.3, 1.5, 0.3, 1, 1), 0.2 * Math.SQRT2), "out through its jamb");
+    withStaticWorld(ww, () => {
+      assert.ok(segmentClear(-1, 1.5, 0, 1, 1.5, 0), "a sightline through it");
+      assert.ok(!segmentClear(-1, 0.5, 0, 1, 0.5, 0), "none under it");
+    });
+  });
+
+  it("in town, every window of a ruin lets a shot through, and the wall under it stops one", () => {
+    const walls = CITY.boxes.filter((b) => b.holes);
+    assert.ok(walls.length >= 6, `walls with windows: ${walls.length}`);
+    let n = 0;
+    for (const wall of walls) {
+      // (straight through the wall: along its thin side)
+      const o = wall.rot ?? { cx: (wall.minX + wall.maxX) / 2, cz: (wall.minZ + wall.maxZ) / 2, hx: (wall.maxX - wall.minX) / 2, hz: (wall.maxZ - wall.minZ) / 2, c: 1, s: 0 };
+      const [nx, nz] = o.hx < o.hz ? [o.c, -o.s] : [o.s, o.c];
+      const inWall = (x: number, z: number) => {
+        const dx = x - o.cx, dz = z - o.cz;
+        return Math.abs(dx * o.c - dz * o.s) <= o.hx && Math.abs(dx * o.s + dz * o.c) <= o.hz;
+      };
+      for (const h of wall.holes as Box[]) {
+        const cx = h.rot ? h.rot.cx : (h.minX + h.maxX) / 2, cz = h.rot ? h.rot.cz : (h.minZ + h.maxZ) / 2;
+        const y = (h.base! + h.top) / 2, below = h.base! - 0.3;
+        const across = (y: number) => segmentClear(cx - nx * 0.6, y, cz - nz * 0.6, cx + nx * 0.6, y, cz + nz * 0.6);
+        assert.ok(inWall(cx, cz) && !inWall(cx - nx * 0.6, cz - nz * 0.6) && !inWall(cx + nx * 0.6, cz + nz * 0.6), "across the wall");
+        assert.ok(across(y), `through the window at (${cx.toFixed(1)}, ${y.toFixed(1)}, ${cz.toFixed(1)})`);
+        if (below > 0) assert.ok(!across(below), `under the window at (${cx.toFixed(1)}, ${below.toFixed(1)}, ${cz.toFixed(1)})`);
+        n++;
+      }
+    }
+    assert.ok(n >= 20, `windows: ${n}`);
   });
 });
 

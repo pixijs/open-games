@@ -478,6 +478,7 @@ function clipSlab(ox: number, oz: number, dx: number, dz: number, minX: number, 
 
 /** Does the straight line from (ax, ay, az) to (bx, by, bz) pass through box `b` (a column from `base`, or the ground, up to `top`)? */
 export function segmentHitsBox(b: Box, ax: number, ay: number, az: number, bx: number, by: number, bz: number): boolean {
+  if (b.holes) return segEnterBox(b, ax, ay, az, bx - ax, by - ay, bz - az) >= 0;
   const dx = bx - ax, dz = bz - az;
   if (!(b.rot ? clipSeg(b.rot, ax, az, dx, dz) : clipSlab(ax, az, dx, dz, b.minX, b.minZ, b.maxX, b.maxZ))) return false;
   const y0 = ay + (by - ay) * _clip.t0, y1 = ay + (by - ay) * _clip.t1;
@@ -547,12 +548,36 @@ function linBetween(g0: number, g1: number, lo: number, hi: number): boolean {
   return _iv.t0 <= _iv.t1;
 }
 
-/** Where (0..1) the segment from (ax, ay, az) along (sx, sy, sz) first goes into box `b`, or -1. */
-function segEnterBox(b: Box, ax: number, ay: number, az: number, sx: number, sy: number, sz: number): number {
-  if (!(b.rot ? clipSeg(b.rot, ax, az, sx, sz) : clipSlab(ax, az, sx, sz, b.minX, b.minZ, b.maxX, b.maxZ))) return -1;
+const _seg = { t0: 0, t1: 0 };
+
+/** The stretch (0..1) of the segment from (ax, ay, az) along (sx, sy, sz) inside box `b`: into `_seg`. False: none. */
+function segInBox(b: Box, ax: number, ay: number, az: number, sx: number, sy: number, sz: number): boolean {
+  if (!(b.rot ? clipSeg(b.rot, ax, az, sx, sz) : clipSlab(ax, az, sx, sz, b.minX, b.minZ, b.maxX, b.maxZ))) return false;
   const t0 = _clip.t0, t1 = _clip.t1;
-  if (!linBetween(ay + sy * t0, ay + sy * t1, b.base ?? -Infinity, b.top)) return -1;
-  return t0 + (t1 - t0) * _iv.t0;
+  if (!linBetween(ay + sy * t0, ay + sy * t1, b.base ?? -Infinity, b.top)) return false;
+  _seg.t0 = t0 + (t1 - t0) * _iv.t0;
+  _seg.t1 = t0 + (t1 - t0) * _iv.t1;
+  return true;
+}
+
+const _holeA: number[] = [], _holeB: number[] = [];
+
+/** Where (0..1) the segment from (ax, ay, az) along (sx, sy, sz) first goes into box `b` (not into its `holes`), or -1. */
+function segEnterBox(b: Box, ax: number, ay: number, az: number, sx: number, sy: number, sz: number): number {
+  if (!segInBox(b, ax, ay, az, sx, sy, sz)) return -1;
+  let u = _seg.t0;
+  if (!b.holes) return u;
+  const end = _seg.t1;
+  _holeA.length = 0; _holeB.length = 0;
+  for (const h of b.holes) if (segInBox(h, ax, ay, az, sx, sy, sz)) { _holeA.push(_seg.t0); _holeB.push(_seg.t1); }
+  // the first of its stretch that isn't in a hole (one leaving a hole through its jamb hits the jamb)
+  for (let moved = true; moved && u <= end;) {
+    moved = false;
+    for (let k = 0; k < _holeA.length; k++) {
+      if (_holeA[k] <= u + 1e-9 && _holeB[k] > u + 1e-9) { u = _holeB[k]; moved = true; }
+    }
+  }
+  return u <= end ? u : -1;
 }
 
 /** …into solid ramp `r` (under its surface, and no more than `thick` under it). */

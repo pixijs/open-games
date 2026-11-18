@@ -5,8 +5,11 @@
  */
 import data from "./kit.json";
 
-/** A box: centre (x, z), half sizes, its top, and (floating) its underside. */
-export interface PartBox { x: number; z: number; hx: number; hz: number; top: number; base?: number; grab?: false; tag?: string }
+/** A box: centre (x, z), half sizes, its top, and (floating) its underside; `holes`: see `Box.holes`. */
+export interface PartBox { x: number; z: number; hx: number; hz: number; top: number; base?: number; grab?: false; tag?: string; holes?: PartHole[] }
+
+/** An opening through a wall box, in the same frame: deeper than the wall, so it pokes out of both faces. */
+export interface PartHole { x: number; z: number; hx: number; hz: number; base: number; top: number }
 
 /**
  * A ramp rising toward +z (`dir` 1) or −z (−1), from `lo` to `hi` (see `Ramp` in map.ts); with
