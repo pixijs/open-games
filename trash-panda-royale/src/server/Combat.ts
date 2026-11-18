@@ -51,12 +51,15 @@ export class Combat {
    * the gun or (`eye`: over the raccoon's back) the crosshair's line over its head, judged
    * against the world AS THE SHOOTER SAW IT: every target is rewound to the shooter's render
    * time with `rewind.lastSeenBy()`. Riders are rebuilt the same way the client draws them:
-   * (rewound car or timetable train) ⊕ (rewound local offset).
+   * (rewound car or timetable train) ⊕ (rewound local offset). Only what the shooter's client
+   * was sent can be hit: a gun outreaches AOI_IN, so someone in range may not be on its screen.
    */
   fire(sid: string, p: Player, aim: number, pitch: number, eye: boolean, time: number, tick: number) {
     if (p.weapon === Weapon.Fists) return this.melee(sid, p, aim, time, tick);
     const w = WEAPONS[p.weapon];
     const seen = this.room.rewind.lastSeenBy(sid);
+    const client = this.room.clients.getById(sid);
+    const view = client?.view;
     const ox = p.x, oz = p.z, oy = shotHeight(p.x, p.y, p.z, p.mode === Mode.Driving, eye);
     // (as sent to everyone watching: they trace the pellets from it themselves)
     const yaw = Math.round(shotYaw(aim, p.weapon, tick) * AIM_Q) / AIM_Q;
@@ -66,7 +69,7 @@ export class Combat {
     const targets: ShotTarget[] = [];
     const what: Target[] = [];
     for (const [qsid, q] of this.room.state.players) {
-      if (qsid === sid || q.mode === Mode.Dead) continue;
+      if (qsid === sid || q.mode === Mode.Dead || (view && !view.has(q))) continue;
       // a gull is a small target up in the air (a hit shoos it: it's out of the round, nothing hurts
       // it). One that only just hatched (or just landed) is a gull to one side of the rewind and a
       // body to the other: no target at all, rather than a raccoon to knock about
@@ -83,13 +86,13 @@ export class Combat {
       what.push({ kind: "player", sid: qsid, p: q });
     }
     for (const npc of this.room.state.npcs.values()) {
-      if (npc.state > NpcState.Flying) continue;
+      if (npc.state > NpcState.Flying || (view && !view.has(npc))) continue;
       const pos = seen.read(npc, POS3, scratch3);
       targets.push({ x: pos.x, z: pos.z, y0: pos.y, y1: pos.y + TOWNSFOLK_TOP, y: pos.y + 0.8, r: 0.5 });
       what.push({ kind: "npc", npc });
     }
     for (const car of this.room.carsById.values()) {
-      if (car.state === 2 || (p.mode === Mode.Driving && car.id === p.veh)) continue;
+      if (car.state === 2 || (p.mode === Mode.Driving && car.id === p.veh) || (view && !view.has(car))) continue;
       const type = CAR_TYPES[car.kind];
       const pose = car.driver === sid ? car : seen.read(car, CARPOSE, scratchC);
       targets.push({ x: pose.x, z: pose.z, y0: car.y, y1: car.y + type.roof, y: car.y + type.roof * 0.55, r: 0, yaw: pose.yaw, hw: type.halfW, hl: type.halfL });
@@ -139,7 +142,6 @@ export class Combat {
     }
 
     this.room.peds.scare(ox, oz, 22);
-    const client = this.room.clients.getById(sid);
     // only the aim (cm, 1/AIM_Q rad: small ints, ~30 bytes): the pellets are traced from it by everyone watching
     const cm = (v: number) => Math.round(v * 100);
     this.room.interest.broadcastNear("shot", [sid, p.weapon, cm(ox), cm(oy), cm(oz), Math.round(yaw * AIM_Q), Math.round(pitch * AIM_Q)], ox, oz, NEAR_EVENTS, client);

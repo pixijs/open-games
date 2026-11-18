@@ -14,8 +14,9 @@ const IN2 = AOI_IN * AOI_IN, OUT2 = AOI_OUT * AOI_OUT;
  * enter a client's `StateView` within AOI_IN metres and leave beyond AOI_OUT; positional
  * events (shots, crashes, honks…) are sent only to clients looking from nearby.
  *
- * Everything the shared step reads about other entities is within ~12 m, and hit tests
- * reach 45 m, both well inside AOI_IN: what a client predicts against is always in view.
+ * Everything the shared step reads about other entities is within ~12 m, well inside AOI_IN:
+ * what a client predicts against is always in view. A gun reaches past AOI_OUT (GUN_RANGE), so
+ * a shot can hit anyone a client is sent, and `Combat.fire` lets it hit nobody else.
  *
  * A raccoon hiding in a trash can isn't sent to anyone (but whoever spectates them) once
  * those around have seen the dive (`Bins.secret`): hiding is the server keeping a secret,

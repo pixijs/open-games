@@ -1,5 +1,5 @@
 import assert from "assert";
-import { Mode, TICK_RATE, Weapon, WEAPONS } from "../src/shared/constants.ts";
+import { AOI_OUT, Mode, TICK_RATE, Weapon, WEAPONS } from "../src/shared/constants.ts";
 import { BLAST_KICK, BLAST_LIFT, EV_FIRE, stepPlayer, type InputLike, type PlayerSim, type WorldView } from "../src/shared/sim.ts";
 import {
   AIM_Q, autoPitch, BLAST_CONE, BLAST_FAR, BLAST_FULL, DRIVE_EYE_Y, EYE_Y, GUN_Y, newPellet, pelletDamage, pelletDir, shotHeight, shotYaw, tracePellet, type ShotTarget,
@@ -113,6 +113,18 @@ describe("hitscan along the aim (shared)", () => {
     const pitch = autoEast(-0.5, 5, 0, [raccoon(14, 0, 0)]);
     assert.ok(pitch !== null && pitch < 0, `pitched down: ${pitch}`);
     assert.strictEqual(east(-0.5, 5, 0, [raccoon(14, 0, 0)], pitch!).target, 0, "from the roof");
+  });
+
+  it("a gun reaches anyone a client is sent, and the Cap Blaster's wobble keeps on them out there", () => {
+    const open = makeStaticWorld([]);
+    for (const weapon of [Weapon.Pistol, Weapon.Smg]) {
+      const { name, range } = WEAPONS[weapon];
+      assert.ok(range > AOI_OUT, name);
+      for (let tick = 0; tick < 3; tick++) {
+        const p = withStaticWorld(open, () => tracePellet(0, 1, 0, shotYaw(0, weapon, tick), 0, range, [raccoon(0, AOI_OUT + 5, 0)], newPellet()));
+        assert.strictEqual(p.target, 0, `${name}, step ${tick}`);
+      }
+    }
   });
 
   describe("autoPitch (overhead, or a stick: no up or down to aim with)", () => {

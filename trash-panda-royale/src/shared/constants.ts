@@ -328,16 +328,24 @@ export interface WeaponDef {
   damage: number;
   range: number;
   pellets: number;
+  /** A gun's wobble (rad): its shots turn by -spread, 0 and +spread in turn (`shotYaw`). */
   spread: number;
   /** Ammo granted by one pickup. */
   pickupAmmo: number;
   knockback: number;
 }
 
+/**
+ * How far the Pop-Gun and the Cap Blaster reach (m): past AOI_OUT, so anyone a client is sent
+ * is in range. `Combat.fire` weighs only what's in the shooter's view, so nobody it can't see
+ * is hit either.
+ */
+export const GUN_RANGE = 90;
+
 export const WEAPONS: WeaponDef[] = [
   { name: "Paw Slap", cooldown: 12, damage: 18, range: 1.6, pellets: 1, spread: 0, pickupAmmo: 0, knockback: 7 },
-  { name: "Pop-Gun", cooldown: 8, damage: 22, range: 45, pellets: 1, spread: 0, pickupAmmo: 36, knockback: 2 },
-  { name: "Cap Blaster", cooldown: 3, damage: 10, range: 34, pellets: 1, spread: 0.04, pickupAmmo: 120, knockback: 1 },
+  { name: "Pop-Gun", cooldown: 8, damage: 22, range: GUN_RANGE, pellets: 1, spread: 0, pickupAmmo: 36, knockback: 2 },
+  { name: "Cap Blaster", cooldown: 3, damage: 10, range: GUN_RANGE, pellets: 1, spread: 0.005, pickupAmmo: 120, knockback: 1 },
   { name: "Trash Blunderbuss", cooldown: 24, damage: 11, range: 18, pellets: 7, spread: 0.07, pickupAmmo: 18, knockback: 6 },
   { name: "Stink Bomb", cooldown: 20, damage: 95, range: 6.5, pellets: 1, spread: 0, pickupAmmo: 4, knockback: 14 },
 ];

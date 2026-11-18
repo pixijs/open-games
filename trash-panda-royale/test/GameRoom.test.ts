@@ -204,6 +204,33 @@ describe("Tiny Town Mayhem server", function () {
     assert.ok(Math.abs(yaw - Math.round((Math.PI / 2) * AIM_Q)) <= 1, `${yaw}`);
   });
 
+  it("a shot reaches whoever the shooter is sent, however far off, and nobody it isn't", async () => {
+    const { room, input: inA, client: cA, p: a } = await join("shooter");
+    clearTraffic(room);
+    const { input: inB, p: b } = await joinExisting(room, "target");
+    // the open ground north-east of town: a clear line 70 m long, past AOI_IN
+    place(a, 85, 130);
+    place(b, 95, 130);
+    a.weapon = Weapon.Pistol; a.ammo1 = 20;
+    await Promise.all([drive(inA, 10, () => {}), drive(inB, 10, () => {})]);
+    const view = room.clients.getById(cA.sessionId)!.view!;
+    assert.ok(view.has(b), "sent to the shooter");
+    place(b, 155, 130);
+    // (fired once the rewind only has them out there)
+    const shoot = () => Promise.all([
+      drive(inA, 30, (d, i) => { d.aim = Math.PI / 2; d.pitch = 0; d.weapon = Weapon.Pistol; d.fire = i === 25; }),
+      drive(inB, 30, () => {}),
+    ]);
+    await shoot();
+    assert.ok(view.has(b), "still sent (they go past AOI_OUT)");
+    assert.ok(b.hp < 100, `hit 70 m off: hp ${b.hp}`);
+    b.hp = 100;
+    view.remove(b);
+    await shoot();
+    assert.strictEqual(a.ammo1, 18, "it did fire");
+    assert.strictEqual(b.hp, 100, "not sent to the shooter: not hit");
+  });
+
   it("a blast point-blank knocks a raccoon off its feet with all of it; one from 12 m catches it with a pellet, and no shove", async () => {
     const { room, input: inA, p: a } = await join("blaster");
     clearTraffic(room);
