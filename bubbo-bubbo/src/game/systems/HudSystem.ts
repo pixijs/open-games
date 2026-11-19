@@ -324,6 +324,6 @@ export class HudSystem implements System {
         // Remove from parent
         toaster.view.removeFromParent();
         // Return to pool
-        pool.return(PointToaster);
+        pool.return(toaster);
     }
 }
