@@ -18,6 +18,10 @@ Below is a list of games that are currently available in this repository. Each g
   - [Code](/puzzling-potions/README.md)
   - [Play](https://pixijs.io/open-games/puzzling-potions)
 
+- Trash Panda Royale
+  - [Code](/trash-panda-royale/README.md)
+  - [Play](https://pixijs.io/open-games/trash-panda-royale)
+
 ## Tools
 
 Below is a list of tools that are used in the games. These tools are also open source and can be used in your own projects.
@@ -25,6 +29,7 @@ Below is a list of tools that are used in the games. These tools are also open s
 - [PixiJS](https://github.com/pixijs/pixijs) A rendering library built for the web.
 - [PixiJS Sound](https://github.com/pixijs/sound) A WebAudio API playback library, with filters.
 - [PixiJS UI](https://github.com/pixijs/ui) For commonly used UI components in PixiJS.
+- [PixiJS 3D](https://github.com/pixijs/3d) A 3D extension for PixiJS.
 - [PixiJS AssetPack](https://github.com/pixijs/assetpack) Compile and optimise assets for the web.
 - [PixiJS Spine](https://github.com/EsotericSoftware/spine-runtimes/blob/4.2/spine-ts/README.md) Spine animation support for PixiJS
 

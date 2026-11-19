@@ -1,0 +1,9 @@
+node_modules
+dist
+build
+.DS_Store
+.colyseus-cloud.json
+.devmode.json
+# written by `npm run assets`
+assets-src/previews
+assets-src/blender/__pycache__

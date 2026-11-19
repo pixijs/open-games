@@ -1,0 +1,2664 @@
+{
+  "generator": "assets-src/blender/build_characters_props.py",
+  "axes": "glTF: +Y up, +Z = model front, -X = model right; metres",
+  "assets": [
+    {
+      "name": "raccoon",
+      "file": "raccoon.glb",
+      "bbox_min": [
+        -0.3606,
+        0.0,
+        -0.7827
+      ],
+      "bbox_max": [
+        0.3606,
+        1.5242,
+        0.2965
+      ],
+      "size": [
+        0.7212,
+        1.5242,
+        1.0792
+      ],
+      "triangles": 6386,
+      "node_names": [
+        "raccoon",
+        "hips",
+        "tail_0",
+        "tail_1",
+        "tail_2",
+        "torso",
+        "acc_bandana",
+        "acc_bowtie",
+        "acc_sack",
+        "arm_l",
+        "forearm_l",
+        "hand_l_socket",
+        "arm_r",
+        "forearm_r",
+        "hand_r_socket",
+        "head",
+        "acc_beanie",
+        "acc_cap",
+        "acc_cone",
+        "acc_crown",
+        "acc_headphones",
+        "acc_pirate",
+        "acc_shades",
+        "acc_tophat",
+        "ear_l",
+        "ear_r",
+        "legs",
+        "leg_l",
+        "foot_l",
+        "leg_r",
+        "foot_r"
+      ],
+      "nodes": [
+        {
+          "name": "raccoon",
+          "type": "empty",
+          "parent": null,
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [],
+          "tris": 0
+        },
+        {
+          "name": "hips",
+          "type": "mesh",
+          "parent": "raccoon",
+          "local_translation_gltf": [
+            0.0,
+            0.36,
+            0.0
+          ],
+          "materials": [
+            "Fur"
+          ],
+          "tris": 80
+        },
+        {
+          "name": "tail_0",
+          "type": "mesh",
+          "parent": "hips",
+          "local_translation_gltf": [
+            0.0,
+            0.04,
+            -0.17
+          ],
+          "materials": [
+            "Fur",
+            "FurDark"
+          ],
+          "tris": 108
+        },
+        {
+          "name": "tail_1",
+          "type": "mesh",
+          "parent": "tail_0",
+          "local_translation_gltf": [
+            0.0,
+            0.07,
+            -0.19
+          ],
+          "materials": [
+            "Fur",
+            "FurDark"
+          ],
+          "tris": 108
+        },
+        {
+          "name": "tail_2",
+          "type": "mesh",
+          "parent": "tail_1",
+          "local_translation_gltf": [
+            0.0,
+            0.11,
+            -0.16
+          ],
+          "materials": [
+            "Fur",
+            "FurDark"
+          ],
+          "tris": 126
+        },
+        {
+          "name": "torso",
+          "type": "mesh",
+          "parent": "hips",
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "Belly",
+            "Fur"
+          ],
+          "tris": 252
+        },
+        {
+          "name": "acc_bandana",
+          "type": "mesh",
+          "parent": "torso",
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "Acc"
+          ],
+          "tris": 276
+        },
+        {
+          "name": "acc_bowtie",
+          "type": "mesh",
+          "parent": "torso",
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "Acc"
+          ],
+          "tris": 424
+        },
+        {
+          "name": "acc_sack",
+          "type": "mesh",
+          "parent": "torso",
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "AccTrim",
+            "Acc"
+          ],
+          "tris": 278
+        },
+        {
+          "name": "arm_l",
+          "type": "mesh",
+          "parent": "torso",
+          "local_translation_gltf": [
+            0.21,
+            0.3,
+            0.0
+          ],
+          "materials": [
+            "Fur"
+          ],
+          "tris": 64
+        },
+        {
+          "name": "forearm_l",
+          "type": "mesh",
+          "parent": "arm_l",
+          "local_translation_gltf": [
+            0.01,
+            -0.15,
+            0.0
+          ],
+          "materials": [
+            "FurDark"
+          ],
+          "tris": 144
+        },
+        {
+          "name": "hand_l_socket",
+          "type": "empty",
+          "parent": "forearm_l",
+          "local_translation_gltf": [
+            0.0,
+            -0.17,
+            0.03
+          ],
+          "materials": [],
+          "tris": 0
+        },
+        {
+          "name": "arm_r",
+          "type": "mesh",
+          "parent": "torso",
+          "local_translation_gltf": [
+            -0.21,
+            0.3,
+            0.0
+          ],
+          "materials": [
+            "Fur"
+          ],
+          "tris": 64
+        },
+        {
+          "name": "forearm_r",
+          "type": "mesh",
+          "parent": "arm_r",
+          "local_translation_gltf": [
+            -0.01,
+            -0.15,
+            0.0
+          ],
+          "materials": [
+            "FurDark"
+          ],
+          "tris": 144
+        },
+        {
+          "name": "hand_r_socket",
+          "type": "empty",
+          "parent": "forearm_r",
+          "local_translation_gltf": [
+            0.0,
+            -0.17,
+            0.03
+          ],
+          "materials": [],
+          "tris": 0
+        },
+        {
+          "name": "head",
+          "type": "mesh",
+          "parent": "torso",
+          "local_translation_gltf": [
+            0.0,
+            0.38,
+            0.0
+          ],
+          "materials": [
+            "Face",
+            "Fur",
+            "Ink"
+          ],
+          "tris": 676
+        },
+        {
+          "name": "acc_beanie",
+          "type": "mesh",
+          "parent": "head",
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "Acc",
+            "AccTrim"
+          ],
+          "tris": 240
+        },
+        {
+          "name": "acc_cap",
+          "type": "mesh",
+          "parent": "head",
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "Acc",
+            "AccTrim"
+          ],
+          "tris": 256
+        },
+        {
+          "name": "acc_cone",
+          "type": "mesh",
+          "parent": "head",
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "AccTrim",
+            "Acc"
+          ],
+          "tris": 190
+        },
+        {
+          "name": "acc_crown",
+          "type": "mesh",
+          "parent": "head",
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "Gold",
+            "AccTrim"
+          ],
+          "tris": 294
+        },
+        {
+          "name": "acc_headphones",
+          "type": "mesh",
+          "parent": "head",
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "Acc",
+            "AccTrim"
+          ],
+          "tris": 452
+        },
+        {
+          "name": "acc_pirate",
+          "type": "mesh",
+          "parent": "head",
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "AccTrim"
+          ],
+          "tris": 284
+        },
+        {
+          "name": "acc_shades",
+          "type": "mesh",
+          "parent": "head",
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "AccTrim",
+            "Acc"
+          ],
+          "tris": 882
+        },
+        {
+          "name": "acc_tophat",
+          "type": "mesh",
+          "parent": "head",
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "Acc",
+            "AccTrim"
+          ],
+          "tris": 260
+        },
+        {
+          "name": "ear_l",
+          "type": "mesh",
+          "parent": "head",
+          "local_translation_gltf": [
+            0.19,
+            0.48,
+            -0.02
+          ],
+          "materials": [
+            "Belly",
+            "Fur",
+            "FurDark"
+          ],
+          "tris": 144
+        },
+        {
+          "name": "ear_r",
+          "type": "mesh",
+          "parent": "head",
+          "local_translation_gltf": [
+            -0.19,
+            0.48,
+            -0.02
+          ],
+          "materials": [
+            "Belly",
+            "Fur",
+            "FurDark"
+          ],
+          "tris": 144
+        },
+        {
+          "name": "legs",
+          "type": "empty",
+          "parent": "raccoon",
+          "local_translation_gltf": [
+            0.0,
+            0.34,
+            0.0
+          ],
+          "materials": [],
+          "tris": 0
+        },
+        {
+          "name": "leg_l",
+          "type": "mesh",
+          "parent": "legs",
+          "local_translation_gltf": [
+            0.11,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "FurDark",
+            "Fur"
+          ],
+          "tris": 96
+        },
+        {
+          "name": "foot_l",
+          "type": "mesh",
+          "parent": "leg_l",
+          "local_translation_gltf": [
+            0.0,
+            -0.26,
+            0.01
+          ],
+          "materials": [
+            "FurDark"
+          ],
+          "tris": 152
+        },
+        {
+          "name": "leg_r",
+          "type": "mesh",
+          "parent": "legs",
+          "local_translation_gltf": [
+            -0.11,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "FurDark",
+            "Fur"
+          ],
+          "tris": 96
+        },
+        {
+          "name": "foot_r",
+          "type": "mesh",
+          "parent": "leg_r",
+          "local_translation_gltf": [
+            0.0,
+            -0.26,
+            0.01
+          ],
+          "materials": [
+            "FurDark"
+          ],
+          "tris": 152
+        }
+      ]
+    },
+    {
+      "name": "human",
+      "file": "human.glb",
+      "bbox_min": [
+        -0.71,
+        0.0,
+        -0.6415
+      ],
+      "bbox_max": [
+        0.6437,
+        2.17,
+        0.6248
+      ],
+      "size": [
+        1.3537,
+        2.17,
+        1.2663
+      ],
+      "triangles": 7367,
+      "node_names": [
+        "human",
+        "hips",
+        "torso",
+        "acc_apron",
+        "acc_backpack",
+        "acc_camera",
+        "acc_overalls",
+        "acc_tank",
+        "acc_tie",
+        "arm_l",
+        "forearm_l",
+        "hand_l_socket",
+        "acc_briefcase",
+        "acc_handbag",
+        "arm_r",
+        "forearm_r",
+        "hand_r_socket",
+        "acc_balloon",
+        "acc_sprayer",
+        "head",
+        "acc_cap",
+        "acc_chef_hat",
+        "acc_gasmask",
+        "acc_glasses",
+        "acc_mustache",
+        "acc_sunhat",
+        "acc_sweatband",
+        "hair_0",
+        "hair_1",
+        "hair_2",
+        "hair_3",
+        "legs",
+        "leg_l",
+        "foot_l",
+        "leg_r",
+        "foot_r"
+      ],
+      "nodes": [
+        {
+          "name": "human",
+          "type": "empty",
+          "parent": null,
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [],
+          "tris": 0
+        },
+        {
+          "name": "hips",
+          "type": "mesh",
+          "parent": "human",
+          "local_translation_gltf": [
+            0.0,
+            0.66,
+            0.0
+          ],
+          "materials": [
+            "Pants"
+          ],
+          "tris": 120
+        },
+        {
+          "name": "torso",
+          "type": "mesh",
+          "parent": "hips",
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "Shirt"
+          ],
+          "tris": 360
+        },
+        {
+          "name": "acc_apron",
+          "type": "mesh",
+          "parent": "torso",
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "AccTrim"
+          ],
+          "tris": 220
+        },
+        {
+          "name": "acc_backpack",
+          "type": "mesh",
+          "parent": "torso",
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "AccTrim"
+          ],
+          "tris": 248
+        },
+        {
+          "name": "acc_camera",
+          "type": "mesh",
+          "parent": "torso",
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "AccTrim"
+          ],
+          "tris": 300
+        },
+        {
+          "name": "acc_overalls",
+          "type": "mesh",
+          "parent": "torso",
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "AccTrim"
+          ],
+          "tris": 214
+        },
+        {
+          "name": "acc_tank",
+          "type": "mesh",
+          "parent": "torso",
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "AccTrim"
+          ],
+          "tris": 316
+        },
+        {
+          "name": "acc_tie",
+          "type": "mesh",
+          "parent": "torso",
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "AccTrim"
+          ],
+          "tris": 80
+        },
+        {
+          "name": "arm_l",
+          "type": "mesh",
+          "parent": "torso",
+          "local_translation_gltf": [
+            0.29,
+            0.42,
+            0.0
+          ],
+          "materials": [
+            "Skin",
+            "Shirt"
+          ],
+          "tris": 182
+        },
+        {
+          "name": "forearm_l",
+          "type": "mesh",
+          "parent": "arm_l",
+          "local_translation_gltf": [
+            0.01,
+            -0.21,
+            0.0
+          ],
+          "materials": [
+            "Skin"
+          ],
+          "tris": 144
+        },
+        {
+          "name": "hand_l_socket",
+          "type": "empty",
+          "parent": "forearm_l",
+          "local_translation_gltf": [
+            0.0,
+            -0.19,
+            0.03
+          ],
+          "materials": [],
+          "tris": 0
+        },
+        {
+          "name": "acc_briefcase",
+          "type": "mesh",
+          "parent": "hand_l_socket",
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "AccTrim"
+          ],
+          "tris": 312
+        },
+        {
+          "name": "acc_handbag",
+          "type": "mesh",
+          "parent": "hand_l_socket",
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "AccTrim"
+          ],
+          "tris": 164
+        },
+        {
+          "name": "arm_r",
+          "type": "mesh",
+          "parent": "torso",
+          "local_translation_gltf": [
+            -0.29,
+            0.42,
+            0.0
+          ],
+          "materials": [
+            "Skin",
+            "Shirt"
+          ],
+          "tris": 182
+        },
+        {
+          "name": "forearm_r",
+          "type": "mesh",
+          "parent": "arm_r",
+          "local_translation_gltf": [
+            -0.01,
+            -0.21,
+            0.0
+          ],
+          "materials": [
+            "Skin"
+          ],
+          "tris": 144
+        },
+        {
+          "name": "hand_r_socket",
+          "type": "empty",
+          "parent": "forearm_r",
+          "local_translation_gltf": [
+            0.0,
+            -0.19,
+            0.03
+          ],
+          "materials": [],
+          "tris": 0
+        },
+        {
+          "name": "acc_balloon",
+          "type": "mesh",
+          "parent": "hand_r_socket",
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "AccTrim"
+          ],
+          "tris": 236
+        },
+        {
+          "name": "acc_sprayer",
+          "type": "mesh",
+          "parent": "hand_r_socket",
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "AccTrim"
+          ],
+          "tris": 184
+        },
+        {
+          "name": "head",
+          "type": "mesh",
+          "parent": "torso",
+          "local_translation_gltf": [
+            0.0,
+            0.5,
+            0.0
+          ],
+          "materials": [
+            "Face",
+            "Skin"
+          ],
+          "tris": 504
+        },
+        {
+          "name": "acc_cap",
+          "type": "mesh",
+          "parent": "head",
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "AccTrim",
+            "Hair"
+          ],
+          "tris": 318
+        },
+        {
+          "name": "acc_chef_hat",
+          "type": "mesh",
+          "parent": "head",
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "AccTrim",
+            "Hair"
+          ],
+          "tris": 310
+        },
+        {
+          "name": "acc_gasmask",
+          "type": "mesh",
+          "parent": "head",
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "AccTrim"
+          ],
+          "tris": 358
+        },
+        {
+          "name": "acc_glasses",
+          "type": "mesh",
+          "parent": "head",
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "AccTrim"
+          ],
+          "tris": 284
+        },
+        {
+          "name": "acc_mustache",
+          "type": "mesh",
+          "parent": "head",
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "Hair"
+          ],
+          "tris": 232
+        },
+        {
+          "name": "acc_sunhat",
+          "type": "mesh",
+          "parent": "head",
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "AccTrim"
+          ],
+          "tris": 368
+        },
+        {
+          "name": "acc_sweatband",
+          "type": "mesh",
+          "parent": "head",
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "AccTrim"
+          ],
+          "tris": 144
+        },
+        {
+          "name": "hair_0",
+          "type": "mesh",
+          "parent": "head",
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "Hair"
+          ],
+          "tris": 226
+        },
+        {
+          "name": "hair_1",
+          "type": "mesh",
+          "parent": "head",
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "Hair"
+          ],
+          "tris": 278
+        },
+        {
+          "name": "hair_2",
+          "type": "mesh",
+          "parent": "head",
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "Hair"
+          ],
+          "tris": 231
+        },
+        {
+          "name": "hair_3",
+          "type": "mesh",
+          "parent": "head",
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "Hair",
+            "AccTrim"
+          ],
+          "tris": 348
+        },
+        {
+          "name": "legs",
+          "type": "empty",
+          "parent": "human",
+          "local_translation_gltf": [
+            0.0,
+            0.62,
+            0.0
+          ],
+          "materials": [],
+          "tris": 0
+        },
+        {
+          "name": "leg_l",
+          "type": "mesh",
+          "parent": "legs",
+          "local_translation_gltf": [
+            0.13,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "Pants"
+          ],
+          "tris": 80
+        },
+        {
+          "name": "foot_l",
+          "type": "mesh",
+          "parent": "leg_l",
+          "local_translation_gltf": [
+            0.0,
+            -0.54,
+            0.02
+          ],
+          "materials": [
+            "Shoes"
+          ],
+          "tris": 100
+        },
+        {
+          "name": "leg_r",
+          "type": "mesh",
+          "parent": "legs",
+          "local_translation_gltf": [
+            -0.13,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "Pants"
+          ],
+          "tris": 80
+        },
+        {
+          "name": "foot_r",
+          "type": "mesh",
+          "parent": "leg_r",
+          "local_translation_gltf": [
+            0.0,
+            -0.54,
+            0.02
+          ],
+          "materials": [
+            "Shoes"
+          ],
+          "tris": 100
+        }
+      ]
+    },
+    {
+      "name": "wpn_pistol",
+      "file": "wpn_pistol.glb",
+      "bbox_min": [
+        -0.03,
+        -0.068,
+        -0.072
+      ],
+      "bbox_max": [
+        0.03,
+        0.12,
+        0.258
+      ],
+      "size": [
+        0.06,
+        0.188,
+        0.33
+      ],
+      "triangles": 424,
+      "node_names": [
+        "wpn_pistol",
+        "muzzle"
+      ],
+      "nodes": [
+        {
+          "name": "wpn_pistol",
+          "type": "mesh",
+          "parent": null,
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "AtlasTown"
+          ],
+          "tris": 424
+        },
+        {
+          "name": "muzzle",
+          "type": "empty",
+          "parent": "wpn_pistol",
+          "local_translation_gltf": [
+            0.0,
+            0.072,
+            0.258
+          ],
+          "materials": [],
+          "tris": 0
+        }
+      ]
+    },
+    {
+      "name": "wpn_smg",
+      "file": "wpn_smg.glb",
+      "bbox_min": [
+        -0.1059,
+        -0.0687,
+        -0.085
+      ],
+      "bbox_max": [
+        0.05,
+        0.2094,
+        0.31
+      ],
+      "size": [
+        0.1559,
+        0.2781,
+        0.395
+      ],
+      "triangles": 538,
+      "node_names": [
+        "wpn_smg",
+        "grip_l",
+        "muzzle"
+      ],
+      "nodes": [
+        {
+          "name": "wpn_smg",
+          "type": "mesh",
+          "parent": null,
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "AtlasTown"
+          ],
+          "tris": 538
+        },
+        {
+          "name": "grip_l",
+          "type": "empty",
+          "parent": "wpn_smg",
+          "local_translation_gltf": [
+            0.0,
+            -0.01,
+            0.175
+          ],
+          "materials": [],
+          "tris": 0
+        },
+        {
+          "name": "muzzle",
+          "type": "empty",
+          "parent": "wpn_smg",
+          "local_translation_gltf": [
+            0.0,
+            0.078,
+            0.31
+          ],
+          "materials": [],
+          "tris": 0
+        }
+      ]
+    },
+    {
+      "name": "wpn_shotgun",
+      "file": "wpn_shotgun.glb",
+      "bbox_min": [
+        -0.0836,
+        -0.0685,
+        -0.2643
+      ],
+      "bbox_max": [
+        0.089,
+        0.1656,
+        0.5666
+      ],
+      "size": [
+        0.1726,
+        0.2341,
+        0.8309
+      ],
+      "triangles": 596,
+      "node_names": [
+        "wpn_shotgun",
+        "grip_l",
+        "muzzle"
+      ],
+      "nodes": [
+        {
+          "name": "wpn_shotgun",
+          "type": "mesh",
+          "parent": null,
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "AtlasTown"
+          ],
+          "tris": 596
+        },
+        {
+          "name": "grip_l",
+          "type": "empty",
+          "parent": "wpn_shotgun",
+          "local_translation_gltf": [
+            0.0,
+            0.01,
+            0.2
+          ],
+          "materials": [],
+          "tris": 0
+        },
+        {
+          "name": "muzzle",
+          "type": "empty",
+          "parent": "wpn_shotgun",
+          "local_translation_gltf": [
+            0.0,
+            0.078,
+            0.506
+          ],
+          "materials": [],
+          "tris": 0
+        }
+      ]
+    },
+    {
+      "name": "wpn_grenade",
+      "file": "wpn_grenade.glb",
+      "bbox_min": [
+        -0.06,
+        -0.105,
+        -0.0585
+      ],
+      "bbox_max": [
+        0.06,
+        0.2243,
+        0.063
+      ],
+      "size": [
+        0.12,
+        0.3293,
+        0.1215
+      ],
+      "triangles": 544,
+      "node_names": [
+        "wpn_grenade",
+        "muzzle"
+      ],
+      "nodes": [
+        {
+          "name": "wpn_grenade",
+          "type": "mesh",
+          "parent": null,
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "StinkBomb"
+          ],
+          "tris": 544
+        },
+        {
+          "name": "muzzle",
+          "type": "empty",
+          "parent": "wpn_grenade",
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [],
+          "tris": 0
+        }
+      ]
+    },
+    {
+      "name": "tree_round",
+      "file": "tree_round.glb",
+      "bbox_min": [
+        -1.58,
+        0.0,
+        -1.14
+      ],
+      "bbox_max": [
+        1.56,
+        4.13,
+        1.32
+      ],
+      "size": [
+        3.14,
+        4.13,
+        2.46
+      ],
+      "triangles": 920,
+      "node_names": [
+        "tree_round"
+      ],
+      "nodes": [
+        {
+          "name": "tree_round",
+          "type": "mesh",
+          "parent": null,
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "Trunk",
+            "Leaves"
+          ],
+          "tris": 920
+        }
+      ]
+    },
+    {
+      "name": "tree_pine",
+      "file": "tree_pine.glb",
+      "bbox_min": [
+        -1.2995,
+        0.0,
+        -1.2995
+      ],
+      "bbox_max": [
+        1.2995,
+        4.5,
+        1.2995
+      ],
+      "size": [
+        2.599,
+        4.5,
+        2.599
+      ],
+      "triangles": 544,
+      "node_names": [
+        "tree_pine"
+      ],
+      "nodes": [
+        {
+          "name": "tree_pine",
+          "type": "mesh",
+          "parent": null,
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "Trunk",
+            "PineLeaves"
+          ],
+          "tris": 544
+        }
+      ]
+    },
+    {
+      "name": "bush",
+      "file": "bush.glb",
+      "bbox_min": [
+        -0.646,
+        0.0,
+        -0.5925
+      ],
+      "bbox_max": [
+        0.6367,
+        0.88,
+        0.605
+      ],
+      "size": [
+        1.2827,
+        0.88,
+        1.1975
+      ],
+      "triangles": 960,
+      "node_names": [
+        "bush"
+      ],
+      "nodes": [
+        {
+          "name": "bush",
+          "type": "mesh",
+          "parent": null,
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "Bush",
+            "Flower",
+            "FlowerCenter"
+          ],
+          "tris": 960
+        }
+      ]
+    },
+    {
+      "name": "lamp",
+      "file": "lamp.glb",
+      "bbox_min": [
+        -0.29,
+        0.0,
+        -0.2092
+      ],
+      "bbox_max": [
+        0.29,
+        4.1949,
+        0.99
+      ],
+      "size": [
+        0.58,
+        4.1949,
+        1.1992
+      ],
+      "triangles": 592,
+      "node_names": [
+        "lamp",
+        "lamp_base",
+        "lamp_post",
+        "lamp_light"
+      ],
+      "nodes": [
+        {
+          "name": "lamp",
+          "type": "empty",
+          "parent": null,
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [],
+          "tris": 0
+        },
+        {
+          "name": "lamp_base",
+          "type": "mesh",
+          "parent": "lamp",
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "LampPost"
+          ],
+          "tris": 80
+        },
+        {
+          "name": "lamp_post",
+          "type": "mesh",
+          "parent": "lamp",
+          "local_translation_gltf": [
+            0.0,
+            0.28,
+            0.0
+          ],
+          "materials": [
+            "LampPost",
+            "Glow"
+          ],
+          "tris": 512
+        },
+        {
+          "name": "lamp_light",
+          "type": "empty",
+          "parent": "lamp_post",
+          "local_translation_gltf": [
+            0.0,
+            3.38,
+            0.7
+          ],
+          "materials": [],
+          "tris": 0
+        }
+      ]
+    },
+    {
+      "name": "hydrant",
+      "file": "hydrant.glb",
+      "bbox_min": [
+        -0.2,
+        0.0,
+        -0.1755
+      ],
+      "bbox_max": [
+        0.2,
+        0.7,
+        0.215
+      ],
+      "size": [
+        0.4,
+        0.7,
+        0.3905
+      ],
+      "triangles": 696,
+      "node_names": [
+        "hydrant"
+      ],
+      "nodes": [
+        {
+          "name": "hydrant",
+          "type": "mesh",
+          "parent": null,
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "HydrantRed",
+            "HydrantCap"
+          ],
+          "tris": 696
+        }
+      ]
+    },
+    {
+      "name": "bench",
+      "file": "bench.glb",
+      "bbox_min": [
+        -0.9,
+        0.0,
+        -0.3775
+      ],
+      "bbox_max": [
+        0.9,
+        0.9062,
+        0.3
+      ],
+      "size": [
+        1.8,
+        0.9062,
+        0.6775
+      ],
+      "triangles": 1068,
+      "node_names": [
+        "bench"
+      ],
+      "nodes": [
+        {
+          "name": "bench",
+          "type": "mesh",
+          "parent": null,
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "BenchWood",
+            "BenchFrame"
+          ],
+          "tris": 1068
+        }
+      ]
+    },
+    {
+      "name": "cone",
+      "file": "cone.glb",
+      "bbox_min": [
+        -0.21,
+        0.0,
+        -0.21
+      ],
+      "bbox_max": [
+        0.21,
+        0.602,
+        0.21
+      ],
+      "size": [
+        0.42,
+        0.602,
+        0.42
+      ],
+      "triangles": 274,
+      "node_names": [
+        "cone"
+      ],
+      "nodes": [
+        {
+          "name": "cone",
+          "type": "mesh",
+          "parent": null,
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "ConeOrange",
+            "ConeStripe"
+          ],
+          "tris": 274
+        }
+      ]
+    },
+    {
+      "name": "trashcan",
+      "file": "trashcan.glb",
+      "bbox_min": [
+        -0.4629,
+        0.0,
+        -0.4274
+      ],
+      "bbox_max": [
+        0.4629,
+        1.168,
+        0.4274
+      ],
+      "size": [
+        0.9258,
+        1.168,
+        0.8548
+      ],
+      "triangles": 1544,
+      "node_names": [
+        "trashcan",
+        "can_body",
+        "lid",
+        "peek"
+      ],
+      "nodes": [
+        {
+          "name": "trashcan",
+          "type": "empty",
+          "parent": null,
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [],
+          "tris": 0
+        },
+        {
+          "name": "can_body",
+          "type": "mesh",
+          "parent": "trashcan",
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "BinBody",
+            "BinLid",
+            "AtlasTown"
+          ],
+          "tris": 992
+        },
+        {
+          "name": "lid",
+          "type": "mesh",
+          "parent": "trashcan",
+          "local_translation_gltf": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "materials": [
+            "BinLid"
+          ],
+          "tris": 236
+        },
+        {
+          "name": "peek",
+          "type": "mesh",
+          "parent": "trashcan",
+          "local_translation_gltf": [
+            0.0,
+            1.04,
+            0.0
+          ],
+          "materials": [
+            "AtlasTown",
+            "PeekEye"
+          ],
+          "tris": 316
+        }
+      ]
+    },
+    {
+      "name": "crossing_sign",
+      "file": "crossing_sign.glb",
+      "bbox_min": [
+        -0.4936,
+        0.0,
+        -0.19
+      ],
+      "bbox_max": [
+        0.4936,
+        2.9936,
+        0.19
+      ],
+      "size": [
+        0.9872,
+        2.9936,
+        0.38
+      ],
+      "triangles": 860,
+      "node_names": [
+        "crossing_sign",
+        "light_l",
+        "light_r"
+      ],
+      "nodes": [
+        {
+          "name": "crossing_sign",
+          "type": "mesh",
+          "parent": null,
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "Concrete",
+            "SignPost",
+            "SignRed",
+            "SignWhite",
+            "SignBlack"
+          ],
+          "tris": 668
+        },
+        {
+          "name": "light_l",
+          "type": "mesh",
+          "parent": "crossing_sign",
+          "local_translation_gltf": [
+            0.3,
+            1.9,
+            0.0
+          ],
+          "materials": [
+            "LightL"
+          ],
+          "tris": 96
+        },
+        {
+          "name": "light_r",
+          "type": "mesh",
+          "parent": "crossing_sign",
+          "local_translation_gltf": [
+            -0.3,
+            1.9,
+            0.0
+          ],
+          "materials": [
+            "LightR"
+          ],
+          "tris": 96
+        }
+      ]
+    },
+    {
+      "name": "crossing_barrier",
+      "file": "crossing_barrier.glb",
+      "bbox_min": [
+        -0.23,
+        0.0,
+        -0.23
+      ],
+      "bbox_max": [
+        5.0,
+        1.19,
+        0.23
+      ],
+      "size": [
+        5.23,
+        1.19,
+        0.46
+      ],
+      "triangles": 930,
+      "node_names": [
+        "crossing_barrier",
+        "barrier_arm",
+        "barrier_base"
+      ],
+      "nodes": [
+        {
+          "name": "crossing_barrier",
+          "type": "empty",
+          "parent": null,
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [],
+          "tris": 0
+        },
+        {
+          "name": "barrier_arm",
+          "type": "mesh",
+          "parent": "crossing_barrier",
+          "local_translation_gltf": [
+            0.0,
+            1.1,
+            0.0
+          ],
+          "materials": [
+            "BarrierDark",
+            "BarrierRed",
+            "BarrierWhite"
+          ],
+          "tris": 518
+        },
+        {
+          "name": "barrier_base",
+          "type": "mesh",
+          "parent": "crossing_barrier",
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "BarrierDark",
+            "BarrierPost"
+          ],
+          "tris": 412
+        }
+      ]
+    },
+    {
+      "name": "fountain",
+      "file": "fountain.glb",
+      "bbox_min": [
+        -2.5,
+        0.0,
+        -2.5
+      ],
+      "bbox_max": [
+        2.5,
+        2.04,
+        2.5
+      ],
+      "size": [
+        5.0,
+        2.04,
+        5.0
+      ],
+      "triangles": 1126,
+      "node_names": [
+        "fountain"
+      ],
+      "nodes": [
+        {
+          "name": "fountain",
+          "type": "mesh",
+          "parent": null,
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "FountainStone",
+            "FountainTrim",
+            "Water"
+          ],
+          "tris": 1126
+        }
+      ]
+    },
+    {
+      "name": "flowerbed",
+      "file": "flowerbed.glb",
+      "bbox_min": [
+        -1.5,
+        0.0,
+        -0.5
+      ],
+      "bbox_max": [
+        1.5,
+        0.6718,
+        0.5
+      ],
+      "size": [
+        3.0,
+        0.6718,
+        1.0
+      ],
+      "triangles": 960,
+      "node_names": [
+        "flowerbed"
+      ],
+      "nodes": [
+        {
+          "name": "flowerbed",
+          "type": "mesh",
+          "parent": null,
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "Planter",
+            "Soil",
+            "FlowerLeaves",
+            "FlowerPink",
+            "FlowerCenter",
+            "FlowerYellow",
+            "FlowerCenterW",
+            "FlowerPurple",
+            "FlowerWhite"
+          ],
+          "tris": 960
+        }
+      ]
+    },
+    {
+      "name": "fx_star",
+      "file": "fx_star.glb",
+      "bbox_min": [
+        -0.1189,
+        -0.1011,
+        -0.05
+      ],
+      "bbox_max": [
+        0.1189,
+        0.125,
+        0.05
+      ],
+      "size": [
+        0.2378,
+        0.2261,
+        0.1
+      ],
+      "triangles": 140,
+      "node_names": [
+        "fx_star"
+      ],
+      "nodes": [
+        {
+          "name": "fx_star",
+          "type": "mesh",
+          "parent": null,
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "Star"
+          ],
+          "tris": 140
+        }
+      ]
+    },
+    {
+      "name": "loot_can",
+      "file": "loot_can.glb",
+      "bbox_min": [
+        -0.27,
+        0.0,
+        -0.2659
+      ],
+      "bbox_max": [
+        0.3546,
+        0.811,
+        0.2682
+      ],
+      "size": [
+        0.6246,
+        0.811,
+        0.5341
+      ],
+      "triangles": 1024,
+      "node_names": [
+        "loot_can",
+        "can_body",
+        "lid"
+      ],
+      "nodes": [
+        {
+          "name": "loot_can",
+          "type": "empty",
+          "parent": null,
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [],
+          "tris": 0
+        },
+        {
+          "name": "can_body",
+          "type": "mesh",
+          "parent": "loot_can",
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "CanMetal",
+            "AtlasTown"
+          ],
+          "tris": 788
+        },
+        {
+          "name": "lid",
+          "type": "mesh",
+          "parent": "loot_can",
+          "local_translation_gltf": [
+            0.0,
+            0.665,
+            -0.262
+          ],
+          "materials": [
+            "CanMetal"
+          ],
+          "tris": 236
+        }
+      ]
+    },
+    {
+      "name": "food_pizza",
+      "file": "food_pizza.glb",
+      "bbox_min": [
+        -0.1457,
+        -0.03,
+        -0.1637
+      ],
+      "bbox_max": [
+        0.1457,
+        0.036,
+        0.2
+      ],
+      "size": [
+        0.2914,
+        0.066,
+        0.3637
+      ],
+      "triangles": 552,
+      "node_names": [
+        "food_pizza"
+      ],
+      "nodes": [
+        {
+          "name": "food_pizza",
+          "type": "mesh",
+          "parent": null,
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "AtlasTown"
+          ],
+          "tris": 552
+        }
+      ]
+    },
+    {
+      "name": "food_donut",
+      "file": "food_donut.glb",
+      "bbox_min": [
+        -0.1643,
+        -0.042,
+        -0.1623
+      ],
+      "bbox_max": [
+        0.1643,
+        0.0552,
+        0.161
+      ],
+      "size": [
+        0.3286,
+        0.0972,
+        0.3233
+      ],
+      "triangles": 832,
+      "node_names": [
+        "food_donut"
+      ],
+      "nodes": [
+        {
+          "name": "food_donut",
+          "type": "mesh",
+          "parent": null,
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "AtlasTown"
+          ],
+          "tris": 832
+        }
+      ]
+    },
+    {
+      "name": "tombstone",
+      "file": "tombstone.glb",
+      "bbox_min": [
+        -0.5118,
+        0.002,
+        -0.28
+      ],
+      "bbox_max": [
+        0.4095,
+        0.79,
+        0.32
+      ],
+      "size": [
+        0.9213,
+        0.788,
+        0.6
+      ],
+      "triangles": 584,
+      "node_names": [
+        "tombstone"
+      ],
+      "nodes": [
+        {
+          "name": "tombstone",
+          "type": "mesh",
+          "parent": null,
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "Stone",
+            "AtlasTown"
+          ],
+          "tris": 584
+        }
+      ]
+    },
+    {
+      "name": "crown",
+      "file": "crown.glb",
+      "bbox_min": [
+        -0.1368,
+        0.0,
+        -0.1456
+      ],
+      "bbox_max": [
+        0.1368,
+        0.181,
+        0.1362
+      ],
+      "size": [
+        0.2736,
+        0.181,
+        0.2818
+      ],
+      "triangles": 344,
+      "node_names": [
+        "crown"
+      ],
+      "nodes": [
+        {
+          "name": "crown",
+          "type": "mesh",
+          "parent": null,
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "Gold",
+            "AccTrim"
+          ],
+          "tris": 344
+        }
+      ]
+    },
+    {
+      "name": "coffee",
+      "file": "coffee.glb",
+      "bbox_min": [
+        -0.093,
+        -0.12,
+        -0.0916
+      ],
+      "bbox_max": [
+        0.093,
+        0.2574,
+        0.0916
+      ],
+      "size": [
+        0.186,
+        0.3774,
+        0.1832
+      ],
+      "triangles": 672,
+      "node_names": [
+        "coffee"
+      ],
+      "nodes": [
+        {
+          "name": "coffee",
+          "type": "mesh",
+          "parent": null,
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "AtlasTown"
+          ],
+          "tris": 672
+        }
+      ]
+    },
+    {
+      "name": "billboard",
+      "file": "billboard.glb",
+      "bbox_min": [
+        -4.2,
+        0.0,
+        -0.4485
+      ],
+      "bbox_max": [
+        4.2,
+        10.404,
+        1.1659
+      ],
+      "size": [
+        8.4,
+        10.404,
+        1.6144
+      ],
+      "triangles": 1316,
+      "node_names": [
+        "billboard",
+        "billboard_panel"
+      ],
+      "nodes": [
+        {
+          "name": "billboard",
+          "type": "mesh",
+          "parent": null,
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "BoardFrame",
+            "Ad",
+            "BoardSteel",
+            "BoardGrate",
+            "Glow"
+          ],
+          "tris": 1316
+        },
+        {
+          "name": "billboard_panel",
+          "type": "empty",
+          "parent": "billboard",
+          "local_translation_gltf": [
+            0.0,
+            7.6,
+            0.0
+          ],
+          "materials": [],
+          "tris": 0
+        }
+      ]
+    },
+    {
+      "name": "billboard_roof",
+      "file": "billboard_roof.glb",
+      "bbox_min": [
+        -4.2,
+        -0.01,
+        -1.52
+      ],
+      "bbox_max": [
+        4.2,
+        6.404,
+        1.1659
+      ],
+      "size": [
+        8.4,
+        6.414,
+        2.6859
+      ],
+      "triangles": 1076,
+      "node_names": [
+        "billboard_roof",
+        "billboard_panel"
+      ],
+      "nodes": [
+        {
+          "name": "billboard_roof",
+          "type": "mesh",
+          "parent": null,
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "BoardFrame",
+            "Ad",
+            "BoardSteel",
+            "Glow"
+          ],
+          "tris": 1076
+        },
+        {
+          "name": "billboard_panel",
+          "type": "empty",
+          "parent": "billboard_roof",
+          "local_translation_gltf": [
+            0.0,
+            3.6,
+            0.0
+          ],
+          "materials": [],
+          "tris": 0
+        }
+      ]
+    },
+    {
+      "name": "gull",
+      "file": "gull.glb",
+      "bbox_min": [
+        -0.812,
+        0.0,
+        -0.364
+      ],
+      "bbox_max": [
+        0.812,
+        0.72,
+        0.4098
+      ],
+      "size": [
+        1.624,
+        0.72,
+        0.7738
+      ],
+      "triangles": 3368,
+      "node_names": [
+        "gull",
+        "body",
+        "carry_socket",
+        "head",
+        "leg_l",
+        "leg_r",
+        "tail",
+        "wing_l",
+        "wingtip_l",
+        "wing_r",
+        "wingtip_r"
+      ],
+      "nodes": [
+        {
+          "name": "gull",
+          "type": "empty",
+          "parent": null,
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [],
+          "tris": 0
+        },
+        {
+          "name": "body",
+          "type": "mesh",
+          "parent": "gull",
+          "local_translation_gltf": [
+            0.0,
+            0.32,
+            0.0
+          ],
+          "materials": [
+            "AtlasTown"
+          ],
+          "tris": 288
+        },
+        {
+          "name": "carry_socket",
+          "type": "empty",
+          "parent": "body",
+          "local_translation_gltf": [
+            0.0,
+            -0.32,
+            0.05
+          ],
+          "materials": [],
+          "tris": 0
+        },
+        {
+          "name": "head",
+          "type": "mesh",
+          "parent": "body",
+          "local_translation_gltf": [
+            0.0,
+            0.12,
+            0.2
+          ],
+          "materials": [
+            "AtlasTown"
+          ],
+          "tris": 1416
+        },
+        {
+          "name": "leg_l",
+          "type": "mesh",
+          "parent": "body",
+          "local_translation_gltf": [
+            0.07,
+            -0.12,
+            0.0
+          ],
+          "materials": [
+            "AtlasTown"
+          ],
+          "tris": 152
+        },
+        {
+          "name": "leg_r",
+          "type": "mesh",
+          "parent": "body",
+          "local_translation_gltf": [
+            -0.07,
+            -0.12,
+            0.0
+          ],
+          "materials": [
+            "AtlasTown"
+          ],
+          "tris": 152
+        },
+        {
+          "name": "tail",
+          "type": "mesh",
+          "parent": "body",
+          "local_translation_gltf": [
+            0.0,
+            0.01,
+            -0.24
+          ],
+          "materials": [
+            "AtlasTown"
+          ],
+          "tris": 144
+        },
+        {
+          "name": "wing_l",
+          "type": "mesh",
+          "parent": "body",
+          "local_translation_gltf": [
+            0.13,
+            0.06,
+            0.02
+          ],
+          "materials": [
+            "AtlasTown"
+          ],
+          "tris": 224
+        },
+        {
+          "name": "wingtip_l",
+          "type": "mesh",
+          "parent": "wing_l",
+          "local_translation_gltf": [
+            0.37,
+            0.01,
+            -0.02
+          ],
+          "materials": [
+            "AtlasTown"
+          ],
+          "tris": 384
+        },
+        {
+          "name": "wing_r",
+          "type": "mesh",
+          "parent": "body",
+          "local_translation_gltf": [
+            -0.13,
+            0.06,
+            0.02
+          ],
+          "materials": [
+            "AtlasTown"
+          ],
+          "tris": 224
+        },
+        {
+          "name": "wingtip_r",
+          "type": "mesh",
+          "parent": "wing_r",
+          "local_translation_gltf": [
+            -0.37,
+            0.01,
+            -0.02
+          ],
+          "materials": [
+            "AtlasTown"
+          ],
+          "tris": 384
+        }
+      ]
+    },
+    {
+      "name": "manhole",
+      "file": "manhole.glb",
+      "bbox_min": [
+        -0.52,
+        0.0,
+        -0.52
+      ],
+      "bbox_max": [
+        0.52,
+        0.054,
+        0.52
+      ],
+      "size": [
+        1.04,
+        0.054,
+        1.04
+      ],
+      "triangles": 1055,
+      "node_names": [
+        "manhole",
+        "frame",
+        "hole",
+        "lid"
+      ],
+      "nodes": [
+        {
+          "name": "manhole",
+          "type": "empty",
+          "parent": null,
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [],
+          "tris": 0
+        },
+        {
+          "name": "frame",
+          "type": "mesh",
+          "parent": "manhole",
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "AtlasTown"
+          ],
+          "tris": 240
+        },
+        {
+          "name": "hole",
+          "type": "mesh",
+          "parent": "manhole",
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "SewerHole"
+          ],
+          "tris": 236
+        },
+        {
+          "name": "lid",
+          "type": "mesh",
+          "parent": "manhole",
+          "local_translation_gltf": [
+            0.0,
+            0.008,
+            0.0
+          ],
+          "materials": [
+            "AtlasTown"
+          ],
+          "tris": 579
+        }
+      ]
+    },
+    {
+      "name": "drum",
+      "file": "drum.glb",
+      "bbox_min": [
+        -0.362,
+        0.0,
+        -0.3565
+      ],
+      "bbox_max": [
+        0.362,
+        0.955,
+        0.359
+      ],
+      "size": [
+        0.724,
+        0.955,
+        0.7155
+      ],
+      "triangles": 596,
+      "node_names": [
+        "drum"
+      ],
+      "nodes": [
+        {
+          "name": "drum",
+          "type": "mesh",
+          "parent": null,
+          "local_translation_gltf": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "materials": [
+            "DrumPaint",
+            "DrumBand",
+            "DrumRust"
+          ],
+          "tris": 596
+        }
+      ]
+    }
+  ]
+}

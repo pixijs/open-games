@@ -1,0 +1,2436 @@
+{
+  "units": "meters",
+  "axes": "glTF: +Y up, model front = +Z, model left = +X",
+  "assets": [
+    {
+      "name": "car_hatch",
+      "file": "car_hatch.glb",
+      "bboxMin": [
+        -1.07,
+        0.0,
+        -1.908
+      ],
+      "bboxMax": [
+        1.07,
+        1.45,
+        1.908
+      ],
+      "size": [
+        2.14,
+        1.45,
+        3.816
+      ],
+      "collisionSpec": {
+        "width_x": 2.0,
+        "length_z": 3.8,
+        "height_y": 1.45
+      },
+      "triangles": 3826,
+      "nodes": [
+        "body",
+        "seat",
+        "steer_wheel",
+        "steer_column",
+        "wheel_bl",
+        "wheel_br",
+        "wheel_fl",
+        "wheel_fr",
+        "car_root"
+      ],
+      "nodeInfo": [
+        {
+          "name": "body",
+          "type": "mesh",
+          "parent": "car_root",
+          "position": [
+            0.0,
+            0.0,
+            -0.0
+          ],
+          "tris": 2198
+        },
+        {
+          "name": "car_root",
+          "type": "empty",
+          "parent": null,
+          "position": [
+            0.0,
+            0.0,
+            -0.0
+          ]
+        },
+        {
+          "name": "seat",
+          "type": "empty",
+          "parent": "car_root",
+          "position": [
+            0.36,
+            0.34,
+            -0.0
+          ]
+        },
+        {
+          "name": "steer_column",
+          "type": "empty",
+          "parent": "car_root",
+          "position": [
+            0.36,
+            0.64,
+            0.35
+          ]
+        },
+        {
+          "name": "steer_wheel",
+          "type": "mesh",
+          "parent": "steer_column",
+          "position": [
+            0.36,
+            0.64,
+            0.35
+          ],
+          "tris": 364
+        },
+        {
+          "name": "wheel_bl",
+          "type": "mesh",
+          "parent": "car_root",
+          "position": [
+            0.79,
+            0.37,
+            -1.22
+          ],
+          "tris": 316
+        },
+        {
+          "name": "wheel_br",
+          "type": "mesh",
+          "parent": "car_root",
+          "position": [
+            -0.79,
+            0.37,
+            -1.22
+          ],
+          "tris": 316
+        },
+        {
+          "name": "wheel_fl",
+          "type": "mesh",
+          "parent": "car_root",
+          "position": [
+            0.79,
+            0.37,
+            1.22
+          ],
+          "tris": 316
+        },
+        {
+          "name": "wheel_fr",
+          "type": "mesh",
+          "parent": "car_root",
+          "position": [
+            -0.79,
+            0.37,
+            1.22
+          ],
+          "tris": 316
+        }
+      ],
+      "materials": [
+        "Paint",
+        "AtlasTown",
+        "Glass"
+      ]
+    },
+    {
+      "name": "car_taxi",
+      "file": "car_taxi.glb",
+      "bboxMin": [
+        -1.07,
+        0.0,
+        -2.108
+      ],
+      "bboxMax": [
+        1.07,
+        1.72,
+        2.108
+      ],
+      "size": [
+        2.14,
+        1.72,
+        4.216
+      ],
+      "collisionSpec": {
+        "width_x": 2.0,
+        "length_z": 4.2,
+        "height_y": 1.5
+      },
+      "triangles": 3902,
+      "nodes": [
+        "body",
+        "seat",
+        "steer_wheel",
+        "steer_column",
+        "wheel_bl",
+        "wheel_br",
+        "wheel_fl",
+        "wheel_fr",
+        "car_root"
+      ],
+      "nodeInfo": [
+        {
+          "name": "body",
+          "type": "mesh",
+          "parent": "car_root",
+          "position": [
+            0.0,
+            0.0,
+            -0.0
+          ],
+          "tris": 2274
+        },
+        {
+          "name": "car_root",
+          "type": "empty",
+          "parent": null,
+          "position": [
+            0.0,
+            0.0,
+            -0.0
+          ]
+        },
+        {
+          "name": "seat",
+          "type": "empty",
+          "parent": "car_root",
+          "position": [
+            0.37,
+            0.38,
+            0.15
+          ]
+        },
+        {
+          "name": "steer_column",
+          "type": "empty",
+          "parent": "car_root",
+          "position": [
+            0.37,
+            0.68,
+            0.5
+          ]
+        },
+        {
+          "name": "steer_wheel",
+          "type": "mesh",
+          "parent": "steer_column",
+          "position": [
+            0.37,
+            0.68,
+            0.5
+          ],
+          "tris": 364
+        },
+        {
+          "name": "wheel_bl",
+          "type": "mesh",
+          "parent": "car_root",
+          "position": [
+            0.79,
+            0.38,
+            -1.38
+          ],
+          "tris": 316
+        },
+        {
+          "name": "wheel_br",
+          "type": "mesh",
+          "parent": "car_root",
+          "position": [
+            -0.79,
+            0.38,
+            -1.38
+          ],
+          "tris": 316
+        },
+        {
+          "name": "wheel_fl",
+          "type": "mesh",
+          "parent": "car_root",
+          "position": [
+            0.79,
+            0.38,
+            1.38
+          ],
+          "tris": 316
+        },
+        {
+          "name": "wheel_fr",
+          "type": "mesh",
+          "parent": "car_root",
+          "position": [
+            -0.79,
+            0.38,
+            1.38
+          ],
+          "tris": 316
+        }
+      ],
+      "materials": [
+        "Paint",
+        "AtlasTown",
+        "Glass"
+      ]
+    },
+    {
+      "name": "car_pest",
+      "file": "car_pest.glb",
+      "bboxMin": [
+        -1.07,
+        0.0,
+        -2.108
+      ],
+      "bboxMax": [
+        1.07,
+        1.81,
+        2.108
+      ],
+      "size": [
+        2.14,
+        1.81,
+        4.216
+      ],
+      "collisionSpec": {
+        "width_x": 2.0,
+        "length_z": 4.2,
+        "height_y": 1.5
+      },
+      "triangles": 4126,
+      "nodes": [
+        "body",
+        "seat",
+        "siren_l",
+        "siren_r",
+        "steer_wheel",
+        "steer_column",
+        "wheel_bl",
+        "wheel_br",
+        "wheel_fl",
+        "wheel_fr",
+        "car_root"
+      ],
+      "nodeInfo": [
+        {
+          "name": "body",
+          "type": "mesh",
+          "parent": "car_root",
+          "position": [
+            0.0,
+            0.0,
+            -0.0
+          ],
+          "tris": 2282
+        },
+        {
+          "name": "car_root",
+          "type": "empty",
+          "parent": null,
+          "position": [
+            0.0,
+            0.0,
+            -0.0
+          ]
+        },
+        {
+          "name": "seat",
+          "type": "empty",
+          "parent": "car_root",
+          "position": [
+            0.37,
+            0.38,
+            0.15
+          ]
+        },
+        {
+          "name": "siren_l",
+          "type": "mesh",
+          "parent": "car_root",
+          "position": [
+            0.33,
+            1.65,
+            0.41
+          ],
+          "tris": 108
+        },
+        {
+          "name": "siren_r",
+          "type": "mesh",
+          "parent": "car_root",
+          "position": [
+            -0.33,
+            1.65,
+            0.41
+          ],
+          "tris": 108
+        },
+        {
+          "name": "steer_column",
+          "type": "empty",
+          "parent": "car_root",
+          "position": [
+            0.37,
+            0.68,
+            0.5
+          ]
+        },
+        {
+          "name": "steer_wheel",
+          "type": "mesh",
+          "parent": "steer_column",
+          "position": [
+            0.37,
+            0.68,
+            0.5
+          ],
+          "tris": 364
+        },
+        {
+          "name": "wheel_bl",
+          "type": "mesh",
+          "parent": "car_root",
+          "position": [
+            0.79,
+            0.38,
+            -1.38
+          ],
+          "tris": 316
+        },
+        {
+          "name": "wheel_br",
+          "type": "mesh",
+          "parent": "car_root",
+          "position": [
+            -0.79,
+            0.38,
+            -1.38
+          ],
+          "tris": 316
+        },
+        {
+          "name": "wheel_fl",
+          "type": "mesh",
+          "parent": "car_root",
+          "position": [
+            0.79,
+            0.38,
+            1.38
+          ],
+          "tris": 316
+        },
+        {
+          "name": "wheel_fr",
+          "type": "mesh",
+          "parent": "car_root",
+          "position": [
+            -0.79,
+            0.38,
+            1.38
+          ],
+          "tris": 316
+        }
+      ],
+      "materials": [
+        "Paint",
+        "AtlasTown",
+        "Glass",
+        "SirenBlue",
+        "SirenRed"
+      ]
+    },
+    {
+      "name": "car_van",
+      "file": "car_van.glb",
+      "bboxMin": [
+        -1.24,
+        0.0,
+        -2.438
+      ],
+      "bboxMax": [
+        1.428,
+        4.6056,
+        2.438
+      ],
+      "size": [
+        2.668,
+        4.6056,
+        4.876
+      ],
+      "collisionSpec": {
+        "width_x": 2.2,
+        "length_z": 4.8,
+        "height_y": 2.2
+      },
+      "triangles": 4970,
+      "nodes": [
+        "body",
+        "seat",
+        "steer_wheel",
+        "steer_column",
+        "wheel_bl",
+        "wheel_br",
+        "wheel_fl",
+        "wheel_fr",
+        "car_root"
+      ],
+      "nodeInfo": [
+        {
+          "name": "body",
+          "type": "mesh",
+          "parent": "car_root",
+          "position": [
+            0.0,
+            0.0,
+            -0.0
+          ],
+          "tris": 3342
+        },
+        {
+          "name": "car_root",
+          "type": "empty",
+          "parent": null,
+          "position": [
+            0.0,
+            0.0,
+            -0.0
+          ]
+        },
+        {
+          "name": "seat",
+          "type": "empty",
+          "parent": "car_root",
+          "position": [
+            0.42,
+            1.03,
+            1.0
+          ]
+        },
+        {
+          "name": "steer_column",
+          "type": "empty",
+          "parent": "car_root",
+          "position": [
+            0.42,
+            1.33,
+            1.35
+          ]
+        },
+        {
+          "name": "steer_wheel",
+          "type": "mesh",
+          "parent": "steer_column",
+          "position": [
+            0.42,
+            1.33,
+            1.35
+          ],
+          "tris": 364
+        },
+        {
+          "name": "wheel_bl",
+          "type": "mesh",
+          "parent": "car_root",
+          "position": [
+            0.86,
+            0.4,
+            -1.55
+          ],
+          "tris": 316
+        },
+        {
+          "name": "wheel_br",
+          "type": "mesh",
+          "parent": "car_root",
+          "position": [
+            -0.86,
+            0.4,
+            -1.55
+          ],
+          "tris": 316
+        },
+        {
+          "name": "wheel_fl",
+          "type": "mesh",
+          "parent": "car_root",
+          "position": [
+            0.86,
+            0.4,
+            1.55
+          ],
+          "tris": 316
+        },
+        {
+          "name": "wheel_fr",
+          "type": "mesh",
+          "parent": "car_root",
+          "position": [
+            -0.86,
+            0.4,
+            1.55
+          ],
+          "tris": 316
+        }
+      ],
+      "materials": [
+        "Paint",
+        "AtlasTown",
+        "Glass"
+      ]
+    },
+    {
+      "name": "car_garbage",
+      "file": "car_garbage.glb",
+      "bboxMin": [
+        -2.435,
+        0.0,
+        -3.35
+      ],
+      "bboxMax": [
+        1.395,
+        3.075,
+        3.33
+      ],
+      "size": [
+        3.83,
+        3.075,
+        6.68
+      ],
+      "collisionSpec": {
+        "width_x": 2.5,
+        "length_z": 6.6,
+        "height_y": 2.8
+      },
+      "triangles": 7074,
+      "nodes": [
+        "beacon_l",
+        "beacon_r",
+        "body",
+        "bin_socket",
+        "lift",
+        "seat",
+        "steer_wheel",
+        "steer_column",
+        "tailgate",
+        "wheel_bl",
+        "wheel_br",
+        "wheel_fl",
+        "wheel_fr",
+        "car_root"
+      ],
+      "nodeInfo": [
+        {
+          "name": "beacon_l",
+          "type": "mesh",
+          "parent": "car_root",
+          "position": [
+            0.9,
+            2.91,
+            2.9
+          ],
+          "tris": 114
+        },
+        {
+          "name": "beacon_r",
+          "type": "mesh",
+          "parent": "car_root",
+          "position": [
+            -0.9,
+            2.91,
+            2.9
+          ],
+          "tris": 114
+        },
+        {
+          "name": "bin_socket",
+          "type": "empty",
+          "parent": "lift",
+          "position": [
+            -1.95,
+            0.9,
+            -0.8
+          ]
+        },
+        {
+          "name": "body",
+          "type": "mesh",
+          "parent": "car_root",
+          "position": [
+            0.0,
+            0.0,
+            -0.0
+          ],
+          "tris": 4550
+        },
+        {
+          "name": "car_root",
+          "type": "empty",
+          "parent": null,
+          "position": [
+            0.0,
+            0.0,
+            -0.0
+          ]
+        },
+        {
+          "name": "lift",
+          "type": "mesh",
+          "parent": "car_root",
+          "position": [
+            -0.6,
+            0.45,
+            -0.8
+          ],
+          "tris": 308
+        },
+        {
+          "name": "seat",
+          "type": "empty",
+          "parent": "car_root",
+          "position": [
+            0.5,
+            1.62,
+            2.45
+          ]
+        },
+        {
+          "name": "steer_column",
+          "type": "empty",
+          "parent": "car_root",
+          "position": [
+            0.5,
+            1.92,
+            2.8
+          ]
+        },
+        {
+          "name": "steer_wheel",
+          "type": "mesh",
+          "parent": "steer_column",
+          "position": [
+            0.5,
+            1.92,
+            2.8
+          ],
+          "tris": 364
+        },
+        {
+          "name": "tailgate",
+          "type": "mesh",
+          "parent": "car_root",
+          "position": [
+            0.0,
+            2.8,
+            -2.235
+          ],
+          "tris": 360
+        },
+        {
+          "name": "wheel_bl",
+          "type": "mesh",
+          "parent": "car_root",
+          "position": [
+            0.99,
+            0.5,
+            -2.0
+          ],
+          "tris": 316
+        },
+        {
+          "name": "wheel_br",
+          "type": "mesh",
+          "parent": "car_root",
+          "position": [
+            -0.99,
+            0.5,
+            -2.0
+          ],
+          "tris": 316
+        },
+        {
+          "name": "wheel_fl",
+          "type": "mesh",
+          "parent": "car_root",
+          "position": [
+            0.99,
+            0.5,
+            2.0
+          ],
+          "tris": 316
+        },
+        {
+          "name": "wheel_fr",
+          "type": "mesh",
+          "parent": "car_root",
+          "position": [
+            -0.99,
+            0.5,
+            2.0
+          ],
+          "tris": 316
+        }
+      ],
+      "materials": [
+        "Beacon",
+        "AtlasTown",
+        "Paint",
+        "Glass"
+      ]
+    },
+    {
+      "name": "train_loco",
+      "file": "train_loco.glb",
+      "bboxMin": [
+        -1.32,
+        0.0,
+        -3.76
+      ],
+      "bboxMax": [
+        1.32,
+        3.625,
+        3.75
+      ],
+      "size": [
+        2.64,
+        3.625,
+        7.51
+      ],
+      "collisionSpec": {
+        "width_x": 2.6,
+        "length_z": 7.5,
+        "height_y": 3.0
+      },
+      "triangles": 4246,
+      "nodes": [
+        "body",
+        "smoke_socket",
+        "train_root"
+      ],
+      "nodeInfo": [
+        {
+          "name": "body",
+          "type": "mesh",
+          "parent": "train_root",
+          "position": [
+            0.0,
+            0.0,
+            -0.0
+          ],
+          "tris": 4246
+        },
+        {
+          "name": "smoke_socket",
+          "type": "empty",
+          "parent": "train_root",
+          "position": [
+            0.0,
+            3.63,
+            2.6
+          ]
+        },
+        {
+          "name": "train_root",
+          "type": "empty",
+          "parent": null,
+          "position": [
+            0.0,
+            0.0,
+            -0.0
+          ]
+        }
+      ],
+      "materials": [
+        "TrainNavy",
+        "AtlasTown",
+        "Paint",
+        "Roof"
+      ]
+    },
+    {
+      "name": "train_wagon",
+      "file": "train_wagon.glb",
+      "bboxMin": [
+        -1.36,
+        0.0,
+        -4.0
+      ],
+      "bboxMax": [
+        1.36,
+        3.0,
+        4.0
+      ],
+      "size": [
+        2.72,
+        3.0,
+        8.0
+      ],
+      "collisionSpec": {
+        "width_x": 2.6,
+        "length_z": 8.0,
+        "height_y": 3.0
+      },
+      "triangles": 3516,
+      "nodes": [
+        "body",
+        "train_root"
+      ],
+      "nodeInfo": [
+        {
+          "name": "body",
+          "type": "mesh",
+          "parent": "train_root",
+          "position": [
+            0.0,
+            0.0,
+            -0.0
+          ],
+          "tris": 3516
+        },
+        {
+          "name": "train_root",
+          "type": "empty",
+          "parent": null,
+          "position": [
+            0.0,
+            0.0,
+            -0.0
+          ]
+        }
+      ],
+      "materials": [
+        "TrainNavy",
+        "AtlasTown",
+        "Paint",
+        "Roof"
+      ]
+    },
+    {
+      "name": "bld_house",
+      "file": "bld_house.glb",
+      "bboxMin": [
+        -4.53,
+        0.0,
+        -4.5
+      ],
+      "bboxMax": [
+        4.53,
+        8.4,
+        4.9
+      ],
+      "size": [
+        9.06,
+        8.4,
+        9.4
+      ],
+      "collisionSpec": {
+        "width_x": 9.0,
+        "length_z": 9.0,
+        "height_y": 8.0
+      },
+      "triangles": 1904,
+      "nodes": [
+        "decal_slot_0",
+        "decal_slot_1",
+        "decal_slot_2",
+        "bld_house"
+      ],
+      "nodeInfo": [
+        {
+          "name": "bld_house",
+          "type": "mesh",
+          "parent": null,
+          "position": [
+            0.0,
+            0.0,
+            -0.0
+          ],
+          "tris": 1904
+        },
+        {
+          "name": "decal_slot_0",
+          "type": "empty",
+          "parent": "bld_house",
+          "position": [
+            4.32,
+            1.52,
+            -0.0
+          ]
+        },
+        {
+          "name": "decal_slot_1",
+          "type": "empty",
+          "parent": "bld_house",
+          "position": [
+            -4.32,
+            1.52,
+            -0.0
+          ]
+        },
+        {
+          "name": "decal_slot_2",
+          "type": "empty",
+          "parent": "bld_house",
+          "position": [
+            0.0,
+            1.52,
+            -4.32
+          ]
+        }
+      ],
+      "materials": [
+        "Wall",
+        "AtlasTown",
+        "Roof"
+      ]
+    },
+    {
+      "name": "bld_shop",
+      "file": "bld_shop.glb",
+      "bboxMin": [
+        -6.11,
+        0.0,
+        -4.56
+      ],
+      "bboxMax": [
+        6.11,
+        6.46,
+        5.385
+      ],
+      "size": [
+        12.22,
+        6.46,
+        9.945
+      ],
+      "collisionSpec": {
+        "width_x": 12.0,
+        "length_z": 9.0,
+        "height_y": 6.0
+      },
+      "triangles": 1856,
+      "nodes": [
+        "decal_slot_0",
+        "decal_slot_1",
+        "decal_slot_2",
+        "decal_slot_3",
+        "decal_slot_4",
+        "shopsign_burger",
+        "shopsign_laundromat",
+        "shopsign_pizza",
+        "shopsign_snack_shack",
+        "shopsign_trash_treasures",
+        "bld_shop"
+      ],
+      "nodeInfo": [
+        {
+          "name": "bld_shop",
+          "type": "mesh",
+          "parent": null,
+          "position": [
+            0.0,
+            0.0,
+            -0.0
+          ],
+          "tris": 1836
+        },
+        {
+          "name": "decal_slot_0",
+          "type": "empty",
+          "parent": "bld_shop",
+          "position": [
+            5.97,
+            1.9,
+            -0.0
+          ]
+        },
+        {
+          "name": "decal_slot_1",
+          "type": "empty",
+          "parent": "bld_shop",
+          "position": [
+            -5.97,
+            1.9,
+            -0.0
+          ]
+        },
+        {
+          "name": "decal_slot_2",
+          "type": "empty",
+          "parent": "bld_shop",
+          "position": [
+            5.97,
+            1.9,
+            3.55
+          ]
+        },
+        {
+          "name": "decal_slot_3",
+          "type": "empty",
+          "parent": "bld_shop",
+          "position": [
+            -5.97,
+            1.9,
+            3.55
+          ]
+        },
+        {
+          "name": "decal_slot_4",
+          "type": "empty",
+          "parent": "bld_shop",
+          "position": [
+            0.95,
+            1.7,
+            -4.42
+          ]
+        },
+        {
+          "name": "shopsign_burger",
+          "type": "mesh",
+          "parent": "bld_shop",
+          "position": [
+            0.0,
+            5.73,
+            3.7
+          ],
+          "tris": 4
+        },
+        {
+          "name": "shopsign_laundromat",
+          "type": "mesh",
+          "parent": "bld_shop",
+          "position": [
+            0.0,
+            5.73,
+            3.7
+          ],
+          "tris": 4
+        },
+        {
+          "name": "shopsign_pizza",
+          "type": "mesh",
+          "parent": "bld_shop",
+          "position": [
+            0.0,
+            5.73,
+            3.7
+          ],
+          "tris": 4
+        },
+        {
+          "name": "shopsign_snack_shack",
+          "type": "mesh",
+          "parent": "bld_shop",
+          "position": [
+            0.0,
+            5.73,
+            3.7
+          ],
+          "tris": 4
+        },
+        {
+          "name": "shopsign_trash_treasures",
+          "type": "mesh",
+          "parent": "bld_shop",
+          "position": [
+            0.0,
+            5.73,
+            3.7
+          ],
+          "tris": 4
+        }
+      ],
+      "materials": [
+        "AtlasTown",
+        "Wall",
+        "Roof"
+      ]
+    },
+    {
+      "name": "bld_apartment",
+      "file": "bld_apartment.glb",
+      "bboxMin": [
+        -5.91,
+        0.0,
+        -5.93
+      ],
+      "bboxMax": [
+        5.91,
+        16.12,
+        6.01
+      ],
+      "size": [
+        11.82,
+        16.12,
+        11.94
+      ],
+      "collisionSpec": {
+        "width_x": 12.0,
+        "length_z": 12.0,
+        "height_y": 14.0
+      },
+      "triangles": 4190,
+      "nodes": [
+        "decal_slot_0",
+        "decal_slot_1",
+        "decal_slot_2",
+        "decal_slot_3",
+        "decal_slot_4",
+        "decal_slot_5",
+        "bld_apartment"
+      ],
+      "nodeInfo": [
+        {
+          "name": "bld_apartment",
+          "type": "mesh",
+          "parent": null,
+          "position": [
+            0.0,
+            0.0,
+            -0.0
+          ],
+          "tris": 4190
+        },
+        {
+          "name": "decal_slot_0",
+          "type": "empty",
+          "parent": "bld_apartment",
+          "position": [
+            5.77,
+            1.85,
+            -1.65
+          ]
+        },
+        {
+          "name": "decal_slot_1",
+          "type": "empty",
+          "parent": "bld_apartment",
+          "position": [
+            5.77,
+            1.85,
+            1.65
+          ]
+        },
+        {
+          "name": "decal_slot_2",
+          "type": "empty",
+          "parent": "bld_apartment",
+          "position": [
+            -5.77,
+            1.85,
+            1.65
+          ]
+        },
+        {
+          "name": "decal_slot_3",
+          "type": "empty",
+          "parent": "bld_apartment",
+          "position": [
+            -5.77,
+            1.85,
+            -1.65
+          ]
+        },
+        {
+          "name": "decal_slot_4",
+          "type": "empty",
+          "parent": "bld_apartment",
+          "position": [
+            1.82,
+            1.6,
+            5.47
+          ]
+        },
+        {
+          "name": "decal_slot_5",
+          "type": "empty",
+          "parent": "bld_apartment",
+          "position": [
+            -1.8,
+            1.85,
+            -5.47
+          ]
+        }
+      ],
+      "materials": [
+        "Wall",
+        "AtlasTown",
+        "Roof"
+      ]
+    },
+    {
+      "name": "bld_tower",
+      "file": "bld_tower.glb",
+      "bboxMin": [
+        -7.0,
+        0.0,
+        -7.0
+      ],
+      "bboxMax": [
+        7.0,
+        27.9,
+        7.5
+      ],
+      "size": [
+        14.0,
+        27.9,
+        14.5
+      ],
+      "collisionSpec": {
+        "width_x": 14.0,
+        "length_z": 14.0,
+        "height_y": 26.0
+      },
+      "triangles": 2254,
+      "nodes": [
+        "decal_slot_0",
+        "decal_slot_1",
+        "decal_slot_2",
+        "decal_slot_3",
+        "decal_slot_4",
+        "bld_tower"
+      ],
+      "nodeInfo": [
+        {
+          "name": "bld_tower",
+          "type": "mesh",
+          "parent": null,
+          "position": [
+            0.0,
+            0.0,
+            -0.0
+          ],
+          "tris": 2254
+        },
+        {
+          "name": "decal_slot_0",
+          "type": "empty",
+          "parent": "bld_tower",
+          "position": [
+            2.4,
+            2.25,
+            6.39
+          ]
+        },
+        {
+          "name": "decal_slot_1",
+          "type": "empty",
+          "parent": "bld_tower",
+          "position": [
+            -2.4,
+            2.25,
+            6.39
+          ]
+        },
+        {
+          "name": "decal_slot_2",
+          "type": "empty",
+          "parent": "bld_tower",
+          "position": [
+            6.39,
+            1.9,
+            -0.0
+          ]
+        },
+        {
+          "name": "decal_slot_3",
+          "type": "empty",
+          "parent": "bld_tower",
+          "position": [
+            -6.39,
+            1.9,
+            -0.0
+          ]
+        },
+        {
+          "name": "decal_slot_4",
+          "type": "empty",
+          "parent": "bld_tower",
+          "position": [
+            -2.4,
+            1.9,
+            -6.39
+          ]
+        }
+      ],
+      "materials": [
+        "AtlasTown",
+        "Wall",
+        "Roof"
+      ]
+    },
+    {
+      "name": "bld_donut",
+      "file": "bld_donut.glb",
+      "bboxMin": [
+        -5.03,
+        0.0,
+        -5.01
+      ],
+      "bboxMax": [
+        5.03,
+        9.611,
+        5.485
+      ],
+      "size": [
+        10.06,
+        9.611,
+        10.495
+      ],
+      "collisionSpec": {
+        "width_x": 10.0,
+        "length_z": 10.0,
+        "height_y": 5.0
+      },
+      "triangles": 3788,
+      "nodes": [
+        "decal_slot_0",
+        "decal_slot_1",
+        "decal_slot_2",
+        "bld_donut"
+      ],
+      "nodeInfo": [
+        {
+          "name": "bld_donut",
+          "type": "mesh",
+          "parent": null,
+          "position": [
+            0.0,
+            0.0,
+            -0.0
+          ],
+          "tris": 3788
+        },
+        {
+          "name": "decal_slot_0",
+          "type": "empty",
+          "parent": "bld_donut",
+          "position": [
+            4.87,
+            1.55,
+            -0.0
+          ]
+        },
+        {
+          "name": "decal_slot_1",
+          "type": "empty",
+          "parent": "bld_donut",
+          "position": [
+            -4.87,
+            1.55,
+            -0.0
+          ]
+        },
+        {
+          "name": "decal_slot_2",
+          "type": "empty",
+          "parent": "bld_donut",
+          "position": [
+            -0.4,
+            1.6,
+            -4.87
+          ]
+        }
+      ],
+      "materials": [
+        "Wall",
+        "AtlasTown",
+        "Roof"
+      ]
+    },
+    {
+      "name": "bld_station",
+      "file": "bld_station.glb",
+      "bboxMin": [
+        -2.01,
+        0.0,
+        -15.0
+      ],
+      "bboxMax": [
+        2.01,
+        4.22,
+        15.0
+      ],
+      "size": [
+        4.02,
+        4.22,
+        30.0
+      ],
+      "collisionSpec": {
+        "width_x": 4.0,
+        "length_z": 30.0,
+        "height_y": 4.2
+      },
+      "triangles": 2074,
+      "nodes": [
+        "booth",
+        "canopy",
+        "platform",
+        "roofad_0",
+        "roofad_1",
+        "bld_station"
+      ],
+      "nodeInfo": [
+        {
+          "name": "bld_station",
+          "type": "empty",
+          "parent": null,
+          "position": [
+            0.0,
+            0.0,
+            -0.0
+          ]
+        },
+        {
+          "name": "booth",
+          "type": "mesh",
+          "parent": "bld_station",
+          "position": [
+            0.0,
+            0.0,
+            -0.0
+          ],
+          "tris": 128
+        },
+        {
+          "name": "canopy",
+          "type": "mesh",
+          "parent": "bld_station",
+          "position": [
+            0.0,
+            0.0,
+            -0.0
+          ],
+          "tris": 1678
+        },
+        {
+          "name": "platform",
+          "type": "mesh",
+          "parent": "bld_station",
+          "position": [
+            0.0,
+            0.0,
+            -0.0
+          ],
+          "tris": 264
+        },
+        {
+          "name": "roofad_0",
+          "type": "mesh",
+          "parent": "bld_station",
+          "position": [
+            1.0816,
+            4.1535,
+            7.5
+          ],
+          "tris": 2
+        },
+        {
+          "name": "roofad_1",
+          "type": "mesh",
+          "parent": "bld_station",
+          "position": [
+            -1.0816,
+            4.1535,
+            -7.5
+          ],
+          "tris": 2
+        }
+      ],
+      "materials": [
+        "Wall",
+        "AtlasTown",
+        "Paving"
+      ]
+    },
+    {
+      "name": "dumpster",
+      "file": "dumpster.glb",
+      "bboxMin": [
+        -0.95,
+        0.0032,
+        -0.5455
+      ],
+      "bboxMax": [
+        0.95,
+        1.2948,
+        0.515
+      ],
+      "size": [
+        1.9,
+        1.2916,
+        1.0605
+      ],
+      "collisionSpec": {
+        "width_x": 1.9,
+        "length_z": 1.1,
+        "height_y": 1.3
+      },
+      "triangles": 1684,
+      "nodes": [
+        "dumpster"
+      ],
+      "nodeInfo": [
+        {
+          "name": "dumpster",
+          "type": "mesh",
+          "parent": null,
+          "position": [
+            0.0,
+            0.0,
+            -0.0
+          ],
+          "tris": 1684
+        }
+      ],
+      "materials": [
+        "Dumpster",
+        "AtlasTown"
+      ]
+    },
+    {
+      "name": "dumpster_gold",
+      "file": "dumpster_gold.glb",
+      "bboxMin": [
+        -1.0,
+        0.0034,
+        -0.66
+      ],
+      "bboxMax": [
+        1.0,
+        1.4,
+        0.7178
+      ],
+      "size": [
+        2.0,
+        1.3966,
+        1.3778
+      ],
+      "collisionSpec": {
+        "width_x": 2.0,
+        "length_z": 1.3,
+        "height_y": 1.4
+      },
+      "triangles": 2918,
+      "nodes": [
+        "body",
+        "lid",
+        "lock",
+        "dumpster_gold"
+      ],
+      "nodeInfo": [
+        {
+          "name": "body",
+          "type": "mesh",
+          "parent": "dumpster_gold",
+          "position": [
+            0.0,
+            0.0,
+            -0.0
+          ],
+          "tris": 1928
+        },
+        {
+          "name": "dumpster_gold",
+          "type": "empty",
+          "parent": null,
+          "position": [
+            0.0,
+            0.0,
+            -0.0
+          ]
+        },
+        {
+          "name": "lid",
+          "type": "mesh",
+          "parent": "dumpster_gold",
+          "position": [
+            0.0,
+            1.25,
+            -0.625
+          ],
+          "tris": 654
+        },
+        {
+          "name": "lock",
+          "type": "mesh",
+          "parent": "dumpster_gold",
+          "position": [
+            0.0,
+            0.97,
+            0.645
+          ],
+          "tris": 336
+        }
+      ],
+      "materials": [
+        "GoldPaint",
+        "GoldTrim",
+        "AtlasTown"
+      ]
+    },
+    {
+      "name": "trash_bags",
+      "file": "trash_bags.glb",
+      "bboxMin": [
+        -0.5608,
+        0.0,
+        -0.4447
+      ],
+      "bboxMax": [
+        0.5697,
+        0.5772,
+        0.4165
+      ],
+      "size": [
+        1.1305,
+        0.5772,
+        0.8611
+      ],
+      "collisionSpec": {
+        "width_x": 1.2,
+        "length_z": 0.9,
+        "height_y": 0.6
+      },
+      "triangles": 1832,
+      "nodes": [
+        "trash_bags"
+      ],
+      "nodeInfo": [
+        {
+          "name": "trash_bags",
+          "type": "mesh",
+          "parent": null,
+          "position": [
+            0.0,
+            0.0,
+            -0.0
+          ],
+          "tris": 1832
+        }
+      ],
+      "materials": [
+        "BinBag"
+      ]
+    },
+    {
+      "name": "bld_demolished",
+      "file": "bld_demolished.glb",
+      "bboxMin": [
+        -7.31,
+        -0.0911,
+        -6.2
+      ],
+      "bboxMax": [
+        7.31,
+        11.7265,
+        6.95
+      ],
+      "size": [
+        14.62,
+        11.8176,
+        13.15
+      ],
+      "collisionSpec": {
+        "width_x": 14.4,
+        "length_z": 13.4,
+        "height_y": 11.2
+      },
+      "triangles": 4540,
+      "nodes": [
+        "bld_demolished"
+      ],
+      "nodeInfo": [
+        {
+          "name": "bld_demolished",
+          "type": "mesh",
+          "parent": null,
+          "position": [
+            0.0,
+            0.0,
+            -0.0
+          ],
+          "tris": 4540
+        }
+      ],
+      "materials": [
+        "Wall",
+        "AtlasTown"
+      ]
+    },
+    {
+      "name": "crane",
+      "file": "crane.glb",
+      "bboxMin": [
+        -13.7596,
+        0.0,
+        -1.8872
+      ],
+      "bboxMax": [
+        5.6798,
+        26.62,
+        3.6505
+      ],
+      "size": [
+        19.4394,
+        26.62,
+        5.5377
+      ],
+      "collisionSpec": {
+        "width_x": 0.9,
+        "length_z": 0.9,
+        "height_y": 22.0
+      },
+      "triangles": 2710,
+      "nodes": [
+        "ball",
+        "jib",
+        "crane"
+      ],
+      "nodeInfo": [
+        {
+          "name": "ball",
+          "type": "mesh",
+          "parent": "jib",
+          "position": [
+            -11.1,
+            22.4,
+            2.6
+          ],
+          "tris": 678
+        },
+        {
+          "name": "crane",
+          "type": "mesh",
+          "parent": null,
+          "position": [
+            0.0,
+            0.0,
+            -0.0
+          ],
+          "tris": 944
+        },
+        {
+          "name": "jib",
+          "type": "mesh",
+          "parent": "crane",
+          "position": [
+            0.0,
+            22.0,
+            -0.0
+          ],
+          "tris": 1088
+        }
+      ],
+      "materials": [
+        "AtlasTown"
+      ]
+    },
+    {
+      "name": "bld_collapsed",
+      "file": "bld_collapsed.glb",
+      "bboxMin": [
+        -6.25,
+        -0.0279,
+        -5.25
+      ],
+      "bboxMax": [
+        5.62,
+        7.8965,
+        7.8648
+      ],
+      "size": [
+        11.87,
+        7.9243,
+        13.1148
+      ],
+      "collisionSpec": {
+        "width_x": 12.0,
+        "length_z": 12.0,
+        "height_y": 7.5
+      },
+      "triangles": 3411,
+      "nodes": [
+        "bld_collapsed"
+      ],
+      "nodeInfo": [
+        {
+          "name": "bld_collapsed",
+          "type": "mesh",
+          "parent": null,
+          "position": [
+            0.0,
+            0.0,
+            -0.0
+          ],
+          "tris": 3411
+        }
+      ],
+      "materials": [
+        "AtlasTown",
+        "Wall",
+        "Roof"
+      ]
+    },
+    {
+      "name": "bld_shell",
+      "file": "bld_shell.glb",
+      "bboxMin": [
+        -6.02,
+        -0.2629,
+        -5.02
+      ],
+      "bboxMax": [
+        6.014,
+        4.62,
+        5.903
+      ],
+      "size": [
+        12.034,
+        4.8829,
+        10.923
+      ],
+      "collisionSpec": {
+        "width_x": 12.0,
+        "length_z": 10.0,
+        "height_y": 4.2
+      },
+      "triangles": 2158,
+      "nodes": [
+        "bld_shell"
+      ],
+      "nodeInfo": [
+        {
+          "name": "bld_shell",
+          "type": "mesh",
+          "parent": null,
+          "position": [
+            0.0,
+            0.0,
+            -0.0
+          ],
+          "tris": 2158
+        }
+      ],
+      "materials": [
+        "Wall",
+        "AtlasTown"
+      ]
+    },
+    {
+      "name": "sinkhole",
+      "file": "sinkhole.glb",
+      "bboxMin": [
+        -11.71,
+        -2.2691,
+        -4.8529
+      ],
+      "bboxMax": [
+        11.61,
+        1.0,
+        4.7925
+      ],
+      "size": [
+        23.32,
+        3.2691,
+        9.6454
+      ],
+      "collisionSpec": {
+        "width_x": 21.8,
+        "length_z": 8.0,
+        "height_y": 1.0
+      },
+      "triangles": 2260,
+      "nodes": [
+        "sinkhole"
+      ],
+      "nodeInfo": [
+        {
+          "name": "sinkhole",
+          "type": "mesh",
+          "parent": null,
+          "position": [
+            0.0,
+            0.0,
+            -0.0
+          ],
+          "tris": 2260
+        }
+      ],
+      "materials": [
+        "AtlasTown",
+        "Water"
+      ]
+    },
+    {
+      "name": "lm_clocktower",
+      "file": "lm_clocktower.glb",
+      "bboxMin": [
+        -3.05,
+        0.0,
+        -3.05
+      ],
+      "bboxMax": [
+        3.05,
+        24.6,
+        3.05
+      ],
+      "size": [
+        6.1,
+        24.6,
+        6.1
+      ],
+      "collisionSpec": {
+        "width_x": 6.0,
+        "length_z": 6.0,
+        "height_y": 16.8
+      },
+      "triangles": 4421,
+      "nodes": [
+        "hand_h_0",
+        "hand_m_0",
+        "clock_0",
+        "hand_h_1",
+        "hand_m_1",
+        "clock_1",
+        "hand_h_2",
+        "hand_m_2",
+        "clock_2",
+        "hand_h_3",
+        "hand_m_3",
+        "clock_3",
+        "lm_clocktower"
+      ],
+      "nodeInfo": [
+        {
+          "name": "clock_0",
+          "type": "empty",
+          "parent": "lm_clocktower",
+          "position": [
+            0.0,
+            15.0,
+            2.34
+          ]
+        },
+        {
+          "name": "clock_1",
+          "type": "empty",
+          "parent": "lm_clocktower",
+          "position": [
+            2.34,
+            15.0,
+            -0.0
+          ]
+        },
+        {
+          "name": "clock_2",
+          "type": "empty",
+          "parent": "lm_clocktower",
+          "position": [
+            0.0,
+            15.0,
+            -2.34
+          ]
+        },
+        {
+          "name": "clock_3",
+          "type": "empty",
+          "parent": "lm_clocktower",
+          "position": [
+            -2.34,
+            15.0,
+            -0.0
+          ]
+        },
+        {
+          "name": "hand_h_0",
+          "type": "mesh",
+          "parent": "clock_0",
+          "position": [
+            0.0,
+            15.0,
+            2.34
+          ],
+          "tris": 32
+        },
+        {
+          "name": "hand_h_1",
+          "type": "mesh",
+          "parent": "clock_1",
+          "position": [
+            2.34,
+            15.0,
+            -0.0
+          ],
+          "tris": 32
+        },
+        {
+          "name": "hand_h_2",
+          "type": "mesh",
+          "parent": "clock_2",
+          "position": [
+            0.0,
+            15.0,
+            -2.34
+          ],
+          "tris": 32
+        },
+        {
+          "name": "hand_h_3",
+          "type": "mesh",
+          "parent": "clock_3",
+          "position": [
+            -2.34,
+            15.0,
+            -0.0
+          ],
+          "tris": 32
+        },
+        {
+          "name": "hand_m_0",
+          "type": "mesh",
+          "parent": "clock_0",
+          "position": [
+            0.0,
+            15.0,
+            2.34
+          ],
+          "tris": 68
+        },
+        {
+          "name": "hand_m_1",
+          "type": "mesh",
+          "parent": "clock_1",
+          "position": [
+            2.34,
+            15.0,
+            -0.0
+          ],
+          "tris": 68
+        },
+        {
+          "name": "hand_m_2",
+          "type": "mesh",
+          "parent": "clock_2",
+          "position": [
+            0.0,
+            15.0,
+            -2.34
+          ],
+          "tris": 68
+        },
+        {
+          "name": "hand_m_3",
+          "type": "mesh",
+          "parent": "clock_3",
+          "position": [
+            -2.34,
+            15.0,
+            -0.0
+          ],
+          "tris": 68
+        },
+        {
+          "name": "lm_clocktower",
+          "type": "mesh",
+          "parent": null,
+          "position": [
+            0.0,
+            0.0,
+            -0.0
+          ],
+          "tris": 4021
+        }
+      ],
+      "materials": [
+        "AtlasTown",
+        "Wall",
+        "Roof"
+      ]
+    },
+    {
+      "name": "lm_maple",
+      "file": "lm_maple.glb",
+      "bboxMin": [
+        -6.141,
+        0.0,
+        -6.2951
+      ],
+      "bboxMax": [
+        6.2937,
+        15.1035,
+        6.2535
+      ],
+      "size": [
+        12.4347,
+        15.1035,
+        12.5485
+      ],
+      "collisionSpec": {
+        "width_x": 6.1,
+        "length_z": 6.1,
+        "height_y": 6.0
+      },
+      "triangles": 5279,
+      "nodes": [
+        "canopy",
+        "swing",
+        "lm_maple"
+      ],
+      "nodeInfo": [
+        {
+          "name": "canopy",
+          "type": "mesh",
+          "parent": "lm_maple",
+          "position": [
+            0.0,
+            4.5,
+            -0.0
+          ],
+          "tris": 3130
+        },
+        {
+          "name": "lm_maple",
+          "type": "mesh",
+          "parent": null,
+          "position": [
+            0.0,
+            0.0,
+            -0.0
+          ],
+          "tris": 1905
+        },
+        {
+          "name": "swing",
+          "type": "mesh",
+          "parent": "lm_maple",
+          "position": [
+            2.6,
+            5.2,
+            -0.0
+          ],
+          "tris": 244
+        }
+      ],
+      "materials": [
+        "Leaves2",
+        "Leaves",
+        "Leaves3",
+        "AtlasTown"
+      ]
+    },
+    {
+      "name": "lm_millyard",
+      "file": "lm_millyard.glb",
+      "bboxMin": [
+        -10.8,
+        0.0,
+        -8.36
+      ],
+      "bboxMax": [
+        10.4,
+        24.0,
+        5.9
+      ],
+      "size": [
+        21.2,
+        24.0,
+        14.26
+      ],
+      "collisionSpec": {
+        "width_x": 21.6,
+        "length_z": 16.6,
+        "height_y": 24.0
+      },
+      "triangles": 5484,
+      "nodes": [
+        "smoke",
+        "lm_millyard"
+      ],
+      "nodeInfo": [
+        {
+          "name": "lm_millyard",
+          "type": "mesh",
+          "parent": null,
+          "position": [
+            0.0,
+            0.0,
+            -0.0
+          ],
+          "tris": 5484
+        },
+        {
+          "name": "smoke",
+          "type": "empty",
+          "parent": "lm_millyard",
+          "position": [
+            -7.5,
+            24.2,
+            -7.0
+          ]
+        }
+      ],
+      "materials": [
+        "Wall",
+        "AtlasTown",
+        "Roof"
+      ]
+    },
+    {
+      "name": "lm_racsign",
+      "file": "lm_racsign.glb",
+      "bboxMin": [
+        -3.2,
+        0.0,
+        -0.6
+      ],
+      "bboxMax": [
+        3.2,
+        14.0,
+        0.6
+      ],
+      "size": [
+        6.4,
+        14.0,
+        1.2
+      ],
+      "collisionSpec": {
+        "width_x": 6.4,
+        "length_z": 0.7,
+        "height_y": 14.0
+      },
+      "triangles": 2292,
+      "nodes": [
+        "bulbs",
+        "neon_a",
+        "neon_b",
+        "board",
+        "lm_racsign"
+      ],
+      "nodeInfo": [
+        {
+          "name": "board",
+          "type": "mesh",
+          "parent": "lm_racsign",
+          "position": [
+            0.0,
+            8.5,
+            -0.0
+          ],
+          "tris": 474
+        },
+        {
+          "name": "bulbs",
+          "type": "mesh",
+          "parent": "board",
+          "position": [
+            0.0,
+            8.5,
+            -0.0
+          ],
+          "tris": 432
+        },
+        {
+          "name": "lm_racsign",
+          "type": "mesh",
+          "parent": null,
+          "position": [
+            0.0,
+            0.0,
+            -0.0
+          ],
+          "tris": 154
+        },
+        {
+          "name": "neon_a",
+          "type": "mesh",
+          "parent": "board",
+          "position": [
+            0.0,
+            8.5,
+            -0.0
+          ],
+          "tris": 768
+        },
+        {
+          "name": "neon_b",
+          "type": "mesh",
+          "parent": "board",
+          "position": [
+            0.0,
+            8.5,
+            -0.0
+          ],
+          "tris": 464
+        }
+      ],
+      "materials": [
+        "Bulbs",
+        "NeonA",
+        "NeonB",
+        "AtlasTown"
+      ]
+    },
+    {
+      "name": "lm_mast",
+      "file": "lm_mast.glb",
+      "bboxMin": [
+        -1.1695,
+        0.0,
+        -0.8755
+      ],
+      "bboxMax": [
+        1.1629,
+        14.57,
+        1.0922
+      ],
+      "size": [
+        2.3324,
+        14.57,
+        1.9678
+      ],
+      "collisionSpec": {
+        "width_x": 1.4,
+        "length_z": 1.4,
+        "height_y": 14.0
+      },
+      "triangles": 2006,
+      "nodes": [
+        "beacon",
+        "lm_mast"
+      ],
+      "nodeInfo": [
+        {
+          "name": "beacon",
+          "type": "mesh",
+          "parent": "lm_mast",
+          "position": [
+            0.0,
+            14.33,
+            -0.0
+          ],
+          "tris": 80
+        },
+        {
+          "name": "lm_mast",
+          "type": "mesh",
+          "parent": null,
+          "position": [
+            0.0,
+            0.0,
+            -0.0
+          ],
+          "tris": 1926
+        }
+      ],
+      "materials": [
+        "Beacon",
+        "AtlasTown"
+      ]
+    }
+  ]
+}
