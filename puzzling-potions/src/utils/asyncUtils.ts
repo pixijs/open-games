@@ -37,7 +37,7 @@ export class AsyncQueue {
 
     /** Check if the execution is paused */
     public isPaused() {
-        return this.processing;
+        return this.paused;
     }
 
     /**
