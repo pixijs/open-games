@@ -30,17 +30,11 @@ class Navigation {
     /** Current screen being displayed */
     private currentScreen?: AppScreen;
 
-    /** Resize function to avoid problems with scope */
-    private currentScreenResize?: () => void;
-
     /** Default load screen */
     private loadScreen?: AppScreen;
 
     /** Current overlay being displayed */
     private currentOverlay?: AppScreen;
-
-    /** Resize function to avoid problems with scope */
-    private currentOverlayResize?: () => void;
 
     /** The width of the screen */
     private _w!: number;
@@ -88,7 +82,7 @@ class Navigation {
     public async hideOverlay() {
         if (!this.currentOverlay) return;
 
-        this._removeScreen(this.currentOverlay, true);
+        this._removeScreen(this.currentOverlay);
     }
 
     /**
@@ -120,14 +114,6 @@ class Navigation {
 
         // Add screen's resize handler, if available
         if (screen.resize) {
-            // Encapsulate resize in another function that can be removed later, to avoi scope issues with addEventListener
-
-            if (isOverlay) {
-                this.currentOverlayResize = () => screen.resize;
-            } else {
-                this.currentScreenResize = () => screen.resize;
-            }
-
             // Trigger a first resize
             screen.resize(this._w, this._h);
         }
@@ -148,17 +134,10 @@ class Navigation {
      * @param screen - The screen instance being added.
      * @param isOverlay - A flag to determine if the screen is an overlay.
      */
-    private async _removeScreen(screen: AppScreen, isOverlay = false) {
+    private async _removeScreen(screen: AppScreen) {
         // Hide screen if method is available
         if (screen.hide) {
             await screen.hide();
-        }
-
-        // Unlink resize handler if exists
-        if (isOverlay) {
-            this.currentOverlayResize && window.removeEventListener('resize', this.currentOverlayResize);
-        } else {
-            this.currentScreenResize && window.removeEventListener('resize', this.currentScreenResize);
         }
 
         // Unlink update function if method is available
@@ -198,7 +177,7 @@ class Navigation {
 
             // Hide loading screen, if exists
             if (this.loadScreen) {
-                this._removeScreen(this.loadScreen, isOverlay);
+                this._removeScreen(this.loadScreen);
             }
         }
 
