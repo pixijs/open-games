@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <!-- The phone's own width, reaching under the notch: the interface reads the safe area -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Night Run &mdash; PixiJS 3D</title>
+    <meta
+      name="description"
+      content="Night Run: an online arcade truck race for up to four friends on a rain-soaked night track. Race bots now, or host a party and share the code. Made with PixiJS, PixiJS 3D and Colyseus."
+    />
+    <meta name="theme-color" content="#060920" />
+    <link rel="preload" href="/fonts/big-shoulders-display-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/fonts/fonts.css" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #060920;
+        color-scheme: dark;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      canvas {
+        display: block;
+      }
+
+      /* The loading screen and the can't-run screens, painted before any script runs */
+      #boot {
+        position: fixed;
+        inset: 0;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 28px;
+        padding: 24px;
+        box-sizing: border-box;
+        background:
+          radial-gradient(ellipse 60% 40% at 50% 46%, rgba(44, 232, 255, 0.1), transparent 70%),
+          radial-gradient(ellipse 90% 60% at 50% 100%, #16204e 0%, #060920 75%);
+        color: #f4f7ff;
+        text-align: center;
+        transition: opacity 0.6s ease-out;
+      }
+
+      #boot.out {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      #boot .wordmark {
+        margin: 0;
+        display: flex;
+        gap: 0.32em;
+        font:
+          900 clamp(56px, 15vw, 132px) / 0.9 'Big Shoulders Display',
+          'Arial Narrow',
+          sans-serif;
+        letter-spacing: 0.02em;
+        transform: skewX(-12deg);
+      }
+
+      #boot .night {
+        color: #a5f5ff;
+        text-shadow:
+          0 0 2px #fff,
+          0 0 18px #2ce8ff,
+          0 0 42px rgba(44, 232, 255, 0.55);
+      }
+
+      #boot .run {
+        color: #ffacd4;
+        text-shadow:
+          0 0 2px #fff,
+          0 0 18px #ff2e97,
+          0 0 42px rgba(255, 46, 151, 0.55);
+      }
+
+      /* The start lamps: two reds, then green, lighting in turn while the game loads */
+      #boot .lamps {
+        display: flex;
+        gap: 18px;
+        padding: 10px 16px;
+        border-radius: 10px;
+        background: #0c1234;
+        box-shadow:
+          inset 0 0 0 2px #24306a,
+          0 6px 18px rgba(0, 0, 0, 0.5);
+      }
+
+      #boot .lamps i {
+        --lamp: #ff3358;
+        --off: #2a1020;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: var(--off);
+        box-shadow: inset 0 0 0 2px #060920;
+        animation: boot-lamp 1.8s steps(1, end) infinite;
+      }
+
+      #boot .lamps i:nth-child(2) {
+        animation-delay: 0.3s;
+      }
+
+      #boot .lamps i:nth-child(3) {
+        --lamp: #3dffa0;
+        --off: #0b2a20;
+        animation-delay: 0.6s;
+      }
+
+      #boot .message {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+      }
+
+      #boot .message:empty {
+        display: none;
+      }
+
+      #boot h1 {
+        margin: 0;
+        font:
+          800 clamp(28px, 6vw, 44px) / 1 'Big Shoulders Display',
+          'Arial Narrow',
+          sans-serif;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+        text-wrap: balance;
+      }
+
+      #boot .body {
+        max-width: 38ch;
+        margin: 0;
+        text-wrap: pretty;
+        font:
+          500 16px/1.5 Kanit,
+          'Segoe UI',
+          sans-serif;
+        color: #a3afe0;
+      }
+
+      #boot .error {
+        max-width: 52ch;
+        margin: 0;
+        font:
+          12px/1.5 ui-monospace,
+          monospace;
+        color: #7d89ad;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      #boot .actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 8px;
+      }
+
+      #boot .actions a,
+      #boot .actions button {
+        min-height: 48px;
+        padding: 0 22px;
+        display: inline-flex;
+        align-items: center;
+        border: 2px solid #2ce8ff;
+        border-radius: 6px;
+        background: #16204e;
+        color: #f4f7ff;
+        font:
+          italic 700 16px Kanit,
+          'Segoe UI',
+          sans-serif;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      #boot .actions a:hover,
+      #boot .actions button:hover {
+        background: #24306a;
+      }
+
+      #boot .actions a:focus-visible,
+      #boot .actions button:focus-visible {
+        outline: 2px solid #f4f7ff;
+        outline-offset: 3px;
+      }
+
+      #boot .collab {
+        position: absolute;
+        bottom: calc(52px + env(safe-area-inset-bottom));
+        width: min(300px, 72vw);
+        height: auto;
+      }
+
+      #boot .credit {
+        position: absolute;
+        bottom: calc(20px + env(safe-area-inset-bottom));
+        margin: 0;
+        font:
+          italic 600 13px Kanit,
+          'Segoe UI',
+          sans-serif;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #59648a;
+      }
+
+      @keyframes boot-lamp {
+        0% {
+          background: var(--lamp);
+          box-shadow:
+            inset 0 0 0 2px #060920,
+            0 0 16px var(--lamp);
+        }
+        70% {
+          background: var(--off);
+          box-shadow: inset 0 0 0 2px #060920;
+        }
+      }
+
+      /* A landscape phone: the row stays clear of the lamps */
+      @media (max-height: 480px) {
+        #boot .collab {
+          bottom: calc(44px + env(safe-area-inset-bottom));
+          width: 210px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        #boot {
+          transition-duration: 0.2s;
+        }
+
+        #boot .lamps i {
+          animation: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="boot">
+      <p class="wordmark" role="img" aria-label="Night Run">
+        <span class="night">NIGHT</span><span class="run">RUN</span>
+      </p>
+      <div class="lamps" role="progressbar" aria-label="Loading"><i></i><i></i><i></i></div>
+      <div class="message"></div>
+      <img class="collab" src="/src/ui/art/collab.svg" alt="Colyseus × PixiJS" />
+      <p class="credit">Made with PixiJS and PixiJS 3D</p>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

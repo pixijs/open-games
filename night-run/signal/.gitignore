@@ -1,0 +1,5 @@
+# wrangler dev's local state and build output
+.wrangler/
+# Local secrets for wrangler dev; the Worker needs none, so keep any that appear out of git
+.dev.vars*
+.env*
