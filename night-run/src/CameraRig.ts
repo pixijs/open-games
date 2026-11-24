@@ -1,12 +1,13 @@
-import type { CameraPiece, CameraState, ClearShotCandidate, CustomBlend, DebugZone } from '@pmndrs/klipp';
+import type { CameraPiece, CameraState, CustomBlend, DebugZone } from '@pmndrs/klipp';
 import {
   BasicMultiChannelPerlinNoise,
   BlendCurves,
   BlendHints,
   cameraState,
-  ClearShot,
+  FollowZoomExtension,
   HardLockToTargetBody,
   hardLookAt,
+  HardLookAtAim,
   ImpulseField,
   ImpulseListenerNoise,
   LensExtension,
@@ -28,6 +29,7 @@ import type { CourseView } from './race/course';
 import { FINISH_LINE } from './race/route';
 import type { TruckPose } from './race/truck';
 import { BASE_TV_SPOTS } from './track/base';
+import { TrackSideCameras } from './TrackSideCameras';
 
 /** The player-selectable shots; `C` cycles through them. */
 export type CameraMode = 'iso' | 'chase' | 'tv';
@@ -129,8 +131,8 @@ function shotAt(position: readonly number[], lookAt: readonly number[], fov: num
  * - `iso`: the original racer's follow camera, a {@link DioramaBody} at a fixed high three-quarter angle with lead and
  *   a dead zone; it holds still through speed, slides and boosts, and only a hit shakes it a little
  * - `chase`: a {@link ChaseBody} on an arm behind the truck that trails along the road and sees past the scenery
- * - `tv`: broadcast crane cams, a {@link ClearShot} cutting to the closest with a clear view, zooming to keep the car
- *   framed
+ * - `tv`: broadcast crane cams, a {@link TrackSideCameras} cutting to the closest with a clear view, zooming to keep the
+ *   car framed
  * - `finish`: a low telephoto shot by the line as the player takes the flag
  *
  * On the chase, speed widens the lens ({@link LensExtension}), engine and drift rumble it
@@ -152,7 +154,7 @@ export class CameraRig {
 
   public readonly iso: VirtualCamera;
   public readonly chase: VirtualCamera;
-  public readonly tv: VirtualCamera;
+  public readonly tv: TrackSideCameras;
   public readonly finish: VirtualCamera;
 
   private readonly _isoBody = new DioramaBody();
@@ -166,9 +168,8 @@ export class CameraRig {
     amplitudeDamping: 0.25,
   });
 
-  /** The crane cams, and the evaluator that cuts between them; both are made again for each track's cranes. */
-  private _tvShots: ClearShotCandidate[];
-  private _clearShot: ClearShot;
+  /** The crane cams' zooms, whose width follows the screen's shape. */
+  private readonly _tvZooms: FollowZoomExtension[] = [];
   /** Blend overrides: the game's own, plus any added through {@link addCustomBlends}. */
   private readonly _blends: CustomBlend[] = [
     { to: 'tv', blend: { curve: BlendCurves.cut, time: 0 } },
@@ -235,27 +236,19 @@ export class CameraRig {
     this.chase.addNoise(this._impactListener(1, HIT_CHANNEL | BOOST_CHANNEL));
 
     // -- tv: crane cams that cut to whichever is closest and zoom to keep the car the same size.
-    this._tvShots = tvShots(BASE_TV_SPOTS);
-    this._clearShot = this._cutter();
-
-    const tvHandheld = new BasicMultiChannelPerlinNoise({
-      rotationAmplitude: [0.35, 0.45, 0.15],
-      rotationFrequency: [0.6, 0.5, 0.3],
+    this.tv = new TrackSideCameras('tv', {
+      priority: STANDBY_PRIORITY,
+      defaultBlend: { curve: BlendCurves.cut, time: 0 },
     });
+    this.tv.score = (crane) => {
+      const car = this._car.position;
+      const p = crane.state.position;
+      const blocked = this.occluders.segmentHit(car[0], car[1], car[2], p[0], p[1], p[2], TV_SIGHT_PAD) < 1;
 
-    this.tv = new VirtualCamera('tv', { priority: STANDBY_PRIORITY });
-    this.klipp.add(this.tv);
-    this.tv.body = {
-      update: (out, dt, justActivated) => {
-        for (const shot of this._tvShots) {
-          hardLookAt.update(shot.state, this._car.position);
-          shot.state.fov = telephotoFov(distanceTo(shot.state, this._car.position));
-        }
-
-        cameraState.copy(out, this._clearShot.tick(dt));
-        tvHandheld.update(out, dt, justActivated);
-      },
+      return -distanceTo(crane.state, car) - (blocked ? TV_BLOCKED : 0);
     };
+    this.klipp.add(this.tv);
+    this.setTvSpots(BASE_TV_SPOTS);
 
     // -- finish: dropped beside the track ahead of the car, telephoto, as it crosses the line.
     this.finish = new VirtualCamera('finish', { priority: FINISH_PRIORITY, active: false });
@@ -278,13 +271,12 @@ export class CameraRig {
   }
 
   /**
-   * Put the crane cams where a track's cranes stand. Only the evaluator is made again; the trackside camera reads it
-   * each frame.
+   * Put the crane cams where a track's cranes stand.
    * @param spots - Each crane's position, x, y and z.
    */
   public setTvSpots(spots: readonly (readonly [number, number, number])[]): void {
-    this._tvShots = tvShots(spots);
-    this._clearShot = this._cutter();
+    this._tvZooms.length = 0;
+    this.tv.setShots(spots.map((spot, i) => this._crane(`cam-${i + 1}`, spot)));
   }
 
   /** The chase's lens this frame, in degrees of vertical field of view. */
@@ -309,7 +301,7 @@ export class CameraRig {
 
   /** The crane cam the trackside camera has cut to, e.g. `cam-3`. */
   public get tvShot(): string | null {
-    return this._clearShot.liveCameraId;
+    return this.tv.children.liveCameraName;
   }
 
   /**
@@ -494,6 +486,9 @@ export class CameraRig {
     this._chaseBody.fov = this._chaseFov;
     this._chaseBody.aspect = aspect;
 
+    // FollowZoom frames a width; scaling it by the aspect keeps the frame's height.
+    for (const zoom of this._tvZooms) zoom.width = 2 * TV_FRAME_RADIUS * aspect;
+
     if (this.finish.active) {
       const spot = this._finishSpot.position;
       const reach = Math.hypot(spot[0] - car.position[0], spot[1] - car.position[1], spot[2] - car.position[2]);
@@ -538,20 +533,28 @@ export class CameraRig {
     });
   }
 
-  /** The trackside cut: the nearest crane whose sight line to the truck is clear of the scenery. */
-  private _cutter(): ClearShot {
-    return new ClearShot(this._tvShots, {
-      evaluator: (shot) => {
-        const car = this._car.position;
-        const p = shot.state.position;
-        const blocked = this.occluders.segmentHit(car[0], car[1], car[2], p[0], p[1], p[2], TV_SIGHT_PAD) < 1;
+  /** A crane cam at `spot`, aimed at the truck, zooming to keep it framed, with a hand on the camera. */
+  private _crane(name: string, spot: readonly [number, number, number]): VirtualCamera {
+    // Starts at the spot, so the cut scores it right before it first runs.
+    const camera = new VirtualCamera(name, { initialState: { position: [spot[0], spot[1], spot[2]] } });
+    const mount = targetPose.create();
+    const zoom = new FollowZoomExtension(this._car, { fovRange: [12, 50], damping: 0 });
 
-        return -distanceTo(shot.state, car) - (blocked ? TV_BLOCKED : 0);
-      },
-      defaultBlend: { curve: BlendCurves.cut, time: 0 },
-      activateAfter: 0.2,
-      minDuration: 1.4,
-    });
+    mount.position[0] = spot[0];
+    mount.position[1] = spot[1];
+    mount.position[2] = spot[2];
+    camera.body = new HardLockToTargetBody(mount);
+    camera.aim = new HardLookAtAim(this._car);
+    camera.addExtension(zoom);
+    camera.addNoise(
+      new BasicMultiChannelPerlinNoise({
+        rotationAmplitude: [0.35, 0.45, 0.15],
+        rotationFrequency: [0.6, 0.5, 0.3],
+      }),
+    );
+    this._tvZooms.push(zoom);
+
+    return camera;
   }
 
   /** A crosshair on klipp's overlay over the truck the race cameras follow. */
@@ -599,18 +602,8 @@ function readMode(): CameraMode {
   }
 }
 
-/** A crane cam per spot, named `cam-1` on. */
-function tvShots(spots: readonly (readonly [number, number, number])[]): ClearShotCandidate[] {
-  return spots.map((spot, i) => ({ cameraId: `cam-${i + 1}`, state: shotAt(spot, _zero, 30), priority: 0 }));
-}
-
 function distanceTo(state: CameraState, point: readonly number[]): number {
   const p = state.position;
 
   return Math.hypot(p[0] - point[0], p[1] - point[1], p[2] - point[2]);
-}
-
-/** Vertical FOV that keeps a {@link TV_FRAME_RADIUS} sphere filling the frame at `distance`. */
-function telephotoFov(distance: number): number {
-  return clamp((2 * Math.atan(TV_FRAME_RADIUS / distance) * 180) / Math.PI, 12, 50);
 }
