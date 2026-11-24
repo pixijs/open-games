@@ -1,26 +1,19 @@
-import type {
-  CameraPiece,
-  CameraState,
-  ClearShotCandidate,
-  CustomBlend,
-  DebugZone,
-  VirtualCamera,
-} from '@kvvasuu/klipp';
+import type { CameraPiece, CameraState, ClearShotCandidate, CustomBlend, DebugZone } from '@pmndrs/klipp';
 import {
   BasicMultiChannelPerlinNoise,
   BlendCurves,
   BlendHints,
+  cameraState,
   ClearShot,
-  copyCameraState,
-  createCameraState,
-  createTargetPose,
   HardLockToTargetBody,
+  hardLookAt,
   ImpulseField,
   ImpulseListenerNoise,
   LensExtension,
-  updateHardLookAt,
-} from '@kvvasuu/klipp';
-import { DebugOverlay } from '@kvvasuu/klipp/dom';
+  targetPose,
+  VirtualCamera,
+} from '@pmndrs/klipp';
+import { DebugOverlay } from '@pmndrs/klipp/dom';
 import type { Camera3D, View3D } from '@pixi/3d';
 import { Vector3 } from '@pixi/3d';
 import { Point } from 'pixi.js';
@@ -117,13 +110,13 @@ const _noZones: readonly DebugZone[] = [];
 
 /** A camera state that sits at `position` and looks at `lookAt`. */
 function shotAt(position: readonly number[], lookAt: readonly number[], fov: number): CameraState {
-  const state = createCameraState();
+  const state = cameraState.create();
 
   state.position[0] = position[0];
   state.position[1] = position[1];
   state.position[2] = position[2];
   state.fov = fov;
-  updateHardLookAt(state, [lookAt[0], lookAt[1], lookAt[2]]);
+  hardLookAt.update(state, [lookAt[0], lookAt[1], lookAt[2]]);
 
   return state;
 }
@@ -154,8 +147,8 @@ export class CameraRig {
   public mode: CameraMode = readMode();
 
   private readonly _view: View3D;
-  private readonly _car = createTargetPose();
-  private readonly _finishSpot = createTargetPose();
+  private readonly _car = targetPose.create();
+  private readonly _finishSpot = targetPose.create();
 
   public readonly iso: VirtualCamera;
   public readonly chase: VirtualCamera;
@@ -218,21 +211,23 @@ export class CameraRig {
     // -- iso: the diorama camera. A fixed rotation; the body slides the lens over the ground after the truck.
     const isoRotation = shotAt(DIORAMA_OFFSET, _zero, DIORAMA_FOV).quaternion;
 
-    this.iso = this.klipp.addCamera('iso', {
+    this.iso = new VirtualCamera('iso', {
       priority: STANDBY_PRIORITY,
       hints: BlendHints.sphericalPosition,
       initialState: { fov: DIORAMA_FOV, quaternion: isoRotation },
     });
+    this.klipp.add(this.iso);
     this.iso.body = this._isoBody;
     this.iso.aim = fixedAim(isoRotation, this._car.position);
     this.iso.addNoise(this._impactListener(ISO_HIT_GAIN, HIT_CHANNEL));
 
     // -- chase: behind and above, trailing along the road through corners; it aims itself.
-    this.chase = this.klipp.addCamera('chase', {
+    this.chase = new VirtualCamera('chase', {
       priority: STANDBY_PRIORITY,
       hints: BlendHints.sphericalPosition,
       initialState: { fov: CHASE_FOV },
     });
+    this.klipp.add(this.chase);
     this._chaseBody = new ChaseBody(occluders, course);
     this.chase.body = this._chaseBody;
     this.chase.addExtension(this._chaseLens);
@@ -248,28 +243,30 @@ export class CameraRig {
       rotationFrequency: [0.6, 0.5, 0.3],
     });
 
-    this.tv = this.klipp.addCamera('tv', { priority: STANDBY_PRIORITY });
+    this.tv = new VirtualCamera('tv', { priority: STANDBY_PRIORITY });
+    this.klipp.add(this.tv);
     this.tv.body = {
       update: (out, dt, justActivated) => {
         for (const shot of this._tvShots) {
-          updateHardLookAt(shot.state, this._car.position);
+          hardLookAt.update(shot.state, this._car.position);
           shot.state.fov = telephotoFov(distanceTo(shot.state, this._car.position));
         }
 
-        copyCameraState(out, this._clearShot.tick(dt));
+        cameraState.copy(out, this._clearShot.tick(dt));
         tvHandheld.update(out, dt, justActivated);
       },
     };
 
     // -- finish: dropped beside the track ahead of the car, telephoto, as it crosses the line.
-    this.finish = this.klipp.addCamera('finish', { priority: FINISH_PRIORITY, active: false });
+    this.finish = new VirtualCamera('finish', { priority: FINISH_PRIORITY, active: false });
+    this.klipp.add(this.finish);
     this.finish.body = new HardLockToTargetBody(this._finishSpot);
     this.finish.aim = {
       update: (out) => {
         const p = out.position;
         const car = this._car.position;
 
-        updateHardLookAt(
+        hardLookAt.update(
           out,
           lookToFrame(_finishLook, p[0], p[1], p[2], car[0], car[1], car[2], FINISH_DOWN, this._finishLens.fov ?? 30),
         );
@@ -307,7 +304,7 @@ export class CameraRig {
 
   /** Name of the virtual camera Klipp is heading to. */
   public get activeCamera(): string | null {
-    return this.klipp.activeCameraId;
+    return this.klipp.activeCameraName;
   }
 
   /** The crane cam the trackside camera has cut to, e.g. `cam-3`. */
@@ -337,7 +334,7 @@ export class CameraRig {
    */
   public addCustomBlends(blends: readonly CustomBlend[]): void {
     this._blends.push(...blends);
-    this.klipp.setCustomBlends(this._blends);
+    this.klipp.customBlends = this._blends;
   }
 
   /** Select the next player shot, and keep it for the next race and the next visit. */

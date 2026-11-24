@@ -1,5 +1,5 @@
-import type { CameraState, KlippOptions } from '@kvvasuu/klipp';
-import { createCameraState, Klipp, updateHardLookAt } from '@kvvasuu/klipp';
+import type { CameraState, KlippOptions } from '@pmndrs/klipp';
+import { cameraState, hardLookAt, Klipp } from '@pmndrs/klipp';
 import type { Camera3D } from '@pixi/3d';
 
 /** How long the lens's own motion carries into a blend, as a decay time in seconds. */
@@ -31,7 +31,7 @@ export class KlippPixi extends Klipp {
   private _frame = 0;
   private _writtenFrame = -1;
   /** The pose written last frame, and how fast it was moving and turning then. */
-  private readonly _last = createCameraState();
+  private readonly _last = cameraState.create();
   private readonly _velocity: [number, number, number] = [0, 0, 0];
   /** Turn per second as an axis scaled by its rate, in world space. */
   private readonly _spin: [number, number, number] = [0, 0, 0];
@@ -45,7 +45,7 @@ export class KlippPixi extends Klipp {
   /** The blend's weight this frame, 0 at its start to 1 at its end. */
   private _weight = 1;
   /** A craned-up lens, re-aimed at what the blend looks at. */
-  private readonly _craned = createCameraState();
+  private readonly _craned = cameraState.create();
 
   constructor(camera: Camera3D, options: Omit<KlippOptions, 'initialCameraState'> = {}) {
     super({ ...options, initialCameraState: readCameraState(camera) });
@@ -80,7 +80,7 @@ export class KlippPixi extends Klipp {
         craned.position[0] = x;
         craned.position[1] = y;
         craned.position[2] = z;
-        updateHardLookAt(craned, shot.lookAtTarget);
+        hardLookAt.update(craned, shot.lookAtTarget);
         q = craned.quaternion;
       }
 
@@ -122,12 +122,12 @@ export class KlippPixi extends Klipp {
       return 0;
     }
 
-    if (transition.toId !== this._carryTo) {
+    if (transition.toName !== this._carryTo) {
       const moving = this._writtenFrame === this._frame - 1;
-      const to = transition.toId === null ? undefined : this.state.cameras.get(transition.toId)?.state.position;
+      const to = transition.toName === null ? undefined : this.state.cameras.get(transition.toName)?.state.position;
       const from = transition.from.position;
 
-      this._carryTo = transition.toId;
+      this._carryTo = transition.toName;
       this._carryTime = 0;
       this._arc = to ? Math.min(MAX_ARC, Math.hypot(to[0] - from[0], to[2] - from[2]) * ARC_PER_METRE) : 0;
       carryInto(this._carryVelocity, this._velocity, moving ? CUT_SPEED : 0);
@@ -197,7 +197,7 @@ function carryInto(out: [number, number, number], from: readonly number[], cut: 
 }
 
 function readCameraState(camera: Camera3D): CameraState {
-  const state = createCameraState();
+  const state = cameraState.create();
   const p = camera.position;
   const q = camera.quaternion;
 

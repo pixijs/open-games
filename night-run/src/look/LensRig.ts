@@ -1,4 +1,4 @@
-import type { CameraState } from '@kvvasuu/klipp';
+import type { CameraState } from '@pmndrs/klipp';
 import { Color } from 'pixi.js';
 
 import { ROAD_Y } from '../race/route';
