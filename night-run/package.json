@@ -1,0 +1,37 @@
+{
+  "name": "night-run",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "description": "Night Run: an online arcade truck race for up to four friends on a rain-soaked night track, built with PixiJS and @pixi/3d.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "check:scripts": "tsc -p tsconfig.scripts.json",
+    "preview": "vite preview",
+    "format": "prettier --write \"{src,scripts}/**/*.{ts,mjs}\" index.html vite.config.ts",
+    "format:check": "prettier --check \"{src,scripts}/**/*.{ts,mjs}\" index.html vite.config.ts"
+  },
+  "dependencies": {
+    "@colyseus/core": "0.18.25",
+    "@colyseus/schema": "5.0.43",
+    "@colyseus/sdk": "0.18.9",
+    "@kvvasuu/klipp": "0.13.0",
+    "@pixi/3d": "0.1.0",
+    "@trystero-p2p/ws-relay": "0.26.0",
+    "buffer": "6.0.3",
+    "crashcat": "0.0.4",
+    "events": "3.3.0",
+    "gsap": "3.15.0",
+    "pixi.js": "8.23.0",
+    "trystero": "0.26.0"
+  },
+  "devDependencies": {
+    "@types/node": "26.5.1",
+    "prettier": "^3.8.1",
+    "tsx": "4.23.15",
+    "typescript": "^5.9.3",
+    "vite": "8.2.1"
+  }
+}

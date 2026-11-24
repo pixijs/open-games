@@ -1,0 +1,17 @@
+{
+  "name": "nightrun-signal",
+  "main": "worker.ts",
+  "compatibility_date": "2026-09-30",
+  "durable_objects": {
+    "bindings": [{ "name": "HUB", "class_name": "SignalHub" }],
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["SignalHub"] }],
+  // Per network (an IPv4 address or an IPv6 /64) and per Cloudflare location: a player calls once to join, and more
+  // only to reconnect.
+  "ratelimits": [{ "name": "CONNECT_LIMIT", "namespace_id": "1002", "simple": { "limit": 20, "period": 60 } }],
+  "vars": {
+    // Your site's origin, such as "https://example.com" (comma-separated for more than one). Left empty, the deployed
+    // Worker answers nobody. `npm run dev` (wrangler dev) swaps in the local servers, in package.json.
+    "ALLOWED_ORIGINS": "",
+  },
+}
