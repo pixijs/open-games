@@ -6,7 +6,7 @@ An online arcade truck race for up to four friends on a rain-soaked night track,
 **[PixiJS](https://pixijs.com) 8 and [`@pixi/3d`](https://github.com/pixijs/3d)**, with
 **[Colyseus](https://colyseus.io) 0.18** running the party in the host's browser. Race three bots, host a party with a
 five-letter code, or draw your own track and share it as a link. Every camera is directed by
-[klipp](https://www.npmjs.com/package/@kvvasuu/klipp), and every piece of the 2D interface is drawn in code as SVG and
+[klipp](https://www.npmjs.com/package/@pmndrs/klipp), and every piece of the 2D interface is drawn in code as SVG and
 rasterised to textures at the screen's pixel ratio, up to 1.5.
 
 **[Play it](https://goodstuff.pixijs.io/night-run/)**

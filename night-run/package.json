@@ -17,7 +17,7 @@
     "@colyseus/core": "0.18.25",
     "@colyseus/schema": "5.0.43",
     "@colyseus/sdk": "0.18.9",
-    "@kvvasuu/klipp": "0.13.0",
+    "@pmndrs/klipp": "0.18.0",
     "@pixi/3d": "0.1.0",
     "@trystero-p2p/ws-relay": "0.26.0",
     "buffer": "6.0.3",

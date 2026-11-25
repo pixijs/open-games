@@ -1,5 +1,5 @@
-import type { CameraState } from '@kvvasuu/klipp';
-import { updateHardLookAt } from '@kvvasuu/klipp';
+import type { CameraState } from '@pmndrs/klipp';
+import { hardLookAt } from '@pmndrs/klipp';
 
 /** Ease a value toward a target with a half-life, frame-rate independent. */
 function damp(value: number, target: number, halfLife: number, dt: number): number {
@@ -88,6 +88,6 @@ export class Dolly {
     out.position[1] = p[1];
     out.position[2] = p[2];
     out.fov = this.fov;
-    updateHardLookAt(out, l);
+    hardLookAt.update(out, l);
   }
 }

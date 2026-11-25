@@ -1,4 +1,4 @@
-import type { CameraPiece, CameraState } from '@kvvasuu/klipp';
+import type { CameraPiece, CameraState } from '@pmndrs/klipp';
 
 import type { TruckPose } from './race/truck';
 

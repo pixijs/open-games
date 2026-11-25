@@ -1,5 +1,5 @@
-import type { CameraState, VirtualCamera } from '@kvvasuu/klipp';
-import { BlendCurves, createCameraState, updateHardLookAt } from '@kvvasuu/klipp';
+import type { CameraState } from '@pmndrs/klipp';
+import { BlendCurves, cameraState, hardLookAt, VirtualCamera } from '@pmndrs/klipp';
 
 import type { CameraRig } from './CameraRig';
 import type { ChaseFraming } from './ChaseBody';
@@ -115,7 +115,7 @@ const GARAGE_CLEARANCE = 0.25;
 const _point = { x: 0, y: 0, z: 0 };
 const _look: [number, number, number] = [0, 0, 0];
 const _spot = { s: 0, lateral: 0, heading: 0 };
-const _chase = createCameraState();
+const _chase = cameraState.create();
 
 /**
  * The attract camera is a chase, the race's own body with a longer lens and lazier springs, on a landscape screen and
@@ -307,9 +307,10 @@ export class StageCameras {
 
     const klipp = rig.klipp;
     const add = (name: string, body: (out: CameraState, dt: number, justActivated: boolean) => void) => {
-      const camera = klipp.addCamera(name, { priority: STAGE_PRIORITY, active: false });
+      const camera = new VirtualCamera(name, { priority: STAGE_PRIORITY, active: false });
 
       camera.body = { update: body };
+      klipp.add(camera);
 
       return camera;
     };
@@ -550,7 +551,7 @@ export class StageCameras {
       lerp(wide.top, tall.top, portrait),
       lerp(wide.bottom, tall.bottom, portrait),
     );
-    updateHardLookAt(out, _look);
+    hardLookAt.update(out, _look);
 
     const leaving = this._leaving;
 
@@ -755,7 +756,7 @@ export class StageCameras {
     p[0] = pose.x + dx * keep;
     p[1] = fy + dy * keep;
     p[2] = pose.z + dz * keep;
-    updateHardLookAt(out, look);
+    hardLookAt.update(out, look);
   }
 
   /** In front of the grid, dollying slowly across it and looking back under the arch at the trucks. */
@@ -885,7 +886,7 @@ export class StageCameras {
     _look[1] = lerp(look[1], target[1], handover);
     _look[2] = lerp(look[2], target[2], handover);
     out.fov = lerp(fov, this._rig.chaseFov, handover);
-    updateHardLookAt(out, _look);
+    hardLookAt.update(out, _look);
   }
 
   /**

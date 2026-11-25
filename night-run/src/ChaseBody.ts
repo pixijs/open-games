@@ -1,5 +1,5 @@
-import type { CameraState } from '@kvvasuu/klipp';
-import { updateHardLookAt } from '@kvvasuu/klipp';
+import type { CameraState } from '@pmndrs/klipp';
+import { hardLookAt } from '@pmndrs/klipp';
 
 import { lookToFrame } from './framing';
 import { clamp, lerp, smoothstep } from './MathUtils';
@@ -334,7 +334,7 @@ export class ChaseBody {
     out.position[0] = lx;
     out.position[1] = ly;
     out.position[2] = lz;
-    updateHardLookAt(out, lookToFrame(_look, lx, ly, lz, fx, fy, fz, this._middle(), this.fov, this._lean.value));
+    hardLookAt.update(out, lookToFrame(_look, lx, ly, lz, fx, fy, fz, this._middle(), this.fov, this._lean.value));
   }
 
   /** Where the truck's middle sits down the screen, 0 top to 1 bottom. */
