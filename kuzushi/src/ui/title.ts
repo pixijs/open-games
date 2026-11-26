@@ -2,6 +2,7 @@ import { gsap } from "gsap"
 import { Container, Graphics, Rectangle, SmoothGraphics } from "pixi.js"
 
 import { PALETTE } from "../art/palette.ts"
+import { play } from "../art/sounds.ts"
 import type { TitleCues } from "../art/title-cues.ts"
 import type { Zone } from "../sim/index.ts"
 import { accentOf } from "./accent.ts"
@@ -138,6 +139,7 @@ export const createTitle = (options: TitleOptions): StageScreen & { readonly rea
 
   const back = () => {
     if (panel === null || leaving) return
+    play("ui-back")
     panel = null
     panelMotion?.kill()
     sheet.hide()

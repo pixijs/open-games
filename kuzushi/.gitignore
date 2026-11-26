@@ -3,3 +3,7 @@ dist
 .DS_Store
 *.log
 shots
+
+# Local only: the audio recipes and the script that renders them into src/audio/
+/audio/
+music.review.json

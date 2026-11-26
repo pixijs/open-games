@@ -20,7 +20,7 @@ The rules run in a deterministic [Ritmo](https://github.com/typeonce-dev/ritmo) 
 | Map | Tab (hold) / M |
 | Pause | Esc / P |
 
-The title's menu: START picks the zone a run starts in: zone 1 for a full run, or a later zone a run has reached on this device for practice (each card shows its place and palette, its enemies, hazard and boss, its best clear time, and on zone 1 the best full run and its rank), CONTROLS, SETTINGS (screen shake, impact flashes for photosensitive players, film grain, an FPS readout, fullscreen; kept in the browser) and EXTRAS. Menus take W/S or the arrows, Enter and Esc, or the mouse.
+The title's menu: START picks the zone a run starts in: zone 1 for a full run, or a later zone a run has reached on this device for practice (each card shows its place and palette, its enemies, hazard and boss, its best clear time, and on zone 1 the best full run and its rank), CONTROLS, SETTINGS (screen shake, impact flashes for photosensitive players, film grain, an FPS readout, fullscreen, the music's and sound effects' volumes; kept in the browser) and EXTRAS. Menus take W/S or the arrows, Enter and Esc, or the mouse.
 
 **[Play it](https://goodstuff.pixijs.io/kuzushi/)**
 
@@ -54,4 +54,4 @@ Run `npm run check` before sending a change. Keep to the folder boundaries in `A
 
 ## Credits and licence
 
-KUZUSHI is released under the [MIT licence](LICENSE). It animates with [GSAP](https://gsap.com), under GreenSock's [standard no-charge licence](https://gsap.com/standard-license), and sets its type in Barlow, Barlow Condensed and Yuji Boku from Google Fonts, under the SIL Open Font License.
+KUZUSHI is released under the [MIT licence](LICENSE). Its music and sound effects are original, generated in code with Ritmo's [ritmo-tools](https://github.com/typeonce-dev/ritmo), and it plays them with [@pixi/sound](https://github.com/pixijs/sound). It animates with [GSAP](https://gsap.com), under GreenSock's [standard no-charge licence](https://gsap.com/standard-license), and sets its type in Barlow, Barlow Condensed and Yuji Boku from Google Fonts, under the SIL Open Font License.

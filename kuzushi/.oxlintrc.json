@@ -39,7 +39,7 @@
       "files": ["src/look/**"],
       "rules": {
         "no-restricted-imports": ["error", {
-          "patterns": [{ "group": ["../vfx/*", "../ui/**", "../sim/*", "!../sim/index.ts"], "message": "look builds the world and actors: read the simulation through ../sim/index.ts, share art through ../art, and leave effects to vfx and screens to ui." }, { "group": ["**/gpu/*"], "message": "src/gpu is the host's compile watch and warm-up: installs take its types from host/types.ts." }]
+          "patterns": [{ "group": ["../vfx/*", "../ui/**", "**/audio/**", "../sim/*", "!../sim/index.ts"], "message": "look builds the world and actors: read the simulation through ../sim/index.ts, share art through ../art, and leave effects to vfx and screens to ui." }, { "group": ["**/gpu/*"], "message": "src/gpu is the host's compile watch and warm-up: installs take its types from host/types.ts." }]
         }]
       }
     },
@@ -47,7 +47,15 @@
       "files": ["src/vfx/**"],
       "rules": {
         "no-restricted-imports": ["error", {
-          "patterns": [{ "group": ["../look/*", "../ui/**", "../sim/*", "!../sim/index.ts"], "message": "vfx draws transient effects from moments and view data: read the simulation through ../sim/index.ts, share art through ../art, and leave the world to look and screens to ui." }, { "group": ["**/gpu/*"], "message": "src/gpu is the host's compile watch and warm-up: installs take its types from host/types.ts." }]
+          "patterns": [{ "group": ["../look/*", "../ui/**", "**/audio/**", "../sim/*", "!../sim/index.ts"], "message": "vfx draws transient effects from moments and view data: read the simulation through ../sim/index.ts, share art through ../art, and leave the world to look and screens to ui." }, { "group": ["**/gpu/*"], "message": "src/gpu is the host's compile watch and warm-up: installs take its types from host/types.ts." }]
+        }]
+      }
+    },
+    {
+      "files": ["src/audio/**"],
+      "rules": {
+        "no-restricted-imports": ["error", {
+          "patterns": [{ "group": ["**/look/**", "**/vfx/**", "**/ui/**", "**/camera/**", "**/title/**", "**/render/**", "**/lab/**", "**/main.ts", "**/host/*", "!**/host/types.ts", "**/sim/*", "!**/sim/index.ts"], "message": "audio plays sounds and music from moments and the view: read the simulation through ../sim/index.ts, play through ../art/sounds.ts, and take only types from ../host/types.ts." }, { "group": ["**/gpu/*"], "message": "src/gpu is the host's compile watch and warm-up: installs take its types from host/types.ts." }]
         }]
       }
     },
@@ -55,7 +63,7 @@
       "files": ["src/title/**"],
       "rules": {
         "no-restricted-imports": ["error", {
-          "patterns": [{ "group": ["../ui/**", "../render/*", "../host/*", "!../host/types.ts", "../sim/*", "!../sim/index.ts"], "message": "title stages the title's 3D scene: build it from look's actors, vfx's drawing helpers, art and the camera, read the simulation through ../sim/index.ts, take only types from ../host/types.ts, and hear the menu through art/title-cues.ts." }, { "group": ["**/gpu/*"], "message": "src/gpu is the host's compile watch and warm-up: installs take its types from host/types.ts." }]
+          "patterns": [{ "group": ["../ui/**", "**/audio/**", "../render/*", "../host/*", "!../host/types.ts", "../sim/*", "!../sim/index.ts"], "message": "title stages the title's 3D scene: build it from look's actors, vfx's drawing helpers, art and the camera, read the simulation through ../sim/index.ts, take only types from ../host/types.ts, and hear the menu through art/title-cues.ts." }, { "group": ["**/gpu/*"], "message": "src/gpu is the host's compile watch and warm-up: installs take its types from host/types.ts." }]
         }]
       }
     },
@@ -64,7 +72,7 @@
       "rules": {
         "no-restricted-imports": ["error", {
           "patterns": [{
-            "group": ["**/sim/*", "!**/sim/index.ts", "**/host/*", "!**/host/types.ts", "!**/host/debug.ts", "**/look/**", "!**/look/shaders/ink.ts", "**/ui/*", "**/ui/*/**", "!**/ui/dom.ts", "!**/ui/extras.ts", "!**/ui/menu.ts", "!**/ui/panel.ts", "!**/ui/screen.ts", "**/camera/*", "!**/camera/index.ts", "**/render/*", "**/vfx/*", "**/title/*"],
+            "group": ["**/sim/*", "!**/sim/index.ts", "**/host/*", "!**/host/types.ts", "!**/host/debug.ts", "**/look/**", "!**/look/shaders/ink.ts", "**/ui/*", "**/ui/*/**", "!**/ui/dom.ts", "!**/ui/extras.ts", "!**/ui/menu.ts", "!**/ui/panel.ts", "!**/ui/screen.ts", "**/camera/*", "!**/camera/index.ts", "**/render/*", "**/vfx/*", "**/title/*", "**/audio/**"],
             "message": "The lab drives the game through the debug API (host/debug.ts) and reads it through sim/index.ts; it borrows the UI's menu, panel and DOM helpers and look's ink material, and leaves drawing the game to look, vfx and render."
           }, {
             "group": ["**/gpu/*"],
@@ -77,7 +85,7 @@
       "files": ["src/ui/**"],
       "rules": {
         "no-restricted-imports": ["error", {
-          "patterns": [{ "group": ["**/look/**", "**/vfx/**", "**/render/**", "**/sim/*", "!**/sim/index.ts"], "message": "ui draws screens and the HUD from view data and sends intents: read the simulation through ../sim/index.ts and leave 3D to look, render and vfx." }, { "group": ["**/gpu/*"], "message": "src/gpu is the host's compile watch and warm-up: installs take its types from host/types.ts." }]
+          "patterns": [{ "group": ["**/look/**", "**/vfx/**", "**/render/**", "**/audio/**", "**/sim/*", "!**/sim/index.ts"], "message": "ui draws screens and the HUD from view data and sends intents: read the simulation through ../sim/index.ts, leave 3D to look, render and vfx, and play the menus' sounds through art/sounds.ts." }, { "group": ["**/gpu/*"], "message": "src/gpu is the host's compile watch and warm-up: installs take its types from host/types.ts." }]
         }]
       }
     }

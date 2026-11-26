@@ -3,6 +3,7 @@ import { Application, Container } from "pixi.js"
 
 import { PALETTE } from "./art/palette.ts"
 import { makeTitleCues } from "./art/title-cues.ts"
+import { installAudio } from "./audio/index.ts"
 import { CameraRig, installCamera } from "./camera/index.ts"
 import { watchCompiles } from "./gpu/compiles.ts"
 import { installDebugApi } from "./host/debug.ts"
@@ -64,7 +65,8 @@ try {
   const titleCues = makeTitleCues()
   const host = makeHost({ app, view, layers, overlay, rig })
 
-  const installs = [installLook, installVfx, installCamera, installUi(titleCues), installTitle(titleCues), installLab(installDebugApi(host))]
+  // Audio decodes its files while the installs before it warm up on the GPU, so its own warm step rarely waits.
+  const installs = [installLook, installVfx, installCamera, installUi(titleCues), installTitle(titleCues), installAudio, installLab(installDebugApi(host))]
   const bootSteps = installs.length + 1
   loader.progress(BOOT_SHARE / bootSteps)
   for (const [index, install] of installs.entries()) {

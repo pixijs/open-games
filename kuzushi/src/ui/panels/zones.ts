@@ -4,6 +4,7 @@ import { Color, Container, DashLineShader, FillGradient, Graphics, Rectangle, Sm
 import type { FederatedPointerEvent } from "pixi.js"
 
 import { hex, PALETTE, paletteOf } from "../../art/palette.ts"
+import { play } from "../../art/sounds.ts"
 import { svgTexture } from "../../art/svg.ts"
 import { bossOf, stageOf, ZONE_LIST } from "../../sim/index.ts"
 import type { Zone, ZoneHazard, ZoneId } from "../../sim/index.ts"
@@ -267,6 +268,7 @@ export const createZones = (options: { readonly launch: (zone: Zone) => void; re
     if (instant || from === cursor.active) return
     brackets.snap(14, 10, 0.18, 0.015)
     gsap.fromTo(chosen.body, { y: 4 }, { y: 0, duration: 0.26, ease: drawn(0.26, "back.out(3)", ON_ONES) })
+    play("ui-move")
     options.onMove?.(ZONE_LIST.indexOf(chosen.zone))
   }
 
@@ -283,6 +285,7 @@ export const createZones = (options: { readonly launch: (zone: Zone) => void; re
     } })
       .add(rattle(card.body, 6, 0.24))
       .add(brackets.kick(8, 8), 0)
+    play("ui-select")
     options.launch(card.zone)
   }
 

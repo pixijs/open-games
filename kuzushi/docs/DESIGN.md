@@ -39,7 +39,7 @@ Loading ──▶ Title ──start (a zone)──▶ Playing ──pause──�
                                          └──last diamond lost───▶ GameOver ──retry──▶ Playing / ──title──▶ Title
 ```
 
-The title is a menu: **START** opens the run panel, **CONTROLS**, **SETTINGS** (screen shake 0 to 100%, impact flashes full, reduced or off, film grain, an FPS readout, fullscreen; kept in localStorage; what shake and flashes do: Look, Impact frames) and **EXTRAS** (entries added with `registerExtra`: the debug scenes). The run panel holds one card per zone with its number, name and kanji, a strip of its palette, its four enemy icons, its hazard, its boss's name and kanji, and its best clear time on this device; zone 1's card also shows the best full run's time and rank. Zone 1 is always open. Zones 2 and 3 open once a run has reached them on this device; a locked card shows LOCKED and the zone's number only. Choosing a card plays the hero's dash at the lens, the panel slides out of its way at once, an ink cover closes, and the run starts 0.42 s later under it (Title scene). The title menu holds the keyboard, so only the run panel starts a run from the title.
+The title is a menu: **START** opens the run panel, **CONTROLS**, **SETTINGS** (screen shake 0 to 100%, impact flashes full, reduced or off, film grain, an FPS readout, fullscreen, music and sound effects 0 to 100%; kept in localStorage; what shake and flashes do: Look, Impact frames; the volumes: Audio) and **EXTRAS** (entries added with `registerExtra`: the debug scenes). The run panel holds one card per zone with its number, name and kanji, a strip of its palette, its four enemy icons, its hazard, its boss's name and kanji, and its best clear time on this device; zone 1's card also shows the best full run's time and rank. Zone 1 is always open. Zones 2 and 3 open once a run has reached them on this device; a locked card shows LOCKED and the zone's number only. Choosing a card plays the hero's dash at the lens, the panel slides out of its way at once, an ink cover closes, and the run starts 0.42 s later under it (Title scene). The title menu holds the keyboard, so only the run panel starts a run from the title.
 
 Pause offers Resume, Restart, Map, Controls, Settings and Quit to title; Map opens the full map in a panel. The results card (RunClear or GameOver) offers Retry and Title; what it shows is The run's Results, laid out as in Look (UI, Results).
 
@@ -622,6 +622,36 @@ Klipp virtual cameras (`src/camera/rig.ts`):
 Blends: title → play a cut (under the run's ink cover), into pause 1.1 s, into special a cut, out of special 0.55 s, boss → play 0.6 s, transitions a cut under cover.
 
 `installCamera` (`src/camera/index.ts`) picks the shot from the screen, sets the room's bounds, feeds the follow target and the lead, and frames the special against the current room's props and walls (in the Void, which has none, the lens may hang over the dark). vfx drives the rest through the rig: `shake`, `punch` (narrows the play lens, then springs back), `specialStrike(x, z, reach)` (the wide cut on the first beat), `dutch(degrees)`, and `hold`/`release` for choreography. `setSpecial(x, z, azimuth, side)` takes the ground direction the camera stands in from the player (simulation radians), not the player's facing, and the side of the frame the player takes.
+
+## Audio
+
+Music and sound effects play through @pixi/sound from the files in `src/audio/sfx/` and `src/audio/music/`. Loading loads every file (its warm step, `audio`), and nothing plays while it runs. Audio starts on the first click, tap or key. It pauses while the window is out of focus.
+
+SETTINGS' **Music** (default 80%) and **Sound effects** (default 100%) step in tenths, each heard as its square: 80% is about -4 dB, 50% -12 dB.
+
+| Sound | Plays on |
+|---|---|
+| ui-move | the highlight moving in a menu, a settings row or the zone cards; a setting's value changing |
+| ui-select | a menu choice; a zone chosen |
+| ui-back | Esc or BACK closing a panel on the title or in pause; Esc or P leaving pause |
+| attack | every weapon's attack (`attack`) |
+| hit | a blow that doesn't kill (`hit`) |
+| kill | an enemy's death, off an edge too (`enemyKilled`) |
+| hurt | the hero hit (`playerHurt`) |
+| dash | a dash (`dashStarted`) |
+| parry | a parry (`parry`) |
+| special | KUZUSHI drawn (`specialStarted`) |
+| door | a room's doors locking and opening (`doorsLocked`, `doorsOpened`) |
+| clear | a room cleared, a boss's room too (`roomCleared`) |
+| boss | a boss's name card and its killing blow (`bossIntro`, `bossFelled`) |
+
+Five loops, one at a time; a new one starts as the last stops. Each file holds its loop and then the loop's first second again, and plays looping from 0.5 s to its end less 0.5 s, so the MP3 encoder's delay never lands on the seam.
+
+| On screen | Music |
+|---|---|
+| The title | title |
+| A boss in the room, from its name card until its killing blow | boss |
+| Anything else: a run's rooms, pause, the results, the sandbox, the lab | the zone's loop (`courtyard`, `spiral`, `void`) |
 
 ## Debug hooks
 

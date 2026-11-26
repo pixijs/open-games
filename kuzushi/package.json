@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@pixi/3d": "^0.1.0",
+    "@pixi/sound": "^6.0.3",
     "@pmndrs/klipp": "^0.18.0",
     "@typeonce/ritmo": "^0.24.0",
     "@typeonce/ritmo-browser": "^0.24.0",

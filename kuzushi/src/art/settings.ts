@@ -2,8 +2,8 @@ import { clamp } from "math"
 
 /**
  * The player's settings, kept in localStorage so they survive a reload. One store for the page: the UI edits it,
- * and look (film grain), vfx (impact flashes) and the camera (shake) read it. Every storage read and write is
- * guarded: a private window or blocked storage just keeps the defaults for the session.
+ * and look (film grain), vfx (impact flashes), the camera (shake) and audio (the volumes) read it. Every storage read
+ * and write is guarded: a private window or blocked storage just keeps the defaults for the session.
  *
  * @example
  * ```ts
@@ -26,6 +26,10 @@ export interface Settings {
   readonly grain: boolean
   /** A frames-per-second readout in the corner. */
   readonly fps: boolean
+  /** The music's volume, 0 (silent) to 1 (full). */
+  readonly music: number
+  /** The sound effects' volume (play's and the menus'), 0 (silent) to 1 (full). */
+  readonly sfx: number
 }
 
 export interface SettingsStore {
@@ -45,7 +49,10 @@ const prefersCalm = (): boolean => {
   }
 }
 
-const defaults = (): Settings => ({ shake: 1, flashes: prefersCalm() ? "reduced" : "full", grain: true, fps: false })
+const defaults = (): Settings => ({ shake: 1, flashes: prefersCalm() ? "reduced" : "full", grain: true, fps: false, music: 0.8, sfx: 1 })
+
+/** A stored 0 to 1 value, or `fallback` when it isn't a finite number. */
+const unit = (value: unknown, fallback: number): number => (typeof value === "number" && Number.isFinite(value) ? clamp(value, 0, 1) : fallback)
 
 /** Keeps only fields of the right type and range from whatever was stored. */
 const parse = (raw: string | null, base: Settings): Settings => {
@@ -59,10 +66,12 @@ const parse = (raw: string | null, base: Settings): Settings => {
     const grain = read("grain")
     const fps = read("fps")
     return {
-      shake: typeof shake === "number" && Number.isFinite(shake) ? clamp(shake, 0, 1) : base.shake,
+      shake: unit(shake, base.shake),
       flashes: flashLevels.find((level) => level === flashes) ?? base.flashes,
       grain: typeof grain === "boolean" ? grain : base.grain,
-      fps: typeof fps === "boolean" ? fps : base.fps
+      fps: typeof fps === "boolean" ? fps : base.fps,
+      music: unit(read("music"), base.music),
+      sfx: unit(read("sfx"), base.sfx)
     }
   } catch {
     return base
@@ -94,7 +103,7 @@ const makeSettings = (): SettingsStore => {
   return {
     get: () => values,
     set: (patch) => {
-      values = { ...values, ...patch, shake: clamp(patch.shake ?? values.shake, 0, 1) }
+      values = { ...values, ...patch, shake: unit(patch.shake, values.shake), music: unit(patch.music, values.music), sfx: unit(patch.sfx, values.sfx) }
       save(values)
       publish()
     },

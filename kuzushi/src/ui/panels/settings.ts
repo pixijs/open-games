@@ -4,6 +4,7 @@ import { Color, Container, FillGradient, Graphics, Rectangle, Text } from "pixi.
 import type { FederatedPointerEvent } from "pixi.js"
 
 import { PALETTE } from "../../art/palette.ts"
+import { play } from "../../art/sounds.ts"
 import { accentOf } from "../accent.ts"
 import type { Accent } from "../accent.ts"
 import { keyAction, opened, pointed, stepped } from "../cursor.ts"
@@ -69,11 +70,11 @@ export interface SettingsPanel extends PanelBody, Tinted {
 }
 
 /**
- * The SETTINGS panel, saved as they change: screen shake, impact flashes, film grain, the FPS readout and
- * fullscreen. Up and down pick a row, left and right change it, Enter steps a choice on; the pointer clicks a value
- * or the shake track. The line under the rows says what the picked one does. The title's sheet sets it in the type
- * scale's roles; `compact` is pause's side panel at fixed sizes, in the zone's accent (`tint`), its height reported
- * through the node's `boundsArea`.
+ * The SETTINGS panel, saved as they change: screen shake, impact flashes, film grain, the FPS readout, fullscreen
+ * and the two volumes. Up and down pick a row, left and right change it, Enter steps a choice on; the pointer clicks a
+ * value or a range's track. The line under the rows says what the picked one does. The title's sheet sets it in the
+ * type scale's roles; `compact` is pause's side panel at fixed sizes, in the zone's accent (`tint`), its height
+ * reported through the node's `boundsArea`.
  */
 export const createSettings = (options: SettingsOptions = {}): SettingsPanel => {
   const compact = options.compact === true
@@ -114,6 +115,7 @@ export const createSettings = (options: SettingsOptions = {}): SettingsPanel => 
   /** The pointer or a key moved the highlight; the detail may have taken another line, and the panel lays out again. */
   const moved = (next: Cursor) => {
     const before = detail.height
+    if (next.active !== cursor.active) play("ui-move")
     select(next, false)
     if (!compact || detail.height === before) return
     fitBounds()
@@ -123,6 +125,7 @@ export const createSettings = (options: SettingsOptions = {}): SettingsPanel => 
   /** A row's control was used by the pointer: it takes the highlight and shows its new value. */
   const used = (index: number) => {
     moved({ active: index, armed: true })
+    play("ui-move")
     paint(true)
   }
 
@@ -252,6 +255,7 @@ export const createSettings = (options: SettingsOptions = {}): SettingsPanel => 
 
   const step = (index: number, by: -1 | 1) => {
     change(index, by)
+    play("ui-move")
     paint(true)
   }
 

@@ -4,6 +4,7 @@ import { AlphaFilter, Color, Container, FillGradient, Graphics, GraphicsPath, Re
 import type { FederatedPointerEvent, Text, TextStyle } from "pixi.js"
 
 import { PALETTE } from "../../art/palette.ts"
+import { play } from "../../art/sounds.ts"
 import { accentOf } from "../accent.ts"
 import type { Accent } from "../accent.ts"
 import { svgPaths } from "../brush.ts"
@@ -290,6 +291,7 @@ export const createMenu = (items: ReadonlyArray<MenuItem>, options: MenuOptions 
     const a = barRect(from)
     const b = barRect(next.active)
     const toward = across ? Math.sign(b.x - a.x) : Math.sign(b.y - a.y)
+    play("ui-move")
     moving?.kill()
     moving = gsap.timeline()
       .add(() => {
@@ -342,6 +344,7 @@ export const createMenu = (items: ReadonlyArray<MenuItem>, options: MenuOptions 
       .to(slash, { x: rect.x + rect.width * 0.12, duration: 0.26, ease: drawn(0.26, "power2.in") }, 0.18)
       .to(slashFade, { alpha: 0, duration: 0.26, ease: drawn(0.26, "power2.in") }, 0.18)
       .add(shown(slash, false))
+    play("ui-select")
     items[index]?.action()
   }
 

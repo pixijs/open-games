@@ -29,7 +29,7 @@ const fullscreen = {
   }
 }
 
-/** The settings, saved as they change: screen shake, impact flashes, film grain, the FPS readout and fullscreen. */
+/** The settings, saved as they change: screen shake, impact flashes, film grain, the FPS readout, fullscreen and the two volumes. */
 export const ROWS: ReadonlyArray<Row> = [
   { kind: "range", label: "Screen shake", detail: "How hard hits, slams and the special kick the camera.", read: () => settings.get().shake, write: (value) => settings.set({ shake: value }) },
   {
@@ -42,7 +42,9 @@ export const ROWS: ReadonlyArray<Row> = [
   },
   { kind: "choice", label: "Film grain", detail: "Moving grain over the picture.", choices: ON_OFF, ...toggle("grain") },
   { kind: "choice", label: "Show FPS", detail: "Frames per second in the bottom-right corner.", choices: ON_OFF, ...toggle("fps") },
-  { kind: "choice", label: "Fullscreen", detail: "Fill the screen with the game; Esc leaves fullscreen.", choices: ON_OFF, ...fullscreen }
+  { kind: "choice", label: "Fullscreen", detail: "Fill the screen with the game; Esc leaves fullscreen.", choices: ON_OFF, ...fullscreen },
+  { kind: "range", label: "Music", detail: "How loud the music plays.", read: () => settings.get().music, write: (value) => settings.set({ music: value }) },
+  { kind: "range", label: "Sound effects", detail: "How loud the fight and the menus sound.", read: () => settings.get().sfx, write: (value) => settings.set({ sfx: value }) }
 ]
 
 export const percent = (value: number) => `${Math.round(value * 100)}%`

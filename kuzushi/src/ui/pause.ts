@@ -3,6 +3,7 @@ import { clamp } from "math"
 import { Container, Graphics, Rectangle } from "pixi.js"
 
 import { PALETTE } from "../art/palette.ts"
+import { play } from "../art/sounds.ts"
 import type { IntentApi } from "../host/types.ts"
 import { ROOM_KINDS, zoneOf } from "../sim/index.ts"
 import type { GameView } from "../sim/index.ts"
@@ -125,6 +126,11 @@ export const createPause = (options: PauseOptions): StageScreen & Tinted => {
     place()
     centre()
   }
+  /** Esc or a side panel's BACK. */
+  const back = () => {
+    play("ui-back")
+    close()
+  }
   const show = (side: Side) => {
     if (shown === side) {
       close()
@@ -139,7 +145,7 @@ export const createPause = (options: PauseOptions): StageScreen & Tinted => {
   }
 
   const sideOf = (title: string, body: PanelBody, width: Side["width"]): Side => {
-    const sidePanel = createPanel({ title, back: close })
+    const sidePanel = createPanel({ title, back })
     sidePanel.setBody(body)
     sides.addChild(sidePanel.node)
     return { panel: sidePanel, body, width }
@@ -166,11 +172,12 @@ export const createPause = (options: PauseOptions): StageScreen & Tinted => {
 
   const sink = createSink(overlay, "Paused", (event) => {
     if (event.code === "KeyP" || (event.code === "Escape" && shown === null)) {
+      play("ui-back")
       intents.resume()
       return true
     }
     if (event.code === "Escape") {
-      close()
+      back()
       return true
     }
     return shown === null ? menu.key(event) : shown.body.key(event)
