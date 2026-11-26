@@ -1,0 +1,611 @@
+[
+ {
+  "eval": "new Promise((resolve) => { const t = setInterval(() => { if (window.__game) { clearInterval(t); resolve(true) } }, 10) })"
+ },
+ {
+  "evalFile": "scripts/dungeon.js"
+ },
+ {
+  "eval": "window.__game.startZone('courtyard', null, { seed: 7 }); true"
+ },
+ {
+  "wait": 2600
+ },
+ {
+  "eval": "window.__dungeon.walk()"
+ },
+ {
+  "eval": "window.__game.freeze(true); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 250
+ },
+ {
+  "shot": "shots/zones/door-courtyard/t00.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-courtyard/t01.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-courtyard/t02.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-courtyard/t03.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-courtyard/t04.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-courtyard/t05.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-courtyard/t06.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-courtyard/t07.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-courtyard/t08.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-courtyard/t09.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-courtyard/t10.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-courtyard/t11.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-courtyard/t12.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-courtyard/t13.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-courtyard/t14.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-courtyard/t15.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-courtyard/t16.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-courtyard/t17.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-courtyard/t18.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-courtyard/t19.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "eval": "window.__game.freeze(false); true"
+ },
+ {
+  "wait": 1200
+ },
+ {
+  "eval": "window.__game.startZone('spiral', null, { seed: 7 }); true"
+ },
+ {
+  "wait": 2600
+ },
+ {
+  "eval": "window.__dungeon.walk()"
+ },
+ {
+  "eval": "window.__game.freeze(true); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 250
+ },
+ {
+  "shot": "shots/zones/door-spiral/t00.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-spiral/t01.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-spiral/t02.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-spiral/t03.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-spiral/t04.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-spiral/t05.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-spiral/t06.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-spiral/t07.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-spiral/t08.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-spiral/t09.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-spiral/t10.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-spiral/t11.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-spiral/t12.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-spiral/t13.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-spiral/t14.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-spiral/t15.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-spiral/t16.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-spiral/t17.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-spiral/t18.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-spiral/t19.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "eval": "window.__game.freeze(false); true"
+ },
+ {
+  "wait": 1200
+ },
+ {
+  "eval": "window.__game.startZone('void', null, { seed: 7 }); true"
+ },
+ {
+  "wait": 2600
+ },
+ {
+  "eval": "window.__dungeon.walk()"
+ },
+ {
+  "eval": "window.__game.freeze(true); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 250
+ },
+ {
+  "shot": "shots/zones/door-void/t00.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-void/t01.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-void/t02.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-void/t03.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-void/t04.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-void/t05.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-void/t06.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-void/t07.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-void/t08.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-void/t09.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-void/t10.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-void/t11.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-void/t12.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-void/t13.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-void/t14.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-void/t15.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-void/t16.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-void/t17.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-void/t18.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "shot": "shots/zones/door-void/t19.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 230
+ },
+ {
+  "eval": "window.__game.freeze(false); true"
+ },
+ {
+  "wait": 1200
+ }
+]

@@ -1,0 +1,533 @@
+[
+{
+"eval": "new Promise((r) => { const p = () => window.__game?.ready ? r(true) : requestAnimationFrame(p); p() })"
+},
+{
+"eval": "window.__game.startStage('courtyard', 0, 7)"
+},
+{
+"wait": 1500
+},
+{
+"eval": "window.__game.invulnerable(true); window.__game.teleport(0, 4, -Math.PI/2)"
+},
+{
+"eval": "window.__game.spawn('gatekeeper')"
+},
+{
+"wait": 250
+},
+{
+"shot": "shots/bestiary/gatekeeper-intro-a.jpg"
+},
+{
+"wait": 900
+},
+{
+"shot": "shots/bestiary/gatekeeper-intro-b.jpg"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.state === 'fighting')(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.pattern === null)(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "const v = window.__game.view(); const b = v.enemies.find((e) => e.id === v.boss?.id); if (b) window.__game.teleport(b.x * 0.5, Math.min(b.z + 5.5, 8), -Math.PI / 2); window.__game.bossPattern('slam')"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.pattern === 'slam')(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "window.__game.freeze(true)"
+},
+{
+"eval": "window.__game.step(20)"
+},
+{
+"wait": 340
+},
+{
+"shot": "shots/bestiary/gatekeeper-slam-020.jpg"
+},
+{
+"eval": "window.__game.step(30)"
+},
+{
+"wait": 480
+},
+{
+"shot": "shots/bestiary/gatekeeper-slam-050.jpg"
+},
+{
+"eval": "window.__game.step(11)"
+},
+{
+"wait": 214
+},
+{
+"shot": "shots/bestiary/gatekeeper-slam-061.jpg"
+},
+{
+"eval": "window.__game.step(5)"
+},
+{
+"wait": 130
+},
+{
+"shot": "shots/bestiary/gatekeeper-slam-066.jpg"
+},
+{
+"eval": "window.__game.step(8)"
+},
+{
+"wait": 172
+},
+{
+"shot": "shots/bestiary/gatekeeper-slam-074.jpg"
+},
+{
+"eval": "window.__game.step(16)"
+},
+{
+"wait": 284
+},
+{
+"shot": "shots/bestiary/gatekeeper-slam-090.jpg"
+},
+{
+"eval": "window.__game.freeze(false)"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.pattern === null)(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "const v = window.__game.view(); const b = v.enemies.find((e) => e.id === v.boss?.id); if (b) window.__game.teleport(b.x * 0.5, Math.min(b.z + 5.5, 8), -Math.PI / 2); window.__game.bossPattern('charge')"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.pattern === 'charge')(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "window.__game.freeze(true)"
+},
+{
+"eval": "window.__game.step(24)"
+},
+{
+"wait": 396
+},
+{
+"shot": "shots/bestiary/gatekeeper-charge-024.jpg"
+},
+{
+"eval": "window.__game.step(22)"
+},
+{
+"wait": 368
+},
+{
+"shot": "shots/bestiary/gatekeeper-charge-046.jpg"
+},
+{
+"eval": "window.__game.step(6)"
+},
+{
+"wait": 144
+},
+{
+"shot": "shots/bestiary/gatekeeper-charge-052.jpg"
+},
+{
+"eval": "window.__game.step(8)"
+},
+{
+"wait": 172
+},
+{
+"shot": "shots/bestiary/gatekeeper-charge-060.jpg"
+},
+{
+"eval": "window.__game.step(10)"
+},
+{
+"wait": 200
+},
+{
+"shot": "shots/bestiary/gatekeeper-charge-070.jpg"
+},
+{
+"eval": "window.__game.step(20)"
+},
+{
+"wait": 340
+},
+{
+"shot": "shots/bestiary/gatekeeper-charge-090.jpg"
+},
+{
+"eval": "window.__game.freeze(false)"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.pattern === null)(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "const v = window.__game.view(); const b = v.enemies.find((e) => e.id === v.boss?.id); if (b) window.__game.teleport(b.x * 0.5, Math.min(b.z + 5.5, 8), -Math.PI / 2); window.__game.bossPattern('fan')"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.pattern === 'fan')(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "window.__game.freeze(true)"
+},
+{
+"eval": "window.__game.step(20)"
+},
+{
+"wait": 340
+},
+{
+"shot": "shots/bestiary/gatekeeper-fan-020.jpg"
+},
+{
+"eval": "window.__game.step(20)"
+},
+{
+"wait": 340
+},
+{
+"shot": "shots/bestiary/gatekeeper-fan-040.jpg"
+},
+{
+"eval": "window.__game.step(6)"
+},
+{
+"wait": 144
+},
+{
+"shot": "shots/bestiary/gatekeeper-fan-046.jpg"
+},
+{
+"eval": "window.__game.step(16)"
+},
+{
+"wait": 284
+},
+{
+"shot": "shots/bestiary/gatekeeper-fan-062.jpg"
+},
+{
+"eval": "window.__game.step(16)"
+},
+{
+"wait": 284
+},
+{
+"shot": "shots/bestiary/gatekeeper-fan-078.jpg"
+},
+{
+"eval": "window.__game.step(22)"
+},
+{
+"wait": 368
+},
+{
+"shot": "shots/bestiary/gatekeeper-fan-100.jpg"
+},
+{
+"eval": "window.__game.freeze(false)"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.pattern === null)(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "const v = window.__game.view(); const b = v.enemies.find((e) => e.id === v.boss?.id); if (b) window.__game.teleport(b.x * 0.5, Math.min(b.z + 5.5, 8), -Math.PI / 2); window.__game.bossPhase(2)"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.state === 'shifting')(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "window.__game.freeze(true)"
+},
+{
+"eval": "window.__game.step(2)"
+},
+{
+"wait": 88
+},
+{
+"shot": "shots/bestiary/gatekeeper-shift2-002.jpg"
+},
+{
+"eval": "window.__game.step(6)"
+},
+{
+"wait": 144
+},
+{
+"shot": "shots/bestiary/gatekeeper-shift2-008.jpg"
+},
+{
+"eval": "window.__game.step(8)"
+},
+{
+"wait": 172
+},
+{
+"shot": "shots/bestiary/gatekeeper-shift2-016.jpg"
+},
+{
+"eval": "window.__game.step(14)"
+},
+{
+"wait": 256
+},
+{
+"shot": "shots/bestiary/gatekeeper-shift2-030.jpg"
+},
+{
+"eval": "window.__game.step(30)"
+},
+{
+"wait": 480
+},
+{
+"shot": "shots/bestiary/gatekeeper-shift2-060.jpg"
+},
+{
+"eval": "window.__game.step(30)"
+},
+{
+"wait": 480
+},
+{
+"shot": "shots/bestiary/gatekeeper-shift2-090.jpg"
+},
+{
+"eval": "window.__game.freeze(false)"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.state === 'fighting')(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.pattern === null)(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "const v = window.__game.view(); const b = v.enemies.find((e) => e.id === v.boss?.id); if (b) window.__game.teleport(b.x * 0.5, Math.min(b.z + 5.5, 8), -Math.PI / 2); window.__game.bossPattern('blink')"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.pattern === 'blink')(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "window.__game.freeze(true)"
+},
+{
+"eval": "window.__game.step(6)"
+},
+{
+"wait": 144
+},
+{
+"shot": "shots/bestiary/gatekeeper-blink-006.jpg"
+},
+{
+"eval": "window.__game.step(12)"
+},
+{
+"wait": 228
+},
+{
+"shot": "shots/bestiary/gatekeeper-blink-018.jpg"
+},
+{
+"eval": "window.__game.step(12)"
+},
+{
+"wait": 228
+},
+{
+"shot": "shots/bestiary/gatekeeper-blink-030.jpg"
+},
+{
+"eval": "window.__game.step(14)"
+},
+{
+"wait": 256
+},
+{
+"shot": "shots/bestiary/gatekeeper-blink-044.jpg"
+},
+{
+"eval": "window.__game.step(8)"
+},
+{
+"wait": 172
+},
+{
+"shot": "shots/bestiary/gatekeeper-blink-052.jpg"
+},
+{
+"eval": "window.__game.step(10)"
+},
+{
+"wait": 200
+},
+{
+"shot": "shots/bestiary/gatekeeper-blink-062.jpg"
+},
+{
+"eval": "window.__game.freeze(false)"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.pattern === null)(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "const v = window.__game.view(); const b = v.enemies.find((e) => e.id === v.boss?.id); if (b) window.__game.teleport(b.x * 0.5, Math.min(b.z + 5.5, 8), -Math.PI / 2); window.__game.breakBoss()"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.state === 'broken')(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "window.__game.freeze(true)"
+},
+{
+"eval": "window.__game.step(2)"
+},
+{
+"wait": 88
+},
+{
+"shot": "shots/bestiary/gatekeeper-broken-002.jpg"
+},
+{
+"eval": "window.__game.step(8)"
+},
+{
+"wait": 172
+},
+{
+"shot": "shots/bestiary/gatekeeper-broken-010.jpg"
+},
+{
+"eval": "window.__game.step(30)"
+},
+{
+"wait": 480
+},
+{
+"shot": "shots/bestiary/gatekeeper-broken-040.jpg"
+},
+{
+"eval": "window.__game.step(80)"
+},
+{
+"wait": 1180
+},
+{
+"shot": "shots/bestiary/gatekeeper-broken-120.jpg"
+},
+{
+"eval": "window.__game.freeze(false)"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.state === 'fighting')(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "const v = window.__game.view(); const b = v.enemies.find((e) => e.id === v.boss?.id); if (b) window.__game.teleport(b.x * 0.5, Math.min(b.z + 5.5, 8), -Math.PI / 2)"
+},
+{
+"wait": 200
+},
+{
+"eval": "const b = window.__game.view().boss; window.__game.bossHealth(1); window.__game.blow(b.id, 3)"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.state === 'defeated')(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "window.__game.freeze(true)"
+},
+{
+"eval": "window.__game.step(1)"
+},
+{
+"wait": 74
+},
+{
+"shot": "shots/bestiary/gatekeeper-defeat-001.jpg"
+},
+{
+"eval": "window.__game.step(5)"
+},
+{
+"wait": 130
+},
+{
+"shot": "shots/bestiary/gatekeeper-defeat-006.jpg"
+},
+{
+"eval": "window.__game.step(8)"
+},
+{
+"wait": 172
+},
+{
+"shot": "shots/bestiary/gatekeeper-defeat-014.jpg"
+},
+{
+"eval": "window.__game.step(16)"
+},
+{
+"wait": 284
+},
+{
+"shot": "shots/bestiary/gatekeeper-defeat-030.jpg"
+},
+{
+"eval": "window.__game.step(20)"
+},
+{
+"wait": 340
+},
+{
+"shot": "shots/bestiary/gatekeeper-defeat-050.jpg"
+},
+{
+"eval": "window.__game.step(25)"
+},
+{
+"wait": 410
+},
+{
+"shot": "shots/bestiary/gatekeeper-defeat-075.jpg"
+},
+{
+"eval": "window.__game.step(15)"
+},
+{
+"wait": 270
+},
+{
+"shot": "shots/bestiary/gatekeeper-defeat-090.jpg"
+},
+{
+"eval": "window.__game.step(6)"
+},
+{
+"wait": 144
+},
+{
+"shot": "shots/bestiary/gatekeeper-defeat-096.jpg"
+},
+{
+"eval": "window.__game.step(12)"
+},
+{
+"wait": 228
+},
+{
+"shot": "shots/bestiary/gatekeeper-defeat-108.jpg"
+},
+{
+"eval": "window.__game.freeze(false)"
+}
+]

@@ -1,0 +1,18 @@
+[
+  { "eval": "new Promise((resolve) => { const t = setInterval(() => { if (window.__game) { clearInterval(t); resolve(true) } }, 10) })" },
+  { "eval": "window.__game.setSeed(7); window.__game.startStage('void', 0); window.__game.invulnerable(true); true" },
+  { "wait": 2000 },
+  { "eval": "window.__game.teleport(0, 1, -Math.PI / 2); window.__game.spawn('splitter', 0, -0.7, { drill: 'idle', facing: Math.PI / 2 }); true" },
+  { "wait": 900 },
+  { "eval": "window.__game.aim(0, -8); window.__game.press('slash'); true" },
+  { "wait": 260 },
+  { "eval": "window.__game.aim(0, -8); window.__game.press('slash'); true" },
+  { "wait": 260 },
+  { "eval": "window.__game.aim(0, -8); window.__game.press('slash'); true" },
+  { "eval": "window.__game.until((s) => s.enemies.filter((e) => e.kind === 'splitling').length === 2, 5000)" },
+  { "eval": "window.__game.freeze(true); window.__game.step(6); true" },
+  { "wait": 300 },
+  { "eval": "JSON.stringify(window.__game.state().enemies)" },
+  { "shot": "shots/stages/splitter-split.jpg" },
+  { "eval": "window.__game.freeze(false); window.__game.invulnerable(false); true" }
+]

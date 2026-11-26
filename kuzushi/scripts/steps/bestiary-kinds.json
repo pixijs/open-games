@@ -1,0 +1,323 @@
+[
+{
+"eval": "new Promise((r) => { const p = () => window.__game?.ready ? r(true) : requestAnimationFrame(p); p() })"
+},
+{
+"eval": "window.__game.startStage('spiral', 0, 7)"
+},
+{
+"wait": 1600
+},
+{
+"eval": "window.__game.invulnerable(true); window.__game.teleport(0, 8.6, -Math.PI/2)"
+},
+{
+"eval": "window.__game.spawn('sweeper', 1.2, 6.6, { drill: 'idle' })"
+},
+{
+"wait": 1300
+},
+{
+"eval": "window.__game.attack(); window.__game.freeze(true)"
+},
+{
+"eval": "window.__game.step(12)"
+},
+{
+"wait": 228
+},
+{
+"shot": "shots/bestiary/sweeper-012.jpg"
+},
+{
+"eval": "window.__game.step(16)"
+},
+{
+"wait": 284
+},
+{
+"shot": "shots/bestiary/sweeper-028.jpg"
+},
+{
+"eval": "window.__game.step(10)"
+},
+{
+"wait": 200
+},
+{
+"shot": "shots/bestiary/sweeper-038.jpg"
+},
+{
+"eval": "window.__game.step(6)"
+},
+{
+"wait": 144
+},
+{
+"shot": "shots/bestiary/sweeper-044.jpg"
+},
+{
+"eval": "window.__game.step(6)"
+},
+{
+"wait": 144
+},
+{
+"shot": "shots/bestiary/sweeper-050.jpg"
+},
+{
+"eval": "window.__game.step(8)"
+},
+{
+"wait": 172
+},
+{
+"shot": "shots/bestiary/sweeper-058.jpg"
+},
+{
+"eval": "window.__game.freeze(false)"
+},
+{
+"eval": "window.__game.startStage('spiral', 0, 7)"
+},
+{
+"wait": 1600
+},
+{
+"eval": "window.__game.invulnerable(true); window.__game.teleport(0, 8.6, -Math.PI/2)"
+},
+{
+"eval": "window.__game.spawn('pulsar', -2.2, 4.5, { drill: 'idle' })"
+},
+{
+"wait": 1300
+},
+{
+"eval": "window.__game.attack(); window.__game.freeze(true)"
+},
+{
+"eval": "window.__game.step(24)"
+},
+{
+"wait": 396
+},
+{
+"shot": "shots/bestiary/pulsar-024.jpg"
+},
+{
+"eval": "window.__game.step(22)"
+},
+{
+"wait": 368
+},
+{
+"shot": "shots/bestiary/pulsar-046.jpg"
+},
+{
+"eval": "window.__game.step(8)"
+},
+{
+"wait": 172
+},
+{
+"shot": "shots/bestiary/pulsar-054.jpg"
+},
+{
+"eval": "window.__game.step(8)"
+},
+{
+"wait": 172
+},
+{
+"shot": "shots/bestiary/pulsar-062.jpg"
+},
+{
+"eval": "window.__game.step(10)"
+},
+{
+"wait": 200
+},
+{
+"shot": "shots/bestiary/pulsar-072.jpg"
+},
+{
+"eval": "window.__game.step(12)"
+},
+{
+"wait": 228
+},
+{
+"shot": "shots/bestiary/pulsar-084.jpg"
+},
+{
+"eval": "window.__game.freeze(false)"
+},
+{
+"eval": "window.__game.startStage('void', 0, 7)"
+},
+{
+"wait": 1600
+},
+{
+"eval": "window.__game.invulnerable(true); window.__game.teleport(0, 1.5, -Math.PI/2)"
+},
+{
+"eval": "window.__game.spawn('leaper', -3.5, -2.5, { drill: 'idle' })"
+},
+{
+"wait": 1300
+},
+{
+"eval": "window.__game.attack(); window.__game.freeze(true)"
+},
+{
+"eval": "window.__game.step(16)"
+},
+{
+"wait": 284
+},
+{
+"shot": "shots/bestiary/leaper-016.jpg"
+},
+{
+"eval": "window.__game.step(18)"
+},
+{
+"wait": 312
+},
+{
+"shot": "shots/bestiary/leaper-034.jpg"
+},
+{
+"eval": "window.__game.step(18)"
+},
+{
+"wait": 312
+},
+{
+"shot": "shots/bestiary/leaper-052.jpg"
+},
+{
+"eval": "window.__game.step(18)"
+},
+{
+"wait": 312
+},
+{
+"shot": "shots/bestiary/leaper-070.jpg"
+},
+{
+"eval": "window.__game.step(14)"
+},
+{
+"wait": 256
+},
+{
+"shot": "shots/bestiary/leaper-084.jpg"
+},
+{
+"eval": "window.__game.step(4)"
+},
+{
+"wait": 116
+},
+{
+"shot": "shots/bestiary/leaper-088.jpg"
+},
+{
+"eval": "window.__game.step(8)"
+},
+{
+"wait": 172
+},
+{
+"shot": "shots/bestiary/leaper-096.jpg"
+},
+{
+"eval": "window.__game.freeze(false)"
+},
+{
+"eval": "window.__game.startStage('void', 0, 7)"
+},
+{
+"wait": 1600
+},
+{
+"eval": "window.__game.invulnerable(true); window.__game.teleport(0, 1.5, -Math.PI/2)"
+},
+{
+"eval": "window.__game.spawn('cutter', -5, -1, { drill: 'idle' })"
+},
+{
+"wait": 1300
+},
+{
+"eval": "window.__game.attack(); window.__game.freeze(true)"
+},
+{
+"eval": "window.__game.step(20)"
+},
+{
+"wait": 340
+},
+{
+"shot": "shots/bestiary/cutter-020.jpg"
+},
+{
+"eval": "window.__game.step(20)"
+},
+{
+"wait": 340
+},
+{
+"shot": "shots/bestiary/cutter-040.jpg"
+},
+{
+"eval": "window.__game.step(8)"
+},
+{
+"wait": 172
+},
+{
+"shot": "shots/bestiary/cutter-048.jpg"
+},
+{
+"eval": "window.__game.step(8)"
+},
+{
+"wait": 172
+},
+{
+"shot": "shots/bestiary/cutter-056.jpg"
+},
+{
+"eval": "window.__game.step(14)"
+},
+{
+"wait": 256
+},
+{
+"shot": "shots/bestiary/cutter-070.jpg"
+},
+{
+"eval": "window.__game.step(70)"
+},
+{
+"wait": 1040
+},
+{
+"shot": "shots/bestiary/cutter-140.jpg"
+},
+{
+"eval": "window.__game.step(50)"
+},
+{
+"wait": 760
+},
+{
+"shot": "shots/bestiary/cutter-190.jpg"
+},
+{
+"eval": "window.__game.freeze(false)"
+}
+]

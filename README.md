@@ -26,6 +26,10 @@ Below is a list of games that are currently available in this repository. Each g
   - [Code](/night-run/README.md)
   - [Play](https://goodstuff.pixijs.io/night-run/)
 
+- KUZUSHI
+  - [Code](/kuzushi/README.md)
+  - [Play](https://goodstuff.pixijs.io/kuzushi/)
+
 ## Tools
 
 Below is a list of tools that are used in the games. These tools are also open source and can be used in your own projects.

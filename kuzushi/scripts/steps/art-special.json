@@ -1,0 +1,22 @@
+[
+  {"eval":"new Promise((resolve) => { const t = setInterval(() => { if (window.__game) { clearInterval(t); resolve(true) } }, 10) })"},
+  {"eval":"window.__game.setSeed(7); window.__game.startStage('spiral', 0); window.__game.hazard(false); window.__game.invulnerable(true); true"},
+  {"wait":1400},
+  {"eval":"const g = window.__game; g.teleport(-4, 6, -1.57); g.spawn('orbiter', -2, 3.5, { drill: 'dummy' }); g.spawn('warden', -7, 3, { drill: 'dummy' }); g.spawn('chaser', -1, 8, { drill: 'dummy' }); g.spawn('shooter', -6.5, 8.5, { drill: 'dummy' }); true"},
+  {"wait":1200},
+  {"eval":"window.__game.special(); true"},
+  {"wait":300},
+  {"shot":"shots/art/special-spiral-cutin.jpg"},
+  {"wait":450},
+  {"shot":"shots/art/special-spiral-strike.jpg"},
+  {"wait":2500},
+  {"eval":"window.__game.startStage('void', 0); true"},
+  {"wait":1400},
+  {"eval":"const g = window.__game; g.teleport(-3, 0, -1.57); g.spawn('lancer', -1, -2.5, { drill: 'dummy' }); g.spawn('splitter', -5.5, -1, { drill: 'dummy' }); g.spawn('chaser', 0, 2, { drill: 'dummy' }); g.spawn('splitling', -4, 2.8, { drill: 'dummy' }); true"},
+  {"wait":1200},
+  {"eval":"window.__game.special(); true"},
+  {"wait":300},
+  {"shot":"shots/art/special-void-cutin.jpg"},
+  {"wait":450},
+  {"shot":"shots/art/special-void-strike.jpg"}
+]

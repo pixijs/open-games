@@ -1,0 +1,19 @@
+[
+  {"eval":"new Promise((r) => { const poll = () => (window.__title?.time() ?? 0) >= 2.6 ? r(true) : requestAnimationFrame(poll); poll() })"},
+  {"key":"KeyS"},{"wait":250},{"key":"KeyS"},{"wait":250},{"key":"KeyS"},{"wait":250},{"key":"Enter"},{"wait":900},
+  {"key":"KeyS"},{"wait":250},
+  {"shot":"shots/integrate/lab/extras-01-menu.jpg"},
+  {"key":"Enter"},
+  {"eval":"new Promise((r) => { const p = () => window.__lab?.ready() ? r(true) : requestAnimationFrame(p); p() })"},
+  {"wait":1200},
+  {"shot":"shots/integrate/lab/extras-02-attacks.jpg"},
+  {"key":"Escape"},{"wait":900},
+  {"shot":"shots/integrate/lab/extras-03-list.jpg"},
+  {"key":"Escape"},{"wait":1500},
+  {"eval":"JSON.stringify({ lab: window.__lab.scene(), flow: window.__game.state().flow, invulnerable: window.__game.view().debug.invulnerable, moves: window.__game.view().debug.moves })"},
+  {"shot":"shots/integrate/lab/extras-04-title.jpg"},
+  {"key":"Enter"},{"wait":900},{"key":"Enter"},{"wait":2500},
+  {"key":"Escape"},{"wait":900},
+  {"eval":"JSON.stringify(window.__game.state().flow)"},
+  {"shot":"shots/integrate/lab/extras-05-pause-after-lab.jpg"}
+]

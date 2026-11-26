@@ -1,0 +1,221 @@
+[
+ {
+  "eval": "new Promise((resolve) => { const t = setInterval(() => { if (window.__game) { clearInterval(t); resolve(true) } }, 10) })"
+ },
+ {
+  "evalFile": "scripts/dungeon.js"
+ },
+ {
+  "wait": 1000
+ },
+ {
+  "eval": "window.__game.startZone('courtyard', null, { seed: 7 }); window.__game.invulnerable(true); true"
+ },
+ {
+  "wait": 2500
+ },
+ {
+  "eval": "window.__game.enterRoom('boss', { instant: true }); true"
+ },
+ {
+  "eval": "window.__game.until((s) => s.boss?.state === 'intro', 6000)"
+ },
+ {
+  "wait": 150
+ },
+ {
+  "eval": "window.__game.freeze(true); true"
+ },
+ {
+  "shot": "shots/interface/boss/card-00.jpg"
+ },
+ {
+  "eval": "window.__game.step(6); true"
+ },
+ {
+  "wait": 144
+ },
+ {
+  "shot": "shots/interface/boss/card-01.jpg"
+ },
+ {
+  "eval": "window.__game.step(6); true"
+ },
+ {
+  "wait": 144
+ },
+ {
+  "shot": "shots/interface/boss/card-02.jpg"
+ },
+ {
+  "eval": "window.__game.step(6); true"
+ },
+ {
+  "wait": 144
+ },
+ {
+  "shot": "shots/interface/boss/card-03.jpg"
+ },
+ {
+  "eval": "window.__game.step(6); true"
+ },
+ {
+  "wait": 144
+ },
+ {
+  "shot": "shots/interface/boss/card-04.jpg"
+ },
+ {
+  "eval": "window.__game.step(12); true"
+ },
+ {
+  "wait": 228
+ },
+ {
+  "shot": "shots/interface/boss/card-05.jpg"
+ },
+ {
+  "eval": "window.__game.step(24); true"
+ },
+ {
+  "wait": 396
+ },
+ {
+  "shot": "shots/interface/boss/card-06.jpg"
+ },
+ {
+  "eval": "window.__game.step(24); true"
+ },
+ {
+  "wait": 396
+ },
+ {
+  "shot": "shots/interface/boss/card-07.jpg"
+ },
+ {
+  "eval": "window.__game.step(12); true"
+ },
+ {
+  "wait": 228
+ },
+ {
+  "shot": "shots/interface/boss/card-08.jpg"
+ },
+ {
+  "eval": "window.__game.step(6); true"
+ },
+ {
+  "wait": 144
+ },
+ {
+  "shot": "shots/interface/boss/card-09.jpg"
+ },
+ {
+  "eval": "window.__game.step(6); true"
+ },
+ {
+  "wait": 144
+ },
+ {
+  "shot": "shots/interface/boss/card-10.jpg"
+ },
+ {
+  "eval": "window.__game.step(6); true"
+ },
+ {
+  "wait": 144
+ },
+ {
+  "shot": "shots/interface/boss/card-11.jpg"
+ },
+ {
+  "eval": "window.__game.freeze(false); true"
+ },
+ {
+  "eval": "window.__game.until((s) => s.boss?.state === 'fighting', 6000)"
+ },
+ {
+  "wait": 900
+ },
+ {
+  "shot": "shots/interface/boss/bar-in.jpg"
+ },
+ {
+  "eval": "const b = window.__game.view().boss; window.__game.bossHealth(b.maxHp * 0.72); true"
+ },
+ {
+  "wait": 120
+ },
+ {
+  "shot": "shots/interface/boss/bar-hit.jpg"
+ },
+ {
+  "wait": 900
+ },
+ {
+  "shot": "shots/interface/boss/bar-chip.jpg"
+ },
+ {
+  "eval": "window.__game.breakBoss(); true"
+ },
+ {
+  "wait": 500
+ },
+ {
+  "shot": "shots/interface/boss/bar-broken.jpg"
+ },
+ {
+  "wait": 3000
+ },
+ {
+  "eval": "window.__game.bossPhase(2); true"
+ },
+ {
+  "wait": 250
+ },
+ {
+  "shot": "shots/interface/boss/bar-shift.jpg"
+ },
+ {
+  "wait": 2200
+ },
+ {
+  "shot": "shots/interface/boss/bar-phase2.jpg"
+ },
+ {
+  "eval": "window.__game.bossHealth(1); true"
+ },
+ {
+  "wait": 300
+ },
+ {
+  "eval": "const b = window.__game.view().boss; window.__game.blow(b.id, 3); true"
+ },
+ {
+  "eval": "window.__game.until((s) => s.boss?.state === 'defeated', 4000)"
+ },
+ {
+  "wait": 100
+ },
+ {
+  "shot": "shots/interface/boss/felled-0.jpg"
+ },
+ {
+  "wait": 400
+ },
+ {
+  "shot": "shots/interface/boss/felled-1.jpg"
+ },
+ {
+  "eval": "window.__game.until((s) => s.boss === null, 6000)"
+ },
+ {
+  "wait": 600
+ },
+ {
+  "shot": "shots/interface/boss/zone-clear.jpg"
+ },
+ {
+  "eval": "window.__game.invulnerable(false); true"
+ }
+]

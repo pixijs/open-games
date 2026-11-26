@@ -1,0 +1,230 @@
+[
+ {
+  "eval": "new Promise((resolve) => { const t = setInterval(() => { if (window.__game) { clearInterval(t); resolve(true) } }, 10) })"
+ },
+ {
+  "evalFile": "scripts/dungeon.js"
+ },
+ {
+  "eval": "window.__game.startZone('courtyard', 'boss', { seed: 7 }); window.__game.invulnerable(true); true"
+ },
+ {
+  "eval": "window.__game.until((s) => s.boss?.state === 'intro', 5000)"
+ },
+ {
+  "wait": 600
+ },
+ {
+  "shot": "shots/zones/gate/boss-shot.jpg"
+ },
+ {
+  "eval": "window.__game.until((s) => s.boss?.state === 'fighting', 5000)"
+ },
+ {
+  "eval": "window.__game.openDoors(); true"
+ },
+ {
+  "eval": "window.__game.until((s) => s.room?.sealed === false, 6000)"
+ },
+ {
+  "wait": 1800
+ },
+ {
+  "shot": "shots/zones/gate/gate-open.jpg"
+ },
+ {
+  "eval": "window.__dungeon.walk('gate')"
+ },
+ {
+  "eval": "window.__game.freeze(true); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 250
+ },
+ {
+  "shot": "shots/zones/gate/z00.jpg"
+ },
+ {
+  "eval": "window.__game.step(3); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 210
+ },
+ {
+  "shot": "shots/zones/gate/z01.jpg"
+ },
+ {
+  "eval": "window.__game.step(3); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 210
+ },
+ {
+  "shot": "shots/zones/gate/z02.jpg"
+ },
+ {
+  "eval": "window.__game.step(3); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 210
+ },
+ {
+  "shot": "shots/zones/gate/z03.jpg"
+ },
+ {
+  "eval": "window.__game.step(3); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 210
+ },
+ {
+  "shot": "shots/zones/gate/z04.jpg"
+ },
+ {
+  "eval": "window.__game.step(5); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 250
+ },
+ {
+  "shot": "shots/zones/gate/z05.jpg"
+ },
+ {
+  "eval": "window.__game.step(5); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 250
+ },
+ {
+  "shot": "shots/zones/gate/z06.jpg"
+ },
+ {
+  "eval": "window.__game.step(5); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 250
+ },
+ {
+  "shot": "shots/zones/gate/z07.jpg"
+ },
+ {
+  "eval": "window.__game.step(5); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 250
+ },
+ {
+  "shot": "shots/zones/gate/z08.jpg"
+ },
+ {
+  "eval": "window.__game.step(5); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 250
+ },
+ {
+  "shot": "shots/zones/gate/z09.jpg"
+ },
+ {
+  "eval": "window.__game.step(5); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 250
+ },
+ {
+  "shot": "shots/zones/gate/z10.jpg"
+ },
+ {
+  "eval": "window.__game.step(30); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 750
+ },
+ {
+  "shot": "shots/zones/gate/z11.jpg"
+ },
+ {
+  "eval": "window.__game.step(30); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 750
+ },
+ {
+  "shot": "shots/zones/gate/z12.jpg"
+ },
+ {
+  "eval": "window.__game.step(30); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 750
+ },
+ {
+  "shot": "shots/zones/gate/z13.jpg"
+ },
+ {
+  "eval": "window.__game.step(30); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 750
+ },
+ {
+  "shot": "shots/zones/gate/z14.jpg"
+ },
+ {
+  "eval": "window.__game.step(6); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 270
+ },
+ {
+  "shot": "shots/zones/gate/z15.jpg"
+ },
+ {
+  "eval": "window.__game.step(6); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 270
+ },
+ {
+  "shot": "shots/zones/gate/z16.jpg"
+ },
+ {
+  "eval": "window.__game.step(6); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 270
+ },
+ {
+  "shot": "shots/zones/gate/z17.jpg"
+ },
+ {
+  "eval": "window.__game.step(6); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 270
+ },
+ {
+  "shot": "shots/zones/gate/z18.jpg"
+ },
+ {
+  "eval": "window.__game.step(6); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 270
+ },
+ {
+  "shot": "shots/zones/gate/z19.jpg"
+ },
+ {
+  "eval": "window.__game.step(6); JSON.stringify(window.__game.state().transition)"
+ },
+ {
+  "wait": 270
+ },
+ {
+  "shot": "shots/zones/gate/z20.jpg"
+ },
+ {
+  "eval": "window.__game.freeze(false); window.__game.invulnerable(false); true"
+ }
+]

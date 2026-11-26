@@ -1,0 +1,128 @@
+/* The DOM's part of the UI: the root of the keyboard sinks and the lab, with its tokens, panels, keys and menu. Every edge sits on --m; spacing is a multiple of --u. */
+.k-ui {
+  --ink: #0d0d0f;
+  --c700: #414146;
+  --c400: #76767c;
+  --c300: #8c8c92;
+  --paper: #f2efe8;
+  --accent: #ff2e3f;
+  --accent-rgb: 255 46 63;
+  --accent-fill: #ff2e3f;
+  --accent-deep: #b3121f;
+  --paper-a: rgba(242, 239, 232, 0.18);
+  --ink-a: rgba(13, 13, 15, 0.78);
+  --m: clamp(16px, 2.8vw, 48px);
+  --u: 8px;
+  --font: "Barlow Condensed", "Arial Narrow", "Helvetica Neue", sans-serif;
+  --text: "Barlow", "Helvetica Neue", Arial, sans-serif;
+  --jp: "Yuji Boku", "Hiragino Mincho ProN", "Yu Mincho", serif;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  color: var(--paper);
+  font-family: var(--font);
+  font-weight: 500;
+  text-transform: uppercase;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+:where(.k-ui *, .k-ui *::before, .k-ui *::after) { box-sizing: border-box; }
+
+:where(.k-ui button) {
+  font: inherit;
+  color: inherit;
+  text-transform: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  outline: none;
+}
+
+:where(.k-ui kbd) {
+  display: inline-block;
+  min-width: 18px;
+  margin-left: 6px;
+  padding: 3px 6px 2px;
+  border: 1px solid rgba(242, 239, 232, 0.34);
+  font: 600 12px/1 var(--font);
+  letter-spacing: 0.12em;
+  text-align: center;
+  color: var(--paper);
+  background: rgba(13, 13, 15, 0.4);
+}
+
+/* A Pixi screen's keyboard: it holds focus, so it can't be hidden with visibility or display. */
+.k-sink { position: fixed; left: 0; top: 0; width: 1px; height: 1px; opacity: 0; overflow: hidden; pointer-events: none; outline: none; }
+
+/* Panels and frame marks. */
+.k-panel {
+  position: relative;
+  padding: calc(var(--u) * 2.5) calc(var(--u) * 3);
+  background: var(--ink-a);
+  border: 1px solid var(--paper-a);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.k-tick { position: absolute; width: 12px; height: 12px; border: 0 solid var(--paper); opacity: 0.85; }
+.k-tick.is-tl { top: -1px; left: -1px; border-top-width: 1px; border-left-width: 1px; }
+.k-tick.is-tr { top: -1px; right: -1px; border-top-width: 1px; border-right-width: 1px; }
+.k-tick.is-bl { bottom: -1px; left: -1px; border-bottom-width: 1px; border-left-width: 1px; }
+.k-tick.is-br { bottom: -1px; right: -1px; border-bottom-width: 1px; border-right-width: 1px; }
+
+.k-panel-head { display: flex; align-items: center; gap: calc(var(--u) * 1.5); font-size: 12px; letter-spacing: 0.42em; }
+.k-index { color: var(--accent); font-weight: 600; letter-spacing: 0.12em; }
+.k-panel-mark { flex: none; width: 6px; height: 6px; background: var(--accent); transform: rotate(45deg); box-shadow: 0 0 8px rgb(var(--accent-rgb) / 0.6); }
+.k-panel-rule { flex: 1; height: 1px; background: var(--paper-a); }
+/* A back action in a panel's head: the lab's list. */
+.k-back { display: flex; align-items: center; gap: 8px; font-size: 11px; letter-spacing: 0.3em; color: var(--c300); pointer-events: auto; transition: color 0.12s; }
+.k-back:hover { color: var(--paper); }
+.k-back kbd { margin-left: 0; }
+
+/* Hints: keys then what they do, in the lab's list. */
+.k-hint kbd { margin: 0 4px 0 0; }
+.k-hint kbd + kbd { margin-left: 0; }
+
+/* Menus: wide-tracked caps; the chosen one on a red bar fading right, inside red corner brackets. */
+.k-menu { position: relative; display: flex; flex-direction: column; gap: 2px; pointer-events: auto; }
+.k-menu-bar { position: absolute; left: 0; top: 0; pointer-events: none; }
+.k-menu-fill { position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: visible; transform-origin: 0 50%; filter: drop-shadow(0 0 12px rgb(var(--accent-rgb) / 0.4)); }
+.k-menu-flash { position: absolute; inset: 0; background: var(--paper); opacity: 0; }
+.k-bracket { position: absolute; width: 12px; height: 12px; border: 0 solid var(--accent); filter: drop-shadow(0 0 4px rgb(var(--accent-rgb) / 0.8)); }
+.k-bracket.is-tl { left: -7px; top: -6px; border-top-width: 2px; border-left-width: 2px; }
+.k-bracket.is-tr { right: -7px; top: -6px; border-top-width: 2px; border-right-width: 2px; }
+.k-bracket.is-bl { left: -7px; bottom: -6px; border-bottom-width: 2px; border-left-width: 2px; }
+.k-bracket.is-br { right: -7px; bottom: -6px; border-bottom-width: 2px; border-right-width: 2px; }
+.k-menu-slash { position: absolute; left: 0; top: 0; opacity: 0; overflow: visible; pointer-events: none; filter: drop-shadow(0 0 6px rgb(var(--accent-rgb) / 0.9)); }
+.k-menu-slash-red { fill: var(--accent); }
+.k-menu-slash-core { fill: var(--paper); }
+.k-option {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 11px 20px;
+  font-size: 17px;
+  letter-spacing: 0.42em;
+  text-align: left;
+  color: rgba(242, 239, 232, 0.72);
+  transition: color 0.12s, opacity 0.2s;
+}
+.k-option.is-active { color: var(--paper); text-shadow: 0 1px 2px rgba(13, 13, 15, 0.5); }
+.k-option.is-struck { color: var(--ink); text-shadow: none; }
+.k-option-label { position: relative; white-space: nowrap; }
+.k-option-detail {
+  position: relative;
+  margin-top: 5px;
+  font-family: var(--text);
+  font-size: 12.5px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: var(--c300);
+}
+.k-option.is-active .k-option-detail { color: rgba(242, 239, 232, 0.86); }

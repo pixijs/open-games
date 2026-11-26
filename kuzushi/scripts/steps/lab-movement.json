@@ -1,0 +1,23 @@
+[
+  {"eval": "new Promise((r) => { const poll = () => window.__lab !== undefined && window.__game !== undefined ? r(true) : requestAnimationFrame(poll); poll() })"},
+  {"eval": "window.__lab.open('movement'); true"},
+  {"eval": "new Promise((r) => { const p = () => window.__lab?.ready() ? r(true) : requestAnimationFrame(p); setTimeout(p, 150) })"},
+  {"eval": "window.__lab.control(\"Mode\", \"run\")"},
+  {"wait": 2600},
+  {"shot": "shots/lab/movement/01-run.jpg"},
+  {"eval": "window.__lab.control(\"Mode\", \"dash\")"},
+  {"wait": 2600},
+  {"shot": "shots/lab/movement/02-dash.jpg"},
+  {"eval": "window.__lab.control(\"Mode\", \"both\")"},
+  {"wait": 2600},
+  {"shot": "shots/lab/movement/03-run-dash.jpg"},
+  {"eval": "window.__game.tune({ speed: 10 }); true"},
+  {"wait": 2600},
+  {"shot": "shots/lab/movement/04-speed10.jpg"},
+  {"eval": "window.__lab.control(\"Reset numbers\")"},
+  {"key": "Backquote"},
+  {"wait": 600},
+  {"shot": "shots/lab/movement/05-folded.jpg"},
+  {"key": "Backquote"},
+  {"eval": "window.__lab.control(\"Mode\", \"run\")"}
+]

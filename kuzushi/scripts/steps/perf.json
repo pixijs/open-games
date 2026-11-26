@@ -1,0 +1,221 @@
+[
+ {
+  "eval": "new Promise((r) => { const poll = () => (window.__title?.time() ?? 0) >= 1 ? r(true) : requestAnimationFrame(poll); poll() })"
+ },
+ {
+  "evalFile": "scripts/measure.js"
+ },
+ {
+  "eval": "window.__measure('title', 6.3)"
+ },
+ {
+  "eval": "window.__game.invulnerable(true); true"
+ },
+ {
+  "eval": "window.__game.startZone('courtyard', 'combat', { seed: 9 }); true"
+ },
+ {
+  "eval": "window.__game.until((s) => s.wave.phase === 'fighting' && s.enemies.length >= 3 && s.enemies.every((e) => e.state !== 'Spawning'), 30000)"
+ },
+ {
+  "eval": "(() => { const g = window.__game; g.spawn('chaser', -5, -3); g.spawn('shooter', 5, -3); g.spawn('bruiser', -6, 2); g.spawn('trickster', 6, 2); g.spawn('chaser', 0, -5); g.spawn('shooter', -3, 4); return g.state().enemies.length })()"
+ },
+ {
+  "wait": 1200
+ },
+ {
+  "eval": "window.__measure('courtyard-room', 6)"
+ },
+ {
+  "shot": "shots/integrate/perf/courtyard-room.jpg"
+ },
+ {
+  "eval": "window.__game.startZone('spiral', 'combat', { seed: 9 }); true"
+ },
+ {
+  "eval": "window.__game.until((s) => s.wave.phase === 'fighting' && s.enemies.length >= 3 && s.enemies.every((e) => e.state !== 'Spawning'), 30000)"
+ },
+ {
+  "eval": "(() => { const g = window.__game; g.spawn('orbiter', -5, -3); g.spawn('warden', 5, -3); g.spawn('sweeper', -6, 2); g.spawn('pulsar', 6, 2); g.spawn('orbiter', 0, -5); g.spawn('sweeper', -3, 4); return g.state().enemies.length })()"
+ },
+ {
+  "wait": 1200
+ },
+ {
+  "eval": "window.__game.sweep(); true"
+ },
+ {
+  "eval": "window.__measure('spiral-room', 6)"
+ },
+ {
+  "shot": "shots/integrate/perf/spiral-room.jpg"
+ },
+ {
+  "eval": "window.__game.startZone('void', 'combat', { seed: 9 }); true"
+ },
+ {
+  "eval": "window.__game.until((s) => s.wave.phase === 'fighting' && s.enemies.length >= 3 && s.enemies.every((e) => e.state !== 'Spawning'), 30000)"
+ },
+ {
+  "eval": "(() => { const g = window.__game; g.spawn('lancer', -5, -3); g.spawn('splitter', 5, -3); g.spawn('leaper', -6, 2); g.spawn('cutter', 6, 2); g.spawn('lancer', 0, -5); g.spawn('splitter', -3, 4); return g.state().enemies.length })()"
+ },
+ {
+  "wait": 1200
+ },
+ {
+  "eval": "window.__measure('void-room', 6)"
+ },
+ {
+  "shot": "shots/integrate/perf/void-room.jpg"
+ },
+ {
+  "eval": "window.__game.grantFocus(); window.__game.special(); true"
+ },
+ {
+  "eval": "window.__measure('void-special', 3)"
+ },
+ {
+  "eval": "window.__game.startZone('courtyard', 'boss', { seed: 9 }); true"
+ },
+ {
+  "eval": "window.__game.until((s) => s.boss !== null && s.boss.state === 'fighting', 30000)"
+ },
+ {
+  "eval": "window.__measure('gatekeeper-fight', 6)"
+ },
+ {
+  "shot": "shots/integrate/perf/gatekeeper-fight.jpg"
+ },
+ {
+  "eval": "window.__game.bossPhase(2); true"
+ },
+ {
+  "eval": "window.__game.until((s) => s.boss !== null && s.boss.phase === 2 && s.boss.state === 'fighting', 30000)"
+ },
+ {
+  "eval": "window.__measure('gatekeeper-last-phase', 6)"
+ },
+ {
+  "shot": "shots/integrate/perf/gatekeeper-last-phase.jpg"
+ },
+ {
+  "eval": "window.__game.startZone('spiral', 'boss', { seed: 9 }); true"
+ },
+ {
+  "eval": "window.__game.until((s) => s.boss !== null && s.boss.state === 'fighting', 30000)"
+ },
+ {
+  "eval": "window.__measure('orrery-fight', 6)"
+ },
+ {
+  "shot": "shots/integrate/perf/orrery-fight.jpg"
+ },
+ {
+  "eval": "window.__game.bossPhase(2); true"
+ },
+ {
+  "eval": "window.__game.until((s) => s.boss !== null && s.boss.phase === 2 && s.boss.state === 'fighting', 30000)"
+ },
+ {
+  "eval": "window.__measure('orrery-last-phase', 6)"
+ },
+ {
+  "shot": "shots/integrate/perf/orrery-last-phase.jpg"
+ },
+ {
+  "eval": "window.__game.startZone('void', 'boss', { seed: 9 }); true"
+ },
+ {
+  "eval": "window.__game.until((s) => s.boss !== null && s.boss.state === 'fighting', 30000)"
+ },
+ {
+  "eval": "window.__measure('sunder-fight', 6)"
+ },
+ {
+  "shot": "shots/integrate/perf/sunder-fight.jpg"
+ },
+ {
+  "eval": "window.__game.bossPhase(3); true"
+ },
+ {
+  "eval": "window.__game.until((s) => s.boss !== null && s.boss.phase === 3 && s.boss.state === 'fighting', 30000)"
+ },
+ {
+  "eval": "window.__measure('sunder-last-phase', 6)"
+ },
+ {
+  "shot": "shots/integrate/perf/sunder-last-phase.jpg"
+ },
+ {
+  "eval": "window.__game.invulnerable(false); true"
+ },
+ {
+  "eval": "window.__lab.open('doors'); true"
+ },
+ {
+  "eval": "new Promise((r) => { const p = () => window.__lab?.ready() ? r(true) : requestAnimationFrame(p); setTimeout(p, 150) })"
+ },
+ {
+  "wait": 600
+ },
+ {
+  "eval": "window.__lab.control(\"Loop\", true)"
+ },
+ {
+  "eval": "window.__lab.control(\"Walk through\")"
+ },
+ {
+  "eval": "window.__measure('lab-doors-loop', 18)"
+ },
+ {
+  "shot": "shots/integrate/perf/lab-doors.jpg"
+ },
+ {
+  "eval": "window.__lab.control(\"Loop\", false)"
+ },
+ {
+  "eval": "window.__lab.open('special'); true"
+ },
+ {
+  "eval": "new Promise((r) => { const p = () => window.__lab?.ready() ? r(true) : requestAnimationFrame(p); setTimeout(p, 150) })"
+ },
+ {
+  "wait": 800
+ },
+ {
+  "eval": "window.__lab.control(\"Loop\", true)"
+ },
+ {
+  "eval": "window.__measure('lab-special-loop', 6)"
+ },
+ {
+  "shot": "shots/integrate/perf/lab-special.jpg"
+ },
+ {
+  "eval": "window.__lab.control(\"Loop\", false)"
+ },
+ {
+  "eval": "window.__lab.open('gallery'); true"
+ },
+ {
+  "eval": "new Promise((r) => { const p = () => window.__lab?.ready() ? r(true) : requestAnimationFrame(p); setTimeout(p, 150) })"
+ },
+ {
+  "wait": 800
+ },
+ {
+  "eval": "window.__lab.control(\"Auto\", true)"
+ },
+ {
+  "eval": "window.__measure('lab-gallery-auto', 6)"
+ },
+ {
+  "shot": "shots/integrate/perf/lab-gallery.jpg"
+ },
+ {
+  "eval": "window.__lab.control(\"Auto\", false)"
+ },
+ {
+  "eval": "window.__lab.close(); true"
+ }
+]

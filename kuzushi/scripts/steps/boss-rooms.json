@@ -1,0 +1,152 @@
+[
+ {
+  "eval": "new Promise((resolve) => { const t = setInterval(() => { if (window.__game) { clearInterval(t); resolve(true) } }, 10) })"
+ },
+ {
+  "wait": 800
+ },
+ {
+  "eval": "window.__game.startZone('courtyard', 'boss', { seed: 3 }); window.__game.invulnerable(true); true"
+ },
+ {
+  "eval": "window.__game.until((s) => s.zone === 'courtyard' && s.boss?.state === 'fighting', 12000)"
+ },
+ {
+  "eval": "window.__game.bossPhase(2); true"
+ },
+ {
+  "eval": "window.__game.until((s) => s.boss?.phase === 2 && s.boss?.state === 'fighting', 12000)"
+ },
+ {
+  "wait": 400
+ },
+ {
+  "eval": "(() => { const g = window.__game; const v = g.view(); for (const e of v.enemies) if (e.kind !== 'gatekeeper') g.remove(e.id); const p = v.room.layout.pillars[0]; const boss = v.enemies.find((e) => e.kind === 'gatekeeper'); const out = Math.hypot(p.x, p.z); const d = { x: p.x / out, z: p.z / out }; g.teleport(p.x - d.x * 6, p.z - d.z * 6, undefined, boss.id); g.teleport(p.x + d.x * 2.4, p.z + d.z * 2.4); g.bossPattern('charge'); return v.room.layout.pillars.length })()"
+ },
+ {
+  "wait": 500
+ },
+ {
+  "shot": "shots/integrate/boss-rooms/gatekeeper-1-charge.jpg"
+ },
+ {
+  "eval": "window.__game.until(() => window.__game.view().room.layout.pillars.length < 4, 8000)"
+ },
+ {
+  "eval": "window.__game.freeze(true); true"
+ },
+ {
+  "wait": 150
+ },
+ {
+  "shot": "shots/integrate/boss-rooms/gatekeeper-2-break.jpg"
+ },
+ {
+  "eval": "window.__game.step(4); true"
+ },
+ {
+  "wait": 180
+ },
+ {
+  "shot": "shots/integrate/boss-rooms/gatekeeper-3-break.jpg"
+ },
+ {
+  "eval": "window.__game.freeze(false); true"
+ },
+ {
+  "wait": 1500
+ },
+ {
+  "shot": "shots/integrate/boss-rooms/gatekeeper-4-after.jpg"
+ },
+ {
+  "eval": "window.__game.startZone('spiral', 'boss', { seed: 3 }); window.__game.invulnerable(true); true"
+ },
+ {
+  "eval": "window.__game.until((s) => s.zone === 'spiral' && s.boss?.state === 'fighting', 12000)"
+ },
+ {
+  "wait": 300
+ },
+ {
+  "shot": "shots/integrate/boss-rooms/orrery-1-phase1.jpg"
+ },
+ {
+  "eval": "window.__game.bossPhase(2); true"
+ },
+ {
+  "eval": "window.__game.until(() => window.__game.view().hazard.kind === 'beam' && window.__game.view().hazard.phase === 'warn', 12000)"
+ },
+ {
+  "wait": 300
+ },
+ {
+  "shot": "shots/integrate/boss-rooms/orrery-2-warn.jpg"
+ },
+ {
+  "eval": "window.__game.until(() => window.__game.view().hazard.phase === 'sweep', 8000)"
+ },
+ {
+  "wait": 700
+ },
+ {
+  "shot": "shots/integrate/boss-rooms/orrery-3-sweep.jpg"
+ },
+ {
+  "wait": 2200
+ },
+ {
+  "shot": "shots/integrate/boss-rooms/orrery-4-sweep.jpg"
+ },
+ {
+  "eval": "window.__game.startZone('void', 'boss', { seed: 3 }); window.__game.invulnerable(true); true"
+ },
+ {
+  "eval": "window.__game.until((s) => s.zone === 'void' && s.boss?.state === 'fighting', 12000)"
+ },
+ {
+  "wait": 300
+ },
+ {
+  "shot": "shots/integrate/boss-rooms/sunder-1-phase1.jpg"
+ },
+ {
+  "eval": "window.__game.bossPhase(2); true"
+ },
+ {
+  "eval": "window.__game.until((s) => s.boss?.state === 'shifting', 8000)"
+ },
+ {
+  "wait": 1400
+ },
+ {
+  "shot": "shots/integrate/boss-rooms/sunder-2-cracking.jpg"
+ },
+ {
+  "wait": 2200
+ },
+ {
+  "shot": "shots/integrate/boss-rooms/sunder-3-fallen.jpg"
+ },
+ {
+  "eval": "window.__game.until((s) => s.boss?.phase === 2 && s.boss?.state === 'fighting', 12000)"
+ },
+ {
+  "eval": "window.__game.bossPhase(3); true"
+ },
+ {
+  "eval": "window.__game.until((s) => s.boss?.state === 'shifting', 8000)"
+ },
+ {
+  "wait": 1400
+ },
+ {
+  "shot": "shots/integrate/boss-rooms/sunder-4-rim.jpg"
+ },
+ {
+  "wait": 2600
+ },
+ {
+  "shot": "shots/integrate/boss-rooms/sunder-5-core.jpg"
+ }
+]

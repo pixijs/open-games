@@ -1,0 +1,12 @@
+[
+  { "eval": "new Promise((resolve) => { const t = setInterval(() => { if (window.__game) { clearInterval(t); resolve(true) } }, 10) })" },
+  { "eval": "window.__game.setSeed(7); window.__game.startStage('spiral', 0); true" },
+  { "wait": 2600 },
+  { "eval": "window.__game.invulnerable(true); window.__game.sweep(); true" },
+  { "wait": 2600 },
+  { "eval": "window.__game.freeze(true); JSON.stringify(window.__game.view().hazard)" },
+  { "shot": "shots/stages/spiral-beam.jpg" },
+  { "eval": "window.__game.freeze(false); window.__game.startStage('void', 0); true" },
+  { "wait": 2600 },
+  { "shot": "shots/stages/void-sandbox.jpg" }
+]

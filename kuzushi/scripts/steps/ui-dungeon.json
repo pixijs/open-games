@@ -1,0 +1,236 @@
+[
+ {
+  "eval": "new Promise((resolve) => { const t = setInterval(() => { if (window.__game) { clearInterval(t); resolve(true) } }, 10) })"
+ },
+ {
+  "evalFile": "scripts/dungeon.js"
+ },
+ {
+  "wait": 1200
+ },
+ {
+  "eval": "window.__game.startZone('courtyard', null, { seed: 5 }); window.__game.invulnerable(true); true"
+ },
+ {
+  "wait": 900
+ },
+ {
+  "shot": "shots/interface/dungeon/01-zone-banner.jpg"
+ },
+ {
+  "wait": 1600
+ },
+ {
+  "eval": "window.__game.teleport(0, -0.6, -1.57); true"
+ },
+ {
+  "wait": 120
+ },
+ {
+  "shot": "shots/interface/dungeon/02-altar-open.jpg"
+ },
+ {
+  "wait": 600
+ },
+ {
+  "shot": "shots/interface/dungeon/03-altar.jpg"
+ },
+ {
+  "eval": "window.__game.interact(); true"
+ },
+ {
+  "wait": 160
+ },
+ {
+  "shot": "shots/interface/dungeon/04-altar-swap.jpg"
+ },
+ {
+  "wait": 700
+ },
+ {
+  "shot": "shots/interface/dungeon/05-altar-taken.jpg"
+ },
+ {
+  "eval": "window.__dungeon.walk(1)"
+ },
+ {
+  "eval": "window.__game.until((s) => s.transition?.beat === 'hold', 4000)"
+ },
+ {
+  "shot": "shots/interface/dungeon/06-door-hold.jpg"
+ },
+ {
+  "eval": "window.__game.until((s) => s.room?.sealed === true, 6000)"
+ },
+ {
+  "wait": 120
+ },
+ {
+  "shot": "shots/interface/dungeon/07-sealed.jpg"
+ },
+ {
+  "wait": 450
+ },
+ {
+  "shot": "shots/interface/dungeon/08-wave-banner.jpg"
+ },
+ {
+  "wait": 2400
+ },
+ {
+  "shot": "shots/interface/dungeon/09-fight.jpg"
+ },
+ {
+  "down": "Tab"
+ },
+ {
+  "wait": 500
+ },
+ {
+  "shot": "shots/interface/dungeon/10-map-hold.jpg"
+ },
+ {
+  "up": "Tab"
+ },
+ {
+  "wait": 300
+ },
+ {
+  "shot": "shots/interface/dungeon/11-map-gone.jpg"
+ },
+ {
+  "eval": "window.__game.setLives(3); window.__game.openDoors(); true"
+ },
+ {
+  "eval": "window.__game.until((s) => s.room?.state === 'cleared' && s.room?.sealed === false, 6000)"
+ },
+ {
+  "wait": 450
+ },
+ {
+  "shot": "shots/interface/dungeon/12-clear.jpg"
+ },
+ {
+  "key": "KeyM"
+ },
+ {
+  "wait": 600
+ },
+ {
+  "shot": "shots/interface/dungeon/13-map-toggle.jpg"
+ },
+ {
+  "key": "KeyM"
+ },
+ {
+  "wait": 300
+ },
+ {
+  "key": "Escape"
+ },
+ {
+  "wait": 600
+ },
+ {
+  "key": "KeyS"
+ },
+ {
+  "key": "KeyS"
+ },
+ {
+  "key": "Enter"
+ },
+ {
+  "wait": 700
+ },
+ {
+  "shot": "shots/interface/dungeon/14-pause-map.jpg"
+ },
+ {
+  "key": "Escape"
+ },
+ {
+  "wait": 200
+ },
+ {
+  "key": "Escape"
+ },
+ {
+  "wait": 400
+ },
+ {
+  "eval": "window.__game.startZone('spiral', 'elite', { seed: 5, weapon: 'darts' }); true"
+ },
+ {
+  "eval": "window.__game.until((s) => s.room?.sealed === true, 6000)"
+ },
+ {
+  "wait": 700
+ },
+ {
+  "shot": "shots/interface/dungeon/15-spiral-banner.jpg"
+ },
+ {
+  "wait": 2400
+ },
+ {
+  "eval": "window.__game.aim(0, -10); window.__game.press('slash'); true"
+ },
+ {
+  "wait": 120
+ },
+ {
+  "eval": "window.__game.press('slash'); true"
+ },
+ {
+  "wait": 200
+ },
+ {
+  "shot": "shots/interface/dungeon/16-spiral-darts.jpg"
+ },
+ {
+  "eval": "window.__game.clearWave(); true"
+ },
+ {
+  "eval": "window.__game.until((s) => s.wave.index === 2 && s.wave.phase === 'intro', 8000)"
+ },
+ {
+  "wait": 500
+ },
+ {
+  "shot": "shots/interface/dungeon/17-spiral-wave2.jpg"
+ },
+ {
+  "eval": "window.__game.setLives(3); window.__game.openDoors(); true"
+ },
+ {
+  "eval": "window.__game.until((s) => s.room?.state === 'cleared' && s.room?.sealed === false, 6000)"
+ },
+ {
+  "wait": 450
+ },
+ {
+  "shot": "shots/interface/dungeon/18-elite-clear-heal.jpg"
+ },
+ {
+  "eval": "window.__game.startZone('void', 'combat', { seed: 5, weapon: 'sigil' }); true"
+ },
+ {
+  "eval": "window.__game.until((s) => s.room?.sealed === true, 6000)"
+ },
+ {
+  "wait": 3000
+ },
+ {
+  "eval": "window.__game.grantFocus(); true"
+ },
+ {
+  "wait": 700
+ },
+ {
+  "shot": "shots/interface/dungeon/19-void.jpg"
+ },
+ {
+  "eval": "window.__game.invulnerable(false); true"
+ }
+]

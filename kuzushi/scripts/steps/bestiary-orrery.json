@@ -1,0 +1,542 @@
+[
+{
+"eval": "new Promise((r) => { const p = () => window.__game?.ready ? r(true) : requestAnimationFrame(p); p() })"
+},
+{
+"eval": "window.__game.startStage('spiral', 0, 7)"
+},
+{
+"wait": 1500
+},
+{
+"eval": "window.__game.invulnerable(true); window.__game.teleport(0, 10.5, -Math.PI/2)"
+},
+{
+"eval": "window.__game.spawn('orrery', 0, 6)"
+},
+{
+"wait": 250
+},
+{
+"shot": "shots/bestiary/orrery-intro-a.jpg"
+},
+{
+"wait": 900
+},
+{
+"shot": "shots/bestiary/orrery-intro-b.jpg"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.state === 'fighting')(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.pattern === null)(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "const v = window.__game.view(); const b = v.enemies.find((e) => e.id === v.boss?.id); if (b) window.__game.teleport(b.x * 0.5, Math.min(b.z + 5.5, 8), -Math.PI / 2); window.__game.bossPattern('volley')"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.pattern === 'volley')(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "window.__game.freeze(true)"
+},
+{
+"eval": "window.__game.step(30)"
+},
+{
+"wait": 480
+},
+{
+"shot": "shots/bestiary/orrery-volley-030.jpg"
+},
+{
+"eval": "window.__game.step(24)"
+},
+{
+"wait": 396
+},
+{
+"shot": "shots/bestiary/orrery-volley-054.jpg"
+},
+{
+"eval": "window.__game.step(16)"
+},
+{
+"wait": 284
+},
+{
+"shot": "shots/bestiary/orrery-volley-070.jpg"
+},
+{
+"eval": "window.__game.step(30)"
+},
+{
+"wait": 480
+},
+{
+"shot": "shots/bestiary/orrery-volley-100.jpg"
+},
+{
+"eval": "window.__game.step(50)"
+},
+{
+"wait": 760
+},
+{
+"shot": "shots/bestiary/orrery-volley-150.jpg"
+},
+{
+"eval": "window.__game.freeze(false)"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.pattern === null)(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "const v = window.__game.view(); const b = v.enemies.find((e) => e.id === v.boss?.id); if (b) window.__game.teleport(b.x * 0.5, Math.min(b.z + 5.5, 8), -Math.PI / 2); window.__game.bossPattern('moons')"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.pattern === 'moons')(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "window.__game.freeze(true)"
+},
+{
+"eval": "window.__game.step(12)"
+},
+{
+"wait": 228
+},
+{
+"shot": "shots/bestiary/orrery-moons-012.jpg"
+},
+{
+"eval": "window.__game.step(48)"
+},
+{
+"wait": 732
+},
+{
+"shot": "shots/bestiary/orrery-moons-060.jpg"
+},
+{
+"eval": "window.__game.step(50)"
+},
+{
+"wait": 760
+},
+{
+"shot": "shots/bestiary/orrery-moons-110.jpg"
+},
+{
+"eval": "window.__game.step(18)"
+},
+{
+"wait": 312
+},
+{
+"shot": "shots/bestiary/orrery-moons-128.jpg"
+},
+{
+"eval": "window.__game.step(17)"
+},
+{
+"wait": 298
+},
+{
+"shot": "shots/bestiary/orrery-moons-145.jpg"
+},
+{
+"eval": "window.__game.step(15)"
+},
+{
+"wait": 270
+},
+{
+"shot": "shots/bestiary/orrery-moons-160.jpg"
+},
+{
+"eval": "window.__game.step(20)"
+},
+{
+"wait": 340
+},
+{
+"shot": "shots/bestiary/orrery-moons-180.jpg"
+},
+{
+"eval": "window.__game.step(35)"
+},
+{
+"wait": 550
+},
+{
+"shot": "shots/bestiary/orrery-moons-215.jpg"
+},
+{
+"eval": "window.__game.freeze(false)"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.pattern === null)(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "const v = window.__game.view(); const b = v.enemies.find((e) => e.id === v.boss?.id); if (b) window.__game.teleport(b.x * 0.5, Math.min(b.z + 5.5, 8), -Math.PI / 2); window.__game.bossPattern('hands')"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.pattern === 'hands')(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "window.__game.freeze(true)"
+},
+{
+"eval": "window.__game.step(24)"
+},
+{
+"wait": 396
+},
+{
+"shot": "shots/bestiary/orrery-hands-024.jpg"
+},
+{
+"eval": "window.__game.step(22)"
+},
+{
+"wait": 368
+},
+{
+"shot": "shots/bestiary/orrery-hands-046.jpg"
+},
+{
+"eval": "window.__game.step(10)"
+},
+{
+"wait": 200
+},
+{
+"shot": "shots/bestiary/orrery-hands-056.jpg"
+},
+{
+"eval": "window.__game.step(10)"
+},
+{
+"wait": 200
+},
+{
+"shot": "shots/bestiary/orrery-hands-066.jpg"
+},
+{
+"eval": "window.__game.step(12)"
+},
+{
+"wait": 228
+},
+{
+"shot": "shots/bestiary/orrery-hands-078.jpg"
+},
+{
+"eval": "window.__game.step(18)"
+},
+{
+"wait": 312
+},
+{
+"shot": "shots/bestiary/orrery-hands-096.jpg"
+},
+{
+"eval": "window.__game.freeze(false)"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.pattern === null)(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "const v = window.__game.view(); const b = v.enemies.find((e) => e.id === v.boss?.id); if (b) window.__game.teleport(b.x * 0.5, Math.min(b.z + 5.5, 8), -Math.PI / 2); window.__game.bossPhase(2)"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.state === 'shifting')(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "window.__game.freeze(true)"
+},
+{
+"eval": "window.__game.step(2)"
+},
+{
+"wait": 88
+},
+{
+"shot": "shots/bestiary/orrery-shift2-002.jpg"
+},
+{
+"eval": "window.__game.step(6)"
+},
+{
+"wait": 144
+},
+{
+"shot": "shots/bestiary/orrery-shift2-008.jpg"
+},
+{
+"eval": "window.__game.step(8)"
+},
+{
+"wait": 172
+},
+{
+"shot": "shots/bestiary/orrery-shift2-016.jpg"
+},
+{
+"eval": "window.__game.step(14)"
+},
+{
+"wait": 256
+},
+{
+"shot": "shots/bestiary/orrery-shift2-030.jpg"
+},
+{
+"eval": "window.__game.step(30)"
+},
+{
+"wait": 480
+},
+{
+"shot": "shots/bestiary/orrery-shift2-060.jpg"
+},
+{
+"eval": "window.__game.step(30)"
+},
+{
+"wait": 480
+},
+{
+"shot": "shots/bestiary/orrery-shift2-090.jpg"
+},
+{
+"eval": "window.__game.freeze(false)"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.state === 'fighting')(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.pattern === null)(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "const v = window.__game.view(); const b = v.enemies.find((e) => e.id === v.boss?.id); if (b) window.__game.teleport(b.x * 0.5, Math.min(b.z + 5.5, 8), -Math.PI / 2); window.__game.bossPattern('pulse')"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.pattern === 'pulse')(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "window.__game.freeze(true)"
+},
+{
+"eval": "window.__game.step(30)"
+},
+{
+"wait": 480
+},
+{
+"shot": "shots/bestiary/orrery-pulse-030.jpg"
+},
+{
+"eval": "window.__game.step(20)"
+},
+{
+"wait": 340
+},
+{
+"shot": "shots/bestiary/orrery-pulse-050.jpg"
+},
+{
+"eval": "window.__game.step(20)"
+},
+{
+"wait": 340
+},
+{
+"shot": "shots/bestiary/orrery-pulse-070.jpg"
+},
+{
+"eval": "window.__game.step(20)"
+},
+{
+"wait": 340
+},
+{
+"shot": "shots/bestiary/orrery-pulse-090.jpg"
+},
+{
+"eval": "window.__game.step(20)"
+},
+{
+"wait": 340
+},
+{
+"shot": "shots/bestiary/orrery-pulse-110.jpg"
+},
+{
+"eval": "window.__game.step(30)"
+},
+{
+"wait": 480
+},
+{
+"shot": "shots/bestiary/orrery-pulse-140.jpg"
+},
+{
+"eval": "window.__game.freeze(false)"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.pattern === null)(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "const v = window.__game.view(); const b = v.enemies.find((e) => e.id === v.boss?.id); if (b) window.__game.teleport(b.x * 0.5, Math.min(b.z + 5.5, 8), -Math.PI / 2); window.__game.breakBoss()"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.state === 'broken')(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "window.__game.freeze(true)"
+},
+{
+"eval": "window.__game.step(2)"
+},
+{
+"wait": 88
+},
+{
+"shot": "shots/bestiary/orrery-broken-002.jpg"
+},
+{
+"eval": "window.__game.step(8)"
+},
+{
+"wait": 172
+},
+{
+"shot": "shots/bestiary/orrery-broken-010.jpg"
+},
+{
+"eval": "window.__game.step(30)"
+},
+{
+"wait": 480
+},
+{
+"shot": "shots/bestiary/orrery-broken-040.jpg"
+},
+{
+"eval": "window.__game.step(80)"
+},
+{
+"wait": 1180
+},
+{
+"shot": "shots/bestiary/orrery-broken-120.jpg"
+},
+{
+"eval": "window.__game.freeze(false)"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.state === 'fighting')(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "const v = window.__game.view(); const b = v.enemies.find((e) => e.id === v.boss?.id); if (b) window.__game.teleport(b.x * 0.5, Math.min(b.z + 5.5, 8), -Math.PI / 2)"
+},
+{
+"wait": 200
+},
+{
+"eval": "const b = window.__game.view().boss; window.__game.bossHealth(1); window.__game.blow(b.id, 3)"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.state === 'defeated')(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "window.__game.freeze(true)"
+},
+{
+"eval": "window.__game.step(1)"
+},
+{
+"wait": 74
+},
+{
+"shot": "shots/bestiary/orrery-defeat-001.jpg"
+},
+{
+"eval": "window.__game.step(5)"
+},
+{
+"wait": 130
+},
+{
+"shot": "shots/bestiary/orrery-defeat-006.jpg"
+},
+{
+"eval": "window.__game.step(8)"
+},
+{
+"wait": 172
+},
+{
+"shot": "shots/bestiary/orrery-defeat-014.jpg"
+},
+{
+"eval": "window.__game.step(16)"
+},
+{
+"wait": 284
+},
+{
+"shot": "shots/bestiary/orrery-defeat-030.jpg"
+},
+{
+"eval": "window.__game.step(20)"
+},
+{
+"wait": 340
+},
+{
+"shot": "shots/bestiary/orrery-defeat-050.jpg"
+},
+{
+"eval": "window.__game.step(25)"
+},
+{
+"wait": 410
+},
+{
+"shot": "shots/bestiary/orrery-defeat-075.jpg"
+},
+{
+"eval": "window.__game.step(15)"
+},
+{
+"wait": 270
+},
+{
+"shot": "shots/bestiary/orrery-defeat-090.jpg"
+},
+{
+"eval": "window.__game.step(6)"
+},
+{
+"wait": 144
+},
+{
+"shot": "shots/bestiary/orrery-defeat-096.jpg"
+},
+{
+"eval": "window.__game.step(12)"
+},
+{
+"wait": 228
+},
+{
+"shot": "shots/bestiary/orrery-defeat-108.jpg"
+},
+{
+"eval": "window.__game.freeze(false)"
+}
+]

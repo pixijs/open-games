@@ -1,0 +1,42 @@
+{
+  "name": "kuzushi",
+  "description": "KUZUSHI, a sakuga-styled top-down action game on the Ritmo ECS, drawn with PixiJS 3D",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": "^22.19 || ^24 || >=26"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc",
+    "lint": "oxlint",
+    "lint:ritmo": "ritmo-devtools lint src/lint.ts",
+    "test": "vitest run",
+    "check": "npm run typecheck && npm run lint && npm run lint:ritmo && npm test"
+  },
+  "dependencies": {
+    "@pixi/3d": "^0.1.0",
+    "@pmndrs/klipp": "^0.18.0",
+    "@typeonce/ritmo": "^0.24.0",
+    "@typeonce/ritmo-browser": "^0.24.0",
+    "@typeonce/ritmo-math": "^0.24.0",
+    "@typeonce/ritmo-render": "^0.24.0",
+    "gsap": "^3.15.1",
+    "math": "^0.1.0",
+    "navcat": "0.4.1",
+    "pixi.js": "^8.23.0",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@typeonce/oxlint-plugin-ritmo": "^0.24.0",
+    "@typeonce/ritmo-devtools": "^0.24.0",
+    "oxlint": "^1.94.0",
+    "playwright": "^1.65.1",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.8",
+    "vitest": "^5.1.0"
+  }
+}

@@ -1,0 +1,221 @@
+[
+ {
+  "eval": "new Promise((resolve) => { const t = setInterval(() => { if (window.__game) { clearInterval(t); resolve(true) } }, 10) })"
+ },
+ {
+  "eval": "localStorage.removeItem('kuzushi.records.v2'); true"
+ },
+ {
+  "eval": "new Promise((r) => { const poll = () => (window.__title?.time() ?? 0) >= 2.6 ? r(true) : requestAnimationFrame(poll); poll() })"
+ },
+ {
+  "key": "Enter"
+ },
+ {
+  "wait": 900
+ },
+ {
+  "shot": "shots/interface/run/01-panel-first.jpg"
+ },
+ {
+  "key": "KeyD"
+ },
+ {
+  "wait": 300
+ },
+ {
+  "shot": "shots/interface/run/02-panel-first-right.jpg"
+ },
+ {
+  "key": "Escape"
+ },
+ {
+  "wait": 500
+ },
+ {
+  "eval": "localStorage.setItem('kuzushi.records.v2', JSON.stringify({ reached: ['courtyard', 'spiral', 'void'], zones: { courtyard: 312.48, spiral: 401.7 }, run: { time: 1104.2, rank: 'A' } })); true"
+ },
+ {
+  "key": "Enter"
+ },
+ {
+  "wait": 900
+ },
+ {
+  "shot": "shots/interface/run/03-panel-open.jpg"
+ },
+ {
+  "key": "KeyD"
+ },
+ {
+  "wait": 400
+ },
+ {
+  "shot": "shots/interface/run/04-panel-spiral.jpg"
+ },
+ {
+  "key": "KeyD"
+ },
+ {
+  "wait": 400
+ },
+ {
+  "shot": "shots/interface/run/05-panel-void.jpg"
+ },
+ {
+  "key": "Enter"
+ },
+ {
+  "wait": 140
+ },
+ {
+  "shot": "shots/interface/run/06-launch.jpg"
+ },
+ {
+  "wait": 900
+ },
+ {
+  "shot": "shots/interface/run/07-cut.jpg"
+ },
+ {
+  "wait": 900
+ },
+ {
+  "eval": "JSON.stringify(window.__game.state().zone)"
+ },
+ {
+  "shot": "shots/interface/run/08-practice-void.jpg"
+ },
+ {
+  "evalFile": "scripts/dungeon.js"
+ },
+ {
+  "eval": "window.__game.enterRoom('boss', { instant: true }); window.__game.invulnerable(true); true"
+ },
+ {
+  "eval": "window.__game.until((s) => s.room?.sealed === true, 8000)"
+ },
+ {
+  "wait": 300
+ },
+ {
+  "eval": "window.__game.openDoors(); true"
+ },
+ {
+  "eval": "window.__game.until((s) => s.room?.state === 'cleared' && s.room?.sealed === false, 8000)"
+ },
+ {
+  "wait": 400
+ },
+ {
+  "eval": "window.__game.until((s) => s.flow === 'RunClear', 8000)"
+ },
+ {
+  "wait": 2800
+ },
+ {
+  "shot": "shots/interface/run/09-practice-clear.jpg"
+ },
+ {
+  "eval": "localStorage.removeItem('kuzushi.records.v2'); window.__game.startZone('courtyard', 'boss', { seed: 3 }); window.__game.invulnerable(true); true"
+ },
+ {
+  "eval": "window.__game.until((s) => s.room?.sealed === true, 8000)"
+ },
+ {
+  "wait": 300
+ },
+ {
+  "eval": "window.__game.openDoors(); true"
+ },
+ {
+  "eval": "window.__game.until((s) => s.room?.state === 'cleared' && s.room?.sealed === false, 8000)"
+ },
+ {
+  "wait": 400
+ },
+ {
+  "eval": "window.__dungeon.walk('gate')"
+ },
+ {
+  "eval": "window.__game.until((s) => s.transition === null && s.zone === 'spiral', 8000)"
+ },
+ {
+  "eval": "window.__game.enterRoom('boss', { instant: true }); true"
+ },
+ {
+  "eval": "window.__game.until((s) => s.room?.sealed === true, 8000)"
+ },
+ {
+  "wait": 300
+ },
+ {
+  "eval": "window.__game.openDoors(); true"
+ },
+ {
+  "eval": "window.__game.until((s) => s.room?.state === 'cleared' && s.room?.sealed === false, 8000)"
+ },
+ {
+  "wait": 400
+ },
+ {
+  "eval": "window.__dungeon.walk('gate')"
+ },
+ {
+  "eval": "window.__game.until((s) => s.transition === null && s.zone === 'void', 8000)"
+ },
+ {
+  "eval": "window.__game.enterRoom('boss', { instant: true }); true"
+ },
+ {
+  "eval": "window.__game.until((s) => s.room?.sealed === true, 8000)"
+ },
+ {
+  "wait": 300
+ },
+ {
+  "eval": "window.__game.openDoors(); true"
+ },
+ {
+  "eval": "window.__game.until((s) => s.room?.state === 'cleared' && s.room?.sealed === false, 8000)"
+ },
+ {
+  "wait": 400
+ },
+ {
+  "eval": "window.__game.until((s) => s.flow === 'RunClear', 8000)"
+ },
+ {
+  "wait": 2800
+ },
+ {
+  "shot": "shots/interface/run/10-full-clear.jpg"
+ },
+ {
+  "key": "KeyD"
+ },
+ {
+  "wait": 300
+ },
+ {
+  "shot": "shots/interface/run/11-full-clear-title.jpg"
+ },
+ {
+  "key": "Enter"
+ },
+ {
+  "wait": 1600
+ },
+ {
+  "key": "Enter"
+ },
+ {
+  "wait": 900
+ },
+ {
+  "shot": "shots/interface/run/12-panel-after.jpg"
+ },
+ {
+  "eval": "window.__game.invulnerable(false); localStorage.getItem('kuzushi.records.v2')"
+ }
+]

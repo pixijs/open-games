@@ -1,0 +1,15 @@
+[
+  { "eval": "new Promise((resolve) => { const t = setInterval(() => { if (window.__game) { clearInterval(t); resolve(true) } }, 10) })" },
+  { "eval": "window.__game.setSeed(7); window.__game.startZone('courtyard', 'combat'); true" },
+  { "wait": 3600 },
+  { "shot": "shots/stages/courtyard-wave2.jpg" },
+  { "eval": "window.__game.startStage('spiral', 1); window.__game.invulnerable(true); true" },
+  { "wait": 6200 },
+  { "eval": "JSON.stringify(window.__game.state().enemies.map((e) => e.kind + ':' + e.state))" },
+  { "shot": "shots/stages/spiral-wave1.jpg" },
+  { "eval": "window.__game.startZone('spiral', 'combat'); true" },
+  { "wait": 5200 },
+  { "shot": "shots/stages/spiral-wave6.jpg" },
+  { "eval": "window.__game.quit(); window.__game.pause(); true" },
+  { "eval": "window.__game.invulnerable(false); true" }
+]

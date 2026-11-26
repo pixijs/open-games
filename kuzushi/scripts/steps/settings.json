@@ -1,0 +1,23 @@
+[
+  {"eval":"new Promise((r) => { const poll = () => (window.__title?.time() ?? 0) >= 2.6 ? r(true) : requestAnimationFrame(poll); poll() })"},
+  {"key":"KeyS"},{"wait":250},{"key":"KeyS"},{"wait":250},{"key":"Enter"},{"wait":900},
+  {"key":"KeyA"},{"wait":60},{"key":"KeyA"},{"wait":60},{"key":"KeyA"},{"wait":60},{"key":"KeyA"},{"wait":60},{"key":"KeyA"},{"wait":60},
+  {"key":"KeyA"},{"wait":60},{"key":"KeyA"},{"wait":60},{"key":"KeyA"},{"wait":60},{"key":"KeyA"},{"wait":60},{"key":"KeyA"},{"wait":60},
+  {"key":"KeyS"},{"wait":120},{"key":"KeyD"},{"wait":120},{"key":"KeyD"},{"wait":120},
+  {"key":"KeyS"},{"wait":120},{"key":"KeyS"},{"wait":120},{"key":"Enter"},{"wait":500},
+  {"eval":"localStorage.getItem('kuzushi.settings.v1')"},
+  {"shot":"shots/integrate/settings/01-changed.jpg"},
+  {"key":"Escape"},{"wait":500},
+  {"key":"KeyW"},{"wait":200},{"key":"KeyW"},{"wait":300},
+  {"key":"Enter"},{"wait":900},{"key":"Enter"},
+  {"eval":"window.__game.until((s) => s.flow === 'Playing', 10000)"},
+  {"wait":2500},
+  {"eval":"(() => { const g = window.__game; const p = g.state().player; for (let i = 0; i < 5; i++) g.spawn('chaser', p.x + Math.cos(i * 1.25) * 3, p.z + Math.sin(i * 1.25) * 3, { drill: 'idle' }); return true })()"},
+  {"wait":1000},
+  {"shot":"shots/integrate/settings/02-fps-readout.jpg"},
+  {"eval":"window.__game.special(); true"},
+  {"wait":1050},
+  {"shot":"shots/integrate/settings/03-special-flashes-off.jpg"},
+  {"wait":2500},
+  {"eval":"localStorage.removeItem('kuzushi.settings.v1'); true"}
+]

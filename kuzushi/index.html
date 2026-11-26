@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0d0d0f" />
+    <title>KUZUSHI 崩し</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230d0d0f'/%3E%3Cpath d='M16 5 26 25H6Z' fill='%23f2efe8'/%3E%3Cpath d='M3 24 29 9' stroke='%23ff2e3f' stroke-width='2.5'/%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,500;0,600;0,700;1,600;1,700&family=Barlow:wght@400&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yuji+Boku&display=swap" />
+    <style>
+      html, body { margin: 0; height: 100%; overflow: hidden; background: #0d0d0f; }
+      #stage, #overlay { position: fixed; inset: 0; }
+      #overlay { pointer-events: none; }
+
+      /*
+       * The loader (docs/DESIGN.md, Loading): a dry-brush stroke inked left to right as loading goes, then a red slash
+       * through it and the ink thrown apart along the slash over the title. Sizes are px at 1680 x 800, scaled by the
+       * window's shorter side; everything moves by transform or opacity, held on twos, so it keeps moving while the
+       * page's script is busy. src/host/loading.ts sets --p, the share done.
+       */
+      #loading {
+        --ink: #0d0d0f; --paper: #f2efe8; --red: #ff2e3f; --rule: #35353a;
+        --px: calc(min(1vw, 1vh) / 8);
+        --line: 52vh;
+        --tilt: -12deg;
+        --seam: 2px;
+        --p: 0;
+        position: fixed; inset: 0; z-index: 10; overflow: hidden; background: var(--ink); pointer-events: auto;
+      }
+      /* The ink in two halves meeting along the slash, each with its own copy of the meter, so the slash cuts it in two. */
+      #loading .half { position: absolute; left: 50%; top: var(--line); width: 130vmax; height: 70vmax; overflow: hidden; background: var(--ink); }
+      #loading .up { transform-origin: 50% calc(100% - var(--seam)); transform: translate(-50%, calc(var(--seam) - 100%)) rotate(var(--tilt)); }
+      #loading .down { transform-origin: 50% 0; transform: translate(-50%, 0) rotate(var(--tilt)); }
+      /* Back level at the point the halves turn round; the upper half reaches past the slash, so they show no seam. */
+      #loading .pin { position: absolute; left: 50%; width: 0; height: 0; transform: rotate(calc(-1 * var(--tilt))); }
+      #loading .up .pin { top: calc(100% - var(--seam)); }
+      #loading .down .pin { top: 0; }
+      #loading .meter { position: absolute; left: -18vw; top: calc(-14 * var(--px)); width: 36vw; }
+      #loading .bar { position: relative; height: calc(28 * var(--px)); overflow: hidden; }
+      #loading .stroke { position: absolute; left: 0; top: calc(8 * var(--px)); width: 100%; height: calc(12 * var(--px)); fill: var(--paper); opacity: 0.85; }
+      #loading .shutter, #loading .head { position: absolute; inset: 0; transform: translateX(calc(var(--p) * 100%)); transition: transform 120ms steps(2); }
+      #loading .shutter { background: var(--ink); }
+      #loading .shutter::before { content: ""; position: absolute; left: 0; right: 0; top: calc(13.5 * var(--px)); height: max(1px, var(--px)); background: var(--rule); }
+      #loading .head { height: calc(28 * var(--px)); }
+      #loading .nib { position: absolute; left: calc(-1 * var(--px)); top: calc(5 * var(--px)); width: max(1.5px, calc(2 * var(--px))); height: calc(18 * var(--px)); background: var(--red); transform: rotate(20deg); animation: loading-flicker calc(1s / 6) steps(1) infinite; }
+      #loading .label, #loading .why { margin: calc(4 * var(--px)) 0 0; font: 500 calc(12 * var(--px)) / 1.4 "Barlow Condensed", sans-serif; letter-spacing: 0.32em; text-transform: uppercase; color: rgb(242 239 232 / 0.55); opacity: 0; }
+      #loading .label { display: flex; justify-content: space-between; }
+      #loading .pct { margin-right: -0.32em; font-variant-numeric: tabular-nums; }
+      #loading .why { display: none; }
+      html.fonts #loading .label, html.fonts #loading .why, #loading[data-state="error"] .label, #loading[data-state="error"] .why { opacity: 1; }
+      #loading[data-state="error"] .why { display: block; }
+      #loading[data-state="error"] .pct { visibility: hidden; }
+      #loading[data-state="error"] .nib { animation: none; }
+      #loading .slash { position: absolute; left: 50%; top: var(--line); width: 150vmax; height: max(2px, calc(2 * var(--px))); background: var(--red); transform: translate(-50%, -50%) rotate(var(--tilt)); opacity: 0; }
+      /* The outro, four drawings at 12 a second: the slash, the ink parting along it, then thrown off. */
+      #loading.out { background: none; }
+      #loading.out .slash { animation: loading-slash 0.333s steps(1) forwards; }
+      #loading.out .up { animation: loading-up 0.333s steps(1) forwards; }
+      #loading.out .down { animation: loading-down 0.333s steps(1) forwards; }
+      @keyframes loading-flicker { 50% { opacity: 0.35; } }
+      @keyframes loading-slash { 0%, 25% { opacity: 1; } 50%, 100% { opacity: 0; } }
+      @keyframes loading-up {
+        25% { transform: translate(-50%, calc(var(--seam) - 100%)) rotate(var(--tilt)) translateY(-7vh); }
+        50% { transform: translate(-50%, calc(var(--seam) - 100%)) rotate(calc(var(--tilt) - 2deg)) translateY(-32vh); }
+        75%, 100% { transform: translate(-50%, calc(var(--seam) - 100%)) rotate(calc(var(--tilt) - 5deg)) translateY(-54vh); }
+      }
+      @keyframes loading-down {
+        25% { transform: translate(-50%, 0) rotate(var(--tilt)) translateY(7vh); }
+        50% { transform: translate(-50%, 0) rotate(calc(var(--tilt) + 2deg)) translateY(32vh); }
+        75%, 100% { transform: translate(-50%, 0) rotate(calc(var(--tilt) + 5deg)) translateY(54vh); }
+      }
+      @keyframes loading-fade { to { opacity: 0; } }
+      @media (prefers-reduced-motion: reduce) {
+        #loading .nib { animation: none; }
+        #loading.out { animation: loading-fade 0.2s linear forwards; }
+        #loading.out .slash, #loading.out .up, #loading.out .down { animation: none; }
+      }
+    </style>
+    <script>
+      // The loader's words wait for their face, a moment at most, rather than flash in a fallback.
+      {
+        const show = () => document.documentElement.classList.add("fonts")
+        Promise.race([document.fonts.load('500 12px "Barlow Condensed"'), new Promise((resolve) => setTimeout(resolve, 1500))]).then(show, show)
+      }
+    </script>
+  </head>
+  <body>
+    <div id="stage"></div>
+    <div id="overlay"></div>
+    <div id="loading" role="progressbar" aria-label="Loading" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+      <svg width="0" height="0" style="position: absolute" aria-hidden="true"><symbol id="loading-brush" viewBox="0 0 600 20" preserveAspectRatio="none"><path fill-rule="evenodd" d="M6 2.6L10 1.7L15 1.7L20 2L25 2.4L30 4.3L35 4.3L40 3L45 5.7L50 2.8L55 3L60 3.2L65 3.3L70 3.1L75 5.3L80 2.9L85 3.2L90 3.2L95 3.3L100 3.3L105 2.8L110 3L115 4.9L120 3.1L125 4.7L130 3.4L135 5L140 5.6L145 3.1L150 3.5L155 3.1L160 3.4L165 3.9L170 3.5L175 3.7L180 3.7L185 3.3L190 3.1L195 3.6L200 3.2L205 3.3L210 2.8L215 3.5L220 3.3L225 2.6L230 2.7L235 2.5L240 2.4L245 2.3L250 2.6L255 3.1L260 2.3L265 2.2L270 2.7L275 2.8L280 3L285 5.8L290 3.3L295 5.6L300 3.5L305 2.6L310 3.2L315 3.4L320 2.6L325 3L330 5.6L335 3.4L340 3.4L345 2.9L350 3.5L355 3.6L360 4.9L365 3.5L370 3.8L375 3.8L380 2.7L385 2.6L390 3.5L395 5.1L400 5.4L405 3L410 2.9L415 5.7L420 3.2L425 2.8L430 3L435 4.9L440 6.9L445 4.2L450 4.3L455 5.6L460 5.7L465 5.7L470 6.9L475 4.3L480 5.7L485 7.6L490 8.7L495 4.7L500 3.8L505 4.5L510 5.8L515 5.5L520 6.3L525 3.8L530 4.9L535 6.7L540 6.2L545.3 6.4L566.6 6.7L576.6 6.9L562.6 7.1L550.2 7.3L546.7 7.8L573.8 8L583.8 8.2L569.8 8.5L548.7 8.6L547.8 9.1L583.9 9.3L593.9 9.5L579.9 9.8L550.4 9.9L550.6 10.4L565.8 10.7L575.8 10.9L561.8 11.1L550.9 11.3L545.6 11.8L546.7 12L556.7 12.2L542.7 12.5L549.5 12.6L551 13.1L586.6 13.3L596.6 13.5L582.6 13.8L546.3 13.9L540 14.2L535 14.8L530 15.8L525 14.8L520 15.9L515 12.8L510 15L505 16.4L500 13.8L495 14.2L490 15.9L485 14.9L480 13.8L475 16.6L470 17L465 16.9L460 16.6L455 15.7L450 15.8L445 16L440 16.1L435 13.5L430 15.7L425 13.4L420 13.9L415 16L410 15.9L405 15.7L400 16.2L395 13.1L390 15.9L385 12.6L380 13.6L375 13.7L370 16.4L365 16L360 13.7L355 15.2L350 16.3L345 16.4L340 16.5L335 13.3L330 14.3L325 16.2L320 16.4L315 16.9L310 16.6L305 14.6L300 16.1L295 16.2L290 16.3L285 15L280 16.1L275 16.2L270 13.9L265 14.6L260 14.6L255 16.2L250 16.7L245 16.8L240 16.4L235 16.4L230 16.7L225 13.8L220 17.3L215 17.3L210 17.4L205 16.9L200 17.3L195 17.1L190 16.6L185 18L180 17.6L175 17.6L170 17.5L165 17.7L160 15.2L155 17.5L150 17.6L145 17.4L140 17.8L135 17.9L130 17.9L125 17.8L120 17.5L115 17.7L110 17.7L105 17.7L100 17.8L95 17.4L90 17.6L85 15.6L80 18L75 17.9L70 18L65 16.4L60 18.2L55 18L50 18L45 18.4L40 16L35 18.6L30 18.4L25 16.4L20 18.7L15 18.9L10 18.8L8 18.6L3.6 16.8L1 13.4L0.4 8.8L2.4 4.6ZM360.7 8.9L407.6 8L478 8.9L425.2 9.3ZM504.5 10L517.1 9.1L536 10.1L521.8 10.5ZM317.7 11.9L332 11.2L353.5 11.9L337.4 12.2ZM529.2 7.1L531.9 6.3L536 7.1L533 7.4ZM351.9 14.5L361.4 13.7L375.8 14.5L365 14.9ZM507.7 15.4L519 14.7L536 15.4L523.3 15.7ZM508.9 11.4L514.1 10.5L522 11.5L516.1 11.9ZM147.8 7.6L170.3 6.8L204 7.6L178.7 8ZM371.3 14.9L414.7 14.2L479.8 15L431 15.3ZM416.5 12.2L429.3 11.1L448.7 12.2L434.2 12.7ZM156.9 9.1L168.9 8.3L186.8 9.2L173.4 9.6ZM466 5.1L494 4.5L536 5.2L504.5 5.5ZM194.9 6.2L220.8 5.3L259.7 6.3L230.6 6.7ZM497.5 14.5L506.2 13.8L519.3 14.5L509.5 14.8ZM223.6 13.5L232.8 12.6L246.7 13.6L236.3 14ZM303.9 6L328.7 5L365.9 6L338 6.5ZM137.7 6.3L160.1 5.4L193.8 6.3L168.6 6.7ZM506.5 11.3L518.3 10.4L536 11.4L522.7 11.8ZM425.5 10.4L467.5 9.7L530.5 10.5L483.3 10.8ZM379.8 5.9L386.4 5.2L396.4 6L388.9 6.3ZM164.8 9.7L183.2 8.9L210.9 9.7L190.2 10.1ZM396.9 11.8L426.8 11.2L471.6 11.8L438 12.1ZM528.5 9.7L531.5 8.9L536 9.8L532.6 10.1ZM192.9 8L216.2 7.2L251 8.1L224.9 8.5ZM180.9 13L195.6 12.2L217.7 13.1L201.1 13.4ZM481.5 9.7L503.3 8.7L536 9.8L511.5 10.2ZM482.2 7.2L488.6 6.2L498.2 7.2L491 7.6ZM359.5 11.7L376.1 10.8L401.1 11.7L382.4 12.1ZM84.9 7.3L98 6.9L117.6 7.4L102.9 7.5ZM365 9.5L375.7 8.5L391.8 9.5L379.8 10Z" /></symbol></svg>
+      <div class="half down" aria-hidden="true">
+        <div class="pin">
+          <div class="meter">
+            <div class="bar"><svg class="stroke"><use href="#loading-brush" /></svg><i class="shutter"></i></div>
+            <div class="head"><i class="nib"></i></div>
+            <p class="label"><span class="say">LOADING</span><span class="pct">0%</span></p>
+            <p class="why"></p>
+          </div>
+        </div>
+      </div>
+      <div class="half up">
+        <div class="pin">
+          <div class="meter">
+            <div class="bar"><svg class="stroke"><use href="#loading-brush" /></svg><i class="shutter"></i></div>
+            <div class="head"><i class="nib"></i></div>
+            <p class="label"><span class="say">LOADING</span><span class="pct">0%</span></p>
+            <p class="why"></p>
+          </div>
+        </div>
+      </div>
+      <i class="slash"></i>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,692 @@
+[
+{
+"eval": "new Promise((r) => { const p = () => window.__game?.ready ? r(true) : requestAnimationFrame(p); p() })"
+},
+{
+"eval": "window.__game.startStage('void', 0, 7)"
+},
+{
+"wait": 1500
+},
+{
+"eval": "window.__game.invulnerable(true); window.__game.teleport(0, 2.5, -Math.PI/2)"
+},
+{
+"eval": "window.__game.spawn('sunder')"
+},
+{
+"wait": 250
+},
+{
+"shot": "shots/bestiary/sunder-intro-a.jpg"
+},
+{
+"wait": 900
+},
+{
+"shot": "shots/bestiary/sunder-intro-b.jpg"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.state === 'fighting')(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.pattern === null)(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "const v = window.__game.view(); const b = v.enemies.find((e) => e.id === v.boss?.id); if (b) window.__game.teleport(b.x * 0.5, Math.min(b.z + 5.5, 8), -Math.PI / 2); window.__game.bossPattern('needles')"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.pattern === 'needles')(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "window.__game.freeze(true)"
+},
+{
+"eval": "window.__game.step(24)"
+},
+{
+"wait": 396
+},
+{
+"shot": "shots/bestiary/sunder-needles-024.jpg"
+},
+{
+"eval": "window.__game.step(22)"
+},
+{
+"wait": 368
+},
+{
+"shot": "shots/bestiary/sunder-needles-046.jpg"
+},
+{
+"eval": "window.__game.step(4)"
+},
+{
+"wait": 116
+},
+{
+"shot": "shots/bestiary/sunder-needles-050.jpg"
+},
+{
+"eval": "window.__game.step(4)"
+},
+{
+"wait": 116
+},
+{
+"shot": "shots/bestiary/sunder-needles-054.jpg"
+},
+{
+"eval": "window.__game.step(8)"
+},
+{
+"wait": 172
+},
+{
+"shot": "shots/bestiary/sunder-needles-062.jpg"
+},
+{
+"eval": "window.__game.step(18)"
+},
+{
+"wait": 312
+},
+{
+"shot": "shots/bestiary/sunder-needles-080.jpg"
+},
+{
+"eval": "window.__game.freeze(false)"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.pattern === null)(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "const v = window.__game.view(); const b = v.enemies.find((e) => e.id === v.boss?.id); if (b) window.__game.teleport(b.x * 0.5, Math.min(b.z + 5.5, 8), -Math.PI / 2); window.__game.bossPattern('lunge')"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.pattern === 'lunge')(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "window.__game.freeze(true)"
+},
+{
+"eval": "window.__game.step(18)"
+},
+{
+"wait": 312
+},
+{
+"shot": "shots/bestiary/sunder-lunge-018.jpg"
+},
+{
+"eval": "window.__game.step(16)"
+},
+{
+"wait": 284
+},
+{
+"shot": "shots/bestiary/sunder-lunge-034.jpg"
+},
+{
+"eval": "window.__game.step(6)"
+},
+{
+"wait": 144
+},
+{
+"shot": "shots/bestiary/sunder-lunge-040.jpg"
+},
+{
+"eval": "window.__game.step(8)"
+},
+{
+"wait": 172
+},
+{
+"shot": "shots/bestiary/sunder-lunge-048.jpg"
+},
+{
+"eval": "window.__game.step(12)"
+},
+{
+"wait": 228
+},
+{
+"shot": "shots/bestiary/sunder-lunge-060.jpg"
+},
+{
+"eval": "window.__game.freeze(false)"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.pattern === null)(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "const v = window.__game.view(); const b = v.enemies.find((e) => e.id === v.boss?.id); if (b) window.__game.teleport(b.x * 0.5, Math.min(b.z + 5.5, 8), -Math.PI / 2); window.__game.bossPhase(2)"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.state === 'shifting')(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "window.__game.freeze(true)"
+},
+{
+"eval": "window.__game.step(2)"
+},
+{
+"wait": 88
+},
+{
+"shot": "shots/bestiary/sunder-shift2-002.jpg"
+},
+{
+"eval": "window.__game.step(6)"
+},
+{
+"wait": 144
+},
+{
+"shot": "shots/bestiary/sunder-shift2-008.jpg"
+},
+{
+"eval": "window.__game.step(8)"
+},
+{
+"wait": 172
+},
+{
+"shot": "shots/bestiary/sunder-shift2-016.jpg"
+},
+{
+"eval": "window.__game.step(14)"
+},
+{
+"wait": 256
+},
+{
+"shot": "shots/bestiary/sunder-shift2-030.jpg"
+},
+{
+"eval": "window.__game.step(30)"
+},
+{
+"wait": 480
+},
+{
+"shot": "shots/bestiary/sunder-shift2-060.jpg"
+},
+{
+"eval": "window.__game.step(30)"
+},
+{
+"wait": 480
+},
+{
+"shot": "shots/bestiary/sunder-shift2-090.jpg"
+},
+{
+"eval": "window.__game.freeze(false)"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.state === 'fighting')(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.pattern === null)(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "const v = window.__game.view(); const b = v.enemies.find((e) => e.id === v.boss?.id); if (b) window.__game.teleport(b.x * 0.5, Math.min(b.z + 5.5, 8), -Math.PI / 2); window.__game.bossPattern('leap')"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.pattern === 'leap')(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "window.__game.freeze(true)"
+},
+{
+"eval": "window.__game.step(12)"
+},
+{
+"wait": 228
+},
+{
+"shot": "shots/bestiary/sunder-leap-012.jpg"
+},
+{
+"eval": "window.__game.step(18)"
+},
+{
+"wait": 312
+},
+{
+"shot": "shots/bestiary/sunder-leap-030.jpg"
+},
+{
+"eval": "window.__game.step(20)"
+},
+{
+"wait": 340
+},
+{
+"shot": "shots/bestiary/sunder-leap-050.jpg"
+},
+{
+"eval": "window.__game.step(20)"
+},
+{
+"wait": 340
+},
+{
+"shot": "shots/bestiary/sunder-leap-070.jpg"
+},
+{
+"eval": "window.__game.step(18)"
+},
+{
+"wait": 312
+},
+{
+"shot": "shots/bestiary/sunder-leap-088.jpg"
+},
+{
+"eval": "window.__game.step(4)"
+},
+{
+"wait": 116
+},
+{
+"shot": "shots/bestiary/sunder-leap-092.jpg"
+},
+{
+"eval": "window.__game.step(8)"
+},
+{
+"wait": 172
+},
+{
+"shot": "shots/bestiary/sunder-leap-100.jpg"
+},
+{
+"eval": "window.__game.freeze(false)"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.pattern === null)(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "const v = window.__game.view(); const b = v.enemies.find((e) => e.id === v.boss?.id); if (b) window.__game.teleport(b.x * 0.5, Math.min(b.z + 5.5, 8), -Math.PI / 2); window.__game.bossPattern('seams')"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.pattern === 'seams')(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "window.__game.freeze(true)"
+},
+{
+"eval": "window.__game.step(20)"
+},
+{
+"wait": 340
+},
+{
+"shot": "shots/bestiary/sunder-seams-020.jpg"
+},
+{
+"eval": "window.__game.step(20)"
+},
+{
+"wait": 340
+},
+{
+"shot": "shots/bestiary/sunder-seams-040.jpg"
+},
+{
+"eval": "window.__game.step(10)"
+},
+{
+"wait": 200
+},
+{
+"shot": "shots/bestiary/sunder-seams-050.jpg"
+},
+{
+"eval": "window.__game.step(14)"
+},
+{
+"wait": 256
+},
+{
+"shot": "shots/bestiary/sunder-seams-064.jpg"
+},
+{
+"eval": "window.__game.step(26)"
+},
+{
+"wait": 424
+},
+{
+"shot": "shots/bestiary/sunder-seams-090.jpg"
+},
+{
+"eval": "window.__game.step(60)"
+},
+{
+"wait": 900
+},
+{
+"shot": "shots/bestiary/sunder-seams-150.jpg"
+},
+{
+"eval": "window.__game.freeze(false)"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.pattern === null)(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "const v = window.__game.view(); const b = v.enemies.find((e) => e.id === v.boss?.id); if (b) window.__game.teleport(b.x * 0.5, Math.min(b.z + 5.5, 8), -Math.PI / 2); window.__game.bossPhase(3)"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.state === 'shifting')(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "window.__game.freeze(true)"
+},
+{
+"eval": "window.__game.step(2)"
+},
+{
+"wait": 88
+},
+{
+"shot": "shots/bestiary/sunder-shift3-002.jpg"
+},
+{
+"eval": "window.__game.step(6)"
+},
+{
+"wait": 144
+},
+{
+"shot": "shots/bestiary/sunder-shift3-008.jpg"
+},
+{
+"eval": "window.__game.step(8)"
+},
+{
+"wait": 172
+},
+{
+"shot": "shots/bestiary/sunder-shift3-016.jpg"
+},
+{
+"eval": "window.__game.step(14)"
+},
+{
+"wait": 256
+},
+{
+"shot": "shots/bestiary/sunder-shift3-030.jpg"
+},
+{
+"eval": "window.__game.step(30)"
+},
+{
+"wait": 480
+},
+{
+"shot": "shots/bestiary/sunder-shift3-060.jpg"
+},
+{
+"eval": "window.__game.step(30)"
+},
+{
+"wait": 480
+},
+{
+"shot": "shots/bestiary/sunder-shift3-090.jpg"
+},
+{
+"eval": "window.__game.freeze(false)"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.state === 'fighting')(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.pattern === null)(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "const v = window.__game.view(); const b = v.enemies.find((e) => e.id === v.boss?.id); if (b) window.__game.teleport(b.x * 0.5, Math.min(b.z + 5.5, 8), -Math.PI / 2); window.__game.bossPattern('split')"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.pattern === 'split')(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "window.__game.freeze(true)"
+},
+{
+"eval": "window.__game.step(30)"
+},
+{
+"wait": 480
+},
+{
+"shot": "shots/bestiary/sunder-split-030.jpg"
+},
+{
+"eval": "window.__game.step(8)"
+},
+{
+"wait": 172
+},
+{
+"shot": "shots/bestiary/sunder-split-038.jpg"
+},
+{
+"eval": "window.__game.step(6)"
+},
+{
+"wait": 144
+},
+{
+"shot": "shots/bestiary/sunder-split-044.jpg"
+},
+{
+"eval": "window.__game.step(36)"
+},
+{
+"wait": 564
+},
+{
+"shot": "shots/bestiary/sunder-split-080.jpg"
+},
+{
+"eval": "window.__game.step(120)"
+},
+{
+"wait": 1740
+},
+{
+"shot": "shots/bestiary/sunder-split-200.jpg"
+},
+{
+"eval": "window.__game.step(220)"
+},
+{
+"wait": 3140
+},
+{
+"shot": "shots/bestiary/sunder-split-420.jpg"
+},
+{
+"eval": "window.__game.step(100)"
+},
+{
+"wait": 1460
+},
+{
+"shot": "shots/bestiary/sunder-split-520.jpg"
+},
+{
+"eval": "window.__game.step(20)"
+},
+{
+"wait": 340
+},
+{
+"shot": "shots/bestiary/sunder-split-540.jpg"
+},
+{
+"eval": "window.__game.freeze(false)"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.pattern === null)(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "const v = window.__game.view(); const b = v.enemies.find((e) => e.id === v.boss?.id); if (b) window.__game.teleport(b.x * 0.5, Math.min(b.z + 5.5, 8), -Math.PI / 2); window.__game.breakBoss()"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.state === 'broken')(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "window.__game.freeze(true)"
+},
+{
+"eval": "window.__game.step(2)"
+},
+{
+"wait": 88
+},
+{
+"shot": "shots/bestiary/sunder-broken-002.jpg"
+},
+{
+"eval": "window.__game.step(8)"
+},
+{
+"wait": 172
+},
+{
+"shot": "shots/bestiary/sunder-broken-010.jpg"
+},
+{
+"eval": "window.__game.step(30)"
+},
+{
+"wait": 480
+},
+{
+"shot": "shots/bestiary/sunder-broken-040.jpg"
+},
+{
+"eval": "window.__game.step(80)"
+},
+{
+"wait": 1180
+},
+{
+"shot": "shots/bestiary/sunder-broken-120.jpg"
+},
+{
+"eval": "window.__game.freeze(false)"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.state === 'fighting')(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "const v = window.__game.view(); const b = v.enemies.find((e) => e.id === v.boss?.id); if (b) window.__game.teleport(b.x * 0.5, Math.min(b.z + 5.5, 8), -Math.PI / 2)"
+},
+{
+"wait": 200
+},
+{
+"eval": "const b = window.__game.view().boss; window.__game.bossHealth(1); window.__game.blow(b.id, 3)"
+},
+{
+"eval": "new Promise((r) => { const t0 = performance.now(); const p = () => { const v = window.__game.view(); if (((v) => v.boss?.state === 'defeated')(v) || performance.now() - t0 > 8000) r(true); else requestAnimationFrame(p) }; p() })"
+},
+{
+"eval": "window.__game.freeze(true)"
+},
+{
+"eval": "window.__game.step(1)"
+},
+{
+"wait": 74
+},
+{
+"shot": "shots/bestiary/sunder-defeat-001.jpg"
+},
+{
+"eval": "window.__game.step(5)"
+},
+{
+"wait": 130
+},
+{
+"shot": "shots/bestiary/sunder-defeat-006.jpg"
+},
+{
+"eval": "window.__game.step(8)"
+},
+{
+"wait": 172
+},
+{
+"shot": "shots/bestiary/sunder-defeat-014.jpg"
+},
+{
+"eval": "window.__game.step(16)"
+},
+{
+"wait": 284
+},
+{
+"shot": "shots/bestiary/sunder-defeat-030.jpg"
+},
+{
+"eval": "window.__game.step(20)"
+},
+{
+"wait": 340
+},
+{
+"shot": "shots/bestiary/sunder-defeat-050.jpg"
+},
+{
+"eval": "window.__game.step(25)"
+},
+{
+"wait": 410
+},
+{
+"shot": "shots/bestiary/sunder-defeat-075.jpg"
+},
+{
+"eval": "window.__game.step(15)"
+},
+{
+"wait": 270
+},
+{
+"shot": "shots/bestiary/sunder-defeat-090.jpg"
+},
+{
+"eval": "window.__game.step(6)"
+},
+{
+"wait": 144
+},
+{
+"shot": "shots/bestiary/sunder-defeat-096.jpg"
+},
+{
+"eval": "window.__game.step(12)"
+},
+{
+"wait": 228
+},
+{
+"shot": "shots/bestiary/sunder-defeat-108.jpg"
+},
+{
+"eval": "window.__game.freeze(false)"
+}
+]

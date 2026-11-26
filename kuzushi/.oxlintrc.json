@@ -1,0 +1,85 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "jsPlugins": ["@typeonce/oxlint-plugin-ritmo"],
+  "rules": {
+    "ritmo/handle-runtime-result": "error",
+    "ritmo/prefix-descriptor-and-system-names": "error",
+    "ritmo/no-state-spread": "error",
+    "ritmo/no-kept-query-values": "error",
+    "ritmo/use-keyboard-for-game-keys": "error"
+  },
+  "overrides": [
+    {
+      "files": ["src/sim/**"],
+      "rules": {
+        "ritmo/use-clock-for-time": "error",
+        "ritmo/use-random-for-randomness": "error",
+        "ritmo/use-ops-for-math": "error",
+        "ritmo/keep-simulation-headless": "error",
+        "ritmo/no-infinity-in-simulation-data": "error",
+        "ritmo/no-float-timers": "error",
+        "ritmo/no-brand-cast": "error",
+        "no-restricted-imports": ["error", {
+          "patterns": [{
+            "group": ["../art/*", "../camera/*", "../host/*", "../look/*", "../render/*", "../ui/*", "../vfx/*", "gsap", "math", "math/*"],
+            "message": "The simulation is headless: it reads intents and writes moments; drawing, camera, effects and UI live in the host folders."
+          }]
+        }]
+      }
+    },
+    {
+      "files": ["src/gpu/**"],
+      "rules": {
+        "no-restricted-imports": ["error", {
+          "patterns": [{ "group": ["*", "!pixi.js", "!pixi.js/*", "!./*"], "message": "src/gpu is generic pixi code meant for upstreaming: import only pixi.js and its own files." }]
+        }]
+      }
+    },
+    {
+      "files": ["src/look/**"],
+      "rules": {
+        "no-restricted-imports": ["error", {
+          "patterns": [{ "group": ["../vfx/*", "../ui/**", "../sim/*", "!../sim/index.ts"], "message": "look builds the world and actors: read the simulation through ../sim/index.ts, share art through ../art, and leave effects to vfx and screens to ui." }, { "group": ["**/gpu/*"], "message": "src/gpu is the host's compile watch and warm-up: installs take its types from host/types.ts." }]
+        }]
+      }
+    },
+    {
+      "files": ["src/vfx/**"],
+      "rules": {
+        "no-restricted-imports": ["error", {
+          "patterns": [{ "group": ["../look/*", "../ui/**", "../sim/*", "!../sim/index.ts"], "message": "vfx draws transient effects from moments and view data: read the simulation through ../sim/index.ts, share art through ../art, and leave the world to look and screens to ui." }, { "group": ["**/gpu/*"], "message": "src/gpu is the host's compile watch and warm-up: installs take its types from host/types.ts." }]
+        }]
+      }
+    },
+    {
+      "files": ["src/title/**"],
+      "rules": {
+        "no-restricted-imports": ["error", {
+          "patterns": [{ "group": ["../ui/**", "../render/*", "../host/*", "!../host/types.ts", "../sim/*", "!../sim/index.ts"], "message": "title stages the title's 3D scene: build it from look's actors, vfx's drawing helpers, art and the camera, read the simulation through ../sim/index.ts, take only types from ../host/types.ts, and hear the menu through art/title-cues.ts." }, { "group": ["**/gpu/*"], "message": "src/gpu is the host's compile watch and warm-up: installs take its types from host/types.ts." }]
+        }]
+      }
+    },
+    {
+      "files": ["src/lab/**"],
+      "rules": {
+        "no-restricted-imports": ["error", {
+          "patterns": [{
+            "group": ["**/sim/*", "!**/sim/index.ts", "**/host/*", "!**/host/types.ts", "!**/host/debug.ts", "**/look/**", "!**/look/shaders/ink.ts", "**/ui/*", "**/ui/*/**", "!**/ui/dom.ts", "!**/ui/extras.ts", "!**/ui/menu.ts", "!**/ui/panel.ts", "!**/ui/screen.ts", "**/camera/*", "!**/camera/index.ts", "**/render/*", "**/vfx/*", "**/title/*"],
+            "message": "The lab drives the game through the debug API (host/debug.ts) and reads it through sim/index.ts; it borrows the UI's menu, panel and DOM helpers and look's ink material, and leaves drawing the game to look, vfx and render."
+          }, {
+            "group": ["**/gpu/*"],
+            "message": "src/gpu is the host's compile watch and warm-up: installs take its types from host/types.ts."
+          }]
+        }]
+      }
+    },
+    {
+      "files": ["src/ui/**"],
+      "rules": {
+        "no-restricted-imports": ["error", {
+          "patterns": [{ "group": ["**/look/**", "**/vfx/**", "**/render/**", "**/sim/*", "!**/sim/index.ts"], "message": "ui draws screens and the HUD from view data and sends intents: read the simulation through ../sim/index.ts and leave 3D to look, render and vfx." }, { "group": ["**/gpu/*"], "message": "src/gpu is the host's compile watch and warm-up: installs take its types from host/types.ts." }]
+        }]
+      }
+    }
+  ]
+}
