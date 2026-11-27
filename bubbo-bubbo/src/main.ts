@@ -36,7 +36,6 @@ function resize() {
 
     // Update renderer  and navigation screens dimensions
     app.renderer.resize(width, height);
-    navigation.init();
     navigation.resize(width, height);
 }
 
@@ -54,6 +53,8 @@ async function init() {
     // Whenever the window resizes, call the 'resize' function
     window.addEventListener('resize', resize);
 
+    navigation.init();
+    
     // Trigger the first resize
     resize();
 
