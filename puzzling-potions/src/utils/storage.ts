@@ -28,7 +28,7 @@ class StorageWrapper {
     /** Get a boolean value from storage or undefined if value can't be converted */
     public getBool(key: string) {
         const bool = localStorage.getItem(key);
-        return bool ? Boolean(bool.toLowerCase()) : undefined;
+        return bool === 'true' ? true : bool === 'false' ? false : undefined;
     }
 
     /** Set a boolean value to storage */
